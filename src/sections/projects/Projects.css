@@ -1,0 +1,44 @@
+.projects {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    -moz-box-align: center;
+    align-items: center;
+    padding: 5rem 0;
+}
+
+.projects h1 {
+    margin-bottom: 0rem;
+}
+
+.projects .inline-link {
+    color: var(--red);
+}
+
+.projects .inline-link::after {
+    background: var(--red);
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+
+
+
+@media (min-width: 800px) {
+
+    .projects .projects__carousel {
+        width: 90%;
+    }
+
+    
+    #individual-projects-list {
+        flex: .8;
+    }
+
+}
+
+

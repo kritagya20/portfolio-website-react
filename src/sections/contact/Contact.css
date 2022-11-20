@@ -1,0 +1,101 @@
+.contact {
+    margin: 0 auto ;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding-bottom: 0;
+}   
+
+.contact h1 {
+    font-size: var(--title);
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+    word-spacing: 4px;
+}
+
+.contact__wrapper {
+    padding: 1rem 1%;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    align-items: center;
+}
+
+
+.contact p {
+    max-width: 70ch;
+}
+
+.contact__btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    margin: 1rem auto;
+}
+
+
+.contact__btns .btn__link {
+    font-size: var(--fs3);
+    font-family: var(--ff3);
+    text-transform: capitalize;
+    letter-spacing: .5px;
+    color: var(--white);
+    border: 2px solid var(--white);
+    padding: .4rem .8rem;
+    border-radius: 5px;
+    z-index: 2;
+    overflow: hidden;
+    position: relative;
+}
+
+.btn--mail {
+    background: var(--indigo);
+}
+
+.btn--call {
+    background: linear-gradient(96.3deg, #111 45%, #121212 55%);
+}
+
+@media (min-width: 800px) {
+
+    .contact {
+        min-height: 90vh;
+    }  
+
+    .contact__btns .btn__link {
+        padding: .5rem 1rem;
+    }
+
+    .btn__link:before {
+        position: absolute;
+        content: "";
+        top: -10%;
+        width: 100%;
+        height: 125%;
+        transform: skew(-22deg);
+        transition: left ease-out .2s, right ease-out .2s;
+        z-index: -1;
+    }
+
+    .btn--call:before {
+        background: var(--indigo);
+        left: -120%;
+    }
+
+    .btn--call:hover::before {
+        left: -0%;
+    }
+
+    .btn--mail::before {
+        background: linear-gradient(96.3deg, #111 45%, #121212 55%);
+        right: -120%;        
+    }
+
+    .btn--mail:hover::before {
+        right: 0%;
+    }
+
+}
+
