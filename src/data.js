@@ -2,19 +2,19 @@
 const hostedProjectList =[
     {    
         key: "ip0",
+        link: "https://youtube.kritagya.in/",
+        githubLink: "https://github.com/kritagya20/react-youtube-clone",
+        title: "Youtube Clone",
+        description: "A website that resembles YouTube UI, has features like a functional search bar, sidebar, a videos recommrecommendation section, and playable videos. ",
+        tech : ["React","Material UI","API",],
+    },
+    {    
+        key: "ip1",
         link: "https://astropic.kritagya.in",
         githubLink: "https://github.com/kritagya20/AstoPic",
         title: "AstroPic",
         description: "An authentic application to display most spectacular and aesthetically pleasing images of space every day along with pertinent information.",
         tech : ["JavaScript","NASA-API","CSS",],
-    },
-    {
-        key: "ip1",
-        link: "https://wordtracker.kritagya.in",
-        githubLink: "https://github.com/kritagya20/Word-Tracker",
-        title: "Word Tracker",
-        description: "An Application tool build for enhancing your vocabulary by searching the best possible synonyms and antonyms of a word.",
-        tech : ["JavaScript","API","CSS",],
     },
     {
         key: "ip2",
@@ -26,6 +26,14 @@ const hostedProjectList =[
     },
     {
         key: "ip3",
+        link: "https://wordtracker.kritagya.in",
+        githubLink: "https://github.com/kritagya20/Word-Tracker",
+        title: "Word Tracker",
+        description: "An Application tool build for enhancing your vocabulary by searching the best possible synonyms and antonyms of a word.",
+        tech : ["JavaScript","API","CSS",],
+    },
+    {
+        key: "ip4",
         link: "https://landingpage.kritagya.in/",
         githubLink: "https://github.com/kritagya20/React-Landing-Page",
         title: "Landing Page",

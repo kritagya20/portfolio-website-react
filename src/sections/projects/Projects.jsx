@@ -1,5 +1,5 @@
 import './Projects.css'; //component css
-import { Projectimg1, Projectimg2, Projectimg3, Projectimg0 } from '../../images/index'; // project images
+import { Projectimg1, Projectimg2, Projectimg3, Projectimg0, Projectimg4 } from '../../images/index'; // project images
 import { HostedProject, Carousel, CarouselItem } from '../../components/index'; // different components
 import { Link } from "react-router-dom"; // routing 
 import {hostedProjectList} from '../../data';//fetching content of the component
@@ -14,7 +14,7 @@ function Projects() {
     });     
 
     const content = hostedProjectList;
-    const imgArray = [Projectimg0, Projectimg1, Projectimg2, Projectimg3, ];
+    const imgArray = [Projectimg0, Projectimg1, Projectimg2, Projectimg3, Projectimg4];
  
   return (
     <section className="projects section" id="projects" ref={containerRef}>

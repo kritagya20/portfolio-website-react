@@ -14,7 +14,9 @@ export const CarouselItem = ({ children, width }) => {
 function Carousel({children}) {
     const [activeIndex, setActiveIndex] = useState(0);
 
+
     const updateIndex = (newIndex) => {
+
         if(newIndex < 0) {
             newIndex = 0;
         } else if (newIndex >= React.Children.count(children)) {
@@ -56,7 +58,7 @@ function Carousel({children}) {
       <div className="indicators">
         <button
             className={
-                activeIndex === 3
+                activeIndex === 4
                 ? "carousel__button  invisible"
                 : "carousel__button "
             }

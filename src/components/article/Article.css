@@ -51,7 +51,7 @@
 }
 
 .bp__post_card:hover .pc__title {
-    color: var(--purple);
+    color: var(--teal);
 }
 
 .pc__meta-date {
