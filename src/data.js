@@ -5,7 +5,7 @@ const hostedProjectList =[
         link: "https://youtube.kritagya.in/",
         githubLink: "https://github.com/kritagya20/react-youtube-clone",
         title: "Youtube Clone",
-        description: "A website that resembles YouTube UI, has features like a functional search bar, sidebar, a videos recommrecommendation section, and playable videos. ",
+        description: "Completly optimised & responsive YouTube Clone that has features like a functional search bar, sidebar, videos recommendation section, and playable videos. ",
         tech : ["React","Material UI","API",],
     },
     {    

@@ -75,6 +75,10 @@
     text-align: left;
     word-wrap:break-word;
     white-space: pre-wrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 6 ;
+    -webkit-box-orient: vertical ;
+    overflow: hidden;
 }
 
 .project__tech-list {
@@ -136,6 +140,10 @@
     
     .individual-project:hover .project__image {
         transform: scale3d(1.2, 1.2, 1.2);
+    }
+
+    .project__description{
+        -webkit-line-clamp: 10 ;
     }
     
 }

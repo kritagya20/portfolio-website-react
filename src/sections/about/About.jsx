@@ -1,9 +1,6 @@
-import { React, useRef, useState} from 'react';
 import '../../App.css';
 import './About.css';
-
 import {ShapesSvg} from '../../components/index';
-
 import { useElementOnScreen } from '../../intersectionObserver';
 
 
@@ -11,15 +8,15 @@ function About() {
 
     const [containerRef, isVisible ] = useElementOnScreen({
         root: null,
-        rootMargin: "0px 0px -280px 0px",
+        rootMargin: "0px 0px -260px 0px",
         threshold: 0,
     }); 
     
   return (
     <section className="about section" id="about" ref={containerRef}>
         <span className=" about__empty-bg-tags empty-bg-tags liner-gradient-2 " />
-        <h1>About Me</h1>
-        <div className={isVisible ? "about__inner fade-in --appear" : "about__inner fade-in"}>
+        <h1 className={isVisible ? " slide-down fade-in --appear" : "slide-down fade-in"}>About Me</h1>
+        <div className={isVisible ? "about__inner slide-up fade-in --appear" : "about__inner slide-up fade-in"}>
             <div className="text-container">
             <p>
                 Hi, My name is Kritagya Singh Chouhan and I love creating things that
@@ -44,8 +41,8 @@ function About() {
             </p>
             </div>
             <div className="image-container">
-            <figure className="card">
-                < ShapesSvg id="shapes" className="card__svg"/>
+            <figure className={isVisible ? "card fade-in --appear" : "card fade-in"}>
+                < ShapesSvg id="shapes" className= "card__svg"/>
                 <img 
                 src={require("../../images/about.jpeg")}
                 title="Kritagya Singh Chouhan"

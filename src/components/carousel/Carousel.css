@@ -37,10 +37,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: fit-content;
 }
 
 .button__image {
-    width: 2.5rem;
+    min-width: 1.5rem;
+    width: 100%;
+    max-width: 2.5rem;
     fill: var(--white);  
     filter: drop-shadow(14px 14px 20px #000);
 }

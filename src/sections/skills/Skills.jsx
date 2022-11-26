@@ -12,8 +12,8 @@ function Skills() {
   return (
     <section className="skills section" id="skills" ref={containerRef}>
       <span className=" skills__empty-bg-tags empty-bg-tags liner-gradient-1 " />
-      <h1 >Technologies</h1>
-      <ul  className={isVisible ? "skills__grid fade-in --appear" : "skills__grid fade-in"}>
+      <h1 className={isVisible ? " slide-down fade-in --appear" : "slide-down fade-in"}>Technologies</h1>
+      <ul  className={isVisible ? "skills__grid slide-up fade-in --appear" : "skills__grid slide-up fade-in"}>
         <li className="individual-skill html">
           <img
             className="skills__image"

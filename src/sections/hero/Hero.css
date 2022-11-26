@@ -1,5 +1,6 @@
 .hero {
     padding-top: 3rem;
+    min-height: 100vh;
 }
 
 .hero__inner {
@@ -73,6 +74,7 @@
     max-width: 25rem;
     width: 35vw;
     min-width: 12rem;
+    margin-top: 1rem;
 }
 
 @media (min-width: 800px) {
@@ -83,6 +85,7 @@
 
     .hero {
         margin-top: 6rem;
+        min-height: inherit;
     }
 
     .hero__inner {
@@ -150,4 +153,9 @@
     .hero__btn--explore:hover::before {
         right: -10%;
     }
+
+    .hero__right .hero-image {
+        margin-top: 0;
+    }
+    
 }

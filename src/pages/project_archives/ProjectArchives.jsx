@@ -16,6 +16,7 @@ function ProjectArchives(props) {
           { contentArray.map((element, index) => {
               return  (
                 <IndividualProjectArchive 
+                  index = {index+1}
                   id= {element.key}
                   githubLink= {element.githubLink}
                   title= {element.title}

@@ -7,7 +7,7 @@ function Work() {
     
     const [containerRef, isVisible ] = useElementOnScreen({
         root: null,
-        rootMargin: "0px 0px -300px 0px",
+        rootMargin: "0px 0px -260px 0px",
         threshold: 0,
     }); 
 
@@ -20,8 +20,8 @@ function Work() {
   return (
     <section className="work section" id="work" ref={containerRef}>
         <span className=" work__empty-bg-tags empty-bg-tags liner-gradient-2 " />
-        <h1>Past Work</h1>
-        <div className={isVisible ? "work__wrapper fade-in --appear" : "work__wrapper fade-in"}>
+        <h1 className={isVisible ? " slide-down fade-in --appear" : "slide-down fade-in"}>Past Work</h1>
+        <div className={isVisible ? "work__wrapper slide-up fade-in --appear" : "work__wrapper slide-up fade-in"}>
             <div className="tab__list" role="tablist">
                 <button
                     role="tab"

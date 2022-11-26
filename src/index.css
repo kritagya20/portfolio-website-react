@@ -46,7 +46,7 @@
   --fs1: clamp(1.6rem, 2.5vw, 2.25rem);
   --fs2: clamp(1.5rem, 2vw , 1.75rem);
   --fs3: clamp(1rem, 1.7vw, 1.3rem);
-  --fs4: clamp(0.75rem, 1.4vw, 1rem);
+  --fs4: clamp(0.8rem, 1.45vw, 1rem);
   --fs5: clamp(0.75rem, .2vw, .85rem);
   --fsa: clamp(0.85rem, 1vw, 1.1rem);
   --fssmall: clamp(0.65rem, 1vw, 0.85rem);

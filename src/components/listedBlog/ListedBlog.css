@@ -31,7 +31,6 @@
 
 .individual-blog .blog__title {
     text-transform: capitalize;
-    color: var(--teal);
 }
 
 .individual-blog .blog__description {

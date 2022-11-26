@@ -9,7 +9,7 @@ function Projects() {
         
     const [containerRef, isVisible ] = useElementOnScreen({
         root: null,
-        rootMargin: "0px 0px -300px 0px",
+        rootMargin: "0px 0px -260px 0px",
         threshold: 0,
     });     
 
@@ -19,11 +19,11 @@ function Projects() {
   return (
     <section className="projects section" id="projects" ref={containerRef}>
         <span className=" projects__empty-bg-tags empty-bg-tags liner-gradient-1 " />
-        <h1>Recent Projects</h1>
-        <Link className="inline-link" to='/archives/'>
+        <h1 className={isVisible ? " slide-down fade-in --appear" : "slide-down fade-in"}>Recent Projects</h1>
+        <Link className={isVisible ? "inline-link fade-in --appear" : "inline-link fade-in"} to='/archives/'>
             view the archive
         </Link >
-        <div className={isVisible ? "projects__wrapper fade-in --appear" : "projects__wrapper fade-in"}>
+        <div className={isVisible ? "projects__wrapper slide-up fade-in --appear" : "projects__wrapper slide-up fade-in"}>
             <Carousel>
                 { content.map((element, index) => {
                     return  (
