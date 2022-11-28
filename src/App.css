@@ -68,11 +68,12 @@
 }
 
 main {
-    padding: 0;
-    margin-inline: 5%;  
+    margin: 0;
+    padding: 1px; 
     display: flex;
     flex-direction: column;
-    gap: 5vh 0;      
+    gap: 2vh 0;          
+    margin-inline: 5%; 
 }
 
 .section {
@@ -143,7 +144,7 @@ img {
 .hero__empty-bg-tags {
     width: 10rem;
     height:10rem;
-    left: 150px;
+    left: -100px;
     top: -180px;
 }
 
@@ -195,6 +196,10 @@ img {
 @media (min-width:800px) {
     * {
         scroll-behavior: smooth;
+    }
+
+    main {
+        padding-inline-start: 2%;    
     }
 
     .section {    

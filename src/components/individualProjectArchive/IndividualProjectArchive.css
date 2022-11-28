@@ -29,12 +29,13 @@
 
 .overliner {
     margin: 0.625rem 0;
-    color: var(--white);
     font-family: var(--ff1);
-    font-size: var(--fs4);
-    font-weight: 500;
+    color: var(--danger);
+    font-size: var(--fs3);
+    font-weight: 800;
     position: relative;
     z-index: 2;
+    text-align: center;
 }
 
 .archive__card .title {
@@ -181,9 +182,10 @@
         margin-bottom: 1rem;
         text-align: unset;
     }
-    
+
     .overliner {
-        color: var(--danger);
+        font-size: var(--fs4);
+        text-align: unset;
     }
 
     .archive__card .description {

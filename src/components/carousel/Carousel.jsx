@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Carousel.css';
 import { RightSvg, LeftSvg } from '../index';
 
@@ -13,7 +13,7 @@ export const CarouselItem = ({ children, width }) => {
 
 function Carousel({children}) {
     const [activeIndex, setActiveIndex] = useState(0);
-
+    const [prjectcount, setProjectCount] = useState(0);
 
     const updateIndex = (newIndex) => {
 

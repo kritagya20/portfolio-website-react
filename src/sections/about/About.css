@@ -30,6 +30,7 @@
 
 .about__inner p {
     text-align: justify;
+    max-width: 40rem;
 }
 
 .about__inner .card {
@@ -75,6 +76,9 @@
 
 @media (min-width: 800px) {
 
+    .about__inner p {
+        max-width: fit-content;
+    }
 
     .about__inner {
         grid-template-areas: "image text";

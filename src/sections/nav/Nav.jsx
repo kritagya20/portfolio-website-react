@@ -25,19 +25,6 @@ function Nav() {
   return (
     <header className={navbar ? "primary-header window-scroll" : "primary-header"} >
 
-        <div className="resume-container">
-            <li>
-                <a
-                    className="resume"
-                    href="./resume/resume.pdf"
-                    download="resume"
-                    title="Resume"
-                    target="_blank"
-                >
-                    Resume
-                </a>
-            </li>
-        </div>
         <div className="nav-toggle-container">
             <button
                 className={toggle ? "nav-toggle visible" : "nav-toggle"} 

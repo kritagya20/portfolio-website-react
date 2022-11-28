@@ -9,7 +9,7 @@ function BlogsPage() {
     root: null,
     rootMargin: "0px 0px -260px 0px",
     threshold: 0,
-}); 
+  }); 
 
   return (
     <main className='blogs_page' ref={containerRef}>
