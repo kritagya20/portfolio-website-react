@@ -77,7 +77,7 @@
 @media (min-width: 800px) {
 
     .about__inner p {
-        max-width: fit-content;
+        max-width: 50rem;
     }
 
     .about__inner {

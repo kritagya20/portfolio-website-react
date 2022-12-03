@@ -29,12 +29,12 @@
 
 .slide-down {
     transform: translateY(-20%);
-    transition: transform .36s ease-in;
+    transition: transform .36s ease-in, opacity .33s ease-in-out;
 }
 
 .slide-up {
     transform: translateY(20%);
-    transition: transform .36s ease-in;
+    transition: transform .36s ease-in, opacity .33s ease-in-out;
 }
 
 .slide-down.fade-in.--appear,
@@ -194,9 +194,7 @@ img {
 }
 
 @media (min-width:800px) {
-    * {
-        scroll-behavior: smooth;
-    }
+
 
     main {
         padding-inline-start: 2%;    

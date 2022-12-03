@@ -3,11 +3,12 @@ import './ProjectArchives.css';
 import { Archiveimg0, Archiveimg1, Archiveimg2, Archiveimg3, Archiveimg4, Archiveimg5, Archiveimg6, } from '../../images/index';
 
 
-function ProjectArchives(props) {
-    
+function ProjectArchives(props) {    
 
   const contentArray = props.children;
   const imgArray = [Archiveimg0, Archiveimg1, Archiveimg2, Archiveimg3, Archiveimg4, Archiveimg5, Archiveimg6,];
+
+  
 
   return (
     <section className="archive__wrapper">
