@@ -6,8 +6,18 @@
 }
 
 .about h1 {
-    margin: 1% 0 5% 0;
+    margin: 1% 0 0 0;
 }  
+
+.about .inline-link.resume {
+    color: var(--red);
+    letter-spacing: .5px;
+}
+
+.about .inline-link.resume::after {
+    background: var(--red);
+    width: 100%;
+}
 
 .about__inner {
     display: grid;
@@ -17,6 +27,7 @@
     gap: 3rem;
     justify-items: center;
     align-items: center;
+    margin-top: 5%;
 }
 
 .about__inner .text-container {
@@ -75,6 +86,14 @@
 
 
 @media (min-width: 800px) {
+
+    .about .inline-link.resume::after {
+        width: 0%;;
+    }
+
+    .about .inline-link.resume:hover::after {
+        width: 100%;;
+    }
 
     .about__inner p {
         max-width: 50rem;

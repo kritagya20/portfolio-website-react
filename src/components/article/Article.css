@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: space-between;
     height: fit-content;
-    margin: 2rem;
+    margin: .25rem;
     border-radius: 5px;
     transition: var(--transition);
     cursor: pointer;
@@ -23,14 +23,7 @@
 .pc__description {
     color: var(--light);
     display: -webkit-box;
-    -webkit-line-clamp: 4 ;
-    -webkit-box-orient: vertical ;
-    overflow: hidden;
-}
-
-.pc__description {
-    display: -webkit-box;
-    -webkit-line-clamp: 2 ;
+    -webkit-line-clamp: 3 ;
     -webkit-box-orient: vertical ;
     overflow: hidden;
 }
@@ -54,6 +47,22 @@
     color: var(--teal);
 }
 
-.pc__meta-date {
+.meta__date {
     font-size: var(--fs5);
+    font-family: var(--ff2);
+}
+
+@media (min-width: 800px) {
+    .bp__post_card {
+        margin: 2rem;
+    }
+
+    .pc__title,
+    .pc__description {
+    color: var(--light);
+    display: -webkit-box;
+    -webkit-line-clamp: 4 ;
+    -webkit-box-orient: vertical ;
+    overflow: hidden;
+}
 }

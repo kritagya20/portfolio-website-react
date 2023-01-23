@@ -5,7 +5,7 @@ function Skills() {
 
   const [containerRef, isVisible ] = useElementOnScreen({
     root: null,
-    rootMargin: "0px 0px -300px 0px",
+    rootMargin: "-260px 0px -260px 0px",
     threshold: 0,
   });  
 

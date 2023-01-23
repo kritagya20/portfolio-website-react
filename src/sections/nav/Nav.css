@@ -45,16 +45,6 @@
     width: 100%;
 }
 
-.resume {
-    border: 1.5px solid var(--white);
-    padding: .5rem 1rem;
-    letter-spacing: .5px;
-    font-weight: 600;
-    border-radius: 5px;
-    position: relative;
-    text-transform: uppercase;
-}
-
 @media (min-width: 800px) {
     .primary-header.window-scroll {
         background: rgba(0,0,0,0.75);

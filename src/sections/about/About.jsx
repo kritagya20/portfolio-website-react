@@ -1,14 +1,15 @@
 import '../../App.css';
 import './About.css';
-import {ShapesSvg} from '../../components/index';
-import { useElementOnScreen } from '../../intersectionObserver';
-
+import {ShapesSvg} from '../../components/index'; //vectors of on about image
+import { useElementOnScreen } from '../../intersectionObserver'; //intersection
+import { Link } from "react-router-dom"; // routing 
+import { pdf } from "../../images/resume.pdf"
 
 function About() {
 
     const [containerRef, isVisible ] = useElementOnScreen({
         root: null,
-        rootMargin: "0px 0px -260px 0px",
+        rootMargin: "-260px 0px -260px 0px",
         threshold: 0,
     }); 
     
@@ -16,6 +17,14 @@ function About() {
     <section className="about section" id="about" ref={containerRef}>
         <span className=" about__empty-bg-tags empty-bg-tags liner-gradient-2 " />
         <h1 className={isVisible ? " slide-down fade-in --appear" : "slide-down fade-in"}>About Me</h1>
+        <a 
+            href="resume.pdf" 
+            download="resume.pdf" 
+            target="_blank" 
+            className={isVisible ? "inline-link resume fade-in --appear" : "inline-link resume fade-in"}
+        >
+            Resume
+        </a>
         <div className={isVisible ? "about__inner slide-up fade-in --appear" : "about__inner slide-up fade-in"}>
             <div className="text-container">
             <p>

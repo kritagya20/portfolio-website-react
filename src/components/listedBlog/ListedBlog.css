@@ -1,7 +1,9 @@
 .individual-blog {
     box-shadow: 0 10px 30px -15px var(--dark);
     transition: var(--transition);
-    background-color: var(--dark);
+    background: rgba(0,0,0,0.5);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
     border-radius: 5px;
     min-width: 250px;
 }

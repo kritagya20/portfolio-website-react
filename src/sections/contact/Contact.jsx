@@ -5,7 +5,7 @@ function Contact() {
     
     const [containerRef, isVisible ] = useElementOnScreen({
         root: null,
-        rootMargin: "0px 0px -275px 0px",
+        rootMargin: "-275px 0px -275px 0px",
         threshold: 0,
     }); 
 

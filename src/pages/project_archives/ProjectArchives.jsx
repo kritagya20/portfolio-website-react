@@ -8,8 +8,6 @@ function ProjectArchives(props) {
   const contentArray = props.children;
   const imgArray = [Archiveimg0, Archiveimg1, Archiveimg2, Archiveimg3, Archiveimg4, Archiveimg5, Archiveimg6,];
 
-  
-
   return (
     <section className="archive__wrapper">
         <ul className="archive__card-list">

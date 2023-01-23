@@ -38,7 +38,9 @@
 
 .work .tab__list .tabs {
     text-align: left;
-    background: var(--dark);
+    background: rgba(0,0,0,0.25);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
     color: var(--white);
     padding: 1rem .5rem;
     font-weight: 600;
@@ -142,7 +144,6 @@
     .work .tab__list .tabs {
         box-shadow: none;
         border-radius: 0;
-        border-inline: none;
     }
 
     .work .tab__list .tabs:hover:not(.active) {

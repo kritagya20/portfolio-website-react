@@ -17,7 +17,9 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    background: var(--dark);
+    background: rgba(0,0,0,0.75);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
     z-index: 1;
     padding: .75rem 1rem;  
     border-radius: 10px; 

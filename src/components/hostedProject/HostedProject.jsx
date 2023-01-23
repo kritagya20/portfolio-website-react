@@ -1,22 +1,31 @@
-import { ExternalSvg, GithubSvg } from "../index";
-import "./HostedProject.css";
+import { ExternalSvg, GithubSvg } from "../index"; //svg 
+import "./HostedProject.css"; //styles
 
 function HostedProject(props) {
+  const {
+    id: id, 
+    link: link, 
+    githubLink: githubLink,
+    title: title, 
+    description: description, 
+    tech: tech, 
+    img: img,
+  } = props;
   return (
-    <div id={props.id} className="individual-project">
+    <div id={id} className="individual-project">
       {/* PROJECT-CONTENT */}
       <div className="project__wrapper">
-      <a href={props.link} target="_blank">
+      <a href={link} target="_blank">
         <header>
           {/* PROJECT-HEADING */}
           <h2 className="project__title">            
-            {props.title}            
+            {title}            
           </h2>
           {/* PROJECT-DESCRIPTION */}
-          <p className="project__description">{props.description}</p>
+          <p className="project__description">{description}</p>
           {/* PROJECT-TECHNOLOGY-LIST */}
           <ul className="project__tech-list">
-            {props.tech.map((number, index) => (
+            {tech.map((number, index) => (
               <li key={index}>{number}</li>
             ))}
           </ul>
@@ -26,7 +35,7 @@ function HostedProject(props) {
           {/* PROJECT-EXTERNAL-ICON-LINK */}
           <div className="external-link">
             <a
-              href={props.link}
+              href={link}
               aria-label="External Link"
               className="external"
               target="_blank"
@@ -37,7 +46,7 @@ function HostedProject(props) {
           {/* PROJECT-GITHUB-ICON-LINK */}
           <div className="github-link">
             <a
-              href={props.githubLink}
+              href={githubLink}
               aria-label="GitHub Link"
               className="github"
               target="_blank"
@@ -49,7 +58,7 @@ function HostedProject(props) {
       </div>
       {/* PROJECT-IMAGE */}
       <figure className="project__image-block">
-        <img src={props.img} className="project__image" />
+        <img src={img} className="project__image" />
       </figure>
     </div> 
   );

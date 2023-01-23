@@ -14,7 +14,7 @@ function BlogsPage() {
   return (
     <main className='blogs_page' ref={containerRef}>
         <div className="bp__heading">
-            <h1 className={isVisible ? " slide-down fade-in --appear" : "slide-down fade-in"}>Blogs</h1>
+          <h1 className={isVisible ? " slide-down fade-in --appear" : "slide-down fade-in"}>Blogs</h1>
         </div>
         <div className="bp__wrapper">
             <ol className={isVisible ? "bp__list slide-up fade-in --appear" : "bp__list slide-up fade-in"}>

@@ -13,10 +13,13 @@
 
 .projects .inline-link {
     color: var(--red);
+    letter-spacing: .5px;
+    text-transform: capitalize;
 }
 
 .projects .inline-link::after {
     background: var(--red);
+    width: 100%;
 }
 
 
@@ -29,6 +32,14 @@
 
 
 @media (min-width: 800px) {
+
+    .projects .inline-link::after {
+        width: 0%;;
+    }
+
+    .projects .inline-link:hover::after {
+        width: 100%;;
+    }
 
     .projects .projects__carousel {
         width: 90%;

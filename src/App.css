@@ -193,6 +193,17 @@ img {
     position: relative;
 }
 
+.inline-link::after {
+    content: "";
+    position: absolute;
+    background: var(--purple);
+    height: 1.5px;
+    left: 0;
+    bottom: -1.5px;
+    transition: width 250ms ease-in;
+}
+
+
 @media (min-width:800px) {
 
 
@@ -212,14 +223,7 @@ img {
     }
 
     .inline-link::after {
-        content: "";
-        position: absolute;
-        background: var(--purple);
-        height: 1.5px;
         width: 0;
-        left: 0;
-        bottom: -1.5px;
-        transition: width 250ms ease-in;
     }
     
     .inline-link:hover::after {
