@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './Carousel.css';
 import { RightSvg, LeftSvg } from '../index';
+import {hostedProjectList} from '../../data';//fetching content of the component
 
 export const CarouselItem = ({ children, width }) => {
     return (
@@ -13,7 +14,6 @@ export const CarouselItem = ({ children, width }) => {
 
 function Carousel({children}) {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [prjectcount, setProjectCount] = useState(0);
 
     const updateIndex = (newIndex) => {
 
@@ -58,7 +58,7 @@ function Carousel({children}) {
       <div className="indicators">
         <button
             className={
-                activeIndex === 4
+                activeIndex === hostedProjectList.length-1
                 ? "carousel__button  invisible"
                 : "carousel__button "
             }
