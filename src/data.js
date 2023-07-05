@@ -1,7 +1,15 @@
 
 const hostedProjectList =[
-    {    
+    {
         key: "ip0",
+        link: "https://chat-7ch6v68g3-kritagya20.vercel.app/",
+        githubLink: "https://github.com/kritagya20/chatApp",
+        title: "Desktop Chat App",
+        description: "A chat application with capabilities including real-time messaging, updating profiles, blocking and unblocking users, adding custom themes, and sending photos.",
+        tech : ["NextJS","Tailwind","Firebase",],
+    },
+    {    
+        key: "ip1",
         link: "https://youtube.kritagya.in/",
         githubLink: "https://github.com/kritagya20/react-youtube-clone",
         title: "Youtube Clone",
@@ -9,7 +17,7 @@ const hostedProjectList =[
         tech : ["React","Material UI","API",],
     },
     {    
-        key: "ip1",
+        key: "ip2",
         link: "https://astropic.kritagya.in",
         githubLink: "https://github.com/kritagya20/AstoPic",
         title: "AstroPic",
@@ -17,7 +25,7 @@ const hostedProjectList =[
         tech : ["JavaScript","NASA-API","CSS",],
     },
     {
-        key: "ip2",
+        key: "ip3",
         link: "https://isro.kritagya.in",
         githubLink: "https://github.com/kritagya20/isro",
         title: "ISRO",
@@ -25,21 +33,13 @@ const hostedProjectList =[
         tech : ["HTML","CSS","JavaScript",],
     },
     {
-        key: "ip3",
+        key: "ip4",
         link: "https://wordtracker.kritagya.in",
         githubLink: "https://github.com/kritagya20/Word-Tracker",
         title: "Word Tracker",
         description: "An Application tool build for enhancing your vocabulary by searching the best possible synonyms and antonyms of a word.",
         tech : ["JavaScript","API","CSS",],
     },
-    {
-        key: "ip4",
-        link: "https://landingpage.kritagya.in/",
-        githubLink: "https://github.com/kritagya20/React-Landing-Page",
-        title: "Landing Page",
-        description: "A cutting-edge user interface for a demo school that features all the latest layouts and designs for all screen sizes. ",
-        tech : ["JavaScript","React","CSS",],
-    }
 ];
 
 const archiveProjectList = [
