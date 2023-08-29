@@ -1,0 +1,13 @@
+.archive__wrapper {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 1200px;
+    min-height: 100vh;
+}
+
+@media (min-width: 800px ) {
+    .archive__wrapper {
+        padding-inline: 8vw 4vw;
+    }
+    
+}

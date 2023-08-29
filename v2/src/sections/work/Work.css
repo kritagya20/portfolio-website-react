@@ -1,0 +1,217 @@
+.work {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    margin: 0px auto;
+    padding: 4rem 0 0 0;
+}
+
+.work__wrapper {
+    display: grid;
+    grid-template-areas: "tab"
+                        "content";
+    gap: 2.5rem;
+    max-width: 900px;
+    width: 100%;
+    padding: 0 .25rem;
+    overflow-x: scroll;
+}
+
+.work h2 {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.work__wrapper .tab__list-container {
+    grid-area: tab;
+    display: flex;
+    overflow-x: auto;
+}
+
+.work__wrapper .tab__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 10px;
+    align-items: flex-start;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap;
+}
+
+.work__wrapper .tab__content-list {
+    grid-area: content;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: 1px solid none;
+    border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
+    max-width: 1000px;
+    min-height: 300px;
+    padding: .5rem 0;
+    overflow-x: scroll;
+}
+
+.work .tab__list {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    position: relative;
+    margin: 0 auto;
+    overflow: scroll;
+    background: transparent;
+    white-space: nowrap;
+    -ms-overflow-style: none;    
+    scrollbar-width: none;
+    gap: 0;
+}
+
+.tab__list::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.work .tab__list .tabs {
+    text-align: left;
+    background: transparent;
+    color: var(--white);
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    font-family: var(--ff1);
+    font-size: clamp(0.65rem, 0.25vw, 0.85rem);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--gray);
+    opacity: .8;
+    word-break: keep-all;
+}
+
+.work .active-tab.tabs {
+    color: var(--white);
+    background-image: linear-gradient(to right, #007bff, #0f6bff, #3057ff, #4c3ffb, #6610f2) !important;
+    font-size: clamp(0.65rem, 0.45vw, 0.95rem);
+    border-bottom: 2px solid var(--white);
+    border-radius: 2px 2px 0 0;
+    text-shadow: 1px 1px 5px var(--black);
+}
+
+.work .inner {
+    max-width: min(90%, 35rem);
+    height: auto;
+    padding: 10px 5px;
+    margin: 0 auto;
+}
+
+.tab__content {
+    display: none;
+}
+
+.tab__content--active {
+    display: block;
+}
+
+.work .inner .title {
+    text-align: left;
+    margin-bottom: 2px;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--red);
+    font-size: var(--fs2);
+    position: relative;
+}
+
+.work .inner .title::after {
+    content: "";
+    position: absolute;
+    background: var(--red);
+    width: 100%;
+    height: 1px;
+    left: 0;
+    bottom: 5px;
+    transition: width 250ms ease-in;
+}
+
+
+.work .inner .range {
+    text-align: left;
+    margin-bottom: 1.563rem;
+    color: var(--gray);
+    font-family: var(--ff3);
+    font-size: var(--fs5);
+}
+
+.work .inner ul li::before {
+    content: "▹";
+    position: absolute;
+    left: 0px;
+    top: 0;
+    font-size: 1.2rem;
+    color: var(--white);
+}
+
+.work .inner ul li {
+    position: relative;
+    font-size: var(--fs4);
+    padding-left: 1.875rem;
+    margin-bottom: 0.625rem;
+    text-align: left;
+}
+
+@media (min-width: 800px) {
+
+    .work__wrapper {
+        display: grid;
+        grid-template-areas: "tab content";
+        gap: 3.125rem;
+        padding: 0 3.125rem 0 2.5rem;        
+        margin-top: 2rem;
+    }
+
+    .work .inner {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .work .tab__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        box-shadow: none;
+        width: 100%;
+        gap: 0;
+        margin: 0;
+    }
+    .work__wrapper .tab__content-list {
+        padding: .5rem 1.5rem;
+    }
+
+    .work .tab__list .tabs {
+        box-shadow: none;
+        border-radius: 0;
+        padding: 1rem;
+        padding-left: 1.5rem;
+        border-left: 2px solid var(--gray);
+        border-bottom: 0;
+    }
+
+    .work .active-tab.tabs {
+        border-left: 2px solid var(--white);
+        opacity: 1;
+        border-radius: 0 2px 2px 0;
+        border-bottom: 0;
+    }
+
+    .work .tab__list .tabs:hover:not(.active-tab) {
+        color: var(--purple);
+    }
+
+    .work .inner .title::after {
+        width: 0;
+    }
+    
+    .work .inner .title:hover::after {
+        width: 100%;
+    }
+}
