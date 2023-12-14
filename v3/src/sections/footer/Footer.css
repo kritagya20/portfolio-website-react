@@ -1,0 +1,16 @@
+footer {
+    display: flex;
+    -moz-box-pack: center;
+    justify-content: center;
+    -moz-box-align: center;
+    align-items: center;
+    text-align: center;
+    min-height: 20px;
+    position: relative;
+}
+
+small {
+    font-size: .7rem;
+    color: var(--gray);
+    word-spacing: 2px;
+}
