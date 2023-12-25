@@ -4,31 +4,11 @@ import React, {useState, useEffect} from 'react';
 
 function Nav() {
 
-  const [navbar, setNavbar] = useState(false);
   const [toggle, setToggle] = useState(false);
 
-  const changeBackground = () => {
-    if (window.scrollY >= 1) {
-      setNavbar(true);
-    } else {
-      setNavbar(false);
-    }
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      changeBackground();
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
-    <header className={`primary-header ${navbar ? 'window-scroll' : ''}`}>
+    <header className={`primary-header`}>
       <div className="nav-toggle-container">
         <button
           className={`nav-toggle ${toggle ? 'visible' : ''}`}

@@ -69,10 +69,10 @@ function Skills({isOpen, onClose}) {
 
   return (
     <section className={isOpen ?`tech-modal-open tech-modal-overlay skills`: `tech-modal-overlay skills`} id="skills">
-      <div className="tech-modal">
         <button className="tech-modal__close-button" onClick={onClose}>
           &#215;
         </button>
+      <div className="tech-modal">
       <h1 >Technologies</h1>
       <ul className={`skills__grid`}>
         {skillItems.map(({ className, imgSrc, name }) => (

@@ -59,7 +59,7 @@ useEffect(() => {
     <>
       <div className="tech-scroller">
         <div className="tech-scroller_wrap">
-          <h3>Technologies</h3>
+          <h4>Technologies</h4>
           <div className="tech-scroller_category" >
             {technologiesList.map((obj, index) => (
               <div key={index} className={index === activeCategory ? 'active' : 'inactive'}>

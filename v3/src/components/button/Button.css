@@ -21,21 +21,17 @@
     text-transform: uppercase;
 }
 
+
 .hero__btn {
-    border-radius: 10px;
-    letter-spacing: .8px;
-    padding: .8rem 1rem;
+    display: flex;
+    align-items: start;
+    justify-content: start;
 }
 
 .contact__btn {
     border-radius: 5px;
     letter-spacing: 1px;
     padding: .75rem 1.25rem;
-}
-
-.btn--explore {
-    background: var(--indigo);
-    background-image: linear-gradient(to right , #007bff, #0f6bff, #3057ff, #4c3ffb, #6610f2);
 }
 
 .btn--mail,
@@ -49,42 +45,7 @@
     background-image: linear-gradient(to right , #007bff, #0f6bff, #3057ff, #4c3ffb, #6610f2);
 }
 
-
 @media (min-width: 800px) {    
-    .btn--hire:before {
-        background: var(--indigo);
-        background-image: linear-gradient(to right , #007bff, #0f6bff, #3057ff, #4c3ffb, #6610f2);
-        left: -120%;
-        position: absolute;
-        content: "";
-        top: -20%;
-        width: 116%;
-        height: 125%;
-        transform: skew(-22deg);
-        transition: left ease-out .2s;
-        z-index: -1;
-    }
-
-    .btn--hire:hover::before {
-        left: -10%;
-    }
-
-    .btn--explore::before {
-        background: linear-gradient(96.3deg, #111 45%, #121212 55%);
-        right: -120%;
-        position: absolute;
-        content: "";
-        top: -20%;
-        width: 113%;
-        height: 125%;
-        transform: skew(-22deg);
-        transition: right ease-out .2s;
-        z-index: -1;
-    }
-
-    .btn--explore:hover::before {
-        right: -10%;
-    }
 
     .btn.contact__btn span {
         z-index: 200;

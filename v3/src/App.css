@@ -22,7 +22,7 @@
   --success: #28a745;
   --info: #17a2b8;
   --warning: #ffc107;
-  --danger: #dc3545;
+  --danger: #fb3246;
   --light: #eeefef;
   --dark: #1d1e20;
   --bg-2: #f4f5ff;
@@ -72,7 +72,7 @@ body {
   scroll-behavior: smooth;  
   webkit-scroll-behavior: smooth;
   overflow-x: hidden;
-  background: linear-gradient(96.3deg, #111 2%, #121212 33.84%, #1E3A8A 162.79%);
+  background: linear-gradient(96.3deg, #111 2%, #121212 33.84%, #1E3A8A 26.79%);
 }
 
 .root {

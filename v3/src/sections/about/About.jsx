@@ -28,20 +28,18 @@ function About() {
             <div className="techScroller-container" onClick={openTechModal}>
                 <TechScroller />
             </div>
-            <div>
+            <div className='resume-container'>
                 <span>
                     <a 
                         href="Resume - Kritagya Singh Chouhan.pdf" 
                         download="Resume - Kritagya Singh Chouhan.pdf" 
                         target="_blank" 
-                        className={"inline-link resume"}                        
-                        title='Download Resume' 
+                        className={" resume"}                        
+                        title='Download CV' 
                     >
                     
-                        Resume
-                    </a> 
-                    &#x1F4C4;
-                
+                    Download CV
+                    </a>               
 
                 </span>
             </div>

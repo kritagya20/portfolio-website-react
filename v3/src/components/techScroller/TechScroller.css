@@ -26,7 +26,7 @@
     background: transparent;
 }
 
-.tech-scroller_wrap > h3 {
+.tech-scroller_wrap > h4 {
     position: relative;
     text-align: center;
     margin: 0 auto 0.5rem auto;
@@ -66,7 +66,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 25%;
+    gap: 20%;
     margin: auto;
     width: 100%;
 }
@@ -76,13 +76,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 0 2vh 0;
 }
 
 
 .tech-scroller_category div.active .image {
-    min-width: 1.75rem ;
-    width: 2.25vw;
-    max-width: 2rem;
+    min-width: 1.5rem ;
+    width: 2vw;
+    max-width: 1.95rem;
     stroke-width: 1px;
     fill: var(--white);
     color: var(--white);

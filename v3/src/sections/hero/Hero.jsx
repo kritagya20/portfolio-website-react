@@ -17,20 +17,7 @@ function Hero() {
             <p>
                 I'm a software developer specializing in building (and occasionally designing) exceptional digital experiences. At Present, I’m focused on building scalable, user-centered products at Jio.
             </p>
-            <div className="hero__btn">
-                <Button
-                    className='btn hero__btn btn--explore'
-                    data='explore'
-                    href='#about'
-                    title='Explore'                
-                />
-                <Button
-                    className='btn hero__btn btn--hire'
-                    data='contact'
-                    href='#contact'
-                    title='contact'                
-                />
-            </div>
+
         </div>
         <div className="hero__right">
             <img className="hero-image" src={Heroimg} />
