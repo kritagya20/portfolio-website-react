@@ -89,7 +89,7 @@
     }
 
     .nav-toggle .line{
-        background: var(--red);
+        background: var(--white);
         border-radius:10px;
         height:3px;
         margin: 2px 0;

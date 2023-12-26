@@ -15,7 +15,6 @@
     pointer-events: none;
     transition: opacity 0.3s ease;
     overflow: hidden;
-    height: 100vh;
 }
     
 .tech-modal-open {
@@ -151,9 +150,6 @@
 
 @media (min-width: 800px) {
 
-    .tech-modal {
-        min-height: none;
-    }
     
     .skills .image {
         max-width: 2rem;

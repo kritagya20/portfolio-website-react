@@ -1,31 +1,27 @@
 .hero {
-    padding-top: 2rem;
+    padding-top: 1rem;
     min-height: 100vh;
 }
 
 .hero__inner {
     display: flex;  
     flex-direction: column-reverse;
-    gap: 1.5rem;
+    gap: 10vh;
     text-align: center;
     justify-content: space-around;
 }
 
-.hero__left h1{
-    font-weight: 400;
-    font-family: var(--ff2);
-    margin-bottom: .85rem;
-    margin-inline: auto;
-}
 
-.hero__left h1 .name{
+.hero__left .name{
     display: block;
     font-size: var(--title);
     font-weight: 600;
     color: var(--light);
     text-transform: uppercase;
-    text-shadow: 1px 1px 5px var(--black);
-
+    text-shadow: 1px 1px 5px var(--black);    
+    font-family: var(--ff2);
+    margin-inline: auto;
+    margin-bottom: .5rem;
 }
 
 .hero__left .auto-typing {
@@ -33,7 +29,13 @@
     position: relative;
     color: var(--red);
     font-weight: 600;
+    text-transform: capitalize;
     text-shadow: 1px 1px 5px var(--black);
+    font-weight: 400;
+    font-family: var(--ff2);
+    margin-inline: auto;
+    margin-bottom: .5rem;
+
 }
 
 .hero__left p {
@@ -41,6 +43,7 @@
     margin: 0 auto;    
     letter-spacing: 1px;
     word-spacing: 7px;
+    text-align: unset;
 }
 
 .hero__btn {
@@ -58,7 +61,7 @@
 }
 
 .hero__right .hero-image {
-    max-width: 25rem;
+    max-width: 30rem;
     width: 35vw;
     min-width: 12rem;
     margin-top: 1rem;
@@ -67,7 +70,7 @@
 @media (min-width: 800px) {
 
     .hero {
-        margin-top: 6rem;
+        margin-top: 5rem;
         min-height: inherit;
     }
 
@@ -84,12 +87,10 @@
         padding-top: 5rem;
     }
 
-    .hero__left h1{
-        margin-bottom: 2%;
-    }
 
     .hero__left h1 .name{
-        word-spacing: 5px;
+        word-spacing: 10px;
+        letter-spacing: 3px;
 
     }
 

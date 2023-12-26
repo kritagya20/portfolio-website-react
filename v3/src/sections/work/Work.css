@@ -5,14 +5,13 @@
     justify-content: center;
     height: fit-content;
     margin: 0px auto;
-    padding: 4rem 0 0 0;
 }
 
 .work__wrapper {
     display: grid;
     grid-template-areas: "tab"
                         "content";
-    gap: 2.5rem;
+    gap: 3vh;
     max-width: 900px;
     width: 100%;
     padding: 0 .25rem;
@@ -73,34 +72,26 @@
 }
 
 .work .tab__list .tabs {
-    text-align: left;
+    text-align: center;
     border-inline: .75px solid var(--gray);
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: saturate(180%) blur(5px);
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     background-color: var(--dark);
     color: var(--white);
-    padding: 1rem 1.5rem;
-    font-weight: 600;
+    padding: .75rem .75rem;
     font-family: var(--ff1);
-    font-size: clamp(0.65rem, 0.25vw, 0.85rem);
+    font-size: clamp(0.5rem, 0.25vw, 0.85rem);
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border-bottom: 2px solid var(--gray);
+    border-block: 1px solid var(--gray);
     opacity: .8;
     word-break: keep-all;
-    min-width: 7.25rem;
 }
 
 .work .active-tab.tabs {
     border-inline: none;
     color: var(--white);
     background-image: linear-gradient(to right, #007bff, #0f6bff, #3057ff, #4c3ffb, #6610f2) !important;
-    font-size: clamp(0.65rem, 0.45vw, 0.95rem);
-    border-bottom: 2px solid var(--white);
-    border-radius: 2px 2px 0 0;
+    border-bottom: 1px solid var(--white);
     text-shadow: 1px 1px 5px var(--black);
 }
 
@@ -128,18 +119,6 @@
     font-size: var(--fs2);
     position: relative;
 }
-
-.work .inner .title::after {
-    content: "";
-    position: absolute;
-    background: var(--red);
-    width: 100%;
-    height: 1px;
-    left: 0;
-    bottom: 5px;
-    transition: width 250ms ease-in;
-}
-
 
 .work .inner .range {
     text-align: left;
@@ -198,6 +177,7 @@
     }
 
     .work .tab__list .tabs {
+        text-align: left;
         background-color: var(--black);
         background: rgba(255, 255, 255, 0.01);
         backdrop-filter: blur(10px);
@@ -205,11 +185,11 @@
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         border-inline: none;
         box-shadow: none;
-        border-radius: 0 2px 2px 0;
         padding: 1rem;
         padding-left: 1.5rem;
         border-left: 2px solid var(--gray);
         border-bottom: 0;
+        min-width: 7.25rem;
     }
 
     .work .active-tab.tabs {
@@ -221,13 +201,5 @@
     .work .tab__list .tabs:hover:not(.active-tab) {
         background-color: aliceblue;        
         background: rgba(255, 255, 255, 0.05);
-    }
-
-    .work .inner .title::after {
-        width: 0;
-    }
-    
-    .work .inner .title:hover::after {
-        width: 100%;
     }
 }

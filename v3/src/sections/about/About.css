@@ -32,9 +32,9 @@
 .about__inner {
     display: grid;
     grid-template-areas: 
-        "text"
-        "resume"
-        "image";
+        "text"        
+        "image"
+        "resume";
     gap: 1rem;
     justify-items: center;
     margin-top: 5%;

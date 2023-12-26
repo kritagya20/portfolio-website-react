@@ -23,7 +23,10 @@
 }
 
 .form-modal {
-  background-color: var(--light);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 10px;
   padding: 2rem;
@@ -36,7 +39,7 @@
 .modal-title {
   font-size: var(--fs1);
   margin-bottom: 1rem;
-  color: var(--dark);
+  color: var(--white);
 }
 
 .close-button {
@@ -46,22 +49,21 @@
   font-size: 1.75rem;
   border: none;
   cursor: pointer;
+  background: transparent;
+  color: var(--light);
 }
 
-.close-button:hover {
-  background: transparent;
-}
 
 .modal-form label {
-  font-weight: 600;
   display: block;
-  margin-bottom: 0.5rem;
-  color: var(--dark);
+  margin-bottom: 0.25rem;
+  color: var(--light);
 }
 
 .modal-form .input-field{
   border: 2px solid var(--gray);
   box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+  background: var(--light);
   width: 100%;
   padding: 0.5rem;
   border-radius: 5px;
@@ -81,13 +83,12 @@
   border: 2px solid var(--green);
 }
 
-
 .modal-form textarea{
   resize: vertical;
 }
 
 .modal-submit-btn:disabled {
-  filter: grayscale(75%);
+  filter: grayscale(250%);
   cursor: no-drop !important;
 }
 
