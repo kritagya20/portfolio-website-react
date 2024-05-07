@@ -1,0 +1,234 @@
+.gradient__bg {
+    background: radial-gradient(circle at 0% 45%, rgba(0,123,255,1) 10%, rgba(102,16,242,1) 45%);
+    background:-moz-radial-gradient(circle at 0% 45%, rgba(0,123,255,1) 10%, rgba(102,16,242,1) 45%);
+  
+    /* safari 5.1+,chrome 10+ */
+    background:-webkit-radial-gradient(circle at 0% 45%, rgba(0,123,255,1) 10%, rgba(102,16,242,1) 45%);
+  
+    /* opera 11.10+ */
+    background:-o-radial-gradient(circle at 0% 45%, rgba(0,123,255,1) 10%, rgba(102,16,242,1) 45%);
+  
+    /* ie 10+ */
+    background:-ms-radial-gradient(circle at 0% 45%, rgba(0,123,255,1) 10%, rgba(102,16,242,1) 45%);
+  
+    /* global 92%+ browsers support */
+    background:radial-gradient(circle at 0% 45%, rgba(0,123,255,1) 10%, rgba(102,16,242,1) 45%);
+}
+
+.liner-gradient-1 {
+    background-image: linear-gradient(to left, #17a2b8, #0098d1, #5c88da, #9f6ec9, #ce4c9c, #d64192, #dc3586, #e22779, #d636a2, #bb4ec8, #8966e9, #007bff);}
+
+.liner-gradient-2 {
+    background-image: linear-gradient(180deg, rgba(0, 194, 255, 0.6) 50%, #FF29C3 101.74%);
+}
+
+.fade-in {
+    opacity: 0 ;
+    transition: opacity .33s ease-in-out;
+}
+
+.slide-down {
+    transform: translateY(-20%);
+    transition: transform .36s ease-in, opacity .33s ease-in-out;
+}
+
+.slide-up {
+    transform: translateY(20%);
+    transition: transform .36s ease-in, opacity .33s ease-in-out;
+}
+
+.slide-down.fade-in.--appear,
+.slide-up.fade-in.--appear {
+    opacity: 1 ;
+    transform: translateY(0%) ;
+}
+
+.fade-in.--appear,
+.fade-in.--appear {
+    opacity: 1 ;
+}
+
+.app {
+    margin: 0 auto;
+    width: 100%;
+    font-family: var(--ff1);
+    line-height: 1.4;
+    color: var(--white);
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: linear-gradient(96.3deg, #111 2%, #121212 33.84%, #1E3A8A 162.79%);
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+main {
+    margin: 0;
+    padding: 1px; 
+    display: flex;
+    flex-direction: column;
+    gap: 2vh 0;          
+    margin-inline: 5%; 
+}
+
+.section {
+    position: relative;    
+    padding: 3rem 1% 1rem 1%;
+    min-height: 60vh;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+    font-family: var(--ff2);
+}
+
+h1 {
+    font-size: var(--fs1);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-inline: auto;
+    margin-block: 0 6vh;
+}
+
+h2 {
+    font-size: var(--fs2);
+}
+
+h3 {
+    font-size: var(--fs3);
+}
+
+h4 {
+    font-size: var(--fs4);
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: .1px;
+    font-size: var(--fs4);
+}
+
+a {
+    color: var(--white);
+    font-size: var(--fsa);
+}
+
+img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.empty-bg-tags {
+    position: absolute;
+    z-index: 0;
+    filter: blur(250px);
+    -webkit-filter: blur(250px);
+}
+
+.hero__empty-bg-tags {
+    width: 10rem;
+    height:10rem;
+    left: -100px;
+    top: -180px;
+}
+
+.skills__empty-bg-tags,
+.projects__empty-bg-tags,
+.blogs__empty-bg-tags {
+    width: 6rem;
+    height:6rem;
+    top: 50px;
+    right: -420px;
+}
+
+.work__empty-bg-tags,
+.contact__empty-bg-tags,
+.about__empty-bg-tags {
+    width: 6rem;
+    height:6rem;
+    top: 0px;
+    left: -250px;
+}
+
+.heading {
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    position: relative;
+    margin: 0.625rem 0px 1rem;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.heading::after {
+    content: "";
+    display: block;
+    position: relative;
+    top: -5px;
+    width: 40vw;
+    height: 1.5px;
+    margin-left: 5vw;
+    background-color: var(--white);
+}
+
+.inline-link {
+    color: var(--purple);
+    font-weight: 500;
+    position: relative;
+}
+
+.inline-link::after {
+    content: "";
+    position: absolute;
+    background: var(--purple);
+    height: 1.5px;
+    left: 0;
+    bottom: -1.5px;
+    transition: width 250ms ease-in;
+}
+
+
+@media (min-width:800px) {
+
+
+    main {
+        padding-inline-start: 2%;    
+    }
+
+    .section {    
+        padding: 4rem 2% 1rem 2%;
+        min-height: 80vh;
+    }
+    
+    .heading::after {
+        width: 25rem;
+        height: 2px;
+        margin-left: 2.5rem;
+    }
+
+    .inline-link::after {
+        width: 0;
+    }
+    
+    .inline-link:hover::after {
+        width: 100%;
+    }
+
+}
+  

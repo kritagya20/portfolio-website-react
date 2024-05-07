@@ -1,0 +1,91 @@
+.socials {
+    background: transparent;
+    width: 40px;
+    position: fixed;
+    bottom: 0px;
+    left: 1.5%;
+    right: auto;
+    z-index: 10;
+}
+
+.social__icon-list {
+    display: flex;
+    flex-direction: column;
+    -moz-box-align: center;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+.social__icon-list li a .icon {
+    width: 1.4rem;
+    margin: 0 0 1rem 0;
+}
+
+.icon {
+    stroke: var(--white);
+    stroke-width: 1.4px;
+    fill: none;
+}
+
+.social__icon-list::after {
+    content: "";
+    display: block;
+    width: .8px;
+    height: 120px;
+    margin: 0px auto;
+    background-color: var(--white);
+}
+
+.social__icon-list .icon:hover {
+    transform: translateY(-.2rem);
+    transition: var(--transition);
+}
+
+.social__icon-list .icon--github:hover {
+    stroke: var(--gray);
+}
+
+.social__icon-list .icon--instagram:hover {
+    stroke: var(--danger);
+}
+
+.social__icon-list .icon--twitter:hover {
+    stroke: var(--cyan);
+}
+
+.social__icon-list .icon--linkedin:hover {
+    stroke: var(--blue);
+}
+
+@media screen and (max-width: 800px) {
+    .socials {
+        position: relative;
+        inset: 0 0 0 0;
+        width: 100%;
+        margin-top: 5rem;
+    }
+    
+    .social__icon-list {
+        flex-direction: row;
+        justify-content: center;
+        margin: auto;
+        gap: 2rem;
+    }
+    
+    .social__icon-list::after {
+        display: none;
+    }
+
+    .social__icon-list li a .icon {
+        width: 1.25rem;
+        margin: 0 0 1rem 0;
+    }
+    
+    .icon {
+        stroke: var(--white);
+        stroke-width: 1.25px;
+        fill: none;
+    }
+}
