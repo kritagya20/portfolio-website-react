@@ -1,0 +1,114 @@
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.about h1 {
+    margin: 1% 0 0 0;
+}  
+
+.resume-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: resume;
+}
+
+.about .resume {
+    font-size: var(--fs4);
+    letter-spacing: 1px;
+    margin: 0 auto;
+    background: var(--red);
+    border: 1px solid var(--white);
+    padding: .3rem 1rem;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.about__inner {
+    display: grid;
+    grid-template-areas: 
+        "text"        
+        "image"
+        "resume";
+    gap: 1rem;
+    justify-items: center;
+    margin-top: 5%;
+}
+
+.about__inner .text-container {
+    grid-area: text;
+    max-width: 75ch;
+    text-align: left;
+}
+
+.about__inner .techScroller-container {
+    grid-area: image;
+}
+
+.about__inner p {
+    text-align: left;
+    max-width: 40rem;
+    letter-spacing: 1px;
+    word-spacing: 10px;
+    line-height: 1.25;
+}
+
+.about__inner p > span {
+    color: var(--pink);
+}
+
+.about__inner .card {
+    max-width: 22rem;   
+    height: fit-content;
+    position: relative;
+}
+
+.about__inner .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-width: 2px;
+    border-style: solid ;
+    border-image: linear-gradient(to left, #6610f2, #9e00db, #be00c4, #d300b0, #e00f9e, #ec1e8e, #f53080, #fa4273, #ff4c5f, #ff5b4a, #ff6c33, #fd7e14) 30;
+    transform: translate(-.8rem, -.8rem);
+  
+}
+
+
+@media (min-width: 800px) {
+
+    .about .inline-link.resume::after {
+        width: 0%;;
+    }
+
+    .about .inline-link.resume:hover::after {
+        width: 100%;;
+    }
+
+    .about__inner p {
+        max-width: 50rem;
+        line-height: 1.5;
+    }
+
+    .about .resume:hover {
+        background: var(--danger);
+    }
+
+    .about__inner {
+        grid-template-areas: 
+            "image text"
+            "resume text"
+        ;
+        gap: 0% 7%;
+    }
+
+    .about__inner .text-container {
+        max-width: 100%;
+        margin-top: .25vh;
+    }
+}

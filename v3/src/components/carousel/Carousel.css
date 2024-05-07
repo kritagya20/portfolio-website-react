@@ -1,0 +1,90 @@
+.carousel__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel {
+    flex: .8;
+    overflow: hidden;
+}
+
+.indicators {
+    flex: .1;
+    z-index: 10;
+    width: fit-content;
+    max-width: 2rem;
+}
+
+.carousel .inner {
+    white-space: nowrap;
+    transition: transform 0.3s;
+    flex: .8;
+    width: 100%;
+}
+
+.carousel-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+}
+
+.carousel__button {
+    background: transparent;
+    border: 0;
+    cursor: pointer;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.button__image {
+    min-width: 1.5rem;
+    width: 100%;
+    max-width: 2.5rem;
+    fill: var(--white);  
+    filter: drop-shadow(14px 14px 20px #000);
+}
+
+.project__visible {
+    display: block;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.dot-indicators__container {
+    margin: .5rem auto 0 auto;
+    display: flex;
+    align-content: center;
+    gap: 1rem;
+}
+
+.dot-indicator {
+    width: .5rem;
+    aspect-ratio: 1;
+    background: var(--gray);
+    display: inline-block;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: rgba(255, 255, 255, 0.15) 0px 5px 15px;
+}
+
+.active {
+    background: var(--white);
+}
+
+
+@media (min-width:800px) {
+    .dot-indicator {
+        width: .6rem;
+    }
+}
