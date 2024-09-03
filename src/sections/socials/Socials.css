@@ -39,24 +39,9 @@
 }
 
 .social__icon-list .icon:hover {
-    transform: translateY(-.2rem);
+    transform: translateY(-.2rem) scale(1.1);
     transition: var(--transition);
-}
-
-.social__icon-list .icon--github:hover {
-    stroke: var(--gray);
-}
-
-.social__icon-list .icon--instagram:hover {
-    stroke: var(--danger);
-}
-
-.social__icon-list .icon--twitter:hover {
-    stroke: var(--cyan);
-}
-
-.social__icon-list .icon--linkedin:hover {
-    stroke: var(--blue);
+    stroke: var(--red);
 }
 
 @media screen and (max-width: 800px) {

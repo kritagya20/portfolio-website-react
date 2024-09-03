@@ -114,9 +114,9 @@ const workData =  [
       date: 'Nov 2023 - Present',
       content: [
         'Working as software developer at Jio',
-        "Interacted with multiple teams and gained knowledge of the company's different domains",
-        'Pursuing various courses in different fields such as devops, testing, microservices and many more',
-        "Increased the learning curve by experimenting with various new technologies"
+        "Automated various test cases using Robot FrameWork.",
+        'Handles all the scripts and maintained the existing codebase using Git and GitHub',
+        "Contributed to the development of an in-house website for storing automation-generated reports, monitoring team tasks, dynamically fetching report data, and visualizing it through graphs and tables."
       ],
     },
     {
