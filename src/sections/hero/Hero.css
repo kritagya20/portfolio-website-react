@@ -11,6 +11,14 @@
     justify-content: space-around;
 }
 
+.hero__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
 
 .hero__left .name{
     display: block;
@@ -25,7 +33,7 @@
 }
 
 .hero__left .auto-typing {
-    font-size: var(--fs3);
+    font-size: var(--fs2);
     position: relative;
     color: var(--red);
     font-weight: 600;
@@ -47,11 +55,12 @@
 }
 
 .hero__btn {
-    margin-top: .5vh;
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     gap: 15%;
     position: relative;
+    margin-inline: auto;
 }
 
 
@@ -85,13 +94,14 @@
 
     .hero__left {
         padding-top: 5rem;
+        display: block;
+        text-align: left;
     }
 
 
     .hero__left h1 .name{
         word-spacing: 10px;
         letter-spacing: 3px;
-
     }
 
     .hero__left p {

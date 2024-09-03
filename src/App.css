@@ -25,6 +25,7 @@
   --danger: #fb3246;
   --light: #eeefef;
   --dark: #1d1e20;
+  --darkbg: #131414;
   --bg-2: #f4f5ff;
 
   /* WIDTH */
@@ -41,7 +42,7 @@
   --ff3: 'Roboto Slab', serif;
 
   /*FONT-SIZE*/
-  --title: clamp(1.7rem, 5vw, 3rem) ;
+  --title: clamp(1.7rem, 6vw, 3.75rem) ;
   --fs1: clamp(1.65rem, 2.75vw, 2.25rem);
   --fs2: clamp(1.5rem, 2vw , 1.75rem);
   --fs3: clamp(1rem, 1.7vw, 1.3rem);

@@ -59,7 +59,7 @@
 }
 
 .about__inner p > span {
-    color: var(--pink);
+    font-weight: 700;
 }
 
 .about__inner .card {

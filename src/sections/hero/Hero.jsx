@@ -1,5 +1,6 @@
 import './Hero.css';
-import {Heroimg} from '../../images/index';
+import { Heroimg} from '../../images/index';
+import { CopyButton } from '../../components';
 
 
 function Hero() {
@@ -12,8 +13,11 @@ function Hero() {
             <h1 className="name">Kritagya Singh Chouhan</h1>
             <h6  className="auto-typing">Full Stack Developer</h6>
             <p>
-                I'm a software developer specializing in building (and occasionally designing) exceptional digital experiences. At Present, I’m focused on building scalable, user-centered products at Jio.
+                I'm a software developer specializing in building exceptional digital experiences. At Present, I’m focused on building scalable, user-centered products at Jio.
             </p>
+            <div className="hero__btn">
+              <CopyButton />
+            </div>
 
         </div>
         <div className="hero__right">

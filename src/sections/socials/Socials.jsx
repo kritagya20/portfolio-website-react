@@ -1,5 +1,5 @@
 import React from 'react';
-import { TwitterSvg, LinkedinSvg, InstagramSvg, GithubSvg } from '../../components';
+import { MailSvg, TwitterSvg, LinkedinSvg, InstagramSvg, GithubSvg } from '../../components';
 import './Socials.css';
 
 const socialLinks = [
@@ -9,20 +9,25 @@ const socialLinks = [
     icon: <GithubSvg className='icon icon--github' />
   },
   {
-    label: 'Linkedin',
-    href: 'https://www.linkedin.com/in/kritagyachouhan/',
-    icon: <LinkedinSvg className='icon icon--linkedin' />
-  },
-  {
     label: 'Twitter',
     href: 'https://twitter.com/kritagyachouhan',
     icon: <TwitterSvg className='icon icon--twitter' />
   },
   {
-    label: 'Instagram',
-    href: 'https://www.instagram.com/kritagya_chouhan',
-    icon: <InstagramSvg className='icon icon--instagram' />
-  }
+    label: 'Linkedin',
+    href: 'https://www.linkedin.com/in/kritagyachouhan/',
+    icon: <LinkedinSvg className='icon icon--linkedin' />
+  },
+  {
+    label: 'Mail',
+    href: 'https://www.linkedin.com/in/kritagyachouhan/',
+    icon: <MailSvg className='icon icon--mail' />
+  },
+  // {
+  //   label: 'Instagram',
+  //   href: 'https://www.instagram.com/kritagya_chouhan',
+  //   icon: <InstagramSvg className='icon icon--instagram' />
+  // }
 ];
 
 function Socials() {
