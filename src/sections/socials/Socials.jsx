@@ -20,7 +20,7 @@ const socialLinks = [
   },
   {
     label: 'Mail',
-    href: 'https://www.linkedin.com/in/kritagyachouhan/',
+    href: 'mailto: kritagya2022@gmail.com',
     icon: <MailSvg className='icon icon--mail' />
   },
   // {

@@ -26,25 +26,7 @@ function Contact() {
                 <p>Let's collaborate to turn ideas into tangible digital solutions. I'm eager to explore new opportunities and contribute my skills.</p>
                 <div className={"contact__btns"} >
                     <div className="external-links">
-                        <Button
-                            className='btn contact__btn btn--mail'
-                            href='mailto: kritagya2022@gmail.com'
-                            target='_blank'
-                            title='mail me'
-                            data='mail'
-                        />
-                        <Button
-                            className='btn contact__btn btn--call'
-                            href='tel:+917987322906'
-                            target='_blank'
-                            title='call me'
-                            data='call'
-                        />
-                    </div>
-                    <div className="popup-link">
-                        <span
-                            onClick={openModal}
-                        >
+                        <span onClick={openModal} >
                             <Button
                                 className='btn contact__btn btn--message'
                                 href='#contact'
@@ -52,8 +34,16 @@ function Contact() {
                                 data='message'                                
                             />
                         </span>
-
+                        <Button
+                            className='btn contact__btn btn--call'
+                            href='tel:+917987322906'
+                            target='_blank'
+                            title='Call 7987322906'
+                            data='call'
+                        />
+                        
                     </div>
+
                 </div>
             </div>
         </section>
