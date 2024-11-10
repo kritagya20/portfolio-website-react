@@ -7,13 +7,61 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 
-.karla {
+/* ---------------ROOT VARIABLES------------------ */
+:root {
+  /* COLORS */
+  --green: #02d866;
+  --green-light: #bbf7d0;
+  --cyan: #67E8F9;
+  --light: #edebe8;
+  --light2: #f5f3f0;
+  --light3: #cdcbcb;
+  --dark3: #656464;
+  --dark2: #434040;
+  --dark: #232121;
+  --black: #000;
+  --white: #fff;
+
+
+  /* TRANSITON */
+  --transition: all 300ms ease;
+
+  /*FONT-SIZE*/
+  --title: clamp(1.7rem, 6vw, 3.75rem) ;
+  --fs1: clamp(1.65rem, 2.75vw, 2.25rem);
+  --fs2: clamp(1.5rem, 2vw , 1.75rem);
+  --fs3: clamp(1rem, 1.7vw, 1.3rem);
+  --fs4: clamp(0.9rem, 1.4vw, 1.05rem);
+  --fs5: clamp(0.75rem, .2vw, .85rem);
+  --fsa: clamp(0.8rem, 1vw, 1.1rem);
+  --fssmall: clamp(0.65rem, 1vw, 0.85rem);
+  --fssmalla: clamp(0.75rem, 1vw, 0.95rem);
+
+}
+/* --------------------------------- */
+
+/* ---------------GENERALS------------------ */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+
+
+.font-h {
   font-family: "Karla", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
 
-.inconsolata {
+.font-p {
   font-family: "Inconsolata", monospace;
   font-optical-sizing: auto;
   font-style: normal;

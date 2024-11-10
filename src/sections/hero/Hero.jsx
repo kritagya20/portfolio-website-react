@@ -1,38 +1,65 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { CopyButton } from '../../components';
-import {Heroimg} from '../../assets';
+import { Heroimg } from '../../assets';
+  
 
 const Hero = () => {
+
+  //code to tilt the image
+  const [transform, setTransform] = useState('perspective(100px) scale(1.01) rotateX(0deg) rotateY(0deg)');
+
+  const handleMouseMove = (e) => {
+    const { width, height, left, top } = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+    const multiplier = 4; // Reduced for a very subtle tilt
+
+    const xRotate = multiplier * ((x - width / 2) / width);
+    const yRotate = -multiplier * ((y - height / 2) / height);
+
+    setTransform(`perspective(100px) scale(1.01) rotateX(${xRotate}deg) rotateY(${yRotate}deg)`);
+  };
+
+  const handleMouseOut = () => {
+    setTransform('perspective(100px) scale(1.01) rotateX(0deg) rotateY(0deg)');
+  };
+
   return (
     <>
-        <section className="hero pt-4 min-h-screen " id="home">
-        <span className="hero__empty-bg-tags empty-bg-tags liner-gradient-2" />
-        <div className="hero__inner flex  flex-col-reverse gap-[10vh] text-center justify-around md:flex-row md:gap-12 md:justify-between md:text-left md:items-center">
-            <div className="hero__left flex flex-col justify-center items-center text-center md:pt-20 md:text-left">
-            <h1 className=" karla name text-8xl font-semibold text-[#cdcbcb] uppercase mx-auto mb-2 z-10">
-                Kritagya Singh Chouhan
+      <section className="hero lg:pt-[12vh] pt-4 pl-8 min-h-screen" id="home">
+        <div className="hero__inner flex flex-col-reverse gap-[10vh] justify-around md:flex-row md:gap-12 md:justify-between md:items-center">
+          <div className="flex flex-col sm:justify-center sm:items-center lg:items-start md:pt-20">
+            <h1 className="font-h name text-6xl font-semibold text-[var(--light)] uppercase mb-2 z-10 sm:text-center md:text-left">
+              Kritagya Singh Chouhan
             </h1>
-            <h6 className="auto-typing text-xl font-semibold text-[var(--red)] capitalize mx-auto mb-2">
-                Full Stack Developer
+            <h6 className="font-p text-xl font-semibold text-[var(--green)] capitalize mb-2 sm:text-center md:text-left">
+              Full Stack Developer
             </h6>
-            <p className="text-[#cdcbcb] inconsolata max-w-prose mx-auto tracking-wider text-justify md:max-w-[55ch] md:mt-4 z-10">
-                I'm a software developer specializing in building exceptional digital experiences. At Present, I’m focused on building scalable, user-centered products at Jio.
+            <p className="text-[var(--light)] font-p max-w-prose tracking-wider md:max-w-[55ch] md:mt-4 z-10 sm:text-center md:text-left">
+              I'm a software developer specializing in building exceptional digital experiences. At Present, I’m focused on building scalable, user-centered products at Jio.
             </p>
-            <div className="hero__btn mt-[5vh] flex justify-center gap-[15%] mx-auto md:justify-start md:gap-20 md:mt-[5%]">
-                <CopyButton />
+            <div className="mt-[5vh] cursor-pointer">
+              <CopyButton />
             </div>
-            </div>
-            <div className="hero__right grid place-items-center">
-            <img
-                className="hero-image max-w-[30rem] w-[35vw] min-w-[12rem] mt-4 md:mt-0 border-4 rounded-full border-[#cdcbcb] z-10"
+          </div>
+          <div className="grid place-items-center">
+            <div
+              className="tilt transition-all duration-100 ease-in cursor-pointer"
+              style={{ transform }}
+              onMouseMove={handleMouseMove}
+              onMouseOut={handleMouseOut}
+            >
+              <img
+                className="tilt__content border-solid border-4 rounded-full border-[var(--light3)] z-10 max-w-[28rem] w-[30vw] min-w-[12rem] mt-4 md:mt-0"
                 src={Heroimg}
-            />
+                alt="Kritagya Singh Chouhan Image"
+              />
             </div>
+          </div>
         </div>
-        </section>
-
+      </section>
     </>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

@@ -1,1 +1,10 @@
 export { default as CopyButton } from './copyButton/CopyButton';
+export { default as ExternalSvg } from './jsxSvg/ExternalSvg';
+export { default as InstagramSvg } from './jsxSvg/InstagramSvg';
+export { default as LinkedinSvg } from './jsxSvg/LinkedinSvg';
+export { default as TwitterSvg } from './jsxSvg/TwitterSvg';
+export { default as GithubSvg } from './jsxSvg/GithubSvg';
+export { default as LeftSvg } from './jsxSvg/LeftSvg';
+export { default as RightSvg } from './jsxSvg/RightSvg';
+export {default as ClipBoard } from './jsxSvg/ClipBoardSvg';
+export {default as MailSvg } from './jsxSvg/MailSvg';

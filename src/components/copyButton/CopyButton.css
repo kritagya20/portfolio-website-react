@@ -2,27 +2,17 @@
     min-width: 15rem;
     word-spacing: 1rem;
     letter-spacing: 1.5px;
-    font-family: var(--ff2) !important;
     padding: .5rem .15rem;
-    border-radius: 10px;
-    border: 1px solid var(--light);
     text-transform: lowercase !important;
-    font-weight: 500 !important;
-    text-shadow: 1px 1px 5px var(--black);
-    background: rgba(0,0,0,0.25);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: saturate(180%) blur(25px);
     display: flex; 
     text-align: center;
     align-items: center; 
     justify-content: center;
     gap: 0.5rem; 
-    font-size: var(--fs3) !important;
 }
 
 .btn--copy__icon {
     margin-left: 1.25rem;
-    margin-bottom: -100px;
 }
 
 .typed-text::after {
