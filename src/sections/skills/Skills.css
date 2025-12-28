@@ -1,0 +1,238 @@
+/* =======================
+   skills SECTION BASE
+======================= */
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    margin: 0 auto;
+}
+
+.skills h2 {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+/* =======================
+   WRAPPER (SINGLE SOURCE OF WIDTH)
+======================= */
+
+.skills__wrapper {
+    display: grid;
+    grid-template-areas:
+        "tab"
+        "content";
+    max-width: 900px;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    overflow-x: hidden;
+    gap: 0;
+}
+
+/* =======================
+   TAB LIST CONTAINER
+======================= */
+
+.skills__wrapper .tab__list-container {
+    grid-area: tab; 
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    overflow-x: auto;
+    margin: 0 auto;
+    border-bottom: 0;
+}
+
+/* =======================
+   TAB LIST
+======================= */
+
+.skills .tab__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+    gap: 0;
+    background: transparent;
+    white-space: nowrap;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.tab__list::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+/* =======================
+   TABS
+======================= */
+
+.skills .tab__list .tabs {
+    text-align: center;
+    border-inline: 0.75px solid var(--gray);
+    border-top: 1px solid var(--gray);
+    border-bottom: 0;
+    background-color: rgba(0,0,0,2.25);
+    color: var(--white);
+    padding: 1rem;
+    font-family: var(--ff1);
+    font-size: clamp(0.5rem, 0.25vw, 1rem);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    word-break: keep-all;
+}
+
+.skills .active-tab.tabs {
+    border-inline: none;
+    border-bottom: 1px solid var(--white);
+    background-image: linear-gradient(
+        to right,
+        #007bff,
+        #0f6bff,
+        #3057ff,
+        #4c3ffb,
+        #6610f2
+    );
+    color: var(--white);
+    text-shadow: 1px 1px 5px var(--black);
+    opacity: 1;
+}
+
+/* =======================
+   CONTENT LIST
+======================= */
+
+.skills__wrapper .tab__content-list {
+    grid-area: content;
+    max-width: 100%;
+    background: rgba(0, 0, 0, 2.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 0.5rem 0.5rem;
+    height: 50vh;
+    padding: 0.5rem 0;
+    padding-right: 10px;
+    padding-bottom: 2rem;
+    overflow-x: scroll;
+    
+    border: 1px solid var(--white);
+    border-top: 0;
+}
+
+/* =======================
+   TAB CONTENT VISIBILITY
+======================= */
+
+.tab__content {
+    display: none;
+}
+
+.tab__content--active {
+    display: block;
+}
+
+/* =======================
+   INNER CONTENT
+======================= */
+
+.inner {
+    max-width: min(90%, 35rem);
+    margin: 0 auto;
+    padding: 0.75rem 1rem 1rem 1rem;
+}
+
+/* =======================
+   TEXT STYLES
+======================= */
+
+.skills .inner .title {
+    text-align: left;
+    margin: 0 auto 10px auto;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--red);
+    font-size: var(--fs2);
+    padding-left: 20px;
+
+}
+
+.skills .inner .range {
+    text-align: left;
+    margin-bottom: 1.563rem;
+    color: var(--gray);
+    font-family: var(--ff3);
+    font-size: var(--fs5);
+}
+
+/* =======================
+   LIST STYLES
+======================= */
+
+.skills .inner ul li {
+    position: relative;
+    font-size: var(--fs4);
+    padding-left: 3.875rem;
+    margin-bottom: 0.625rem;
+    text-align: left;
+    letter-spacing: 1px;
+    word-spacing: 5px;
+    line-height: 1.5;
+}
+
+.skills .inner ul li::before {
+    content: "▹";
+    position: absolute;
+    left: 2rem;
+    top: 0;
+    font-size: 1.2rem;
+    color: var(--white);
+}
+
+/* =======================
+   DESKTOP BREAKPOINT
+======================= */
+
+@media (min-width: 800px) {
+
+    .skills__wrapper {
+        padding: 0;
+        margin-top: 1rem;
+    }
+
+    .inner {
+        max-width: 90vw;
+        min-width: 80vw;
+        margin: 0;
+    
+    }
+
+
+    .skills .tabs {
+        border-bottom: 0;
+    }
+
+
+    .skills .active-tab.tabs {
+        border: 2px solid var(--white);
+        border-bottom: 0;
+    }
+
+    .skills .tab__list .tabs:hover:not(.active-tab) {
+        background: rgba(0,0,0, 2.25);
+    }
+
+    .skills .inner ul li {
+    margin-right: 30%;
+}
+}
