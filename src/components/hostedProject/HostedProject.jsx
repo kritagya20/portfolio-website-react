@@ -34,16 +34,7 @@ function HostedProject(props) {
       </a>  
         <footer className="project__links">
           {/* PROJECT-EXTERNAL-ICON-LINK */}
-          <div className="external-link">
-            <a
-              href={link}
-              aria-label="External Link"
-              className="external"
-              target="_blank"
-            >
-              <ExternalSvg />
-            </a>
-          </div>
+
           {/* PROJECT-GITHUB-ICON-LINK */}
           <div className="github-link">
             <a

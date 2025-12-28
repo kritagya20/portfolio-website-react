@@ -30,7 +30,6 @@ function Projects() {
                             <HostedProject 
                                 key={element.key}
                                 id= {element.key}
-                                link= {element.link}
                                 githubLink= {element.githubLink}
                                 title= {element.title}
                                 description= {element.description}
