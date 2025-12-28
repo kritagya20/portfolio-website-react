@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/portfolio-website-react/static/css/main.dad1a51a.css",
-    "main.js": "/portfolio-website-react/static/js/main.222b7051.js",
+    "main.css": "/portfolio-website-react/static/css/main.cb751f42.css",
+    "main.js": "/portfolio-website-react/static/js/main.2308e125.js",
     "static/media/hero-image.png": "/portfolio-website-react/static/media/hero-image.2fc3ee607875cb762861.png",
     "static/media/astropic-demo-image.jpg": "/portfolio-website-react/static/media/astropic-demo-image.497b2baf20c4138ac75a.jpg",
     "static/media/weather-app-demo-image.jpg": "/portfolio-website-react/static/media/weather-app-demo-image.185b7ecb9d1f504bc5d8.jpg",
@@ -44,11 +44,11 @@
     "static/media/tailwind.svg": "/portfolio-website-react/static/media/tailwind.936cc6802fe0e453b1d5438cc91c024d.svg",
     "static/media/bootstrap.svg": "/portfolio-website-react/static/media/bootstrap.2a3abf1792516edb4500587273521ab7.svg",
     "static/media/material-ui.svg": "/portfolio-website-react/static/media/material-ui.61d7d68899d467a05a880b93abc304ec.svg",
-    "main.dad1a51a.css.map": "/portfolio-website-react/static/css/main.dad1a51a.css.map",
-    "main.222b7051.js.map": "/portfolio-website-react/static/js/main.222b7051.js.map"
+    "main.cb751f42.css.map": "/portfolio-website-react/static/css/main.cb751f42.css.map",
+    "main.2308e125.js.map": "/portfolio-website-react/static/js/main.2308e125.js.map"
   },
   "entrypoints": [
-    "static/css/main.dad1a51a.css",
-    "static/js/main.222b7051.js"
+    "static/css/main.cb751f42.css",
+    "static/js/main.2308e125.js"
   ]
 }
