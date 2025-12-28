@@ -30,7 +30,7 @@
     padding: 0;
     margin: 0 auto;
     overflow-x: hidden;
-    gap: 0;
+    gap: 10px;
 }
 
 /* =======================
@@ -44,7 +44,7 @@
     display: flex;
     overflow-x: auto;
     margin: 0 auto;
-    border-bottom: 0;
+    border: 1px solid var(--white)
 }
 
 /* =======================
@@ -58,13 +58,13 @@
     position: relative;
     width: 100%;
     margin: 0 auto;
-    padding: 0 10px;
     gap: 0;
     background: transparent;
     white-space: nowrap;
     overflow-x: auto;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    max-width: fit-content  ;
 }
 
 .tab__list::-webkit-scrollbar {
@@ -121,13 +121,13 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 0.5rem 0.5rem;
     height: 50vh;
+    max-height: 30rem;
     padding: 0.5rem 0;
     padding-right: 10px;
     padding-bottom: 2rem;
     overflow-x: scroll;
-    
+    width: fit-content;
     border: 1px solid var(--white);
-    border-top: 0;
 }
 
 /* =======================
@@ -148,8 +148,7 @@
 
 .inner {
     max-width: min(90%, 35rem);
-    margin: 0 auto;
-    padding: 0.75rem 1rem 1rem 1rem;
+    padding: 10px;
 }
 
 /* =======================
@@ -181,23 +180,20 @@
 
 .skills .inner ul li {
     position: relative;
-    font-size: var(--fs4);
-    padding-left: 3.875rem;
-    margin-bottom: 0.625rem;
-    text-align: left;
-    letter-spacing: 1px;
-    word-spacing: 5px;
-    line-height: 1.5;
+    padding-left: 1rem;
+    margin-bottom: 0.25rem;
+    text-align: justify;
 }
 
 .skills .inner ul li::before {
     content: "▹";
     position: absolute;
-    left: 2rem;
+    left: 0rem;
     top: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--white);
 }
+
 
 /* =======================
    DESKTOP BREAKPOINT
@@ -206,6 +202,7 @@
 @media (min-width: 800px) {
 
     .skills__wrapper {
+        gap: 0;
         padding: 0;
         margin-top: 1rem;
     }
@@ -214,7 +211,16 @@
         max-width: 90vw;
         min-width: 80vw;
         margin: 0;
+        padding: 0.75rem 1rem 1rem 1rem;
     
+    }
+
+    .skills__wrapper .tab__list-container {
+        border-bottom: 0;
+    }
+
+    .skills__wrapper .tab__content-list {
+        border-top: 0;
     }
 
 
@@ -233,6 +239,27 @@
     }
 
     .skills .inner ul li {
-    margin-right: 30%;
-}
+        margin-right: 30%;
+    }
+
+            
+    .skills .inner ul li {
+        position: relative;
+        font-size: var(--fs4);
+        padding-left: 3.875rem;
+        margin-bottom: 0.625rem;
+        text-align: left;
+        letter-spacing: 1px;
+        word-spacing: 5px;
+        line-height: 1.5;
+    }
+
+    .skills .inner ul li::before {
+        content: "▹";
+        position: absolute;
+        left: 2rem;
+        top: 0;
+        font-size: 1.2rem;
+        color: var(--white);
+    }
 }

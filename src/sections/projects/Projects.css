@@ -18,6 +18,17 @@
     margin-top: -2rem;
 }
 
+.project__title {
+    word-break: break-all;
+    overflow-x: scroll;
+}
+
+.projects__wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+} 
+
 .projects .inline-link::after {
     background: var(--red);
     width: 100%;

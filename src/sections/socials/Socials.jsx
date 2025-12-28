@@ -23,11 +23,11 @@ const socialLinks = [
     href: 'mailto: kritagya2022@gmail.com',
     icon: <MailSvg className='icon icon--mail' />
   },
-  {
-    label: 'Twitter',
-    href: 'https://twitter.com/kritagyachouhan',
-    icon: <TwitterSvg className='icon icon--twitter' />
-  }
+  // {
+  //   label: 'Twitter',
+  //   href: 'https://twitter.com/kritagyachouhan',
+  //   icon: <TwitterSvg className='icon icon--twitter' />
+  // }
 ];
 
 function Socials() {
