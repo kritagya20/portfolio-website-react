@@ -20,7 +20,7 @@ function App() {
       {loading && <Loader />}
       {!loading && (
         <section className="app">
-          <Router basename="/portfolio-website">
+          <Router basename="/portfolio-website-react">
             <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
