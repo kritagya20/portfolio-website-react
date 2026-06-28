@@ -1,4 +1,4 @@
-# Yashaswi Srivastava — Portfolio
+# Kritagya Singh Chouhan — Portfolio
 
 A modern, animated personal portfolio built with **React + Vite + Framer Motion**.
 Pure frontend, deployable to **Netlify** in one click.
@@ -65,10 +65,10 @@ A `netlify.toml` is included, so deploying is one click:
 portfolio/
 ├── public/
 │   ├── favicon.svg
-│   └── Yashaswi_Srivastava_Resume.pdf   ← served at /Yashaswi_Srivastava_Resume.pdf
+│   └── [Resume - Kritagya Singh Chouhan.pdf]
 ├── src/
-│   ├── components/    # Navbar, Hero, About, Experience, Skills, Projects, Reviews, Contact, Footer
-│   ├── context/       # ThemeContext.jsx (3-theme switcher)
+│   ├── components/    # Navbar, Hero, About, Experience, Projects, Socials, Contact, Footer
+│   ├── context/       # ThemeContext.jsx (5-theme switcher)
 │   ├── data/          # portfolio.js (single source of truth) + reviews.json (seed db)
 │   ├── styles/        # index.css (theme tokens + all section styles)
 │   ├── App.jsx
@@ -93,11 +93,4 @@ Edit **`src/data/portfolio.js`** to update everything that the user sees:
 Edit **`src/data/reviews.json`** to seed initial visitor reviews.
 Edit **`src/styles/index.css`** to tweak themes — just change the `--primary`, `--bg`, etc. variables under each `[data-theme='...']` block.
 
-## 💾 About the "temp database"
 
-Since Netlify hosts a static site, there is no real backend.
-- **Seed reviews** live in `src/data/reviews.json` (committed to the repo).
-- **New reviews** users submit are saved to the visitor's `localStorage` — they persist across reloads on that device.
-- Same model is used for theme preference and the visitor counter.
-
-If you later want a real shared review wall, you can swap `loadReviews/saveReviews` in `Reviews.jsx` for a Firebase/Supabase/Netlify-Functions backend without changing any UI.
