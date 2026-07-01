@@ -24,7 +24,6 @@ export default function App() {
     <div className="app">
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Navbar />
-
       <main>
         <Hero />
         <About />
