@@ -1893,7 +1893,7 @@ main {
 /* ========== RESPONSIVE CATCH-ALLS ========== */
 
 /* Tablet / small laptop */
-@media (max-width: 980px) {
+@media (max-width: 950px) {
   .nav-links { display: none; }
   .menu-btn { display: inline-flex; }
 }
