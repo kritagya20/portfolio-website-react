@@ -3,22 +3,22 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 export const THEMES = [
   {
     id: 'midnight',
-    label: 'Midnight',
-    icon: '🌙',
+    label: 'Eclipse',
+    icon: '🌓',
   },
   {
     id: 'daylight',
-    label: 'Dawn',
-    icon: '🌅',
+    label: 'Daylight',
+    icon: '☀️',
   },
   {
     id: 'ocean',
-    label: 'Ocean',
-    icon: '🌊',
+    label: 'Moonlight',
+    icon: '🌙',
   },
   {
     id: 'batman',
-    label: 'Eclipse',
+    label: 'Midnight',
     icon: '🌑',
   },
 ];
