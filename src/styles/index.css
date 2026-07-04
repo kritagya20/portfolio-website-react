@@ -343,7 +343,6 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 8px 14px;
 }
 
@@ -563,16 +562,14 @@ main {
   .nav {
     right: 12px;
     left: auto;
-
     transform: none;
-
     width: auto;
-
     border-radius: 16px;
   }
 
   .nav-inner {
-    padding: 10px 12px;
+    padding: 0;
+    background: transparent;
   }
 
   .nav-links {
@@ -1065,6 +1062,7 @@ main {
 #projects .icon {
     width: 1rem;
     stroke-width: 2.4px;
+    stroke: #fff;
 }
 
 .project .actions .icon {
