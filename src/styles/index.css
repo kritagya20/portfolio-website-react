@@ -244,13 +244,23 @@ img {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
-  color: #fff;
+  color: var(--bg-soft);
   border: none;
 }
 
-.btn-primary:hover {
+.btn-primary .icon {
+  stroke: var(--bg-soft);
+}
+
+.btn-primary:hover,
+.btn-primary:hover .icon {
   filter: brightness(1.08);
   box-shadow: 0 12px 28px rgba(124, 92, 255, 0.35);
+  color: var(--text);
+}
+
+.btn-primary:hover .icon {
+  stroke: var(--text);
 }
 
 .card {
@@ -1062,7 +1072,6 @@ main {
 #projects .icon {
     width: 1rem;
     stroke-width: 2.4px;
-    stroke: #fff;
 }
 
 .project .actions .icon {
@@ -1087,8 +1096,8 @@ main {
 .icon-btn:hover,
 .project .actions .icon {
   border-color: var(--primary);
-  color: var(--primary);
-  stroke: var(--primary-2);
+  color: var(--text);
+  stroke: var(--text);
 }
 
 /* ========== REVIEWS ========== */
