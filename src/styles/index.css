@@ -146,20 +146,20 @@ img {
 }
 
 /* Only desktop gets social bar spacing */
-@media (min-width: 1025px) {
+@media (min-width: 950px) {
   .socials {
     right: 2rem;
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .socials {
     position: relative;
     right: auto;
   }
 
   main {
-    padding-right: 0 !important;
+    padding-inline: 2vw !important;
   }
 }
 /* ========== UTILITIES ========== */
