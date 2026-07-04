@@ -8,36 +8,18 @@ export const THEMES = [
   },
   {
     id: 'daylight',
-    label: 'Daylight',
-    icon: '☀️',
+    label: 'Dawn',
+    icon: '🌅',
   },
   {
     id: 'ocean',
     label: 'Ocean',
     icon: '🌊',
   },
-
-  // Superhero Themes
-
   {
     id: 'batman',
-    label: 'Batman',
-    icon: '🦇',
-  },
-  {
-    id: 'spiderman',
-    label: 'Spider-Verse',
-    icon: '🕷️',
-  },
-  {
-    id: 'captain',
-    label: 'Liberty',
-    icon: '🛡️',
-  },
-  {
-    id: 'hulk',
-    label: 'Gamma',
-    icon: '💚',
+    label: 'Eclipse',
+    icon: '🌑',
   },
 ];
 

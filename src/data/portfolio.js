@@ -29,26 +29,26 @@ export const stats = [
 ];
 
 export const aboutHighlights = [
-  {
-    icon: '⚡',
-    title: 'Performance Obsessed',
-    text: 'Cut report generation 12s → 3.5s and reduced API latency ~30% on production workflows.',
-  },
-  {
-    icon: '🛠️',
-    title: 'End-to-End Ownership',
-    text: 'Requirement analysis, design, deployment, and production support — full lifecycle.',
-  },
-  {
-    icon: '🤖',
-    title: 'GenAI Integrations',
-    text: 'LLMs, RAG pipelines, prompt engineering integrated into enterprise backends.',
-  },
-  {
-    icon: '☁️',
-    title: 'Cloud & CI/CD',
-    text: 'Azure DevOps pipelines that reduced deployment failures by ~40%.',
-  },
+{
+  icon: '⚡',
+  title: 'Performance Focused',
+  text: 'Optimized backend APIs, SQL queries, and execution workflows to improve response times and build scalable production systems.',
+},
+{
+  icon: '🏗️',
+  title: 'Backend Engineering',
+  text: 'Building RESTful APIs with Go, ASP.NET Core, and MySQL while following clean architecture and scalable design principles.',
+},
+{
+  icon: '🐳',
+  title: 'Developer Tooling',
+  text: 'Experienced with Docker, Git, Postman, and automation tools to streamline development, testing, and deployment workflows.',
+},
+{
+  icon: '🧪',
+  title: 'Quality Engineering',
+  text: 'Strong foundation in API testing, Selenium, Rest Assured, and Playwright to ensure software quality alongside development.',
+},
 ];
 
 export const experience = [
@@ -170,7 +170,58 @@ export const experience = [
   },
 ];
 
+export const githubProfileUrl = 'https://github.com/kritagya20?tab=repositories';
+
+
+
 export const projects = [
+  {
+    title: "ISRO Landing Page",
+    type: "Frontend",
+    desc: "A multi-page website showcasing the Indian Space Research Organisation, highlighting its major missions, achievements, launch vehicles, satellites, and technological advancements through a clean and responsive interface.",
+    tech: ["JavaScript", "HTML", "CSS"],
+    links: {
+      live: "https://isro.kritagya.in/",
+      code: "https://github.com/kritagya20/isro",
+    },
+    featured: true,
+  },
+  {
+    title: "Cosmic",
+    type: "Frontend",
+    desc: "A space exploration application that integrates NASA APIs to display the Astronomy Picture of the Day with detailed information, providing users with a visually engaging experience of daily space discoveries.",
+    tech: ["JavaScript", "NASA API", "HTML", "CSS"],
+    links: {
+      live: null,
+      code: "https://github.com/kritagya20/cosmic",
+    },
+    featured: true,
+  },
+  {
+    title: "YouTube Clone",
+    type: "Frontend",
+    desc: "A fully responsive YouTube-inspired application featuring video search, category-based browsing, recommendations, and video playback using real-time API integration with a modern React architecture.",
+    tech: ["React", "Material UI", "YouTube API"],
+    links: {
+      live: null,
+      code: "https://github.com/kritagya20/react-youtube-clone",
+    },
+    featured: true,
+  },
+  {
+    title: "Desktop Chat App",
+    type: "Full Stack",
+    desc: "A real-time chat application with Firebase backend support, enabling instant messaging, profile management, custom themes, image sharing, and user blocking/unblocking in a modern Next.js interface.",
+    tech: ["Next.js", "Firebase", "Tailwind CSS"],
+    links: {
+      live: "https://chat-7ch6v68g3-kritagya20.vercel.app/",
+      code: "https://github.com/kritagya20/chatApp",
+    },
+    featured: true,
+  },
+];
+
+export const oldProjects = [
   {
     title: 'Jio Home Delivery Platform',
     type: 'Internal',
@@ -236,70 +287,5 @@ export const projects = [
     tech: ['Spring MVC', 'Hibernate', 'MySQL'],
     links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/Tshirt_companion' },
   },
-];
-
-export const githubProfileUrl = 'https://github.com/YashaswiSrivastava1706';
-
-export const seedReviews = [
-  {
-    id: 'r1',
-    name: 'Rohit M.',
-    role: 'Engineering Manager',
-    rating: 5,
-    text: 'Yashaswi consistently ships clean, optimized backend code. His SQL & API tuning saved us real production minutes.',
-    date: '2025-09-12',
-  },
-  {
-    id: 'r2',
-    name: 'Priya S.',
-    role: 'Product Lead',
-    rating: 5,
-    text: 'Reliable end-to-end developer. Took ownership of complex modules and shipped with very few defects.',
-    date: '2025-08-04',
-  },
-  {
-    id: 'r3',
-    name: 'Anand K.',
-    role: 'Senior Architect',
-    rating: 4,
-    text: 'Strong .NET fundamentals and a clear thinker around system design. Great teammate to have on a delivery-heavy sprint.',
-    date: '2025-06-18',
-  },
-];
-
-
-export const hostedProjectList = [
-    {
-      key: "ip3",
-      link: "https://isro.kritagya.in/",
-      githubLink: "https://github.com/kritagya20/isro",
-      title: "ISRO Landing Page",
-      description: "A multi-page website that provides an overview of all the significant developments, innovations, and missions carried out by the Indian Space Research Organization.",
-      tech: ["JavaScript", "CSS", "HTML"],
-    },
-    {
-      key: "ip2",
-      link: "https://cosmic.kritagya.in/",
-      githubLink: "https://github.com/kritagya20/cosmic",
-      title: "Cosmic",
-      description: "An authentic application to display most spectacular and aesthetically pleasing images of space every day along with pertinent information.",
-      tech: ["JavaScript", "NASA-API", "CSS"],
-    },
-    {
-      key: "ip1",
-      link: "https://youtube.kritagya.in/",
-      githubLink: "https://github.com/kritagya20/react-youtube-clone",
-      title: "Youtube Clone",
-      description: "Completely optimized & responsive YouTube Clone that has features like a functional search bar, sidebar, videos recommendation section, and playable videos.",
-      tech: ["React", "Material UI", "API"],
-    },
-    {
-      key: "ip0",
-      link: "https://chat-7ch6v68g3-kritagya20.vercel.app/",
-      githubLink: "https://github.com/kritagya20/chatApp",
-      title: "Desktop Chat App",
-      description: "A chat application with capabilities including real-time messaging, updating profiles, blocking and unblocking users, adding custom themes, and sending photos.",
-      tech: ["NextJS", "Firebase", "Tailwind"],
-    },
 ];
 
