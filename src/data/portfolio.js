@@ -175,13 +175,33 @@ export const githubProfileUrl = 'https://github.com/kritagya20?tab=repositories'
 
 
 export const projects = [
+    {
+    title: "Enterprise Web Automation & Analytics Engine",
+    type: "SDET / Test Engineering",
+    desc: "An enterprise-grade Selenium & TestNG automation framework featuring cross-browser W3C native network interception, a single unified JSON execution engine, pinpoint step-correlated multi-tab Excel traces, and a sleek SaaS-grade executive dark dashboard for platform health intelligence.",
+    tech: [
+      "Java",
+      "Selenium",
+      "TestNG",
+      "JavaScript",
+      "ExtentReports",
+      "Chart.js",
+      "Apache POI",
+      "Maven"
+    ],
+    links: {
+      live: null, 
+      code: "https://github.com/kritagya20/selenium-web-automation",
+    },
+    featured: true,
+  },
   {
     title: "ISRO Landing Page",
     type: "Frontend",
     desc: "A multi-page website showcasing the Indian Space Research Organisation, highlighting its major missions, achievements, launch vehicles, satellites, and technological advancements through a clean and responsive interface.",
     tech: ["JavaScript", "HTML", "CSS"],
     links: {
-      live: "https://isro.kritagya.in/",
+      live: null,
       code: "https://github.com/kritagya20/isro",
     },
     featured: true,
