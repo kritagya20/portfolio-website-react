@@ -7,7 +7,7 @@ import BugHunter from './BugHunter.jsx';
 import MemoryMatch from './MemoryMatch.jsx';
 import Hangman from './Hangman.jsx';
 
-const BEST_KEY = 'ys-portfolio-game-best-v1';
+const BEST_KEY = 'kritagya-portfolio-game-best-v1';
 
 export const GAMES = [
   {

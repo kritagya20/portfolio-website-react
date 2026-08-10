@@ -10,8 +10,8 @@ export const profile = {
   resumeUrl: '/Resume - Kritagya Singh Chouhan.pdf',
   socials: {
     github: 'https://github.com/kritagya20',
-    linkedin: 'https://linkedin.com/',
-    leetcode: 'https://leetcode.com/',
+    linkedin: 'https://linkedin.com/in/kritagyasinghchouhan/',
+    leetcode: 'https://leetcode.com/kritagya20/',
   },
   typewriter: [
     'Full Stack Software Developer',
@@ -29,77 +29,75 @@ export const stats = [
 ];
 
 export const aboutHighlights = [
-{
-  icon: '⚡',
-  title: 'Performance Focused',
-  text: 'Optimized backend APIs, SQL queries, and execution workflows to improve response times and build scalable production systems.',
-},
-{
-  icon: '🏗️',
-  title: 'Backend Engineering',
-  text: 'Building RESTful APIs with Go, ASP.NET Core, and MySQL while following clean architecture and scalable design principles.',
-},
-{
-  icon: '🐳',
-  title: 'Developer Tooling',
-  text: 'Experienced with Docker, Git, Postman, and automation tools to streamline development, testing, and deployment workflows.',
-},
-{
-  icon: '🧪',
-  title: 'Quality Engineering',
-  text: 'Strong foundation in API testing, Selenium, Rest Assured, and Playwright to ensure software quality alongside development.',
-},
+  {
+    icon: '⚡',
+    title: 'Performance Focused',
+    text: 'Optimized backend APIs, SQL queries, and execution workflows to improve response times and build scalable production systems.',
+  },
+  {
+    icon: '🏗️',
+    title: 'Backend Engineering',
+    text: 'Building RESTful APIs with Go, ASP.NET Core, and MySQL while following clean architecture and scalable design principles.',
+  },
+  {
+    icon: '🐳',
+    title: 'Developer Tooling',
+    text: 'Experienced with Docker, Git, Postman, and automation tools to streamline development, testing, and deployment workflows.',
+  },
+  {
+    icon: '🧪',
+    title: 'Quality Engineering',
+    text: 'Strong foundation in API testing, Selenium, Rest Assured, and Playwright to ensure software quality alongside development.',
+  },
 ];
 
 export const experience = [
-    {
-      role: 'Backend Engineer',
-      company: 'Medkart',
-      where: 'Ahmedabad, India',
-      when: 'Apr 2026 – Present',
-      bullets: [
-        'Designed and developed backend services in Go for loyalty, rewards, invoicing, and transaction workflows.',
-        'Optimized API execution paths and database interactions, improving response times across critical services.',
-        'Built reusable service components, middleware, and utility packages, accelerating feature development.',
-        'Containerized backend applications with Docker and streamlined local development and deployment workflows.',
-        'Integrated PostgreSQL with backend services while ensuring data consistency through transactional validation.',
-        'Collaborated with frontend, QA, and product teams to deliver production-ready features with end-to-end ownership.'
-      ],
-      stack: [
-        'Golang',
-        'PostgreSQL',
-        'Docker',
-        'REST APIs',
-        'Git'
-      ]
-    },
-
-    {
-      role: 'Senior Software Development Engineer in Test',
-      company: 'Medkart',
-      where: 'Ahmedabad, India',
-      when: 'Feb 2026 – Apr 2026',
-      bullets: [
-          'Architected and maintained a scalable automation framework supporting Web, Mobile, API, Database, and Batch Job validation.',
-          'Built reusable framework modules for session management, reporting, data handling, and test utilities, reducing test development effort.',
-          'Developed robust REST Assured automation suites with reusable request builders, validators, authentication handlers, and assertion libraries.',
-          'Implemented end-to-end validation of loyalty points, rewards, invoicing, and transaction workflows using API, database, and asynchronous job verification.',
-          'Created custom Excel reporting solutions using Apache POI and SXSSF for large-scale execution reporting and analysis.',
-          'Integrated PostgreSQL and MySQL validations to automate backend verification of financial transactions, memberships, and rewards data.',
-          'Designed polling and job-monitoring mechanisms for validating long-running background processes and scheduled workflows.',
-          'Integrated Jenkins CI/CD pipelines and enhanced framework observability through detailed logging, reporting, and debugging utilities.'
-      ],
-      stack: [
-        'Java',
-        'Selenium',
-        'Appium',
-        'REST Assured',
-        'PostgreSQL',
-        'Maven',
-        'Git',
-      ]
-    },
-
+  {
+    role: 'Backend Engineer',
+    company: 'Medkart',
+    where: 'Ahmedabad, India',
+    when: 'Apr 2026 – Present',
+    bullets: [
+      'Designed and developed backend services in Go for loyalty, rewards, invoicing, and transaction workflows.',
+      'Optimized API execution paths and database interactions, improving response times across critical services.',
+      'Built reusable service components, middleware, and utility packages, accelerating feature development.',
+      'Containerized backend applications with Docker and streamlined local development and deployment workflows.',
+      'Integrated PostgreSQL with backend services while ensuring data consistency through transactional validation.',
+      'Collaborated with frontend, QA, and product teams to deliver production-ready features with end-to-end ownership.'
+    ],
+    stack: [
+      'Golang',
+      'PostgreSQL',
+      'Docker',
+      'REST APIs',
+      'Git'
+    ]
+  },
+  {
+    role: 'Senior Software Development Engineer in Test',
+    company: 'Medkart',
+    where: 'Ahmedabad, India',
+    when: 'Feb 2026 – Apr 2026',
+    bullets: [
+      'Architected and maintained a scalable automation framework supporting Web, Mobile, API, Database, and Batch Job validation.',
+      'Built reusable framework modules for session management, reporting, data handling, and test utilities, reducing test development effort.',
+      'Developed robust REST Assured automation suites with reusable request builders, validators, authentication handlers, and assertion libraries.',
+      'Implemented end-to-end validation of loyalty points, rewards, invoicing, and transaction workflows using API, database, and asynchronous job verification.',
+      'Created custom Excel reporting solutions using Apache POI and SXSSF for large-scale execution reporting and analysis.',
+      'Integrated PostgreSQL and MySQL validations to automate backend verification of financial transactions, memberships, and rewards data.',
+      'Designed polling and job-monitoring mechanisms for validating long-running background processes and scheduled workflows.',
+      'Integrated Jenkins CI/CD pipelines and enhanced framework observability through detailed logging, reporting, and debugging utilities.'
+    ],
+    stack: [
+      'Java',
+      'Selenium',
+      'Appium',
+      'REST Assured',
+      'PostgreSQL',
+      'Maven',
+      'Git',
+    ]
+  },
   {
     role: 'Software Development Engineer in Test',
     company: 'Bhanix Finance and Investment Limited',
@@ -126,7 +124,6 @@ export const experience = [
       'ExtentReports',
     ],
   },
-
   {
     role: 'Assistant Manager',
     company: 'Jio Platforms Limited',
@@ -149,7 +146,6 @@ export const experience = [
       'ChartJS',
     ],
   },
-
   {
     role: 'Software Development Intern',
     company: 'CASHe',
@@ -172,10 +168,8 @@ export const experience = [
 
 export const githubProfileUrl = 'https://github.com/kritagya20?tab=repositories';
 
-
-
 export const projects = [
-    {
+  {
     title: "Enterprise Web Automation & Analytics Engine",
     type: "SDET / Test Engineering",
     desc: "An enterprise-grade Selenium & TestNG automation framework featuring cross-browser W3C native network interception, a single unified JSON execution engine, pinpoint step-correlated multi-tab Excel traces, and a sleek SaaS-grade executive dark dashboard for platform health intelligence.",
@@ -207,9 +201,9 @@ export const projects = [
     featured: true,
   },
   {
-    title: "Cosmic",
+    title: "Cosmic Space Discovery App",
     type: "Frontend",
-    desc: "A space exploration application that integrates NASA APIs to display the Astronomy Picture of the Day with detailed information, providing users with a visually engaging experience of daily space discoveries.",
+    desc: "A space exploration application that integrates NASA APIs to display Astronomy Picture of the Day with detailed information, providing users with a visually engaging experience of daily space discoveries.",
     tech: ["JavaScript", "NASA API", "HTML", "CSS"],
     links: {
       live: null,
@@ -253,59 +247,9 @@ export const oldProjects = [
   {
     title: 'Inventory Store and Management',
     type: 'Internal',
-    desc: 'Centralized inventory platform with real-time tracking and request management. Built during my internship at Ankur Web Technology — reduced manual paperwork by ~80%.',
+    desc: 'Centralized inventory platform with real-time tracking and request management. Built during internship — reduced manual paperwork by ~80%.',
     tech: ['PHP', 'MySQL', 'AJAX', 'JavaScript'],
     links: { live: null, code: null },
     featured: true,
   },
-  {
-    title: 'Holiday Master',
-    type: 'Full Stack',
-    desc: 'Holiday & leave-master service to manage organizational holiday calendars, public holidays per region, and reusable holiday metadata for downstream apps.',
-    tech: ['Spring Boot', 'REST API', 'MySQL'],
-    links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/HolidayMaster' },
-  },
-  {
-    title: 'Product Review Platform',
-    type: 'Full Stack',
-    desc: 'REST API + Angular client for product reviews with auth, search, and admin moderation. Emphasizes coding conventions, security, and clean UX.',
-    tech: ['Spring Boot', 'Angular', 'REST API', 'MySQL'],
-    links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/product_review' },
-  },
-  {
-    title: 'Note Saver',
-    type: 'Full Stack',
-    desc: 'Notes app keeping the most recent 10 entries per user, hourly cleanup of older ones, length validations, and user-driven deletes.',
-    tech: ['Java 8', 'Spring Boot', 'JPA', 'Angular'],
-    links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/note_saver' },
-  },
-  {
-    title: 'Result Management',
-    type: 'Full Stack',
-    desc: 'Web app where students view results by roll & DOB and teachers manage records — full CRUD with validation flows. Angular frontend + Node backend.',
-    tech: ['Angular', 'Node.js', 'TypeScript', 'HTML', 'CSS'],
-    links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/result_management' },
-  },
-  {
-    title: 'Blogging Thoughts',
-    type: 'Web App',
-    desc: 'A blogging platform for displaying posts, viewing details, adding/editing/deleting posts, and liking favourites. Uses Redux + Context API for state.',
-    tech: ['React', 'Redux', 'Context API', 'Node.js'],
-    links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/Blogging_Thoughts' },
-  },
-  {
-    title: 'Library Management',
-    type: 'Web App',
-    desc: 'Spring MVC + JSP web app exposing REST APIs (App 2) for authors & books with full CRUD via Hibernate. Showcases clean MVC + RESTful design.',
-    tech: ['Spring MVC', 'Hibernate', 'JSP', 'REST'],
-    links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/Library_Management' },
-  },
-  {
-    title: 'T-Shirt Shopping Companion',
-    type: 'Web App',
-    desc: 'Spring + Hibernate product search by Color, Size, Gender, and output preference. Dynamic CSV loading via threads, login + product search screens.',
-    tech: ['Spring MVC', 'Hibernate', 'MySQL'],
-    links: { live: null, code: 'https://github.com/YashaswiSrivastava1706/Tshirt_companion' },
-  },
 ];
-

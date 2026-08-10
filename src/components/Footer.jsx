@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { profile } from '../data/portfolio.js';
 
-const VISITOR_KEY = 'ys-portfolio-visits';
+const VISITOR_KEY = 'kritagya-portfolio-visits';
 
 function bumpVisits() {
   try {

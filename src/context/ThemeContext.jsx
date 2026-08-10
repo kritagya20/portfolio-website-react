@@ -18,7 +18,7 @@ export const THEMES = [
   },
 ];
 
-const STORAGE_KEY = 'ys-portfolio-theme';
+const STORAGE_KEY = 'kritagya-portfolio-theme';
 
 const ThemeContext = createContext(null);
 
