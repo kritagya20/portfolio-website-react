@@ -84,10 +84,12 @@ export default function StarfieldCanvas() {
 
     function spawnMeteor() {
       const geometry = new THREE.BufferGeometry();
-      const tailPoints = 14;
-      const startX = (Math.random() - 0.3) * 70 + 20;
-      const startY = Math.random() * 30 + 20;
-      const startZ = (Math.random() - 0.5) * 40;
+      const tailPoints = 22;
+
+      // Position spawn point cleanly inside visible camera viewport
+      const startX = (Math.random() * 40) - 10;
+      const startY = (Math.random() * 15) + 10;
+      const startZ = (Math.random() - 0.5) * 10;
 
       const dirX = -0.7;
       const dirY = -0.45;
@@ -95,9 +97,9 @@ export default function StarfieldCanvas() {
 
       const positions = new Float32Array(tailPoints * 3);
       for (let i = 0; i < tailPoints; i++) {
-        positions[i * 3] = startX + i * (dirX * 0.35);
-        positions[i * 3 + 1] = startY + i * (dirY * 0.35);
-        positions[i * 3 + 2] = startZ + i * (dirZ * 0.35);
+        positions[i * 3] = startX + i * (dirX * 0.45);
+        positions[i * 3 + 1] = startY + i * (dirY * 0.45);
+        positions[i * 3 + 2] = startZ + i * (dirZ * 0.45);
       }
 
       geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
@@ -108,8 +110,8 @@ export default function StarfieldCanvas() {
       const material = new THREE.LineBasicMaterial({
         color: color,
         transparent: true,
-        opacity: 0.95,
-        linewidth: 2,
+        opacity: 1.0,
+        linewidth: 3,
         blending: THREE.AdditiveBlending,
       });
 
@@ -118,15 +120,17 @@ export default function StarfieldCanvas() {
 
       meteors.push({
         mesh: line,
-        vx: dirX * 1.6,
-        vy: dirY * 1.6,
-        vz: dirZ * 1.6,
+        vx: dirX * 1.4,
+        vy: dirY * 1.4,
+        vz: dirZ * 1.4,
         life: 1.0,
       });
     }
 
+    // Spawn 1 immediately at start, then every 3 seconds for clear visibility
+    spawnMeteor();
     let lastMeteorSpawn = Date.now();
-    const meteorInterval = 6500;
+    const meteorInterval = 3000;
 
     let targetMouseX = 0;
     let targetMouseY = 0;
@@ -166,8 +170,8 @@ export default function StarfieldCanvas() {
     const animate = () => {
       const now = Date.now();
 
-      // Spawn meteors every 6-8 seconds
-      if (now - lastMeteorSpawn > meteorInterval + (Math.random() * 2000 - 1000)) {
+      // Spawn meteors every 3 seconds
+      if (now - lastMeteorSpawn > meteorInterval + (Math.random() * 1500 - 750)) {
         spawnMeteor();
         lastMeteorSpawn = now;
       }
@@ -178,7 +182,7 @@ export default function StarfieldCanvas() {
         m.mesh.position.x += m.vx;
         m.mesh.position.y += m.vy;
         m.mesh.position.z += m.vz;
-        m.life -= 0.022;
+        m.life -= 0.025;
         m.mesh.material.opacity = m.life;
 
         if (m.life <= 0) {
