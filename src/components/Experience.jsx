@@ -1,6 +1,52 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { experience } from '../data/portfolio.js';
+
+function TimelineItem({ item, index, total, scaleY }) {
+  const isLeft = index % 2 === 0;
+  const [reached, setReached] = useState(false);
+
+  // Calculate threshold for this breakpoint: 1st node ~0.05, middle ~0.5, last ~0.95
+  const threshold = total > 1 ? (index / (total - 1)) * 0.88 + 0.05 : 0.5;
+
+  useEffect(() => {
+    return scaleY.on('change', (val) => {
+      setReached(val >= threshold);
+    });
+  }, [scaleY, threshold]);
+
+  return (
+    <motion.div
+      className={`tl-item ${reached ? 'reached' : ''}`}
+      initial={{ x: isLeft ? -60 : 60, opacity: 0 }}
+      whileInView={{ x: 0, opacity: 1 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.65, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1.0] }}
+    >
+      <div className="tl-card">
+        <div className="tl-head">
+          <h3>
+            {item.role} · <span style={{ color: 'var(--primary)' }}>{item.company}</span>
+          </h3>
+          <span className="when">{item.when}</span>
+        </div>
+        <div className="where">{item.where}</div>
+        <ul>
+          {item.bullets.map((b, idx) => (
+            <li key={idx}>{b}</li>
+          ))}
+        </ul>
+        <div className="tech-row" style={{ marginTop: 12 }}>
+          {item.stack.map((s) => (
+            <span key={s} className="tech">
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Experience() {
   const containerRef = useRef(null);
@@ -49,41 +95,15 @@ export default function Experience() {
           {/* Un-deformed Travelling Glowing Dot */}
           <motion.div className="timeline-progress-dot" style={{ top: dotTop }} />
 
-          {experience.map((e, i) => {
-            const isLeft = i % 2 === 0;
-            return (
-              <motion.div
-                key={e.role + e.company}
-                className="tl-item"
-                initial={{ x: isLeft ? -60 : 60, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.65, delay: i * 0.08, ease: [0.25, 0.1, 0.25, 1.0] }}
-              >
-                <div className="tl-card">
-                  <div className="tl-head">
-                    <h3>
-                      {e.role} · <span style={{ color: 'var(--primary)' }}>{e.company}</span>
-                    </h3>
-                    <span className="when">{e.when}</span>
-                  </div>
-                  <div className="where">{e.where}</div>
-                  <ul>
-                    {e.bullets.map((b, idx) => (
-                      <li key={idx}>{b}</li>
-                    ))}
-                  </ul>
-                  <div className="tech-row" style={{ marginTop: 12 }}>
-                    {e.stack.map((s) => (
-                      <span key={s} className="tech">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+          {experience.map((e, i) => (
+            <TimelineItem
+              key={e.role + e.company}
+              item={e}
+              index={i}
+              total={experience.length}
+              scaleY={scaleY}
+            />
+          ))}
         </div>
       </div>
     </section>
