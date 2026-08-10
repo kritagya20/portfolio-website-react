@@ -949,7 +949,7 @@ main {
   border: 3px solid color-mix(in srgb, var(--border) 70%, transparent);
   box-shadow: none;
   opacity: 0.55;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+  transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
   z-index: 4;
 }
 

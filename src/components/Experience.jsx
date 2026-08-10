@@ -4,10 +4,22 @@ import { experience } from '../data/portfolio.js';
 
 function TimelineItem({ item, index, total, scaleY }) {
   const isLeft = index % 2 === 0;
+  const itemRef = useRef(null);
   const [reached, setReached] = useState(false);
+  const [threshold, setThreshold] = useState(
+    (index / Math.max(total - 1, 1)) * 0.8 + 0.02
+  );
 
-  // Calculate threshold for this breakpoint: 1st node ~0.05, middle ~0.5, last ~0.95
-  const threshold = total > 1 ? (index / (total - 1)) * 0.88 + 0.05 : 0.5;
+  // Measure exact element offset ratio relative to container
+  useEffect(() => {
+    if (itemRef.current && itemRef.current.parentElement) {
+      const itemTop = itemRef.current.offsetTop + 10;
+      const totalHeight = itemRef.current.parentElement.offsetHeight;
+      if (totalHeight > 0) {
+        setThreshold(Math.max(0.01, itemTop / totalHeight));
+      }
+    }
+  }, [total]);
 
   useEffect(() => {
     return scaleY.on('change', (val) => {
@@ -17,6 +29,7 @@ function TimelineItem({ item, index, total, scaleY }) {
 
   return (
     <motion.div
+      ref={itemRef}
       className={`tl-item ${reached ? 'reached' : ''}`}
       initial={{ x: isLeft ? -60 : 60, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
