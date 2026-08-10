@@ -193,7 +193,7 @@ export default function Navbar() {
             >
               <div className="nav-mobile-header">
                 <span className="nav-mobile-title">
-                  Menu <span className="dot" />
+                   
                 </span>
                 <button
                   className="nav-mobile-close"

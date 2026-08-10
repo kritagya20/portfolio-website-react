@@ -2176,6 +2176,22 @@ main {
 html, body { overflow-x: hidden; max-width: 100%; }
 img, svg, video, canvas, pre, code { max-width: 100%; }
 
+/* ========== HIDE SCROLLBARS GLOBALLY (All Browsers & Mobile Devices) ========== */
+html,
+body,
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE & Edge */
+}
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
 
 
 
