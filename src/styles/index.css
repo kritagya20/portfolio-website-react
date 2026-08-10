@@ -2,6 +2,23 @@
 
 /* ========== THEME TOKENS ========== */
 :root,
+[data-theme='solar'] {
+  --bg: #070707;
+  --bg-soft: #111111;
+  --surface: rgba(18, 18, 20, 0.80);
+  --surface-strong: rgba(28, 28, 32, 0.92);
+  --border: rgba(245, 158, 11, 0.20);
+  --text: #f3f4f6;
+  --text-muted: #9ca3af;
+  --primary: #f59e0b;
+  --primary-2: #fcd34d;
+  --accent: #64748b;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+  --grad-hero: radial-gradient(1200px 600px at 85% -10%, rgba(245, 158, 11, 0.18), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(100, 116, 139, 0.12), transparent 60%);
+  --noise: 0.04;
+}
+
 [data-theme='cosmic'] {
   --bg: #030712;
   --bg-soft: #0b0f19;
@@ -19,7 +36,7 @@
   --noise: 0.04;
 }
 
-[data-theme='nebula'] {
+[data-theme='starlight'] {
   --bg: #020d1a;
   --bg-soft: #081a2f;
   --surface: rgba(8, 26, 47, 0.80);
@@ -33,23 +50,6 @@
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.80);
   --grad-hero: radial-gradient(1200px 600px at 80% -10%, rgba(0, 242, 254, 0.35), transparent 60%),
     radial-gradient(900px 500px at -10% 30%, rgba(79, 172, 254, 0.25), transparent 60%);
-  --noise: 0.04;
-}
-
-[data-theme='starlight'] {
-  --bg: #070707;
-  --bg-soft: #111111;
-  --surface: rgba(18, 18, 20, 0.80);
-  --surface-strong: rgba(28, 28, 32, 0.92);
-  --border: rgba(245, 158, 11, 0.20);
-  --text: #f3f4f6;
-  --text-muted: #9ca3af;
-  --primary: #f59e0b;
-  --primary-2: #fcd34d;
-  --accent: #64748b;
-  --shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
-  --grad-hero: radial-gradient(1200px 600px at 85% -10%, rgba(245, 158, 11, 0.18), transparent 60%),
-    radial-gradient(900px 500px at -10% 30%, rgba(100, 116, 139, 0.12), transparent 60%);
   --noise: 0.04;
 }
 
