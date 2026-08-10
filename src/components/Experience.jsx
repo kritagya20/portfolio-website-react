@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { experience } from '../data/portfolio.js';
 
 export default function Experience() {
@@ -15,6 +15,9 @@ export default function Experience() {
     damping: 28,
     restDelta: 0.001,
   });
+
+  // Map scaleY progress to top percentage for travelling dot to avoid scale distortion
+  const dotTop = useTransform(scaleY, [0, 1], ['0%', '100%']);
 
   return (
     <section id="experience" className="section">
@@ -40,10 +43,11 @@ export default function Experience() {
           {/* Background Track Line */}
           <div className="timeline-track" />
 
-          {/* Animated Scroll Fill Line with Travelling Glowing Dot */}
-          <motion.div className="timeline-progress" style={{ scaleY }}>
-            <span className="timeline-progress-dot" />
-          </motion.div>
+          {/* Animated Scroll Fill Line */}
+          <motion.div className="timeline-progress" style={{ scaleY }} />
+
+          {/* Un-deformed Travelling Glowing Dot */}
+          <motion.div className="timeline-progress-dot" style={{ top: dotTop }} />
 
           {experience.map((e, i) => {
             const isLeft = i % 2 === 0;

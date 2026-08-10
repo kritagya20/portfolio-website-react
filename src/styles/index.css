@@ -919,9 +919,9 @@ main {
 
 .timeline-progress-dot {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 50%);
+  top: 0%;
+  left: 19px;
+  transform: translate(-50%, -50%);
   width: 14px;
   height: 14px;
   background: var(--primary-2);
@@ -2001,7 +2001,9 @@ main {
 
   .tl-item { padding-left: 44px; }
   .tl-item::before { left: 8px; width: 14px; height: 14px; }
-  .timeline::before { left: 14px; }
+  .timeline-track { left: 14px; }
+  .timeline-progress { left: 14px; }
+  .timeline-progress-dot { left: 15px; }
   .tl-card { padding: 16px; }
   .tl-head h3 { font-size: 0.98rem; }
 
