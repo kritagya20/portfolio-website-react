@@ -79,6 +79,55 @@ export default function StarfieldCanvas() {
 
     camera.position.z = 20;
 
+    // Shooting Stars / Meteor System
+    const meteors = [];
+
+    function spawnMeteor() {
+      const geometry = new THREE.BufferGeometry();
+      const tailPoints = 14;
+      const startX = (Math.random() - 0.3) * 70 + 20;
+      const startY = Math.random() * 30 + 20;
+      const startZ = (Math.random() - 0.5) * 40;
+
+      const dirX = -0.7;
+      const dirY = -0.45;
+      const dirZ = -0.1;
+
+      const positions = new Float32Array(tailPoints * 3);
+      for (let i = 0; i < tailPoints; i++) {
+        positions[i * 3] = startX + i * (dirX * 0.35);
+        positions[i * 3 + 1] = startY + i * (dirY * 0.35);
+        positions[i * 3 + 2] = startZ + i * (dirZ * 0.35);
+      }
+
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+      const isCyan = Math.random() > 0.4;
+      const color = isCyan ? 0x38bdf8 : 0xc084fc;
+
+      const material = new THREE.LineBasicMaterial({
+        color: color,
+        transparent: true,
+        opacity: 0.95,
+        linewidth: 2,
+        blending: THREE.AdditiveBlending,
+      });
+
+      const line = new THREE.Line(geometry, material);
+      scene.add(line);
+
+      meteors.push({
+        mesh: line,
+        vx: dirX * 1.6,
+        vy: dirY * 1.6,
+        vz: dirZ * 1.6,
+        life: 1.0,
+      });
+    }
+
+    let lastMeteorSpawn = Date.now();
+    const meteorInterval = 6500;
+
     let targetMouseX = 0;
     let targetMouseY = 0;
     let currentInfluenceX = 0;
@@ -90,14 +139,12 @@ export default function StarfieldCanvas() {
     let windowHalfY = window.innerHeight / 2;
 
     const handleMouseMove = (event) => {
-      // Calculate responsive mouse offset when cursor moves
       targetMouseX = (event.clientX - windowHalfX) * 0.00025;
       targetMouseY = (event.clientY - windowHalfY) * 0.00025;
       isMouseActive = true;
 
       if (inactivityTimer) clearTimeout(inactivityTimer);
 
-      // Smoothly return to ultra-slow idle reading mode after 900ms of no cursor motion
       inactivityTimer = setTimeout(() => {
         isMouseActive = false;
       }, 900);
@@ -117,14 +164,36 @@ export default function StarfieldCanvas() {
     let animationFrameId;
 
     const animate = () => {
+      const now = Date.now();
+
+      // Spawn meteors every 6-8 seconds
+      if (now - lastMeteorSpawn > meteorInterval + (Math.random() * 2000 - 1000)) {
+        spawnMeteor();
+        lastMeteorSpawn = now;
+      }
+
+      // Update meteors
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i];
+        m.mesh.position.x += m.vx;
+        m.mesh.position.y += m.vy;
+        m.mesh.position.z += m.vz;
+        m.life -= 0.022;
+        m.mesh.material.opacity = m.life;
+
+        if (m.life <= 0) {
+          scene.remove(m.mesh);
+          m.mesh.geometry.dispose();
+          m.mesh.material.dispose();
+          meteors.splice(i, 1);
+        }
+      }
+
       const activeFactor = isMouseActive ? 1.0 : 0.0;
 
-      // Smooth lerp towards target influence when active, or 0 when still
       currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.06;
       currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.06;
 
-      // When user moves mouse: full vivid 3D parallax reaction!
-      // When user stops moving or is reading: ultra-slow, serene background pace
       starMesh.rotation.y += 0.00005 + currentInfluenceX;
       starMesh.rotation.x += 0.000025 + currentInfluenceY;
 
@@ -139,6 +208,11 @@ export default function StarfieldCanvas() {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+      meteors.forEach((m) => {
+        scene.remove(m.mesh);
+        m.mesh.geometry.dispose();
+        m.mesh.material.dispose();
+      });
       starsGeometry.dispose();
       starsMaterial.dispose();
       starTexture.dispose();
