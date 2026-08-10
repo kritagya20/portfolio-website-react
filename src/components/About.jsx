@@ -5,22 +5,29 @@ export default function About() {
   return (
     <section id="about" className="section">
       <div className="container">
-        <span className="eyebrow">
-          <span className="dot" /> About me
-        </span>
-        <h2 className="section-title">
-          Allow me to <span className="accent">introduce</span> myself
-        </h2>
-        <p className="section-sub">
-          A short story of where I’ve been and the kind of work I love shipping.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <span className="eyebrow">
+            <span className="dot" /> About me
+          </span>
+          <h2 className="section-title">
+            Allow me to <span className="accent">introduce</span> myself
+          </h2>
+          <p className="section-sub">
+            A short story of where I’ve been and the kind of work I love shipping.
+          </p>
+        </motion.div>
 
         <div className="about-grid">
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
+            initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <p>
               I’m <strong> Kritagya Singh Chouhan</strong>, a Software Engineer passionate about building
@@ -56,10 +63,10 @@ export default function About() {
               <motion.div
                 key={h.title}
                 className="about-item"
-                initial={{ x: 20, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                viewport={{ once: true, amount: 0.4 }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                initial={{ x: 40, opacity: 0, scale: 0.95 }}
+                whileInView={{ x: 0, opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.175, 0.885, 0.32, 1.275] }}
               >
                 <div className="ico" aria-hidden>
                   {h.icon}

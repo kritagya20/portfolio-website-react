@@ -14,23 +14,34 @@ export default function Projects() {
     return projects.filter((p) => p.type === filter);
   }, [filter]);
 
-  const total = projects.length;
-  const openSource = projects.filter((p) => p.links?.code).length;
-
   return (
     <section id="projects" className="section">
       <div className="container">
-        <span className="eyebrow">
-          <span className="dot" /> Selected work
-        </span>
-        <h2 className="section-title">
-          Recent <span className="accent">Projects</span>
-        </h2>
-        <p className="section-sub">
-          A showcase of applications I've built, tested, automated, and continuously improved.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <span className="eyebrow">
+            <span className="dot" /> Selected work
+          </span>
+          <h2 className="section-title">
+            Recent <span className="accent">Projects</span>
+          </h2>
+          <p className="section-sub">
+            A showcase of applications I've built, tested, automated, and continuously improved.
+          </p>
+        </motion.div>
 
-        <div className="skills-tabs" style={{ marginBottom: 28 }}>
+        <motion.div
+          className="skills-tabs"
+          style={{ marginBottom: 28 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
           {FILTERS.map((f) => (
             <button
               key={f}
@@ -40,10 +51,10 @@ export default function Projects() {
               {f}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         <motion.div className="projects-grid" layout>
-          <AnimatePresence>
+          <AnimatePresence mode="popLayout">
             {list.map((p, i) => {
               const isInternal = p.type === 'Internal' || (!p.links?.code && !p.links?.live);
               return (
@@ -51,11 +62,16 @@ export default function Projects() {
                   layout
                   key={p.title}
                   className="card project"
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3, delay: i * 0.04 }}
-                  whileHover={{ y: -6 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.94 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: (i % 3) * 0.1,
+                    ease: [0.175, 0.885, 0.32, 1.275],
+                  }}
+                  whileHover={{ y: -8, transition: { duration: 0.2 } }}
                 >
                   <div className="tag-row">
                     <span className="badge">{p.type}</span>
@@ -91,7 +107,7 @@ export default function Projects() {
                         target="_blank"
                         rel="noreferrer"
                       >
-                       <GithubSvg className='icon ' />
+                        <GithubSvg className="icon" />
                         Code
                       </a>
                     )}
@@ -121,17 +137,23 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <div className="projects-cta">
+        <motion.div
+          className="projects-cta"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <a
             className="btn btn-primary"
             href={githubProfileUrl}
             target="_blank"
             rel="noreferrer"
           >
-           <GithubSvg className='icon ' />
-           View all repos on GitHub →
+            <GithubSvg className="icon" />
+            View all repos on GitHub →
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { profile, stats } from '../data/portfolio.js';
+import { profile } from '../data/portfolio.js';
 
 function useTypewriter(words, typing = 80, holding = 1400) {
   const [text, setText] = useState('');
@@ -32,6 +32,46 @@ function useTypewriter(words, typing = 80, holding = 1400) {
   return text;
 }
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0] },
+  },
+};
+
+const titleVariant = {
+  hidden: { opacity: 0, scale: 0.92, y: 20 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.175, 0.885, 0.32, 1.275] },
+  },
+};
+
+const btnLeft = {
+  hidden: { opacity: 0, x: -40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
+const btnRight = {
+  hidden: { opacity: 0, x: 40 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
 export default function Hero() {
   const typed = useTypewriter(profile.typewriter);
 
@@ -39,37 +79,39 @@ export default function Hero() {
     <section id="home" className="section hero">
       <div className="container hero-grid">
         <motion.div
-          initial={{ y: 24, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <div className="typer">
+          <motion.div className="typer" variants={itemUp}>
             &gt; {typed}
             <span className="caret">&nbsp;</span>
-          </div>
-          <h1>
+          </motion.div>
+
+          <motion.h1 variants={titleVariant}>
             Hi, I’m <span className="grad">{profile.name.split(' ')[0]}</span>.
             <br />I build <span className="grad">scalable full stack</span> projects.
-          </h1>
-          <p className="lead">{profile.tagline}</p>
+          </motion.h1>
+
+          <motion.p className="lead" variants={itemUp}>
+            {profile.tagline}
+          </motion.p>
 
           <div className="cta">
-            <a className="btn btn-primary" href="#projects">
+            <motion.a className="btn btn-primary" href="#projects" variants={btnLeft}>
               View My Work →
-            </a>
-            <a className="btn" href={profile.resumeUrl} target="_blank" rel="noreferrer">
+            </motion.a>
+            <motion.a className="btn" href={profile.resumeUrl} target="_blank" rel="noreferrer" variants={btnRight}>
               📄 Download Resume
-            </a>
-
+            </motion.a>
           </div>
-
         </motion.div>
 
         <motion.div
           className="hero-card"
-          initial={{ y: 24, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
+          initial={{ opacity: 0, scale: 0.92, y: 30 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.175, 0.885, 0.32, 1.275] }}
         >
           <div className="terminal-bar">
             <span /> <span /> <span />

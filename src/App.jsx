@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll } from 'framer-motion';
+import StarfieldCanvas from './components/StarfieldCanvas.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import About from './components/About.jsx';
@@ -22,6 +23,7 @@ export default function App() {
 
   return (
     <div className="app">
+      <StarfieldCanvas />
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Navbar />
       <main>

@@ -23,27 +23,40 @@ export default function Contact({ onToast }) {
   return (
     <section id="contact" className="section">
       <div className="container">
-        <span className="eyebrow">
-          <span className="dot" /> Get in touch
-        </span>
-        <h2 className="section-title">
-          Let’s build <span className="accent">something</span>
-        </h2>
-        <p className="section-sub">
-          Have a role, a project, or just want to say hi? My inbox is always open.
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <span className="eyebrow">
+            <span className="dot" /> Get in touch
+          </span>
+          <h2 className="section-title">
+            Let’s build <span className="accent">something</span>
+          </h2>
+          <p className="section-sub">
+            Have a role, a project, or just want to say hi? My inbox is always open.
+          </p>
+        </motion.div>
 
-        <div className="contact-grid">
+        <motion.div
+          className="contact-grid"
+          initial={{ opacity: 0, scale: 0.94, filter: 'blur(6px)' }}
+          whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.85, ease: 'easeOut' }}
+        >
           <motion.div
             className="contact-info"
-            initial={{ x: -16, opacity: 0 }}
+            initial={{ x: -25, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
           >
             <a className="contact-row" href={`mailto:${profile.email}`}>
               <span className="ico">
-                <MailSvg className='icon icon--mail' />
+                <MailSvg className="icon icon--mail" />
               </span>
               <div>
                 <strong>Email</strong>
@@ -76,10 +89,10 @@ export default function Contact({ onToast }) {
           <motion.form
             onSubmit={submit}
             className="card"
-            initial={{ x: 16, opacity: 0 }}
+            initial={{ x: 25, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.4 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="field">
               <label>Your name</label>
@@ -99,10 +112,10 @@ export default function Contact({ onToast }) {
               />
             </div>
             <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-                Send Message
+              Send Message
             </button>
           </motion.form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
