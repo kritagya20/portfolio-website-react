@@ -47,7 +47,7 @@ export default function Navbar() {
     };
   }, []);
 
-  // 2. Measure active link position for silky-smooth CSS transition
+  // 2. Measure active link position for desktop pill indicator
   const updateIndicator = () => {
     const activeEl = navLinkRefs.current[active];
     const pillEl = pillRef.current;
@@ -69,7 +69,6 @@ export default function Navbar() {
 
   useEffect(() => {
     window.addEventListener('resize', updateIndicator);
-    // Initial measurement delay after DOM layout settles
     const t = setTimeout(updateIndicator, 50);
     return () => {
       window.removeEventListener('resize', updateIndicator);
@@ -100,7 +99,28 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Persistent Floating Glass Pill Navbar */}
+      {/* Mobile Top Bar (< 768px): Top Left Theme Button & Top Right Menu Button */}
+      <div className="mobile-top-bar">
+        <button
+          className="mobile-theme-btn"
+          onClick={cycleTheme}
+          aria-label={`Switch theme (current: ${themeMeta.label})`}
+          title={`Theme: ${themeMeta.label}`}
+        >
+          <span className="theme-icon">{themeMeta.icon}</span>
+          <span className="theme-label">{themeMeta.label}</span>
+        </button>
+
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setOpen((prev) => !prev)}
+          aria-label="Toggle menu"
+        >
+          {open ? '✕' : '☰'}
+        </button>
+      </div>
+
+      {/* Desktop Floating Pill Navbar (> 768px) */}
       <motion.header
         className="site-nav"
         initial={{ y: -60, x: '-50%', opacity: 0 }}
@@ -111,7 +131,6 @@ export default function Navbar() {
         }}
       >
         <div className="nav-pill" ref={pillRef}>
-          {/* Single Persistent Indicator Element with CSS Transition */}
           <span
             className="nav-indicator"
             style={{
@@ -139,7 +158,6 @@ export default function Navbar() {
 
           <div className="nav-divider" />
 
-          {/* Embedded Theme Button */}
           <button
             className="theme-nav-btn"
             onClick={cycleTheme}
@@ -148,14 +166,6 @@ export default function Navbar() {
           >
             <span className="theme-icon">{themeMeta.icon}</span>
             <span className="theme-label">{themeMeta.label}</span>
-          </button>
-
-          <button
-            className="menu-btn"
-            onClick={() => setOpen((prev) => !prev)}
-            aria-label="Toggle menu"
-          >
-            {open ? '✕' : '☰'}
           </button>
         </div>
       </motion.header>
@@ -184,30 +194,21 @@ export default function Navbar() {
                 stiffness: 260,
               }}
             >
-              <div className="nav-mobile-header">
-                <button
-                  className="theme-nav-btn"
-                  onClick={cycleTheme}
-                  aria-label={`Switch theme (current: ${themeMeta.label})`}
-                >
-                  <span>{themeMeta.icon}</span>
-                  <span>{themeMeta.label}</span>
-                </button>
+              <div className="nav-mobile-links">
+                {links.map((link) => (
+                  <a
+                    key={link.id}
+                    href={`#${link.id}`}
+                    className={active === link.id ? 'active' : ''}
+                    onClick={() => {
+                      setActive(link.id);
+                      setOpen(false);
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
-
-              {links.map((link) => (
-                <a
-                  key={link.id}
-                  href={`#${link.id}`}
-                  className={active === link.id ? 'active' : ''}
-                  onClick={() => {
-                    setActive(link.id);
-                    setOpen(false);
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
             </motion.div>
           </>
         )}
