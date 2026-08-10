@@ -7,19 +7,14 @@ export const THEMES = [
     icon: '✨',
   },
   {
-    id: 'midnight',
-    label: 'Eclipse',
-    icon: '🌓',
+    id: 'nebula',
+    label: 'Nebula',
+    icon: '💫',
   },
   {
-    id: 'ocean',
-    label: 'Moonlight',
-    icon: '🌙',
-  },
-  {
-    id: 'batman',
-    label: 'Midnight',
-    icon: '🌑',
+    id: 'starlight',
+    label: 'Starlight',
+    icon: '☀️',
   },
 ];
 

@@ -5,33 +5,33 @@ const socialLinks = [
   {
     label: 'GitHub',
     href: 'https://github.com/kritagya20',
-    icon: <GithubSvg className='icon icon--github' />
+    icon: <GithubSvg className="icon icon--github" />,
   },
   {
-    label: 'Leet Code',
+    label: 'LeetCode',
     href: 'https://leetcode.com/u/kritagya20/',
-    icon: <LeetCodeSvg className='icon icon--leetcode' />
+    icon: <LeetCodeSvg className="icon icon--leetcode" />,
   },
   {
     label: 'Medium',
     href: 'https://medium.com/@kritagya2022',
-    icon: <MediumSvg className='icon icon--medium' />
+    icon: <MediumSvg className="icon icon--medium" />,
   },
   {
-    label: 'Linkedin',
+    label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/kritagyachouhan/',
-    icon: <LinkedinSvg className='icon icon--linkedin' />
+    icon: <LinkedinSvg className="icon icon--linkedin" />,
   },
   {
     label: 'Mail',
-    href: 'mailto: kritagya2022@gmail.com',
-    icon: <MailSvg className='icon icon--mail' />
+    href: 'mailto:kritagya2022@gmail.com',
+    icon: <MailSvg className="icon icon--mail" />,
   },
 ];
 
-function Socials() {
+export default function Socials() {
   return (
-    <section className="socials">
+    <aside className="socials" aria-label="Social Profiles">
       <ul className="social__icon-list">
         {socialLinks.map(({ label, href, icon }) => (
           <li key={label}>
@@ -40,14 +40,14 @@ function Socials() {
               aria-label={label}
               target="_blank"
               rel="noopener noreferrer"
+              className="social-link"
             >
               {icon}
+              <span className="social-tooltip">{label}</span>
             </a>
           </li>
         ))}
       </ul>
-    </section>
+    </aside>
   );
 }
-
-export default Socials;
