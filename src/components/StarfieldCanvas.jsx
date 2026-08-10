@@ -25,7 +25,7 @@ export default function StarfieldCanvas() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    const starsCount = 3200;
+    const starsCount = 3400;
     const starsGeometry = new THREE.BufferGeometry();
     const posArray = new Float32Array(starsCount * 3);
 
@@ -64,11 +64,11 @@ export default function StarfieldCanvas() {
     const starTexture = createStarTexture();
 
     const starsMaterial = new THREE.PointsMaterial({
-      size: 0.32,
+      size: 0.34,
       map: starTexture,
       color: 0xffffff,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.8,
       blending: THREE.AdditiveBlending,
       sizeAttenuation: true,
       depthWrite: false,
@@ -81,15 +81,26 @@ export default function StarfieldCanvas() {
 
     let targetMouseX = 0;
     let targetMouseY = 0;
-    let mouseX = 0;
-    let mouseY = 0;
+    let currentInfluenceX = 0;
+    let currentInfluenceY = 0;
+    let isMouseActive = false;
+    let inactivityTimer = null;
 
     let windowHalfX = window.innerWidth / 2;
     let windowHalfY = window.innerHeight / 2;
 
     const handleMouseMove = (event) => {
-      targetMouseX = (event.clientX - windowHalfX) * 0.00004;
-      targetMouseY = (event.clientY - windowHalfY) * 0.00004;
+      // Calculate responsive mouse offset when cursor moves
+      targetMouseX = (event.clientX - windowHalfX) * 0.00025;
+      targetMouseY = (event.clientY - windowHalfY) * 0.00025;
+      isMouseActive = true;
+
+      if (inactivityTimer) clearTimeout(inactivityTimer);
+
+      // Smoothly return to ultra-slow idle reading mode after 900ms of no cursor motion
+      inactivityTimer = setTimeout(() => {
+        isMouseActive = false;
+      }, 900);
     };
 
     const handleResize = () => {
@@ -106,13 +117,16 @@ export default function StarfieldCanvas() {
     let animationFrameId;
 
     const animate = () => {
-      // Smooth interpolation for mouse movements
-      mouseX += (targetMouseX - mouseX) * 0.04;
-      mouseY += (targetMouseY - mouseY) * 0.04;
+      const activeFactor = isMouseActive ? 1.0 : 0.0;
 
-      // Ultra-slow continuous idle rotation so content is perfectly readable
-      starMesh.rotation.y += 0.00005 + mouseX * 0.15;
-      starMesh.rotation.x += 0.000025 + mouseY * 0.15;
+      // Smooth lerp towards target influence when active, or 0 when still
+      currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.06;
+      currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.06;
+
+      // When user moves mouse: full vivid 3D parallax reaction!
+      // When user stops moving or is reading: ultra-slow, serene background pace
+      starMesh.rotation.y += 0.00005 + currentInfluenceX;
+      starMesh.rotation.x += 0.000025 + currentInfluenceY;
 
       renderer.render(scene, camera);
       animationFrameId = requestAnimationFrame(animate);
@@ -121,6 +135,7 @@ export default function StarfieldCanvas() {
     animate();
 
     return () => {
+      if (inactivityTimer) clearTimeout(inactivityTimer);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);

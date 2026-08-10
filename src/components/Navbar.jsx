@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme, THEMES } from '../context/ThemeContext.jsx';
 
@@ -17,52 +17,81 @@ export default function Navbar() {
   const [active, setActive] = useState('home');
   const [open, setOpen] = useState(false);
 
+  const pillRef = useRef(null);
+  const navLinkRefs = useRef({});
+  const [indicatorPos, setIndicatorPos] = useState({ left: 10, width: 60 });
+
+  // 1. IntersectionObserver for active section tracking
   useEffect(() => {
-    const onScroll = () => {
-      const offset = window.scrollY + 140;
-
-      let current = 'home';
-
-      for (const link of links) {
-        const el = document.getElementById(link.id);
-
-        if (el && el.offsetTop <= offset) {
-          current = link.id;
-        }
-      }
-
-      setActive(current);
+    const observerOptions = {
+      root: null,
+      rootMargin: '-25% 0px -45% 0px',
+      threshold: 0,
     };
 
-    window.addEventListener('scroll', onScroll, {
-      passive: true,
-    });
+    const handleIntersect = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    };
 
-    onScroll();
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+    const sections = links.map((l) => document.getElementById(l.id)).filter(Boolean);
+
+    sections.forEach((sec) => observer.observe(sec));
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      sections.forEach((sec) => observer.unobserve(sec));
     };
   }, []);
 
+  // 2. Measure active link position for silky-smooth CSS transition
+  const updateIndicator = () => {
+    const activeEl = navLinkRefs.current[active];
+    const pillEl = pillRef.current;
+
+    if (activeEl && pillEl) {
+      const pillRect = pillEl.getBoundingClientRect();
+      const activeRect = activeEl.getBoundingClientRect();
+
+      const left = activeRect.left - pillRect.left;
+      const width = activeRect.width;
+
+      setIndicatorPos({ left, width });
+    }
+  };
+
+  useLayoutEffect(() => {
+    updateIndicator();
+  }, [active]);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateIndicator);
+    // Initial measurement delay after DOM layout settles
+    const t = setTimeout(updateIndicator, 50);
+    return () => {
+      window.removeEventListener('resize', updateIndicator);
+      clearTimeout(t);
+    };
+  }, []);
+
+  // 3. Lock scroll when mobile drawer is open
   useEffect(() => {
     if (!open) return;
-
     const scrollY = window.scrollY;
 
-    document.body.style.position = "fixed";
+    document.body.style.position = 'fixed';
     document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
+    document.body.style.left = '0';
+    document.body.style.right = '0';
 
     return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.width = "";
-
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
       window.scrollTo(0, scrollY);
     };
   }, [open]);
@@ -71,34 +100,55 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Theme Button */}
-      <button
-        className="theme-floating-btn"
-        onClick={cycleTheme}
-        aria-label={`Switch theme (current: ${themeMeta.label})`}
-        title={`Theme: ${themeMeta.label}`}
+      {/* Persistent Floating Glass Pill Navbar */}
+      <motion.header
+        className="site-nav"
+        initial={{ y: -60, x: '-50%', opacity: 0 }}
+        animate={{ y: 0, x: '-50%', opacity: 1 }}
+        transition={{
+          duration: 0.7,
+          ease: [0.34, 1.56, 0.64, 1],
+        }}
       >
-        <span>{themeMeta.icon}</span>
+        <div className="nav-pill" ref={pillRef}>
+          {/* Single Persistent Indicator Element with CSS Transition */}
+          <span
+            className="nav-indicator"
+            style={{
+              left: `${indicatorPos.left}px`,
+              width: `${indicatorPos.width}px`,
+            }}
+          />
 
-        <span className="theme-label">
-          {themeMeta.label}
-        </span>
-      </button>
-
-      {/* Desktop / Mobile Navbar */}
-      <header className="nav">
-        <div className="nav-inner">
           <nav className="nav-links">
-            {links.map((link) => (
-              <a
-                key={link.id}
-                href={`#${link.id}`}
-                className={active === link.id ? 'active' : ''}
-              >
-                {link.label}
-              </a>
-            ))}
+            {links.map((link) => {
+              const isActive = active === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  ref={(el) => (navLinkRefs.current[link.id] = el)}
+                  className={`nav-link ${isActive ? 'active' : ''}`}
+                  onClick={() => setActive(link.id)}
+                >
+                  <span className="nav-label">{link.label}</span>
+                </a>
+              );
+            })}
           </nav>
+
+          <div className="nav-divider" />
+
+          {/* Embedded Theme Button */}
+          <button
+            className="theme-nav-btn"
+            onClick={cycleTheme}
+            aria-label={`Switch theme (current: ${themeMeta.label})`}
+            title={`Theme: ${themeMeta.label}`}
+          >
+            <span className="theme-icon">{themeMeta.icon}</span>
+            <span className="theme-label">{themeMeta.label}</span>
+          </button>
 
           <button
             className="menu-btn"
@@ -108,13 +158,12 @@ export default function Navbar() {
             {open ? '✕' : '☰'}
           </button>
         </div>
-      </header>
+      </motion.header>
 
+      {/* Mobile Navigation Drawer */}
       <AnimatePresence>
         {open && (
           <>
-            {/* Blur Overlay */}
-
             <motion.div
               className="nav-overlay"
               initial={{ opacity: 0 }}
@@ -123,8 +172,6 @@ export default function Navbar() {
               transition={{ duration: 0.2 }}
               onClick={() => setOpen(false)}
             />
-
-            {/* Mobile Drawer */}
 
             <motion.div
               className="nav-mobile"
@@ -137,11 +184,26 @@ export default function Navbar() {
                 stiffness: 260,
               }}
             >
+              <div className="nav-mobile-header">
+                <button
+                  className="theme-nav-btn"
+                  onClick={cycleTheme}
+                  aria-label={`Switch theme (current: ${themeMeta.label})`}
+                >
+                  <span>{themeMeta.icon}</span>
+                  <span>{themeMeta.label}</span>
+                </button>
+              </div>
+
               {links.map((link) => (
                 <a
                   key={link.id}
                   href={`#${link.id}`}
-                  onClick={() => setOpen(false)}
+                  className={active === link.id ? 'active' : ''}
+                  onClick={() => {
+                    setActive(link.id);
+                    setOpen(false);
+                  }}
                 >
                   {link.label}
                 </a>
