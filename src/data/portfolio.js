@@ -16,8 +16,8 @@ export const profile = {
   typewriter: [
     'Full Stack Software Developer',
     'Golang Backend Engineer',
-    'React + Node Frontend Builder',
-    'Java + Selenium Automation Enthusiast',
+    'React + Node Developer',
+    'Java & Automation Engineer',
   ],
 };
 

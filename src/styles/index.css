@@ -819,9 +819,21 @@ main {
 .typer {
   font-family: 'JetBrains Mono', monospace;
   color: var(--primary-2);
-  font-size: 1rem;
+  font-size: clamp(0.78rem, 0.65rem + 0.8vw, 1rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
   margin-bottom: 4px;
   min-height: 1.5em;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 520px) {
+  .typer {
+    font-size: clamp(0.72rem, 3.3vw, 0.86rem);
+  }
 }
 .typer .caret {
   display: inline-block;
