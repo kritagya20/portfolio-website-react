@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme, THEMES } from '../context/ThemeContext.jsx';
+import { MailSvg, LinkedinSvg, GithubSvg, MediumSvg, LeetCodeSvg } from '../icon_jsx';
 
 const links = [
   { id: 'home', label: 'Home' },
@@ -25,7 +26,7 @@ export default function Navbar() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-25% 0px -45% 0px',
+      rootMargin: '-20% 0px -60% 0px',
       threshold: 0,
     };
 
@@ -38,28 +39,28 @@ export default function Navbar() {
     };
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const sections = links.map((l) => document.getElementById(l.id)).filter(Boolean);
 
-    sections.forEach((sec) => observer.observe(sec));
+    links.forEach((link) => {
+      const el = document.getElementById(link.id);
+      if (el) observer.observe(el);
+    });
 
-    return () => {
-      sections.forEach((sec) => observer.unobserve(sec));
-    };
+    return () => observer.disconnect();
   }, []);
 
-  // 2. Measure active link position for desktop pill indicator
+  // 2. Measure active link position for indicator offset
   const updateIndicator = () => {
     const activeEl = navLinkRefs.current[active];
-    const pillEl = pillRef.current;
+    const container = pillRef.current;
 
-    if (activeEl && pillEl) {
-      const pillRect = pillEl.getBoundingClientRect();
+    if (activeEl && container) {
       const activeRect = activeEl.getBoundingClientRect();
+      const containerRect = container.getBoundingClientRect();
 
-      const left = activeRect.left - pillRect.left;
-      const width = activeRect.width;
-
-      setIndicatorPos({ left, width });
+      setIndicatorPos({
+        left: activeRect.left - containerRect.left,
+        width: activeRect.width,
+      });
     }
   };
 
@@ -69,12 +70,8 @@ export default function Navbar() {
 
   useEffect(() => {
     window.addEventListener('resize', updateIndicator);
-    const t = setTimeout(updateIndicator, 50);
-    return () => {
-      window.removeEventListener('resize', updateIndicator);
-      clearTimeout(t);
-    };
-  }, []);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [active]);
 
   // 3. Lock scroll when mobile drawer is open
   useEffect(() => {
@@ -95,7 +92,7 @@ export default function Navbar() {
     };
   }, [open]);
 
-  const themeMeta = THEMES.find((t) => t.id === theme);
+  const themeMeta = THEMES.find((t) => t.id === theme) || THEMES[0];
 
   return (
     <>
@@ -196,7 +193,7 @@ export default function Navbar() {
             >
               <div className="nav-mobile-header">
                 <span className="nav-mobile-title">
-                  Navigation <span className="dot" />
+                  Menu <span className="dot" />
                 </span>
                 <button
                   className="nav-mobile-close"
@@ -228,6 +225,49 @@ export default function Navbar() {
               </nav>
 
               <div className="nav-mobile-footer">
+                <div className="nav-mobile-socials">
+                  <a
+                    href="https://github.com/kritagya20"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                  >
+                    <GithubSvg className="icon icon--github" />
+                  </a>
+                  <a
+                    href="https://leetcode.com/u/kritagya20/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LeetCode"
+                  >
+                    <LeetCodeSvg className="icon icon--leetcode" />
+                  </a>
+                  <a
+                    href="https://medium.com/@kritagya2022"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Medium"
+                  >
+                    <MediumSvg className="icon icon--medium" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/kritagyachouhan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                  >
+                    <LinkedinSvg className="icon icon--linkedin" />
+                  </a>
+                  <a
+                    href="mailto:kritagya2022@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Mail"
+                  >
+                    <MailSvg className="icon icon--mail" />
+                  </a>
+                </div>
+
                 <button
                   className="nav-mobile-theme-btn"
                   onClick={cycleTheme}
