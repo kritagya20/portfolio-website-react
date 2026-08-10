@@ -194,20 +194,50 @@ export default function Navbar() {
                 stiffness: 260,
               }}
             >
-              <div className="nav-mobile-links">
-                {links.map((link) => (
-                  <a
-                    key={link.id}
-                    href={`#${link.id}`}
-                    className={active === link.id ? 'active' : ''}
-                    onClick={() => {
-                      setActive(link.id);
-                      setOpen(false);
-                    }}
-                  >
-                    {link.label}
-                  </a>
-                ))}
+              <div className="nav-mobile-header">
+                <span className="nav-mobile-title">
+                  Navigation <span className="dot" />
+                </span>
+                <button
+                  className="nav-mobile-close"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close menu"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <nav className="nav-mobile-links">
+                {links.map((link) => {
+                  const isActive = active === link.id;
+                  return (
+                    <a
+                      key={link.id}
+                      href={`#${link.id}`}
+                      className={`nav-mobile-link ${isActive ? 'active' : ''}`}
+                      onClick={() => {
+                        setActive(link.id);
+                        setOpen(false);
+                      }}
+                    >
+                      <span className="nav-mobile-label">{link.label}</span>
+                      {isActive && <span className="active-dot" />}
+                    </a>
+                  );
+                })}
+              </nav>
+
+              <div className="nav-mobile-footer">
+                <button
+                  className="nav-mobile-theme-btn"
+                  onClick={cycleTheme}
+                  aria-label="Switch Theme"
+                >
+                  <span>{themeMeta.icon}</span>
+                  <span>
+                    Theme: <strong>{themeMeta.label}</strong>
+                  </span>
+                </button>
               </div>
             </motion.div>
           </>
