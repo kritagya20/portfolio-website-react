@@ -79,58 +79,72 @@ export default function StarfieldCanvas() {
 
     camera.position.z = 20;
 
-    // Shooting Stars / Meteor System
+    // Advanced Dynamic Meteor Wave System
     const meteors = [];
 
-    function spawnMeteor() {
-      const geometry = new THREE.BufferGeometry();
-      const tailPoints = 22;
+    function spawnMeteorWave() {
+      // Random count: 1 to 3 meteors per wave
+      const count = Math.floor(Math.random() * 3) + 1;
+      const isSameDirection = Math.random() > 0.4;
 
-      // Position spawn point cleanly inside visible camera viewport
-      const startX = (Math.random() * 40) - 10;
-      const startY = (Math.random() * 15) + 10;
-      const startZ = (Math.random() - 0.5) * 10;
+      const baseDirX = Math.random() > 0.5 ? (Math.random() * 0.3 - 0.75) : (Math.random() * 0.3 + 0.45);
+      const baseDirY = -(Math.random() * 0.3 + 0.35);
 
-      const dirX = -0.7;
-      const dirY = -0.45;
-      const dirZ = -0.1;
+      for (let c = 0; c < count; c++) {
+        const geometry = new THREE.BufferGeometry();
+        const tailPoints = 22;
 
-      const positions = new Float32Array(tailPoints * 3);
-      for (let i = 0; i < tailPoints; i++) {
-        positions[i * 3] = startX + i * (dirX * 0.45);
-        positions[i * 3 + 1] = startY + i * (dirY * 0.45);
-        positions[i * 3 + 2] = startZ + i * (dirZ * 0.45);
+        const dirX = isSameDirection
+          ? baseDirX
+          : (Math.random() > 0.5 ? (Math.random() * 0.3 - 0.75) : (Math.random() * 0.3 + 0.45));
+        const dirY = isSameDirection ? baseDirY : -(Math.random() * 0.3 + 0.35);
+        
+        // Random speed multiplier per meteor (1.1x to 2.3x)
+        const speed = Math.random() * 1.2 + 1.1;
+
+        // Position spawn origin relative to direction
+        const startX = dirX < 0 ? (Math.random() * 30 + 5) : (Math.random() * -30 - 5);
+        const startY = Math.random() * 18 + 8;
+        const startZ = (Math.random() - 0.5) * 12;
+
+        const positions = new Float32Array(tailPoints * 3);
+        for (let i = 0; i < tailPoints; i++) {
+          positions[i * 3] = startX + i * (dirX * 0.45);
+          positions[i * 3 + 1] = startY + i * (dirY * 0.45);
+          positions[i * 3 + 2] = startZ + i * (-0.08 * 0.45);
+        }
+
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const colorChoice = Math.random();
+        const color = colorChoice < 0.45 ? 0x38bdf8 : colorChoice < 0.85 ? 0xc084fc : 0xf59e0b;
+
+        const material = new THREE.LineBasicMaterial({
+          color: color,
+          transparent: true,
+          opacity: 1.0,
+          linewidth: 3,
+          blending: THREE.AdditiveBlending,
+        });
+
+        const line = new THREE.Line(geometry, material);
+        scene.add(line);
+
+        meteors.push({
+          mesh: line,
+          vx: dirX * speed * 1.3,
+          vy: dirY * speed * 1.3,
+          vz: -0.08 * speed,
+          life: 1.0,
+          fadeSpeed: Math.random() * 0.012 + 0.018,
+        });
       }
-
-      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-      const isCyan = Math.random() > 0.4;
-      const color = isCyan ? 0x38bdf8 : 0xc084fc;
-
-      const material = new THREE.LineBasicMaterial({
-        color: color,
-        transparent: true,
-        opacity: 1.0,
-        linewidth: 3,
-        blending: THREE.AdditiveBlending,
-      });
-
-      const line = new THREE.Line(geometry, material);
-      scene.add(line);
-
-      meteors.push({
-        mesh: line,
-        vx: dirX * 1.4,
-        vy: dirY * 1.4,
-        vz: dirZ * 1.4,
-        life: 1.0,
-      });
     }
 
-    // Spawn 1 immediately at start, then every 3 seconds for clear visibility
-    spawnMeteor();
+    // Initial spawn wave, then random interval between 5000ms and 10000ms
+    spawnMeteorWave();
     let lastMeteorSpawn = Date.now();
-    const meteorInterval = 3000;
+    let nextMeteorInterval = Math.random() * 5000 + 5000;
 
     let targetMouseX = 0;
     let targetMouseY = 0;
@@ -170,19 +184,20 @@ export default function StarfieldCanvas() {
     const animate = () => {
       const now = Date.now();
 
-      // Spawn meteors every 3 seconds
-      if (now - lastMeteorSpawn > meteorInterval + (Math.random() * 1500 - 750)) {
-        spawnMeteor();
+      // Dynamic spawn timer (5 - 10 seconds)
+      if (now - lastMeteorSpawn > nextMeteorInterval) {
+        spawnMeteorWave();
         lastMeteorSpawn = now;
+        nextMeteorInterval = Math.random() * 5000 + 5000; // Reset next interval (5 to 10s)
       }
 
-      // Update meteors
+      // Update active meteors
       for (let i = meteors.length - 1; i >= 0; i--) {
         const m = meteors[i];
         m.mesh.position.x += m.vx;
         m.mesh.position.y += m.vy;
         m.mesh.position.z += m.vz;
-        m.life -= 0.025;
+        m.life -= m.fadeSpeed;
         m.mesh.material.opacity = m.life;
 
         if (m.life <= 0) {
