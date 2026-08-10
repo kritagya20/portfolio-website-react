@@ -1,7 +1,21 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { experience } from '../data/portfolio.js';
 
 export default function Experience() {
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 75%', 'end 80%'],
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 220,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
   return (
     <section id="experience" className="section">
       <div className="container">
@@ -22,7 +36,15 @@ export default function Experience() {
           </p>
         </motion.div>
 
-        <div className="timeline">
+        <div className="timeline" ref={containerRef}>
+          {/* Background Track Line */}
+          <div className="timeline-track" />
+
+          {/* Animated Scroll Fill Line with Travelling Glowing Dot */}
+          <motion.div className="timeline-progress" style={{ scaleY }}>
+            <span className="timeline-progress-dot" />
+          </motion.div>
+
           {experience.map((e, i) => {
             const isLeft = i % 2 === 0;
             return (

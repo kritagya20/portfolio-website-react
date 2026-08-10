@@ -893,15 +893,42 @@ main {
   margin-top: 24px;
 }
 
-.timeline::before {
-  content: '';
+.timeline-track {
   position: absolute;
   left: 18px;
   top: 6px;
   bottom: 6px;
   width: 2px;
-  background: linear-gradient(180deg, var(--primary), var(--primary-2), transparent);
+  background: color-mix(in srgb, var(--border) 60%, transparent);
   border-radius: 2px;
+  z-index: 1;
+}
+
+.timeline-progress {
+  position: absolute;
+  left: 18px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
+  transform-origin: top center;
+  box-shadow: 0 0 14px var(--primary);
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.timeline-progress-dot {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 14px;
+  height: 14px;
+  background: var(--primary-2);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 16px var(--primary-2), 0 0 28px var(--primary);
+  z-index: 3;
 }
 
 .tl-item {
