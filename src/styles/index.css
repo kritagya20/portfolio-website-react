@@ -948,6 +948,7 @@ main {
   background: var(--bg);
   border: 3px solid var(--primary);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 25%, transparent);
+  z-index: 4;
 }
 
 .tl-card {
