@@ -90,8 +90,45 @@
   --noise: 0.04;
 }
 
-* {
-  cursor: none !important;
+/* ========== COSMIC ROCKET CURSOR & STARDUST TRAIL ========== */
+@media (min-width: 769px) {
+  * {
+    cursor: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-cursor-head,
+  .stardust-container {
+    display: none !important;
+  }
+}
+
+.custom-cursor-head {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.08s ease-out, filter 0.2s ease;
+  will-change: transform;
+}
+
+.custom-cursor-head .rocket-icon {
+  font-size: 1.3rem;
+  transform: rotate(-45deg);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.8));
+}
+
+.custom-cursor-head.hovered .rocket-icon {
+  transform: rotate(0deg) scale(1.35);
+  filter: drop-shadow(0 0 18px rgba(192, 132, 252, 1));
 }
 
 
