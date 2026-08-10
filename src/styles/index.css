@@ -1,7 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 /* ========== THEME TOKENS ========== */
 :root,
+[data-theme='cosmic'] {
+  --bg: #030712;
+  --bg-soft: #0b0f19;
+  --surface: rgba(15, 23, 42, 0.78);
+  --surface-strong: rgba(24, 33, 71, 0.90);
+  --border: rgba(168, 85, 247, 0.25);
+  --text: #f3e8ff;
+  --text-muted: #94a3b8;
+  --primary: #c084fc;
+  --primary-2: #38bdf8;
+  --accent: #f59e0b;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.80);
+  --grad-hero: radial-gradient(1200px 600px at 80% -10%, rgba(192, 132, 252, 0.35), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(56, 189, 248, 0.25), transparent 60%);
+  --noise: 0.04;
+}
+
 [data-theme='midnight'] {
   --bg: #0b1020;
   --bg-soft: #111733;
@@ -187,8 +204,9 @@ img {
 .section-sub { margin-bottom: clamp(28px, 4vw, 48px); }
 
 .section-title {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.6rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0 0 8px;
 }
@@ -198,6 +216,7 @@ img {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  filter: drop-shadow(0 0 16px color-mix(in srgb, var(--primary) 35%, transparent));
 }
 
 .section-sub {
@@ -208,10 +227,11 @@ img {
 }
 
 .eyebrow {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 999px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -219,8 +239,9 @@ img {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   margin-bottom: 18px;
+  backdrop-filter: blur(12px);
 }
 
 .eyebrow .dot {
@@ -232,6 +253,7 @@ img {
 }
 
 .btn {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -244,6 +266,7 @@ img {
   font-size: 0.95rem;
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease,
     box-shadow 0.2s ease;
+  backdrop-filter: blur(12px);
 }
 
 .btn:hover {
@@ -254,9 +277,30 @@ img {
 }
 
 .btn-primary {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
   color: var(--bg-soft);
   border: none;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-15deg);
+  animation: glowSweep 4s infinite linear;
+}
+
+@keyframes glowSweep {
+  0% { left: -100%; }
+  35% { left: 160%; }
+  100% { left: 160%; }
 }
 
 .btn-primary .icon {
@@ -627,6 +671,7 @@ main {
 }
 
 .hero h1 {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
   font-size: clamp(2.2rem, 1.4rem + 3vw, 4rem);
   line-height: 1.05;
   letter-spacing: -0.03em;

@@ -2,6 +2,11 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 export const THEMES = [
   {
+    id: 'cosmic',
+    label: 'Cosmic Void',
+    icon: '🌌',
+  },
+  {
     id: 'midnight',
     label: 'Eclipse',
     icon: '🌓',
@@ -30,7 +35,7 @@ const ThemeContext = createContext(null);
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
     if (typeof window === 'undefined') {
-      return 'midnight';
+      return 'cosmic';
     }
 
     const savedTheme = localStorage.getItem(STORAGE_KEY);
@@ -39,7 +44,7 @@ export function ThemeProvider({ children }) {
       (themeOption) => themeOption.id === savedTheme
     );
 
-    return isValidTheme ? savedTheme : 'midnight';
+    return isValidTheme ? savedTheme : 'cosmic';
   });
 
   useEffect(() => {
