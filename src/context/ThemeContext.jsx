@@ -12,11 +12,6 @@ export const THEMES = [
     icon: '🌓',
   },
   {
-    id: 'daylight',
-    label: 'Daylight',
-    icon: '☀️',
-  },
-  {
     id: 'ocean',
     label: 'Moonlight',
     icon: '🌙',
