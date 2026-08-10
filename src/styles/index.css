@@ -123,11 +123,11 @@
   }
 
   .cursor-outline.hovered {
-    width: 58px;
-    height: 58px;
+    width: 44px;
+    height: 44px;
     border-color: var(--primary-2);
-    background: color-mix(in srgb, var(--primary) 14%, transparent);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 25%, transparent);
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 20%, transparent);
   }
 }
 
