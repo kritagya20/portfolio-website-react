@@ -1,62 +1,39 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function CustomCursor() {
-  const cursorRef = useRef(null);
-  const trailContainerRef = useRef(null);
+  const dotRef = useRef(null);
+  const outlineRef = useRef(null);
   const [hovered, setHovered] = useState(false);
-  const lastTimeRef = useRef(0);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const trailContainer = trailContainerRef.current;
+    const dot = dotRef.current;
+    const outline = outlineRef.current;
 
     const handleMouseMove = (e) => {
-      const { clientX: x, clientY: y } = e;
+      const posX = e.clientX;
+      const posY = e.clientY;
 
-      // 1. Move Cosmic Rocket Cursor
-      if (cursor) {
-        cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
+      if (dot) {
+        dot.style.left = `${posX}px`;
+        dot.style.top = `${posY}px`;
       }
 
-      // 2. Emit Stardust Sparkles from Rocket Thruster
-      const now = Date.now();
-      if (now - lastTimeRef.current > 35 && trailContainer) {
-        lastTimeRef.current = now;
-
-        const particle = document.createElement('span');
-        particle.className = 'stardust-particle';
-
-        const colors = ['#38bdf8', '#c084fc', '#f59e0b', '#a7f3d0', '#ffffff'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
-        const size = Math.random() * 6 + 4; // 4px to 10px
-
-        // Position particle slightly behind rocket thruster
-        particle.style.left = `${x}px`;
-        particle.style.top = `${y + 12}px`;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.background = color;
-        particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
-
-        const dx = (Math.random() - 0.5) * 28;
-        const dy = Math.random() * 20 + 8; // Drifts downward like thruster exhaust
-        particle.style.setProperty('--dx', `${dx}px`);
-        particle.style.setProperty('--dy', `${dy}px`);
-
-        trailContainer.appendChild(particle);
-
-        setTimeout(() => {
-          if (particle.parentNode) {
-            particle.parentNode.removeChild(particle);
-          }
-        }, 650);
+      if (outline) {
+        outline.animate(
+          {
+            left: `${posX}px`,
+            top: `${posY}px`,
+          },
+          { duration: 400, fill: 'forwards', easing: 'cubic-bezier(0.25, 1, 0.5, 1)' }
+        );
       }
 
-      // 3. Detect hover over clickable elements
+      // Check hover state over clickable elements
       const target = e.target;
-      const isClickable =
-        target.closest('a, button, .card, .btn, .nav-link, input, select, textarea');
-      setHovered(Boolean(isClickable));
+      const isInteractable = target.closest(
+        'a, button, .card, .btn, .nav-link, input, select, textarea, .tl-card'
+      );
+      setHovered(Boolean(isInteractable));
     };
 
     window.addEventListener('mousemove', handleMouseMove);
@@ -65,16 +42,11 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Stardust Trail Container */}
-      <div ref={trailContainerRef} className="stardust-container" />
-
-      {/* Cosmic Rocket Cursor Head */}
+      <div ref={dotRef} className="cursor-dot" />
       <div
-        ref={cursorRef}
-        className={`custom-cursor-head ${hovered ? 'hovered' : ''}`}
-      >
-        <span className="rocket-icon">🚀</span>
-      </div>
+        ref={outlineRef}
+        className={`cursor-outline ${hovered ? 'hovered' : ''}`}
+      />
     </>
   );
 }
