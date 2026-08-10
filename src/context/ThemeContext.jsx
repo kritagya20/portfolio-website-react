@@ -3,8 +3,8 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 export const THEMES = [
   {
     id: 'cosmic',
-    label: 'Cosmic Void',
-    icon: '🌌',
+    label: 'Cosmic',
+    icon: '✨',
   },
   {
     id: 'midnight',
