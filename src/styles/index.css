@@ -711,6 +711,8 @@ main {
   box-shadow: var(--shadow);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  transform-style: preserve-3d;
+  will-change: transform;
   overflow: hidden;
   min-width: 0;
 }
@@ -735,6 +737,9 @@ main {
   line-height: 1.7;
   word-break: break-word;
   overflow-wrap: anywhere;
+  transform: translateZ(30px);
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
 }
 
 .terminal pre {
