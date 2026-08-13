@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform, useMotionValue } from 'framer-motion';
 import { experience } from '../data/portfolio.js';
 
 function TimelineItem({ item, index, total, scaleY }) {
@@ -22,8 +22,13 @@ function TimelineItem({ item, index, total, scaleY }) {
   }, [total]);
 
   useEffect(() => {
+    if (scaleY.get() >= threshold) {
+      setReached(true);
+    }
     return scaleY.on('change', (val) => {
-      setReached(val >= threshold);
+      if (val >= threshold) {
+        setReached(true);
+      }
     });
   }, [scaleY, threshold]);
 
@@ -75,8 +80,20 @@ export default function Experience() {
     restDelta: 0.001,
   });
 
-  // Map scaleY progress to top percentage for travelling dot to avoid scale distortion
-  const dotTop = useTransform(scaleY, [0, 1], ['0%', '100%']);
+  const maxScaleY = useMotionValue(0);
+
+  useEffect(() => {
+    const unsub = scaleY.on('change', (val) => {
+      if (val > maxScaleY.get()) {
+        const newVal = val >= 0.98 ? 1 : val;
+        maxScaleY.set(newVal);
+      }
+    });
+    return () => unsub();
+  }, [scaleY, maxScaleY]);
+
+  // Map maxScaleY progress to top percentage for travelling dot to avoid scale distortion
+  const dotTop = useTransform(maxScaleY, [0, 1], ['0%', '100%']);
 
   return (
     <section id="experience" className="section">
@@ -103,10 +120,22 @@ export default function Experience() {
           <div className="timeline-track" />
 
           {/* Animated Scroll Fill Line */}
-          <motion.div className="timeline-progress" style={{ scaleY }} />
+          <motion.div className="timeline-progress" style={{ scaleY: maxScaleY }} />
 
-          {/* Un-deformed Travelling Glowing Dot */}
-          <motion.div className="timeline-progress-dot" style={{ top: dotTop }} />
+          {/* Travelling Glowing Space Comet */}
+          <motion.div className="timeline-comet" style={{ top: dotTop }} title="Cosmic Meteor">
+            <div className="comet-tail" />
+            <div className="comet-head">
+              <div className="comet-core" />
+              <div className="comet-aura" />
+            </div>
+            <div className="comet-sparkles" aria-hidden="true">
+              <span className="sparkle s1" />
+              <span className="sparkle s2" />
+              <span className="sparkle s3" />
+              <span className="sparkle s4" />
+            </div>
+          </motion.div>
 
           {experience.map((e, i) => (
             <TimelineItem
@@ -114,7 +143,7 @@ export default function Experience() {
               item={e}
               index={i}
               total={experience.length}
-              scaleY={scaleY}
+              scaleY={maxScaleY}
             />
           ))}
         </div>

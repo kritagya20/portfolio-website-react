@@ -1050,18 +1050,110 @@ main {
   z-index: 2;
 }
 
-.timeline-progress-dot {
+/* ========== SPACE COMET TIMELINE METEOR ========== */
+.timeline-comet {
   position: absolute;
   top: 0%;
   left: 19px;
   transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.comet-head {
+  position: relative;
   width: 14px;
   height: 14px;
-  background: var(--primary-2);
-  border: 2px solid #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 16px var(--primary-2), 0 0 28px var(--primary);
-  z-index: 3;
+  background: #ffffff;
+  box-shadow: 
+    0 0 10px #ffffff,
+    0 0 20px #38bdf8,
+    0 0 32px #c084fc,
+    0 0 45px rgba(56, 189, 248, 0.7);
+  z-index: 2;
+  animation: cometPulse 2s ease-in-out infinite alternate;
+}
+
+.comet-core {
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 35%, #38bdf8 70%, #c084fc 100%);
+}
+
+.comet-aura {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.5), rgba(192, 132, 252, 0.25), transparent 70%);
+  animation: auraRotate 3.5s linear infinite;
+}
+
+.comet-tail {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 48px;
+  background: linear-gradient(0deg, #ffffff 0%, #38bdf8 35%, #c084fc 75%, transparent 100%);
+  border-radius: 999px;
+  box-shadow: 
+    0 0 10px #38bdf8,
+    0 0 22px #c084fc;
+  opacity: 0.9;
+  animation: tailShimmer 1.5s ease-in-out infinite alternate;
+}
+
+.comet-sparkles {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #38bdf8, 0 0 14px #c084fc;
+  opacity: 0;
+  animation: sparkleTwinkle 2.2s ease-in-out infinite;
+}
+
+.sparkle.s1 { top: -10px; left: 2px; animation-delay: 0s; }
+.sparkle.s2 { top: -20px; right: 4px; animation-delay: 0.5s; width: 3px; height: 3px; }
+.sparkle.s3 { top: -32px; left: 8px; animation-delay: 1.1s; width: 5px; height: 5px; }
+.sparkle.s4 { top: -42px; right: 10px; animation-delay: 1.6s; width: 3px; height: 3px; }
+
+@keyframes cometPulse {
+  0% { transform: scale(0.92); box-shadow: 0 0 10px #fff, 0 0 20px #38bdf8, 0 0 32px #c084fc; }
+  100% { transform: scale(1.15); box-shadow: 0 0 14px #fff, 0 0 28px #38bdf8, 0 0 45px #c084fc, 0 0 60px rgba(56, 189, 248, 0.8); }
+}
+
+@keyframes auraRotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes tailShimmer {
+  0% { opacity: 0.7; height: 42px; width: 3px; }
+  100% { opacity: 1; height: 54px; width: 4px; }
+}
+
+@keyframes sparkleTwinkle {
+  0% { opacity: 0; transform: translateY(0) scale(0.4); }
+  40% { opacity: 1; transform: translateY(-8px) scale(1.2); }
+  80% { opacity: 0.6; transform: translateY(-16px) scale(0.8); }
+  100% { opacity: 0; transform: translateY(-24px) scale(0.2); }
 }
 
 .tl-item {
@@ -2154,7 +2246,8 @@ main {
   .tl-item::before { left: 8px; width: 14px; height: 14px; }
   .timeline-track { left: 14px; }
   .timeline-progress { left: 14px; }
-  .timeline-progress-dot { left: 15px; }
+  .timeline-progress-dot,
+  .timeline-comet { left: 15px; }
   .tl-card { padding: 16px; }
   .tl-head h3 { font-size: 0.98rem; }
 
