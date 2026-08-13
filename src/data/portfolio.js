@@ -52,27 +52,27 @@ export const aboutHighlights = [
 ];
 
 export const experience = [
-  {
-    role: 'Backend Engineer',
-    company: 'Medkart',
-    where: 'Ahmedabad, India',
-    when: 'Feb 2026 – Present',
-    bullets: [
-      'Designed and developed backend services in Go for loyalty, rewards, invoicing, and transaction workflows.',
-      'Optimized API execution paths and database interactions, improving response times across critical services.',
-      'Built reusable service components, middleware, and utility packages, accelerating feature development.',
-      'Containerized backend applications with Docker and streamlined local development and deployment workflows.',
-      'Integrated PostgreSQL with backend services while ensuring data consistency through transactional validation.',
-      'Collaborated with frontend, QA, and product teams to deliver production-ready features with end-to-end ownership.'
-    ],
-    stack: [
-      'Golang',
-      'PostgreSQL',
-      'Docker',
-      'REST APIs',
-      'Git'
-    ]
-  },
+  // {
+  //   role: 'Backend Engineer',
+  //   company: 'Medkart',
+  //   where: 'Ahmedabad, India',
+  //   when: 'Feb 2026 – Present',
+  //   bullets: [
+  //     'Designed and developed backend services in Go for loyalty, rewards, invoicing, and transaction workflows.',
+  //     'Optimized API execution paths and database interactions, improving response times across critical services.',
+  //     'Built reusable service components, middleware, and utility packages, accelerating feature development.',
+  //     'Containerized backend applications with Docker and streamlined local development and deployment workflows.',
+  //     'Integrated PostgreSQL with backend services while ensuring data consistency through transactional validation.',
+  //     'Collaborated with frontend, QA, and product teams to deliver production-ready features with end-to-end ownership.'
+  //   ],
+  //   stack: [
+  //     'Golang',
+  //     'PostgreSQL',
+  //     'Docker',
+  //     'REST APIs',
+  //     'Git'
+  //   ]
+  // },
   {
     role: 'Senior Software Development Engineer in Test',
     company: 'Medkart',
