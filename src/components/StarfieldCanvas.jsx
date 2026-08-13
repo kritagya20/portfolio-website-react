@@ -157,15 +157,15 @@ export default function StarfieldCanvas() {
     let windowHalfY = window.innerHeight / 2;
 
     const handleMouseMove = (event) => {
-      targetMouseX = (event.clientX - windowHalfX) * 0.00025;
-      targetMouseY = (event.clientY - windowHalfY) * 0.00025;
+      targetMouseX = (event.clientX - windowHalfX) * 0.00004;
+      targetMouseY = (event.clientY - windowHalfY) * 0.00004;
       isMouseActive = true;
 
       if (inactivityTimer) clearTimeout(inactivityTimer);
 
       inactivityTimer = setTimeout(() => {
         isMouseActive = false;
-      }, 900);
+      }, 1200);
     };
 
     const handleResize = () => {
@@ -221,11 +221,11 @@ export default function StarfieldCanvas() {
 
         const activeFactor = isMouseActive ? 1.0 : 0.0;
 
-        currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.06;
-        currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.06;
+        currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.018;
+        currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.018;
 
-        starMesh.rotation.y += 0.00005 + currentInfluenceX;
-        starMesh.rotation.x += 0.000025 + currentInfluenceY;
+        starMesh.rotation.y += 0.00012 + currentInfluenceX;
+        starMesh.rotation.x += 0.00006 + currentInfluenceY;
 
         renderer.render(scene, camera);
       }
