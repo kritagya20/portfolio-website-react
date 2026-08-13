@@ -1744,13 +1744,26 @@ main {
 .game-tile-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .game-tile-row {
   display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  min-width: 0; width: 100%;
 }
-.game-tile-row h3 { margin: 0; font-size: 1.05rem; }
+.game-tile-row h3 {
+  margin: 0;
+  font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1 1 auto;
+}
 .game-tag {
-  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: clamp(0.58rem, 1.8vw, 0.68rem); text-transform: uppercase; letter-spacing: 0.05em;
   font-weight: 700; padding: 3px 8px; border-radius: 999px;
   background: color-mix(in srgb, var(--g-color, var(--primary)) 18%, transparent);
   color: var(--g-color, var(--primary));
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
 }
 .game-tile p { margin: 0; color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; }
 .game-tile-foot {
@@ -1791,8 +1804,9 @@ main {
   display: flex; justify-content: space-between; align-items: center;
   padding: 16px 20px; border-bottom: 1px solid var(--border);
 }
-.game-modal-head > div:first-child { display: flex; align-items: center; gap: 12px; }
-.game-modal-head h3 { margin: 0; font-size: 1.1rem; }
+.game-modal-head > div:first-child { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+.game-modal-head > div:first-child > div { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: nowrap; }
+.game-modal-head h3 { margin: 0; font-size: clamp(0.92rem, 3vw, 1.1rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .game-close {
   width: 36px; height: 36px; border-radius: 50%;
   background: var(--surface); border: 1px solid var(--border);
@@ -2166,10 +2180,11 @@ main {
 
 /* ========== PLAYGROUND RESPONSIVE OVERRIDES ========== */
 @media (max-width: 640px) {
-  .game-tile { padding: 16px; gap: 12px; }
-  .game-tile-icon { width: 46px; height: 46px; font-size: 1.4rem; border-radius: 12px; }
-  .game-tile-row h3 { font-size: 0.98rem; }
-  .game-tile p { font-size: 0.82rem; }
+  .game-tile { padding: 14px; gap: 10px; }
+  .game-tile-icon { width: 42px; height: 42px; font-size: 1.3rem; border-radius: 12px; }
+  .game-tile-row h3 { font-size: clamp(0.8rem, 3.2vw, 0.95rem); white-space: nowrap; }
+  .game-tag { font-size: clamp(0.55rem, 2.2vw, 0.64rem); padding: 2px 6px; white-space: nowrap; flex-shrink: 0; }
+  .game-tile p { font-size: 0.8rem; }
 
   .game-overlay { padding: 8px; align-items: flex-start; }
   .game-modal { max-height: calc(100vh - 16px); border-radius: 18px; }

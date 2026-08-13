@@ -12,44 +12,44 @@ const BEST_KEY = 'kritagya-portfolio-game-best-v1';
 export const GAMES = [
   {
     id: 'circle',
-    name: 'Perfect Circle',
-    tag: 'Reflex',
+    name: 'Perfect Orbit',
+    tag: 'Orbit',
     icon: '◯',
     color: '#7c5cff',
-    desc: 'Draw a circle in one go. Score is how round it actually was.',
+    desc: 'Draw a smooth planetary orbit in one continuous sweep. Score is orbit roundness.',
     Component: PerfectCircle,
     bestLabel: (v) => `Best: ${v}%`,
     bestIsHigher: true,
   },
   {
     id: 'typing',
-    name: 'Code Typing',
-    tag: 'Skill',
+    name: 'Typing',
+    tag: 'Flight Code',
     icon: '⌨',
     color: '#22d3ee',
-    desc: 'Type a real code snippet. We measure WPM and accuracy.',
+    desc: 'Type real space-flight and dev code snippets. Measures WPM and accuracy.',
     Component: TypingTest,
     bestLabel: (v) => `Best: ${v} WPM`,
     bestIsHigher: true,
   },
   {
     id: 'sequence',
-    name: 'Memory Sequence',
-    tag: 'Memory',
+    name: 'Starlight Sequence',
+    tag: 'Signals',
     icon: '🎵',
     color: '#22c55e',
-    desc: 'Watch the lights, repeat the pattern. Each round adds one step.',
+    desc: 'Watch the constellation beacons, repeat the signal pattern. Each round adds one step.',
     Component: MemorySequence,
     bestLabel: (v) => `Round ${v}`,
     bestIsHigher: true,
   },
   {
     id: 'bug',
-    name: 'Bug Hunter',
-    tag: 'Logic',
+    name: 'Asteroid Bug Hunter',
+    tag: 'Telemetry',
     icon: '🐛',
     color: '#f59e0b',
-    desc: 'Spot the buggy line in real code. 5 puzzles, no hints.',
+    desc: 'Spot the buggy line in real space-probe code. 5 telemetry puzzles, no hints.',
     Component: BugHunter,
     bestLabel: (v) => `Best: ${v}/5`,
     bestIsHigher: true,
@@ -60,18 +60,18 @@ export const GAMES = [
     tag: 'Memory',
     icon: '🧠',
     color: '#ec4899',
-    desc: 'Flip cards to match tech-stack pairs. Fewer moves = better.',
+    desc: 'Flip cosmic cards to match tech-stack pairs. Fewer moves = better rank.',
     Component: MemoryMatch,
     bestLabel: (v) => `Best: ${v} moves`,
     bestIsHigher: false,
   },
   {
     id: 'hangman',
-    name: 'Tech Hangman',
-    tag: 'Word',
+    name: 'Cosmic Hangman',
+    tag: 'Deep Space',
     icon: '🎯',
     color: '#fb7185',
-    desc: 'Guess the tech word before the doodle finishes.',
+    desc: 'Decrypt the tech keyword before the cosmic doodle completes.',
     Component: Hangman,
     bestLabel: (v) => `Win streak: ${v}`,
     bestIsHigher: true,
@@ -126,14 +126,14 @@ export default function Playground({ onToast }) {
     <section id="playground" className="section">
       <div className="container">
         <span className="eyebrow">
-          <span className="dot" /> Have a minute?
+          <span className="dot" /> Cosmic Holodeck
         </span>
         <h2 className="section-title">
-          Mini <span className="accent">Playground</span>
+          Space <span className="accent">Arcade</span>
         </h2>
         <p className="section-sub">
-          Six small dev-flavored games — built in React, no backend, your best scores stay
-          on this device.
+          Six space-flavored dev mini-games — test your orbits, signals, telemetry, and speed.
+          High scores persist on this device.
         </p>
 
         <div className="game-grid">

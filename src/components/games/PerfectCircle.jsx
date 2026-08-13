@@ -114,8 +114,8 @@ export default function PerfectCircle({ best, onBest }) {
   return (
     <div className="game pc">
       <p className="game-intro">
-        Hold and drag (or touch) inside the box to draw a circle in <b>one stroke</b>.
-        Release to score.
+        Hold and drag (or touch) inside the cosmic grid to draw a planetary orbit in <b>one stroke</b>.
+        Release to measure orbital precision.
       </p>
 
       <div className="pc-stage">
@@ -143,14 +143,14 @@ export default function PerfectCircle({ best, onBest }) {
               <div className="pc-num">{result}%</div>
               <div className="pc-cap">
                 {result > 95
-                  ? 'Mathematical.'
+                  ? 'Perfect planetary orbit!'
                   : result > 85
-                  ? 'Outstanding!'
+                  ? 'Stable trajectory!'
                   : result > 70
-                  ? 'Pretty round!'
+                  ? 'Decent orbital path.'
                   : result > 40
-                  ? 'Keep practicing.'
-                  : 'That… was not a circle.'}
+                  ? 'Unstable orbit — practice entry.'
+                  : 'Off-course trajectory!'}
               </div>
             </motion.div>
           )}

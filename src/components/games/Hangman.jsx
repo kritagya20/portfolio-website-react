@@ -104,11 +104,11 @@ export default function Hangman({ best, onBest, onToast }) {
         onBest?.(next);
         return next;
       });
-      onToast?.(`🎉 You saved them!`);
+      onToast?.(`🎉 Signal decrypted!`);
     } else if (lost && !ended) {
       setEnded(true);
       setStreak(0);
-      onToast?.(`💀 The word was ${word}`);
+      onToast?.(`📡 Signal lost! The word was ${word}`);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [won, lost]);

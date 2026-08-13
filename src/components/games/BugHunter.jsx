@@ -121,7 +121,7 @@ export default function BugHunter({ best, onBest }) {
               <b style={{ color: 'var(--primary-2)' }}>{score}</b>
             </div>
           </div>
-          <p className="game-intro">Click the line that contains the bug.</p>
+          <p className="game-intro">Click the line that contains the space probe system bug.</p>
 
           <pre className="bug-code">
             {puzzle.code.map((line, i) => (
@@ -148,7 +148,7 @@ export default function BugHunter({ best, onBest }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
               >
-                {correct ? '✅ Nailed it.' : '❌ Not quite.'} {puzzle.explain}
+                {correct ? '✅ Anomaly identified.' : '❌ Incorrect target.'} {puzzle.explain}
               </motion.div>
             )}
           </AnimatePresence>
@@ -171,10 +171,10 @@ export default function BugHunter({ best, onBest }) {
           </div>
           <p>
             {score === PUZZLES.length
-              ? '🐞 Master bug hunter.'
+              ? '🛸 Master space telemetry engineer.'
               : score >= 3
-              ? '👀 Pretty sharp eye.'
-              : 'Nice attempt — try again!'}
+              ? '👀 Sharp telemetry eye.'
+              : 'Anomaly detected — try again!'}
           </p>
           <div className="game-actions">
             <button className="btn btn-primary" onClick={reset}>
