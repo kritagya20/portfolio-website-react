@@ -24,24 +24,22 @@ export default function Footer() {
     <footer className="footer space-footer">
       <div className="container footer-inner">
         <motion.div
-          className="space-footer-greeting"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          className="space-footer-card greeting-card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="space-footer-text">
-            <span className="greeting-part1">
-              <span className="space-footer-sparkle">🚀</span> <strong>Happy to see you here</strong> —
-            </span>{' '}
-            <span className="greeting-part2">have a great day ahead! 👋</span>
-          </div>
+          <span className="space-footer-sparkle" aria-hidden="true">🚀</span>
+          <span className="single-line-greeting">
+            <strong>Happy to see you here</strong> — have a great day ahead! 👋
+          </span>
         </motion.div>
 
         <motion.div
-          className="space-visitor-badge"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          className="space-footer-card visitor-card"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
           title="Local orbital visit counter"
