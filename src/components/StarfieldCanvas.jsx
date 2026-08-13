@@ -176,47 +176,59 @@ export default function StarfieldCanvas() {
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
 
+    let isTabVisible = !document.hidden;
+
+    const handleVisibilityChange = () => {
+      isTabVisible = !document.hidden;
+      if (isTabVisible) {
+        lastMeteorSpawn = Date.now();
+      }
+    };
+
+    window.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('resize', handleResize);
 
     let animationFrameId;
 
     const animate = () => {
-      const now = Date.now();
+      if (isTabVisible) {
+        const now = Date.now();
 
-      // Dynamic spawn timer (5 - 10 seconds)
-      if (now - lastMeteorSpawn > nextMeteorInterval) {
-        spawnMeteorWave();
-        lastMeteorSpawn = now;
-        nextMeteorInterval = Math.random() * 5000 + 5000; // Reset next interval (5 to 10s)
-      }
-
-      // Update active meteors
-      for (let i = meteors.length - 1; i >= 0; i--) {
-        const m = meteors[i];
-        m.mesh.position.x += m.vx;
-        m.mesh.position.y += m.vy;
-        m.mesh.position.z += m.vz;
-        m.life -= m.fadeSpeed;
-        m.mesh.material.opacity = m.life;
-
-        if (m.life <= 0) {
-          scene.remove(m.mesh);
-          m.mesh.geometry.dispose();
-          m.mesh.material.dispose();
-          meteors.splice(i, 1);
+        // Dynamic spawn timer (5 - 10 seconds)
+        if (now - lastMeteorSpawn > nextMeteorInterval) {
+          spawnMeteorWave();
+          lastMeteorSpawn = now;
+          nextMeteorInterval = Math.random() * 5000 + 5000;
         }
+
+        // Update active meteors
+        for (let i = meteors.length - 1; i >= 0; i--) {
+          const m = meteors[i];
+          m.mesh.position.x += m.vx;
+          m.mesh.position.y += m.vy;
+          m.mesh.position.z += m.vz;
+          m.life -= m.fadeSpeed;
+          m.mesh.material.opacity = m.life;
+
+          if (m.life <= 0) {
+            scene.remove(m.mesh);
+            m.mesh.geometry.dispose();
+            m.mesh.material.dispose();
+            meteors.splice(i, 1);
+          }
+        }
+
+        const activeFactor = isMouseActive ? 1.0 : 0.0;
+
+        currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.06;
+        currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.06;
+
+        starMesh.rotation.y += 0.00005 + currentInfluenceX;
+        starMesh.rotation.x += 0.000025 + currentInfluenceY;
+
+        renderer.render(scene, camera);
       }
-
-      const activeFactor = isMouseActive ? 1.0 : 0.0;
-
-      currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.06;
-      currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.06;
-
-      starMesh.rotation.y += 0.00005 + currentInfluenceX;
-      starMesh.rotation.x += 0.000025 + currentInfluenceY;
-
-      renderer.render(scene, camera);
       animationFrameId = requestAnimationFrame(animate);
     };
 
@@ -225,6 +237,7 @@ export default function StarfieldCanvas() {
     return () => {
       if (inactivityTimer) clearTimeout(inactivityTimer);
       cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
       meteors.forEach((m) => {

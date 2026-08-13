@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import PerfectCircle from './PerfectCircle.jsx';
-import TypingTest from './TypingTest.jsx';
-import MemorySequence from './MemorySequence.jsx';
-import BugHunter from './BugHunter.jsx';
-import MemoryMatch from './MemoryMatch.jsx';
-import Hangman from './Hangman.jsx';
+
+const PerfectCircle = lazy(() => import('./PerfectCircle.jsx'));
+const TypingTest = lazy(() => import('./TypingTest.jsx'));
+const MemorySequence = lazy(() => import('./MemorySequence.jsx'));
+const BugHunter = lazy(() => import('./BugHunter.jsx'));
+const MemoryMatch = lazy(() => import('./MemoryMatch.jsx'));
+const Hangman = lazy(() => import('./Hangman.jsx'));
 
 const BEST_KEY = 'kritagya-portfolio-game-best-v1';
 
-export const GAMES = [
+exporscm-history-item:/Users/kritagyasinghchouhan/Desktop/projects/Portfolio-main?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%228fce315dfa763644a3ca8979d434f9b0314e816f%22%2C%22historyItemParentId%22%3A%2281e6365f2499193b252bf89bcbb30ce47a0b8483%22%2C%22historyItemDisplayId%22%3A%228fce315%22%7Dt const GAMES = [
   {
     id: 'circle',
     name: 'Perfect Orbit',
@@ -211,11 +212,19 @@ export default function Playground({ onToast }) {
               </header>
 
               <div className="game-modal-body">
-                <active.Component
-                  best={bests[active.id]}
-                  onBest={(v) => recordBest(active.id, v)}
-                  onToast={onToast}
-                />
+                <Suspense
+                  fallback={
+                    <div style={{ padding: '40px 0', textAlign: 'center', color: 'var(--primary-2)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem' }}>
+                      // INITIALIZING HOLODECK MODULE…
+                    </div>
+                  }
+                >
+                  <active.Component
+                    best={bests[active.id]}
+                    onBest={(v) => recordBest(active.id, v)}
+                    onToast={onToast}
+                  />
+                </Suspense>
               </div>
             </motion.div>
           </motion.div>

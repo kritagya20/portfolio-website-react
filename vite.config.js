@@ -6,6 +6,17 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
+    cssCodeSplit: true,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-motion': ['framer-motion'],
+          'vendor-three': ['three'],
+        },
+      },
+    },
   },
   server: {
     port: 5173,
