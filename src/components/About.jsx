@@ -12,13 +12,13 @@ export default function About() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <span className="eyebrow">
-            <span className="dot" /> Flight Dossier
+            <span className="dot" /> About Me
           </span>
           <h2 className="section-title">
-            Engineer <span className="accent">Dossier</span> &amp; Directives
+            Engineering <span className="accent">Background</span> &amp; Strengths
           </h2>
           <p className="section-sub">
-            Mission log, core specialization modules, and production flight philosophy.
+            A summary of my professional journey, technical specializations, and engineering principles.
           </p>
         </motion.div>
 
@@ -48,7 +48,7 @@ export default function About() {
               </p>
 
               <p>
-                Currently at <strong>Medkart</strong>, I build backend services engineered primarily in <span className="dossier-tech-highlight">Go (Golang)</span>. Grounded in my foundation across <span className="dossier-tech-highlight">Java</span>, <span className="dossier-tech-highlight">Selenium</span>, and <span className="dossier-tech-highlight">REST Assured</span>, I design automation frameworks that validate system telemetry under stress and ensure confident releases.
+                Currently at <strong>Medkart</strong>, I build backend services engineered primarily in <span className="dossier-tech-highlight">Go (Golang)</span>. Grounded in my foundation across <span className="dossier-tech-highlight">Java</span>, <span className="dossier-tech-highlight">Selenium</span>, and <span className="dossier-tech-highlight">REST Assured</span>, I design automation frameworks that validate backend reliability under stress and ensure confident releases.
               </p>
 
               <p>
@@ -56,7 +56,7 @@ export default function About() {
               </p>
 
               <div className="dossier-quote">
-                “Great software isn’t just shipped fast—it is built to withstand orbital stress under scale.”
+                “Great software isn’t just shipped fast—it is engineered to perform reliably under high scale.”
               </div>
             </div>
           </motion.div>
