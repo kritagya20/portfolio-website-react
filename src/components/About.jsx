@@ -12,69 +12,75 @@ export default function About() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <span className="eyebrow">
-            <span className="dot" /> About me
+            <span className="dot" /> Flight Dossier
           </span>
           <h2 className="section-title">
-            Allow me to <span className="accent">introduce</span> myself
+            Engineer <span className="accent">Dossier</span> &amp; Directives
           </h2>
           <p className="section-sub">
-            A short story of where I’ve been and the kind of work I love shipping.
+            Mission log, core specialization modules, and production flight philosophy.
           </p>
         </motion.div>
 
         <div className="about-grid">
           <motion.div
+            className="dossier-card"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <p>
-              I’m <strong> Kritagya Singh Chouhan</strong>, a Software Engineer passionate about building
-              scalable, reliable, and production-ready systems. What excites me most about engineering
-              is solving real-world problems through software—whether that means designing backend
-              services, optimizing APIs, working with databases, or containerizing applications with
-              <strong> Docker</strong>. I enjoy understanding how every piece of a system fits together
-              and contributes to delivering a great user experience.
-            </p>
+            <div className="dossier-header">
+              <div className="dossier-title-box">
+                <div className="dossier-avatar" aria-hidden="true">KC</div>
+                <div>
+                  <h3 className="dossier-name">Kritagya Singh Chouhan</h3>
+                  <span style={{ color: 'var(--primary-2)', fontSize: '0.88rem', fontWeight: 600 }}>
+                    Software Engineer
+                  </span>
+                </div>
+              </div>
+            </div>
 
-            <p>
-              Currently at <strong>Medkart</strong>, I build high-performance backend systems primarily
-              using <strong>Go (Golang)</strong>. My experience extends beyond development alone; I believe
-              great software is not defined by how quickly it ships, but by how reliably it performs once
-              users start depending on it. To support that philosophy, I leverage my background in
-              <strong> Java</strong>, <strong>Selenium</strong>, and <strong>Rest-Assured</strong> to build
-              robust API and UI automation frameworks that continuously validate product quality and
-              accelerate confident releases.
-            </p>
+            <div className="dossier-body">
+              <p>
+                I’m a Software Engineer focused on architecting scalable, high-throughput, and production-ready systems. My mission centers on solving complex engineering challenges—designing robust backend microservices, optimizing low-latency APIs, tuning database interactions, and containerizing runtimes with <span className="dossier-tech-highlight">Docker</span>.
+              </p>
 
-            <p>
-              I enjoy taking ownership of problems end-to-end—from system design and implementation
-              to automation, troubleshooting, and performance optimization. My experience across both
-              development and quality engineering allows me to approach software from multiple
-              perspectives: how it should be built, how it should behave under stress, and how it can
-              continue scaling as requirements evolve. Outside of tech, I’m a football and cricket
-              enthusiast who enjoys turning complex problems into clean, dependable software solutions.
-            </p>
+              <p>
+                Currently at <strong>Medkart</strong>, I build backend services engineered primarily in <span className="dossier-tech-highlight">Go (Golang)</span>. Grounded in my foundation across <span className="dossier-tech-highlight">Java</span>, <span className="dossier-tech-highlight">Selenium</span>, and <span className="dossier-tech-highlight">REST Assured</span>, I design automation frameworks that validate system telemetry under stress and ensure confident releases.
+              </p>
+
+              <p>
+                I take end-to-end ownership—from system architecture and API design to automated test pipelines and performance optimization. Beyond code, I’m a football and cricket enthusiast who loves building dependable software solutions.
+              </p>
+
+              <div className="dossier-quote">
+                “Great software isn’t just shipped fast—it is built to withstand orbital stress under scale.”
+              </div>
+            </div>
           </motion.div>
 
           <div className="about-list">
             {aboutHighlights.map((h, i) => (
               <motion.div
                 key={h.title}
-                className="about-item"
+                className="subsystem-card"
                 initial={{ x: 40, opacity: 0, scale: 0.95 }}
                 whileInView={{ x: 0, opacity: 1, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5, delay: i * 0.08, ease: [0.175, 0.885, 0.32, 1.275] }}
               >
-                <div className="ico" aria-hidden>
-                  {h.icon}
+                <div className="subsystem-head">
+                  <div className="subsystem-title-wrap">
+                    <div className="subsystem-ico" aria-hidden="true">
+                      {h.icon}
+                    </div>
+                    <h4>{h.title}</h4>
+                  </div>
+                  <span className="subsystem-tag">MODULE 0{i + 1}</span>
                 </div>
-                <div>
-                  <h4>{h.title}</h4>
-                  <p>{h.text}</p>
-                </div>
+                <p>{h.text}</p>
               </motion.div>
             ))}
           </div>

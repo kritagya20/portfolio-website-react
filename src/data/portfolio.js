@@ -56,7 +56,7 @@ export const experience = [
     role: 'Backend Engineer',
     company: 'Medkart',
     where: 'Ahmedabad, India',
-    when: 'Apr 2026 – Present',
+    when: 'Feb 2026 – Present',
     bullets: [
       'Designed and developed backend services in Go for loyalty, rewards, invoicing, and transaction workflows.',
       'Optimized API execution paths and database interactions, improving response times across critical services.',
@@ -77,7 +77,7 @@ export const experience = [
     role: 'Senior Software Development Engineer in Test',
     company: 'Medkart',
     where: 'Ahmedabad, India',
-    when: 'Feb 2026 – Apr 2026',
+    when: 'Feb 2026 – Present',
     bullets: [
       'Architected and maintained a scalable automation framework supporting Web, Mobile, API, Database, and Batch Job validation.',
       'Built reusable framework modules for session management, reporting, data handling, and test utilities, reducing test development effort.',

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { profile } from '../data/portfolio.js';
+import { motion } from 'framer-motion';
 
 const VISITOR_KEY = 'kritagya-portfolio-visits';
 
@@ -21,20 +21,40 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="footer">
+    <footer className="footer space-footer">
       <div className="container footer-inner">
-        <div>
-          <span style={{ color: 'var(--text)', fontWeight: 600 }}>
-            Happy to see you here
-          </span>{' '}
-          — have a great day ahead 👋
-        </div>
-
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-          <span className="visitor-pill" title="Local visit counter">
-            👀 You’re  <b style={{ color: 'var(--text)', fontWeight: 600 }}>#{visits}</b>th visiter to my site :)
+        <motion.div
+          className="space-footer-greeting"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="space-footer-sparkle">🚀</span>
+          <span className="space-footer-text">
+            <strong>Happy to see you here</strong> — have a great day ahead! 👋
           </span>
-        </div>
+        </motion.div>
+
+        <motion.div
+          className="space-visitor-badge"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          title="Local orbital visit counter"
+        >
+          <div className="radar-pulse-box">
+            <span className="radar-dot" />
+            <span className="radar-ring" />
+          </div>
+          <div className="visitor-info">
+            <span className="visitor-meta">// ORBIT VISITOR TELEMETRY</span>
+            <span className="visitor-text">
+              YOU ARE VISITOR <b className="visitor-num">#{visits}</b> ON THIS SITE
+            </span>
+          </div>
+        </motion.div>
       </div>
     </footer>
   );

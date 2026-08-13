@@ -44,17 +44,20 @@ function TimelineItem({ item, index, total, scaleY }) {
       <div className="tl-card">
         <div className="tl-head">
           <h3>
-            {item.role} · <span style={{ color: 'var(--primary)' }}>{item.company}</span>
+            <span className="tl-role">{item.role}</span> · <span className="tl-company">{item.company}</span>
           </h3>
           <span className="when">{item.when}</span>
         </div>
         <div className="where">{item.where}</div>
-        <ul>
+        <ul className="tl-bullets">
           {item.bullets.map((b, idx) => (
-            <li key={idx}>{b}</li>
+            <li key={idx}>
+              <span className="tl-bullet-icon">›</span>
+              <span>{b}</span>
+            </li>
           ))}
         </ul>
-        <div className="tech-row" style={{ marginTop: 12 }}>
+        <div className="tech-row" style={{ marginTop: 14 }}>
           {item.stack.map((s) => (
             <span key={s} className="tech">
               {s}
@@ -105,13 +108,13 @@ export default function Experience() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <span className="eyebrow">
-            <span className="dot" /> Career
+            <span className="dot" /> Spaceflight Trajectory
           </span>
           <h2 className="section-title">
-            Work <span className="accent">Experience</span>
+            Career <span className="accent">Trajectory</span>
           </h2>
           <p className="section-sub">
-            From automating quality to engineering scalable backend systems—bringing reliability to every line of code.
+            From automating quality engineering to architecting high-throughput Go backend services.
           </p>
         </motion.div>
 

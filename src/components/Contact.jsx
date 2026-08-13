@@ -11,13 +11,13 @@ export default function Contact({ onToast }) {
   const submit = (e) => {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !msg.trim()) {
-      onToast?.('Please fill in name, email, and a short message.');
+      onToast?.('Please fill in your name, email, and transmission message.');
       return;
     }
-    const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+    const subject = encodeURIComponent(`Portfolio transmission from ${name}`);
     const body = encodeURIComponent(`${msg}\n\n— ${name} (${email})`);
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    onToast?.('Opening your mail client…');
+    onToast?.('Opening mail client to transmit signal…');
   };
 
   return (
@@ -30,19 +30,19 @@ export default function Contact({ onToast }) {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <span className="eyebrow">
-            <span className="dot" /> Get in touch
+            <span className="dot" /> Get In Touch
           </span>
           <h2 className="section-title">
-            Let’s build <span className="accent">something</span>
+            Establish <span className="accent">Connection</span>
           </h2>
           <p className="section-sub">
-            Have a role, a project, or just want to say hi? My inbox is always open.
+            Have a role, a project, or just want to say hi? Send a message and I’ll get back to you.
           </p>
         </motion.div>
 
         <motion.div
           className="contact-grid"
-          initial={{ opacity: 0, scale: 0.94, filter: 'blur(6px)' }}
+          initial={{ opacity: 0, scale: 0.96, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.85, ease: 'easeOut' }}
@@ -54,41 +54,65 @@ export default function Contact({ onToast }) {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <a className="contact-row" href={`mailto:${profile.email}`}>
-              <span className="ico">
-                <MailSvg className="icon icon--mail" />
-              </span>
-              <div>
-                <strong>Email</strong>
-                <span>{profile.email}</span>
+            <a className="contact-channel" href={`mailto:${profile.email}`}>
+              <div className="channel-ico">
+                <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div className="channel-body">
+                <div className="channel-head">
+                  <strong className="channel-title">Email</strong>
+                  <span className="channel-badge">MAIL</span>
+                </div>
+                <span className="channel-val">{profile.email}</span>
               </div>
             </a>
 
-            <a className="contact-row" href={`tel:${profile.phone.replace(/\s+/g, '')}`}>
-              <span className="ico">☎</span>
-              <div>
-                <strong>Phone</strong>
-                <span>{profile.phone}</span>
+            <a className="contact-channel" href={`tel:${profile.phone.replace(/\s+/g, '')}`}>
+              <div className="channel-ico">
+                <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+              </div>
+              <div className="channel-body">
+                <div className="channel-head">
+                  <strong className="channel-title">Phone</strong>
+                  <span className="channel-badge">CALL</span>
+                </div>
+                <span className="channel-val">{profile.phone}</span>
               </div>
             </a>
 
             <a
-              className="contact-row"
+              className="contact-channel"
               href={profile.resumeUrl}
               target="_blank"
               rel="noreferrer"
             >
-              <span className="ico">📄</span>
-              <div>
-                <strong>Resume</strong>
-                <span>Download PDF</span>
+              <div className="channel-ico">
+                <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <div className="channel-body">
+                <div className="channel-head">
+                  <strong className="channel-title">Resume</strong>
+                  <span className="channel-badge">PDF</span>
+                </div>
+                <span className="channel-val">Download PDF</span>
               </div>
             </a>
           </motion.div>
 
           <motion.form
             onSubmit={submit}
-            className="card"
+            className="contact-terminal-card"
             initial={{ x: 25, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -96,23 +120,33 @@ export default function Contact({ onToast }) {
           >
             <div className="field">
               <label>Your name</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} type="text" />
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                placeholder="Your name..."
+              />
             </div>
             <div className="field">
               <label>Your email</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" />
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                placeholder="Your email address..."
+              />
             </div>
             <div className="field">
               <label>Message</label>
               <textarea
-                rows={5}
+                rows={4}
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
                 placeholder="Tell me a little about your project or role…"
               />
             </div>
             <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-              Send Message
+              Send Message →
             </button>
           </motion.form>
         </motion.div>
