@@ -10,7 +10,7 @@ const Hangman = lazy(() => import('./Hangman.jsx'));
 
 const BEST_KEY = 'kritagya-portfolio-game-best-v1';
 
-exporscm-history-item:/Users/kritagyasinghchouhan/Desktop/projects/Portfolio-main?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%228fce315dfa763644a3ca8979d434f9b0314e816f%22%2C%22historyItemParentId%22%3A%2281e6365f2499193b252bf89bcbb30ce47a0b8483%22%2C%22historyItemDisplayId%22%3A%228fce315%22%7Dt const GAMES = [
+export const GAMES = [
   {
     id: 'circle',
     name: 'Perfect Orbit',
