@@ -196,7 +196,7 @@ img {
 
 .section-title {
   font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.6rem);
+  font-size: clamp(1.48rem, 1.1rem + 1.8vw, 2.4rem);
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0 0 8px;
@@ -212,8 +212,9 @@ img {
 
 .section-sub {
   color: var(--text-muted);
-  margin: 0 0 48px;
-  font-size: 1rem;
+  margin: 0 0 clamp(24px, 4vw, 44px);
+  font-size: clamp(0.88rem, 0.8rem + 0.4vw, 1.05rem);
+  line-height: 1.6;
   max-width: 640px;
 }
 
@@ -778,8 +779,8 @@ main {
 
 .hero h1 {
   font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(2.2rem, 1.4rem + 3vw, 4rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 1.3rem + 3.2vw, 3.8rem);
+  line-height: 1.08;
   letter-spacing: -0.03em;
   margin: 12px 0 16px;
   font-weight: 800;
@@ -795,7 +796,7 @@ main {
 .hero p.lead {
   color: var(--text-muted);
   max-width: 560px;
-  font-size: 1.05rem;
+  font-size: clamp(0.92rem, 0.85rem + 0.45vw, 1.08rem);
   line-height: 1.65;
   margin: 0 0 28px;
 }
@@ -2312,7 +2313,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
+    gap: 12px;
     width: 100%;
   }
 
@@ -2320,6 +2321,41 @@ main {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .space-footer-card {
+    padding: 9px 14px;
+    border-radius: 12px;
+    min-height: unset;
+  }
+
+  .visitor-card {
+    gap: 8px;
+  }
+
+  .visitor-meta {
+    font-size: 0.58rem !important;
+    margin-bottom: 1px !important;
+  }
+
+  .visitor-text {
+    font-size: 0.72rem !important;
+  }
+
+  .visitor-num {
+    font-size: 0.84rem !important;
+  }
+
+  .radar-pulse-box {
+    width: 12px;
+    height: 12px;
+  }
+
+  .radar-dot {
+    width: 6px;
+    height: 6px;
   }
 }
 
