@@ -221,8 +221,8 @@ img {
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  gap: 12px;
+  padding: 6px 16px;
   border-radius: 999px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -236,11 +236,12 @@ img {
 }
 
 .eyebrow .dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--primary), var(--primary-2));
   box-shadow: 0 0 12px var(--primary);
+  flex-shrink: 0;
 }
 
 .btn {
@@ -1358,7 +1359,7 @@ main {
 
 .tl-item {
   position: relative;
-  padding-left: 56px;
+  padding-left: 68px;
   margin-bottom: 28px;
 }
 
@@ -2316,10 +2317,29 @@ main {
   color: var(--text-muted);
 }
 
-.space-footer-greeting strong {
+.space-footer-text {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 6px;
+}
+
+.greeting-part1 {
+  white-space: nowrap;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.greeting-part1 strong {
   color: var(--text);
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
+}
+
+.greeting-part2 {
+  white-space: nowrap;
 }
 
 .space-footer-sparkle {

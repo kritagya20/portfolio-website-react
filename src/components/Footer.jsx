@@ -30,10 +30,12 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="space-footer-sparkle">🚀</span>
-          <span className="space-footer-text">
-            <strong>Happy to see you here</strong> — have a great day ahead! 👋
-          </span>
+          <div className="space-footer-text">
+            <span className="greeting-part1">
+              <span className="space-footer-sparkle">🚀</span> <strong>Happy to see you here</strong> —
+            </span>{' '}
+            <span className="greeting-part2">have a great day ahead! 👋</span>
+          </div>
         </motion.div>
 
         <motion.div
