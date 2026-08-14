@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { profile } from '../data/portfolio.js';
+import { profile, contactData } from '../data/portfolio.js';
 import { MailSvg } from '../icon_jsx';
 
 export default function Contact({ onToast }) {
@@ -11,13 +11,13 @@ export default function Contact({ onToast }) {
   const submit = (e) => {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !msg.trim()) {
-      onToast?.('Please fill in your name, email, and transmission message.');
+      onToast?.(contactData.validationMessage);
       return;
     }
     const subject = encodeURIComponent(`Portfolio transmission from ${name}`);
     const body = encodeURIComponent(`${msg}\n\n— ${name} (${email})`);
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    onToast?.('Opening mail client to transmit signal…');
+    onToast?.(contactData.sendingMessage);
   };
 
   return (
@@ -30,13 +30,13 @@ export default function Contact({ onToast }) {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <span className="eyebrow">
-            <span className="dot" /> Get In Touch
+            <span className="dot" /> {contactData.eyebrow}
           </span>
           <h2 className="section-title">
-            Establish <span className="accent">Connection</span>
+            Establish <span className="accent">{contactData.titleAccent}</span>
           </h2>
           <p className="section-sub">
-            Have a role, a project, or just want to say hi? Send a message and I’ll get back to you.
+            {contactData.sub}
           </p>
         </motion.div>
 
@@ -119,34 +119,34 @@ export default function Contact({ onToast }) {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <div className="field">
-              <label>Your name</label>
+              <label>{contactData.formLabels.name}</label>
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
-                placeholder="Your name..."
+                placeholder={contactData.formLabels.namePlaceholder}
               />
             </div>
             <div className="field">
-              <label>Your email</label>
+              <label>{contactData.formLabels.email}</label>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
-                placeholder="Your email address..."
+                placeholder={contactData.formLabels.emailPlaceholder}
               />
             </div>
             <div className="field">
-              <label>Message</label>
+              <label>{contactData.formLabels.message}</label>
               <textarea
                 rows={4}
                 value={msg}
                 onChange={(e) => setMsg(e.target.value)}
-                placeholder="Tell me a little about your project or role…"
+                placeholder={contactData.formLabels.messagePlaceholder}
               />
             </div>
             <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-              Send Message →
+              {contactData.formLabels.buttonText}
             </button>
           </motion.form>
         </motion.div>
@@ -154,3 +154,4 @@ export default function Contact({ onToast }) {
     </section>
   );
 }
+

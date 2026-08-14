@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { footerData } from '../data/portfolio.js';
 
 const VISITOR_KEY = 'kritagya-portfolio-visits';
 
@@ -32,7 +33,7 @@ export default function Footer() {
         >
           <span className="space-footer-sparkle" aria-hidden="true">🚀</span>
           <span className="single-line-greeting">
-            <strong>Happy to see you here</strong> — have a great day ahead! 👋
+            <strong>{footerData.greeting}</strong> {footerData.greetingSub}
           </span>
         </motion.div>
 
@@ -49,7 +50,7 @@ export default function Footer() {
             <span className="radar-ring" />
           </div>
           <div className="visitor-info">
-            <span className="visitor-meta">// ORBIT VISITOR TELEMETRY</span>
+            <span className="visitor-meta">{footerData.visitorTelemetryLabel}</span>
             <span className="visitor-text">
               YOU ARE VISITOR <b className="visitor-num">#{visits}</b> ON THIS SITE
             </span>
@@ -59,3 +60,4 @@ export default function Footer() {
     </footer>
   );
 }
+

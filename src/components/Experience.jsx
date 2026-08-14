@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform, useMotionValue } from 'framer-motion';
-import { experience } from '../data/portfolio.js';
+import { experience, experienceHeader } from '../data/portfolio.js';
 
 function TimelineItem({ item, index, total, scaleY }) {
   const isLeft = index % 2 === 0;
@@ -108,13 +108,13 @@ export default function Experience() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <span className="eyebrow">
-            <span className="dot" /> Spaceflight Trajectory
+            <span className="dot" /> {experienceHeader.eyebrow}
           </span>
           <h2 className="section-title">
-            Career <span className="accent">Trajectory</span>
+            Career <span className="accent">{experienceHeader.titleAccent}</span>
           </h2>
           <p className="section-sub">
-            From automating quality engineering to architecting high-throughput Go backend services.
+            {experienceHeader.sub}
           </p>
         </motion.div>
 

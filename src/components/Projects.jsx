@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { projects, githubProfileUrl } from '../data/portfolio.js';
+import { projects, githubProfileUrl, projectsHeader } from '../data/portfolio.js';
 import { GithubSvg } from '../icon_jsx';
 
 export default function Projects() {
@@ -51,13 +51,13 @@ export default function Projects() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             <span className="eyebrow">
-              <span className="dot" /> Orbital Projects
+              <span className="dot" /> {projectsHeader.eyebrow}
             </span>
             <h2 className="section-title">
-              Recent <span className="accent">Projects</span>
+              Featured <span className="accent">{projectsHeader.titleAccent}</span>
             </h2>
             <p className="section-sub">
-              A showcase of applications I've built, tested, automated, and continuously improved.
+              {projectsHeader.sub}
             </p>
           </motion.div>
 

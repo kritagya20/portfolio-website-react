@@ -1,89 +1,146 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { aboutHighlights } from '../data/portfolio.js';
+import { aboutData } from '../data/portfolio.js';
 
 export default function About() {
+  const [hudTab, setHudTab] = useState('telemetry');
+
   return (
     <section id="about" className="section">
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 35 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
           <span className="eyebrow">
-            <span className="dot" /> About Me
+            <span className="dot" /> {aboutData.eyebrow}
           </span>
           <h2 className="section-title">
-            Engineering <span className="accent">Background</span> &amp; Strengths
+            Engineering <span className="accent">{aboutData.titleAccent}</span> &amp; Principles
           </h2>
-          <p className="section-sub">
-            A summary of my professional journey, technical specializations, and engineering principles.
-          </p>
+          <p className="section-sub">{aboutData.sub}</p>
         </motion.div>
 
-        <div className="about-grid">
+        {/* Main Content Layout: Terminal Window (Left) + Open-Air Story Flow (Right) */}
+        <div className="about-main-layout">
+          {/* Left Column: Authentic macOS Terminal Window */}
           <motion.div
-            className="dossier-card"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
+            className="mac-terminal-window"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
           >
-            <div className="dossier-header">
-              <div className="dossier-title-box">
-                <div className="dossier-avatar" aria-hidden="true">KC</div>
-                <div>
-                  <h3 className="dossier-name">Kritagya Singh Chouhan</h3>
-                  <span style={{ color: 'var(--primary-2)', fontSize: '0.88rem', fontWeight: 600 }}>
-                    Software Engineer
-                  </span>
-                </div>
+            {/* macOS Window Title Bar */}
+            <div className="mac-terminal-bar">
+              <div className="mac-controls">
+                <span className="mac-btn close" />
+                <span className="mac-btn minimize" />
+                <span className="mac-btn zoom" />
+              </div>
+              <div className="mac-tabs">
+                <button
+                  type="button"
+                  className={`mac-tab ${hudTab === 'telemetry' ? 'active' : ''}`}
+                  onClick={() => setHudTab('telemetry')}
+                >
+                  profile.json
+                </button>
+                <button
+                  type="button"
+                  className={`mac-tab ${hudTab === 'metrics' ? 'active' : ''}`}
+                  onClick={() => setHudTab('metrics')}
+                >
+                  architecture.sh
+                </button>
               </div>
             </div>
 
-            <div className="dossier-body">
-              <p>
-                I’m a Software Engineer focused on architecting scalable, high-throughput, and production-ready systems. My mission centers on solving complex engineering challenges—designing robust backend microservices, optimizing low-latency APIs, tuning database interactions, and containerizing runtimes with <span className="dossier-tech-highlight">Docker</span>.
-              </p>
-
-              <p>
-                Currently at <strong>Medkart</strong>, I build backend services engineered primarily in <span className="dossier-tech-highlight">Go (Golang)</span>. Grounded in my foundation across <span className="dossier-tech-highlight">Java</span>, <span className="dossier-tech-highlight">Selenium</span>, and <span className="dossier-tech-highlight">REST Assured</span>, I design automation frameworks that validate backend reliability under stress and ensure confident releases.
-              </p>
-
-              <p>
-                I take end-to-end ownership—from system architecture and API design to automated test pipelines and performance optimization. Beyond code, I’m a football and cricket enthusiast who loves building dependable software solutions.
-              </p>
-
-              <div className="dossier-quote">
-                “Great software isn’t just shipped fast—it is engineered to perform reliably under high scale.”
-              </div>
+            {/* Terminal Body */}
+            <div className="mac-terminal-body">
+              {hudTab === 'telemetry' ? (
+                <div className="hud-terminal">
+                  <div className="terminal-line">
+                    <span className="prompt">{aboutData.terminal.promptUser}</span> whoami
+                  </div>
+                  <div className="muted-text">→ Full Stack Software Engineer @ Medkart</div>
+                  <div className="terminal-line" style={{ marginTop: 14 }}>
+                    <span className="prompt">{aboutData.terminal.promptUser}</span> cat profile.json
+                  </div>
+                  <pre className="json-block">
+{`{
+  `}<span className="key">"name"</span>{`: `}<span className="str">"{aboutData.terminal.profileJson.name}"</span>{`,
+  `}<span className="key">"experience"</span>{`: `}<span className="str">"{aboutData.terminal.profileJson.experience}"</span>{`,
+  `}<span className="key">"primaryStack"</span>{`: [`}{aboutData.terminal.profileJson.primaryStack.map((s, i) => (
+                    <span key={s}><span className="str">"{s}"</span>{i < aboutData.terminal.profileJson.primaryStack.length - 1 ? ', ' : ''}</span>
+                  ))}{`],
+  `}<span className="key">"databases"</span>{`: [`}{aboutData.terminal.profileJson.databases.map((d, i) => (
+                    <span key={d}><span className="str">"{d}"</span>{i < aboutData.terminal.profileJson.databases.length - 1 ? ', ' : ''}</span>
+                  ))}{`],
+  `}<span className="key">"testing"</span>{`: [`}{aboutData.terminal.profileJson.testing.map((t, i) => (
+                    <span key={t}><span className="str">"{t}"</span>{i < aboutData.terminal.profileJson.testing.length - 1 ? ', ' : ''}</span>
+                  ))}{`],
+  `}<span className="key">"masters"</span>{`: `}<span className="str">"{aboutData.terminal.profileJson.masters}"</span>
+{`}`}
+                  </pre>
+                  <div className="terminal-line" style={{ marginTop: 14 }}>
+                    <span className="prompt">{aboutData.terminal.promptUser}</span> echo "Let’s build scalable systems." <span className="caret">&nbsp;</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="hud-terminal">
+                  <div className="terminal-line">
+                    <span className="prompt">{aboutData.terminal.promptUser}</span> ./architecture.sh
+                  </div>
+                  <div className="muted-text" style={{ marginTop: 4 }}>
+                    # CORE SYSTEM ARCHITECTURE &amp; TECHNICAL SPECIFICATIONS
+                  </div>
+                  <div className="env-block" style={{ marginTop: 10 }}>
+                    {aboutData.terminal.architectureSpecs.map((spec, i) => (
+                      <div key={spec.section} style={{ marginTop: i === 0 ? 0 : 6 }}>
+                        <div><span className="key">{spec.section}</span></div>
+                        <div style={{ paddingLeft: 10 }}><span className="str">{spec.details}</span></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="terminal-line" style={{ marginTop: 14 }}>
+                    <span className="prompt">{aboutData.terminal.promptUser}</span> <span className="caret">&nbsp;</span>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
 
-          <div className="about-list">
-            {aboutHighlights.map((h, i) => (
-              <motion.div
-                key={h.title}
-                className="subsystem-card"
-                initial={{ x: 40, opacity: 0, scale: 0.95 }}
-                whileInView={{ x: 0, opacity: 1, scale: 1 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.175, 0.885, 0.32, 1.275] }}
-              >
-                <div className="subsystem-head">
-                  <div className="subsystem-title-wrap">
-                    <div className="subsystem-ico" aria-hidden="true">
-                      {h.icon}
-                    </div>
-                    <h4>{h.title}</h4>
-                  </div>
-                  <span className="subsystem-tag">MODULE 0{i + 1}</span>
-                </div>
-                <p>{h.text}</p>
-              </motion.div>
+          {/* Right Column: Open-Air Typography Story Flow */}
+          <motion.div
+            className="about-story-col"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+          >
+            <p className="about-story-text lead-text">
+              {aboutData.story.lead}
+            </p>
+
+            {aboutData.story.paragraphs.map((pText, i) => (
+              <p key={i} className="about-story-text">
+                {pText}
+              </p>
             ))}
-          </div>
+
+            <div className="about-glow-quote">
+              <span className="quote-bar" />
+              <div>
+                <p className="quote-body">
+                  {aboutData.story.quote.body}
+                </p>
+                <span className="quote-author">{aboutData.story.quote.author}</span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

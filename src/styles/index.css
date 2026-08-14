@@ -763,166 +763,474 @@ main {
 
 
 
-/* ========== HERO ========== */
-.hero {
-  margin-top: 8rem;
-  padding: clamp(40px, 7vw, 80px) 0 clamp(30px, 5vw, 60px);
-  position: relative;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: clamp(28px, 4vw, 48px);
+/* ========== HERO: 100VH ELLIPTICAL 3D COSMIC SOLAR SYSTEM ========== */
+.hero-centered-theme {
+  height: 100vh;
+  min-height: 600px;
+  max-height: 100vh;
+  margin-top: 0;
+  padding: 0;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
-.hero h1 {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(2rem, 1.3rem + 3.2vw, 3.8rem);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  margin: 12px 0 16px;
+.hero-centered-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  height: 100%;
+  max-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  will-change: transform;
+}
+
+
+/* Typewriter Top Pill */
+.hero-typer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary-2) 12%, #030712);
+  border: 1px solid color-mix(in srgb, var(--primary-2) 30%, transparent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.75rem, 0.65rem + 0.3vw, 0.88rem);
+  color: var(--primary-2);
+  margin-bottom: 6px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5), 0 0 12px color-mix(in srgb, var(--primary-2) 15%, transparent);
+}
+
+.hero-typer-badge .typer-prompt {
+  color: var(--primary);
   font-weight: 800;
 }
 
-.hero h1 .grad {
-  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+.hero-typer-badge .caret {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  background: var(--primary-2);
+  margin-left: 2px;
+  animation: blink 1s steps(1) infinite;
+}
+
+/* Math-Based Grand Elliptical Solar System Stage (Dominant Core Centering) */
+.hero-solar-system {
+  position: relative;
+  width: clamp(680px, 86vw, 1020px);
+  height: clamp(360px, 52vh, 460px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  margin: auto 0;
+}
+
+/* Elliptical 3D Tilted Orbit Rings */
+.solar-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transform: rotateX(65deg) rotateZ(-12deg);
+}
+
+.solar-ring.ring-1 {
+  width: 62%;
+  height: 62%;
+  border: 1px dashed color-mix(in srgb, var(--primary) 45%, transparent);
+  box-shadow: inset 0 0 25px color-mix(in srgb, var(--primary) 15%, transparent);
+  animation: orbitRotate 24s linear infinite;
+}
+
+.solar-ring.ring-2 {
+  width: 76%;
+  height: 76%;
+  border: 1px solid color-mix(in srgb, var(--primary-2) 35%, transparent);
+  animation: orbitRotateReverse 36s linear infinite;
+}
+
+.solar-ring.ring-3 {
+  width: 90%;
+  height: 90%;
+  border: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
+  animation: orbitRotate 50s linear infinite;
+}
+
+.solar-ring.ring-4 {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed color-mix(in srgb, var(--primary) 22%, transparent);
+  animation: orbitRotateReverse 68s linear infinite;
+}
+
+
+.core-typer-sub {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.74rem, 0.68rem + 0.35vw, 0.92rem);
+  color: var(--primary-2);
+  margin-bottom: 6px;
+  font-weight: 600;
+  white-space: nowrap; /* STRICT SINGLE LINE GUARANTEE */
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.core-typer-sub .typer-prompt {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.core-typer-sub .caret {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  background: var(--primary-2);
+  margin-left: 1px;
+  animation: blink 1s steps(1) infinite;
+}
+
+/* High-Contrast Dark Cosmic Nucleus (Dominant Center Focal Point) */
+.solar-core {
+  position: relative;
+  width: clamp(320px, 42vw, 540px);
+  height: clamp(170px, 25vh, 250px);
+  border-radius: 28px;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.97), rgba(3, 7, 18, 0.99));
+  border: 1.5px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 32px;
+  text-align: center;
+  box-shadow: 
+    0 28px 70px rgba(0, 0, 0, 0.85),
+    0 0 45px color-mix(in srgb, var(--primary) 35%, transparent),
+    inset 0 0 30px color-mix(in srgb, var(--primary) 18%, transparent);
+  z-index: 10;
+  transform: translateZ(40px);
+  transition: all 0.3s ease;
+}
+
+.core-glow-aura {
+  position: absolute;
+  inset: -16px;
+  border-radius: 32px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 35%, transparent), transparent 75%);
+  animation: auraPulse 4s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.core-pulse-ring {
+  position: absolute;
+  inset: -28px;
+  border-radius: 38px;
+  border: 1px dashed color-mix(in srgb, var(--primary) 38%, transparent);
+  animation: pulseRing 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.96); opacity: 0.3; }
+  100% { transform: scale(1.06); opacity: 0.8; }
+}
+
+.solar-core .hero-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.75rem, 1.3rem + 1.5vw, 2.85rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  margin: 6px 0;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+  text-shadow: 0 0 25px color-mix(in srgb, var(--primary) 45%, transparent);
+}
+
+.solar-core .hero-title .grad {
+  background: linear-gradient(135deg, #38bdf8, #c084fc);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.hero p.lead {
-  color: var(--text-muted);
-  max-width: 560px;
-  font-size: clamp(0.92rem, 0.85rem + 0.45vw, 1.08rem);
-  line-height: 1.65;
-  margin: 0 0 28px;
+/* Embedded Action Buttons inside Central Core Card */
+.core-tab-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(3, 7, 18, 0.92);
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  margin-top: 8px;
+  width: fit-content;
 }
 
-.hero .cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 36px;
-}
-
-.typer {
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--primary-2);
-  font-size: clamp(0.78rem, 0.65rem + 0.8vw, 1rem);
+.core-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 24px;
+  border-radius: 999px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(0.78rem, 0.72rem + 0.3vw, 0.92rem);
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.25s ease;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  margin-bottom: 4px;
-  min-height: 1.5em;
+}
+
+
+.core-tab-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #ffffff;
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+.core-tab-btn:not(.active) {
+  color: var(--text-muted);
+  background: transparent;
+}
+
+.core-tab-btn:not(.active):hover {
+  color: #ffffff;
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+@keyframes auraPulse {
+  0% { opacity: 0.4; transform: scale(0.96); }
+  100% { opacity: 0.9; transform: scale(1.06); }
+}
+
+
+/* Orbiting Elliptical Satellite Nodes (Flicker-Free Buffer) */
+.sat-node {
+  position: absolute;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(3, 7, 18, 0.96));
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px color-mix(in srgb, var(--primary) 18%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(0.72rem, 0.65rem + 0.3vw, 0.85rem);
+  font-weight: 700;
+  color: var(--text);
   display: flex;
   align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  z-index: 12;
+  cursor: pointer;
+}
+
+/* Invisible Hit Buffer preventing mouse-enter/leave flicker loops */
+.sat-node::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 999px;
+  pointer-events: auto;
+}
+
+.sat-node:hover,
+.sat-node.sat-active {
+  border-color: var(--warp-color, var(--primary)) !important;
+  color: #ffffff !important;
+  transform: scale(1.05) translateZ(30px) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7), 0 0 25px var(--warp-color, var(--primary)) !important;
+  z-index: 20 !important;
+}
+
+.sat-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+  transition: transform 0.25s ease;
+}
+
+.sat-node:hover .sat-dot,
+.sat-node.sat-active .sat-dot {
+  transform: scale(1.3);
+}
+
+/* Orbit-Exclusive Gravitational Warp Experience (Card Kept Calm & Crisp) */
+.gravitational-warp-active .solar-ring {
+  border-color: color-mix(in srgb, var(--warp-color, var(--primary)) 45%, transparent) !important;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.solar-ring.ring-active {
+  border-color: var(--warp-color, var(--primary)) !important;
+  box-shadow: 0 0 28px color-mix(in srgb, var(--warp-color, var(--primary)) 60%, transparent), inset 0 0 16px color-mix(in srgb, var(--warp-color, var(--primary)) 30%, transparent) !important;
+  animation-duration: 10s !important;
+}
+
+
+
+/* Math-Tilted Elliptical Satellite Positions Across Grand Orbits (Guaranteed Core Clearance) */
+/* Ring 1 (Inner Top/Bottom Clearance) */
+.sat-r1-1 { top: 14%; left: 10%; animation: floatSat1 4s ease-in-out infinite alternate; }
+.sat-r1-2 { bottom: 14%; right: 10%; animation: floatSat2 4.5s ease-in-out infinite alternate 0.4s; }
+
+/* Ring 2 (Mid-Inner Outer Clearance) */
+.sat-r2-1 { top: 4%; right: 15%; animation: floatSat2 5s ease-in-out infinite alternate 0.8s; }
+.sat-r2-2 { bottom: 4%; left: 15%; animation: floatSat1 4.8s ease-in-out infinite alternate 1.2s; }
+
+/* Ring 3 (Mid-Outer Side Flanks - Outside Card Edge) */
+.sat-r3-1 { top: 46%; left: -45px; animation: floatSat1 5.5s ease-in-out infinite alternate 0.2s; }
+.sat-r3-2 { top: 46%; right: -45px; animation: floatSat2 5.2s ease-in-out infinite alternate 0.6s; }
+
+/* Ring 4 (Outer Apex Top/Bottom) */
+.sat-r4-1 { top: -8%; left: 36%; animation: floatSat2 6s ease-in-out infinite alternate 1s; }
+.sat-r4-2 { bottom: -8%; right: 36%; animation: floatSat1 5.8s ease-in-out infinite alternate 1.4s; }
+
+
+
+.hero-tab-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  color: #ffffff;
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+.hero-tab-btn:not(.active) {
+  color: var(--text-muted);
+  background: transparent;
+}
+
+.hero-tab-btn:not(.active):hover {
+  color: #ffffff;
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 @media (max-width: 520px) {
-  .typer {
-    font-size: clamp(0.72rem, 3.3vw, 0.86rem);
+  .hero-segmented-tab-dock {
+    padding: 3px;
+    gap: 2px;
+  }
+  .hero-tab-btn {
+    padding: 7px 15px;
+    font-size: 0.76rem;
   }
 }
-.typer .caret {
-  display: inline-block;
-  width: 8px;
-  background: var(--primary-2);
-  margin-left: 2px;
-  animation: blink 1s steps(1) infinite;
-}
-@keyframes blink {
-  50% { opacity: 0; }
+
+
+
+
+@media (max-width: 768px) {
+  .hero-centered-theme {
+    height: 100vh;
+    min-height: 560px;
+    max-height: 100vh;
+    margin-top: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-centered-stage {
+    height: 100%;
+    max-height: 100vh;
+    justify-content: center;
+  }
+
+
+  /* Utilize available Vh on Portrait / Small Screens */
+  .hero-solar-system {
+    width: clamp(290px, 94vw, 420px);
+    height: clamp(380px, 58vh, 520px);
+    margin: auto 0;
+  }
+
+  /* Lessen 3D tilt on mobile so orbits expand vertically into Vh */
+  .solar-ring {
+    transform: rotateX(42deg) rotateZ(-6deg);
+  }
+
+  /* Compact Central Core Card for Mobile */
+  .solar-core {
+    width: clamp(200px, 68vw, 250px);
+    height: auto;
+    min-height: 110px;
+    padding: 10px 14px;
+    border-radius: 18px;
+  }
+
+  .solar-core .hero-title {
+    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+    margin: 2px 0;
+  }
+
+  .core-typer-sub {
+    font-size: clamp(0.62rem, 2.8vw, 0.72rem);
+    margin-bottom: 4px;
+  }
+
+  .core-tab-actions {
+    padding: 2px;
+    margin-top: 4px;
+  }
+
+  .core-tab-btn {
+    padding: 4px 11px;
+    font-size: 0.7rem;
+    gap: 4px;
+  }
+
+  /* Mobile Satellite Nodes Spacing across Vertical Canvas */
+  .sat-node {
+    font-size: 0.68rem;
+    padding: 4px 10px;
+    gap: 4px;
+  }
+
+  .sat-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Vertical Elliptical Spacing (Utilizes Screen Vh) */
+  .sat-r1-1 { top: 20%; left: 8%; }
+  .sat-r1-2 { bottom: 20%; right: 8%; }
+
+  .sat-r2-1 { top: 10%; right: 10%; }
+  .sat-r2-2 { bottom: 10%; left: 10%; }
+
+  .sat-r3-1 { top: 46%; left: -8px; }
+  .sat-r3-2 { top: 46%; right: -8px; }
+
+  .sat-r4-1 { top: -2%; left: 22%; }
+  .sat-r4-2 { bottom: -2%; right: 22%; }
 }
 
-.hero-card {
-  position: relative;
-  border-radius: 24px;
-  padding: clamp(16px, 3vw, 24px);
-  background: linear-gradient(180deg, var(--surface-strong), var(--surface));
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transform-style: preserve-3d;
-  will-change: transform;
-  overflow: hidden;
-  min-width: 0;
-}
 
-.hero-card::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: 24px;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--primary), transparent 40%, var(--primary-2));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0.6;
-}
 
-.terminal {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(0.78rem, 0.6rem + 0.5vw, 0.92rem);
-  line-height: 1.7;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  transform: translateZ(30px);
-  transform-style: preserve-3d;
-  transition: transform 0.2s ease-out;
-}
-
-.terminal pre {
-  white-space: pre-wrap;
-  word-break: break-word;
-  overflow-wrap: anywhere;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-.terminal .prompt {
-  color: var(--primary-2);
-}
-
-.terminal .key {
-  color: var(--primary);
-}
-
-.terminal .str {
-  color: var(--accent);
-}
-
-.terminal .muted {
-  color: var(--text-muted);
-}
-
-.terminal-bar {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 14px;
-}
-
-.terminal-bar span {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--border);
-}
-
-.terminal-bar span:nth-child(1) { background: #ff5f56; }
-.terminal-bar span:nth-child(2) { background: #ffbd2e; }
-.terminal-bar span:nth-child(3) { background: #27c93f; }
-
-@media (max-width: 980px) {
-  .hero-grid { grid-template-columns: 1fr; }
-}
 
 /* ========== STATS ========== */
 .stats {
@@ -965,185 +1273,282 @@ main {
   .stats { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ========== SPACE FLIGHT DOSSIER (ABOUT SECTION) ========== */
-.about-grid {
+/* ========== ABOUT SECTION: OPEN-AIR STORY & FLIGHT HUD ========== */
+.about-main-layout {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: clamp(24px, 4vw, 40px);
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(24px, 4vw, 48px);
   align-items: start;
+  margin-top: clamp(24px, 3vw, 36px);
 }
 
-.dossier-card {
-  position: relative;
-  border-radius: 20px;
-  padding: clamp(18px, 3vw, 26px);
-  background: linear-gradient(145deg, color-mix(in srgb, var(--surface-strong) 92%, #000), var(--surface));
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  overflow: hidden;
-}
-
-.dossier-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-2), transparent);
-  box-shadow: 0 0 12px var(--primary);
-}
-
-.dossier-header {
+/* Right Column: Open-Air Typography Flow */
+.about-story-col {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 16px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  flex-direction: column;
+  gap: 14px;
 }
 
-.dossier-title-box {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.dossier-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 25%, transparent), color-mix(in srgb, var(--primary-2) 15%, transparent));
-  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
-  display: grid;
-  place-items: center;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 800;
-  font-size: 1.05rem;
-  color: var(--primary);
-  box-shadow: 0 0 16px color-mix(in srgb, var(--primary) 20%, transparent);
-  flex-shrink: 0;
-}
-
-.dossier-id {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  color: var(--primary-2);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.dossier-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 700;
-  margin: 2px 0 0;
-}
-
-.dossier-status-pill {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: color-mix(in srgb, #22c55e 18%, transparent);
-  color: #22c55e;
-  border: 1px solid color-mix(in srgb, #22c55e 35%, transparent);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.dossier-body p {
+.about-story-text {
   color: var(--text-muted);
-  line-height: 1.7;
-  font-size: 0.95rem;
-  margin-bottom: 16px;
+  font-size: clamp(0.92rem, 0.88rem + 0.3vw, 1.02rem);
+  line-height: 1.72;
+  margin: 0;
 }
 
-.dossier-body strong {
+.about-story-text.lead-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.08rem, 1rem + 0.4vw, 1.25rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.about-story-text strong {
   color: var(--text);
   font-weight: 600;
 }
 
-.dossier-tech-highlight {
+
+.tech-tag-glow {
   display: inline-block;
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  padding: 1px 7px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
   color: var(--primary);
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.84rem;
   font-weight: 600;
-  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
 }
 
-.dossier-quote {
-  margin-top: 20px;
-  padding: 14px 18px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--primary) 8%, transparent);
-  border-left: 3px solid var(--primary);
+.about-glow-quote {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  margin-top: 14px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 8%, transparent), color-mix(in srgb, var(--primary-2) 5%, transparent));
+  border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.about-glow-quote .quote-bar {
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
+  box-shadow: 0 0 10px var(--primary);
+  flex-shrink: 0;
+}
+
+.about-glow-quote .quote-body {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-style: italic;
   color: var(--text);
   line-height: 1.6;
+  margin: 0 0 6px;
 }
 
-/* Subsystem Cards (Right Column) */
-.about-list {
-  display: grid;
+.about-glow-quote .quote-author {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--primary-2);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+}
+
+/* Right Column: Authentic macOS Terminal Window */
+.mac-terminal-window {
+  position: relative;
+  border-radius: 16px;
+  background: #090d16;
+  border: 1px solid var(--border);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 30px color-mix(in srgb, var(--primary) 15%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mac-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  background: #111827;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+.mac-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mac-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.mac-btn.close { background: #ff5f56; border: 1px solid #e0443e; }
+.mac-btn.minimize { background: #ffbd2e; border: 1px solid #dea123; }
+.mac-btn.zoom { background: #27c93f; border: 1px solid #1aab29; }
+
+.mac-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.mac-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.mac-tab:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface-strong) 60%, transparent);
+}
+
+.mac-tab.active {
+  background: color-mix(in srgb, var(--primary) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  color: var(--primary);
+  font-weight: 700;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.mac-tab .tab-icon {
+  font-size: 0.82rem;
+}
+
+.mac-terminal-body {
+  padding: 22px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #090d16;
+}
+
+.hud-terminal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.hud-terminal .prompt { color: var(--primary-2); font-weight: 700; }
+.hud-terminal .muted-text { color: var(--text-muted); margin-top: 2px; }
+.hud-terminal .json-block {
+  margin: 8px 0 0;
+  font-family: inherit;
+  font-size: inherit;
+  white-space: pre-wrap;
+}
+.hud-terminal .env-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.hud-terminal .key { color: var(--primary); font-weight: 600; }
+.hud-terminal .str { color: var(--accent); }
+
+
+/* HUD Metrics */
+.hud-metrics {
+  display: flex;
+  flex-direction: column;
   gap: 14px;
 }
 
-.subsystem-card {
-  position: relative;
-  padding: 16px 18px;
-  border-radius: 16px;
-  background: var(--surface);
+.metrics-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--primary-2);
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.metrics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metric-info {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.metric-label { color: var(--text); }
+.metric-val { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+
+.metric-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-strong) 80%, #000);
   border: 1px solid var(--border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: all 0.25s ease;
   overflow: hidden;
 }
 
-.subsystem-card:hover {
-  border-color: var(--primary);
-  transform: translateX(4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 18px color-mix(in srgb, var(--primary) 20%, transparent);
+.metric-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.8s ease;
 }
 
-.subsystem-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 8px;
+@media (max-width: 980px) {
+  .about-main-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
-.subsystem-title-wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+
 
 .subsystem-ico {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, var(--bg), var(--bg-soft));
-  border: 1px solid var(--primary);
-  font-size: 1.1rem;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent), color-mix(in srgb, var(--primary-2) 10%, transparent));
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  font-size: 1.15rem;
   flex-shrink: 0;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--primary) 30%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--primary) 20%, transparent);
 }
 
 .subsystem-card h4 {
@@ -1151,6 +1556,7 @@ main {
   font-size: 0.98rem;
   font-weight: 700;
   color: var(--text);
+  letter-spacing: -0.01em;
 }
 
 .subsystem-tag {
@@ -1160,8 +1566,8 @@ main {
   text-transform: uppercase;
   color: var(--primary-2);
   background: color-mix(in srgb, var(--primary-2) 12%, transparent);
-  padding: 2px 7px;
-  border-radius: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
   border: 1px solid color-mix(in srgb, var(--primary-2) 25%, transparent);
   white-space: nowrap;
   flex-shrink: 0;
@@ -1171,8 +1577,232 @@ main {
   margin: 0;
   font-size: 0.86rem;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
 }
+
+@media (max-width: 1024px) {
+  .subsystems-grid-horizontal {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .subsystems-grid-horizontal {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== HERO COSMIC ORBITAL STAGE ========== */
+.hero-orbital-stage {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+.orbital-container {
+  position: relative;
+  width: 340px;
+  height: 340px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+/* Concentric Orbital Rings */
+.orbital-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px stroke transparent;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.orbital-ring.r1 {
+  width: 220px;
+  height: 220px;
+  border: 1px dashed color-mix(in srgb, var(--primary) 35%, transparent);
+  animation: orbitRotate 28s linear infinite;
+  box-shadow: inset 0 0 20px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.orbital-ring.r2 {
+  width: 320px;
+  height: 320px;
+  border: 1px solid color-mix(in srgb, var(--primary-2) 25%, transparent);
+  animation: orbitRotateReverse 42s linear infinite;
+}
+
+.orbital-ring.r3 {
+  width: 410px;
+  height: 410px;
+  border: 1px dotted color-mix(in srgb, var(--accent) 20%, transparent);
+  animation: orbitRotate 60s linear infinite;
+}
+
+@keyframes orbitRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitRotateReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Central Glowing Cosmic Core */
+.orbital-core {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--primary) 45%, var(--primary-2) 80%, #030712 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 
+    0 0 25px var(--primary),
+    0 0 50px color-mix(in srgb, var(--primary) 60%, transparent),
+    0 0 90px color-mix(in srgb, var(--primary-2) 40%, transparent);
+  z-index: 5;
+  transform: translateZ(40px);
+  animation: corePulse 3.5s ease-in-out infinite alternate;
+  cursor: pointer;
+}
+
+.orbital-core-avatar {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #ffffff, #e0f2fe);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+.orbital-core-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--primary-2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  background: rgba(3, 7, 18, 0.6);
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary-2) 40%, transparent);
+}
+
+@keyframes corePulse {
+  0% {
+    transform: translateZ(40px) scale(0.96);
+    box-shadow: 0 0 25px var(--primary), 0 0 50px color-mix(in srgb, var(--primary) 50%, transparent);
+  }
+  100% {
+    transform: translateZ(40px) scale(1.05);
+    box-shadow: 0 0 35px var(--primary), 0 0 75px color-mix(in srgb, var(--primary) 80%, transparent), 0 0 110px color-mix(in srgb, var(--primary-2) 50%, transparent);
+  }
+}
+
+/* Orbiting Skill Satellites */
+.satellite-pill {
+  position: absolute;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--surface-strong) 90%, #000), var(--surface));
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px color-mix(in srgb, var(--primary) 15%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  z-index: 6;
+  cursor: pointer;
+}
+
+.satellite-pill:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: scale(1.12) translateZ(50px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 25px var(--primary);
+}
+
+.satellite-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+/* Satellite Positions along orbits */
+.satellite-1 { top: -15px; left: 20%; animation: floatFloat1 4.5s ease-in-out infinite alternate; }
+.satellite-2 { top: 25%; right: -25px; animation: floatFloat2 5s ease-in-out infinite alternate; }
+.satellite-3 { bottom: 10px; right: 15%; animation: floatFloat1 5.5s ease-in-out infinite alternate 0.5s; }
+.satellite-4 { bottom: 20%; left: -30px; animation: floatFloat2 4s ease-in-out infinite alternate 1s; }
+.satellite-5 { top: 15%; left: -20px; animation: floatFloat1 6s ease-in-out infinite alternate 1.5s; }
+.satellite-6 { bottom: -15px; left: 35%; animation: floatFloat2 4.8s ease-in-out infinite alternate 0.8s; }
+
+@keyframes floatFloat1 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes floatFloat2 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(12px) rotate(-2deg); }
+}
+
+@media (max-width: 980px) {
+  .hero-orbital-stage {
+    min-height: 360px;
+    margin-top: 20px;
+  }
+  .orbital-container {
+    width: 290px;
+    height: 290px;
+  }
+  .orbital-ring.r1 { width: 180px; height: 180px; }
+  .orbital-ring.r2 { width: 260px; height: 260px; }
+  .orbital-ring.r3 { width: 330px; height: 330px; }
+  .satellite-pill { font-size: 0.76rem; padding: 5px 12px; }
+}
+
+@media (max-width: 480px) {
+  .orbital-container {
+    width: 240px;
+    height: 240px;
+  }
+  .orbital-core {
+    width: 90px;
+    height: 90px;
+  }
+  .orbital-core-avatar { font-size: 1.3rem; }
+  .orbital-ring.r1 { width: 140px; height: 140px; }
+  .orbital-ring.r2 { width: 210px; height: 210px; }
+  .orbital-ring.r3 { display: none; }
+  .satellite-pill { font-size: 0.7rem; padding: 4px 10px; }
+  .satellite-2 { right: -10px; }
+  .satellite-4 { left: -10px; }
+}
+
 
 /* Telemetry Stats Bar */
 .dossier-stats {

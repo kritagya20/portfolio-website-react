@@ -11,7 +11,8 @@ export const profile = {
   socials: {
     github: 'https://github.com/kritagya20',
     linkedin: 'https://linkedin.com/in/kritagyasinghchouhan/',
-    leetcode: 'https://leetcode.com/kritagya20/',
+    leetcode: 'https://leetcode.com/u/kritagya20/',
+    medium: 'https://medium.com/@kritagya2022',
   },
   typewriter: [
     'Full Stack Software Developer',
@@ -21,58 +22,110 @@ export const profile = {
   ],
 };
 
-export const stats = [
-  { num: '3+', lbl: 'Years of Experience' },
-  { num: 'AI-Ready', lbl: 'Workflow Automations' },
-  { num: '24/7', lbl: 'Production deployment support' },
-  { num: 'Optimized', lbl: '.NET Backend Systems' },
+export const satellites = [
+  { label: 'Golang APIs', color: '#38bdf8' },
+  { label: 'Java Automation', color: '#a855f7' },
+  { label: 'React & Node', color: '#f59e0b' },
+  { label: 'PostgreSQL & MySQL', color: '#22c55e' },
+  { label: 'Docker & Containers', color: '#ec4899' },
+  { label: 'System Architecture', color: '#6366f1' },
+  { label: 'REST Assured', color: '#06b6d4' },
+  { label: 'GenAI Workflows', color: '#10b981' },
 ];
 
-export const aboutHighlights = [
+export const navLinks = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'playground', label: 'Playground' },
+  { id: 'contact', label: 'Contact' },
+];
+
+export const socialLinks = [
   {
-    icon: '⚡',
-    title: 'Performance Focused',
-    text: 'Optimized backend APIs, SQL queries, and execution workflows to improve response times and build scalable production systems.',
+    label: 'GitHub',
+    href: 'https://github.com/kritagya20',
+    iconName: 'github',
   },
   {
-    icon: '🏗️',
-    title: 'Backend Engineering',
-    text: 'Building RESTful APIs with Go, ASP.NET Core, and MySQL while following clean architecture and scalable design principles.',
+    label: 'LeetCode',
+    href: 'https://leetcode.com/u/kritagya20/',
+    iconName: 'leetcode',
   },
   {
-    icon: '🐳',
-    title: 'Developer Tooling',
-    text: 'Experienced with Docker, Git, Postman, and automation tools to streamline development, testing, and deployment workflows.',
+    label: 'Medium',
+    href: 'https://medium.com/@kritagya2022',
+    iconName: 'medium',
   },
   {
-    icon: '🧪',
-    title: 'Quality Engineering',
-    text: 'Strong foundation in API testing, Selenium, Rest Assured, and Playwright to ensure software quality alongside development.',
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/kritagyachouhan/',
+    iconName: 'linkedin',
+  },
+  {
+    label: 'Mail',
+    href: 'mailto:kritagya2022@gmail.com',
+    iconName: 'mail',
   },
 ];
+
+export const aboutData = {
+  eyebrow: 'About Me',
+  title: 'Engineering Background & Principles',
+  titleAccent: 'Background',
+  sub: 'Architecting scalable backend runtimes, automated quality pipelines, and high-throughput systems.',
+  terminal: {
+    promptUser: 'kritagya@core ~ %',
+    profileJson: {
+      name: 'Kritagya Singh Chouhan',
+      experience: '3+ years',
+      primaryStack: ['Golang', 'Java', 'React'],
+      databases: ['PostgreSQL', 'MySQL', 'MongoDB'],
+      testing: ['Selenium', 'REST Assured'],
+      masters: 'IIT PATNA',
+    },
+    architectureSpecs: [
+      {
+        section: '[01. BACKEND & SERVICES]',
+        details: '→ Go (Golang) Microservices, REST APIs, Node.js',
+      },
+      {
+        section: '[02. DATABASE ARCHITECTURE]',
+        details: '→ PostgreSQL, MySQL, Query Optimization, Transactions',
+      },
+      {
+        section: '[03. AUTOMATION & QUALITY]',
+        details: '→ Java, Selenium, REST Assured, Appium, TestNG',
+      },
+      {
+        section: '[04. DEVOPS & RUNTIMES]',
+        details: '→ Docker , Jenkins CI/CD, Git, Linux',
+      },
+    ],
+  },
+  story: {
+    lead: 'Building resilient systems engineered for high scale & minimal latency.',
+    paragraphs: [
+      'I’m a Software Engineer dedicated to solving complex system architecture challenges. My work centers on designing high-throughput backend services, tuning database execution plans, and establishing end-to-end automated validation pipelines.',
+      'Currently at Medkart, I craft backend services primarily in Go (Golang). Drawing from a strong foundation in Java, Selenium, and REST Assured, I engineer stress-tested automation frameworks that ensure 100% backend reliability before deployment.',
+      'From low-level API design to containerized runtimes with Docker, I take complete end-to-end ownership. Beyond code, I’m a passionate football and cricket follower driven by continuous technical growth.',
+    ],
+    quote: {
+      body: '“Great software isn’t just shipped fast—it is engineered to perform reliably under high scale.”',
+      author: '— KRITAGYA SINGH CHOUHAN',
+    },
+  },
+};
+
+export const experienceHeader = {
+  eyebrow: 'Past Experience',
+  title: 'Career Trajectory',
+  titleAccent: 'Trajectory',
+  sub: 'From automating quality engineering to architecting high-throughput Go backend services.',
+};
 
 export const experience = [
-  // {
-  //   role: 'Backend Engineer',
-  //   company: 'Medkart',
-  //   where: 'Ahmedabad, India',
-  //   when: 'Feb 2026 – Present',
-  //   bullets: [
-  //     'Designed and developed backend services in Go for loyalty, rewards, invoicing, and transaction workflows.',
-  //     'Optimized API execution paths and database interactions, improving response times across critical services.',
-  //     'Built reusable service components, middleware, and utility packages, accelerating feature development.',
-  //     'Containerized backend applications with Docker and streamlined local development and deployment workflows.',
-  //     'Integrated PostgreSQL with backend services while ensuring data consistency through transactional validation.',
-  //     'Collaborated with frontend, QA, and product teams to deliver production-ready features with end-to-end ownership.'
-  //   ],
-  //   stack: [
-  //     'Golang',
-  //     'PostgreSQL',
-  //     'Docker',
-  //     'REST APIs',
-  //     'Git'
-  //   ]
-  // },
   {
     role: 'Senior Software Development Engineer in Test',
     company: 'Medkart',
@@ -168,88 +221,100 @@ export const experience = [
 
 export const githubProfileUrl = 'https://github.com/kritagya20?tab=repositories';
 
+export const projectsHeader = {
+  eyebrow: 'Recent Projects',
+  title: 'Featured Missions',
+  titleAccent: 'Missions',
+  sub: 'A showcase of applications I\'ve built, tested, automated, and continuously improved.',
+};
+
 export const projects = [
   {
-    title: "Enterprise Web Automation & Analytics Engine",
-    type: "SDET / Test Engineering",
-    desc: "An enterprise-grade Selenium & TestNG automation framework featuring cross-browser W3C native network interception, a single unified JSON execution engine, pinpoint step-correlated multi-tab Excel traces, and a sleek SaaS-grade executive dark dashboard for platform health intelligence.",
+    title: 'Enterprise Web Automation & Analytics Engine',
+    type: 'SDET / Test Engineering',
+    desc: 'An enterprise-grade Selenium & TestNG automation framework featuring cross-browser W3C native network interception, a single unified JSON execution engine, pinpoint step-correlated multi-tab Excel traces, and a sleek SaaS-grade executive dark dashboard for platform health intelligence.',
     tech: [
-      "Java",
-      "Selenium",
-      "TestNG",
-      "JavaScript",
-      "ExtentReports",
-      "Chart.js",
-      "Apache POI",
-      "Maven"
+      'Java',
+      'Selenium',
+      'TestNG',
+      'JavaScript',
+      'ExtentReports',
+      'Chart.js',
+      'Apache POI',
+      'Maven'
     ],
     links: {
       live: null, 
-      code: "https://github.com/kritagya20/selenium-web-automation",
+      code: 'https://github.com/kritagya20/selenium-web-automation',
     },
     featured: true,
   },
   {
-    title: "ISRO Landing Page",
-    type: "Frontend",
-    desc: "A multi-page website showcasing the Indian Space Research Organisation, highlighting its major missions, achievements, launch vehicles, satellites, and technological advancements through a clean and responsive interface.",
-    tech: ["JavaScript", "HTML", "CSS"],
+    title: 'ISRO Landing Page',
+    type: 'Frontend',
+    desc: 'A multi-page website showcasing the Indian Space Research Organisation, highlighting its major missions, achievements, launch vehicles, satellites, and technological advancements through a clean and responsive interface.',
+    tech: ['JavaScript', 'HTML', 'CSS'],
     links: {
       live: null,
-      code: "https://github.com/kritagya20/isro",
+      code: 'https://github.com/kritagya20/isro',
     },
     featured: true,
   },
   {
-    title: "Cosmic Space Discovery App",
-    type: "Frontend",
-    desc: "A space exploration application that integrates NASA APIs to display Astronomy Picture of the Day with detailed information, providing users with a visually engaging experience of daily space discoveries.",
-    tech: ["JavaScript", "NASA API", "HTML", "CSS"],
+    title: 'Cosmic Space Discovery App',
+    type: 'Frontend',
+    desc: 'A space exploration application that integrates NASA APIs to display Astronomy Picture of the Day with detailed information, providing users with a visually engaging experience of daily space discoveries.',
+    tech: ['JavaScript', 'NASA API', 'HTML', 'CSS'],
     links: {
       live: null,
-      code: "https://github.com/kritagya20/cosmic",
+      code: 'https://github.com/kritagya20/cosmic',
     },
     featured: true,
   },
   {
-    title: "YouTube Clone",
-    type: "Frontend",
-    desc: "A fully responsive YouTube-inspired application featuring video search, category-based browsing, recommendations, and video playback using real-time API integration with a modern React architecture.",
-    tech: ["React", "Material UI", "YouTube API"],
+    title: 'YouTube Clone',
+    type: 'Frontend',
+    desc: 'A fully responsive YouTube-inspired application featuring video search, category-based browsing, recommendations, and video playback using real-time API integration with a modern React architecture.',
+    tech: ['React', 'Material UI', 'YouTube API'],
     links: {
       live: null,
-      code: "https://github.com/kritagya20/react-youtube-clone",
+      code: 'https://github.com/kritagya20/react-youtube-clone',
     },
     featured: true,
   },
   {
-    title: "Desktop Chat App",
-    type: "Full Stack",
-    desc: "A real-time chat application with Firebase backend support, enabling instant messaging, profile management, custom themes, image sharing, and user blocking/unblocking in a modern Next.js interface.",
-    tech: ["Next.js", "Firebase", "Tailwind CSS"],
+    title: 'Desktop Chat App',
+    type: 'Full Stack',
+    desc: 'A real-time chat application with Firebase backend support, enabling instant messaging, profile management, custom themes, image sharing, and user blocking/unblocking in a modern Next.js interface.',
+    tech: ['Next.js', 'Firebase', 'Tailwind CSS'],
     links: {
-      live: "https://chat-7ch6v68g3-kritagya20.vercel.app/",
-      code: "https://github.com/kritagya20/chatApp",
+      live: 'https://chat-7ch6v68g3-kritagya20.vercel.app/',
+      code: 'https://github.com/kritagya20/chatApp',
     },
     featured: true,
   },
 ];
 
-export const oldProjects = [
-  {
-    title: 'Jio Home Delivery Platform',
-    type: 'Internal',
-    desc: 'Core delivery workflow modules for SIM & Fiber customers. Designed service layers and optimized SQL → 50% faster queries. Built role-based access and integrated automated job schedulers.',
-    tech: ['ASP.NET', 'C#', 'MySQL', 'Azure', 'JavaScript'],
-    links: { live: null, code: null },
-    featured: true,
+export const contactData = {
+  eyebrow: 'Get In Touch',
+  title: 'Establish Connection',
+  titleAccent: 'Connection',
+  sub: 'Have a role, a project, or just want to say hi? Send a message and I’ll get back to you.',
+  validationMessage: 'Please fill in your name, email, and transmission message.',
+  sendingMessage: 'Opening mail client to transmit signal…',
+  formLabels: {
+    name: 'Your name',
+    namePlaceholder: 'Your name...',
+    email: 'Your email',
+    emailPlaceholder: 'Your email address...',
+    message: 'Message',
+    messagePlaceholder: 'Tell me a little about your project or role…',
+    buttonText: 'Send Message →',
   },
-  {
-    title: 'Inventory Store and Management',
-    type: 'Internal',
-    desc: 'Centralized inventory platform with real-time tracking and request management. Built during internship — reduced manual paperwork by ~80%.',
-    tech: ['PHP', 'MySQL', 'AJAX', 'JavaScript'],
-    links: { live: null, code: null },
-    featured: true,
-  },
-];
+};
+
+export const footerData = {
+  greeting: 'Happy to see you here',
+  greetingSub: '— have a great day ahead! 👋',
+  visitorTelemetryLabel: '// ORBIT VISITOR TELEMETRY',
+};

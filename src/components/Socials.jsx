@@ -1,39 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { socialLinks } from '../data/portfolio.js';
 import { MailSvg, LinkedinSvg, GithubSvg, MediumSvg, LeetCodeSvg } from '../icon_jsx';
 
-const socialLinks = [
-  {
-    label: 'GitHub',
-    href: 'https://github.com/kritagya20',
-    icon: <GithubSvg className="icon icon--github" />,
-  },
-  {
-    label: 'LeetCode',
-    href: 'https://leetcode.com/u/kritagya20/',
-    icon: <LeetCodeSvg className="icon icon--leetcode" />,
-  },
-  {
-    label: 'Medium',
-    href: 'https://medium.com/@kritagya2022',
-    icon: <MediumSvg className="icon icon--medium" />,
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/kritagyachouhan/',
-    icon: <LinkedinSvg className="icon icon--linkedin" />,
-  },
-  {
-    label: 'Mail',
-    href: 'mailto:kritagya2022@gmail.com',
-    icon: <MailSvg className="icon icon--mail" />,
-  },
-];
+const iconMap = {
+  github: <GithubSvg className="icon icon--github" />,
+  leetcode: <LeetCodeSvg className="icon icon--leetcode" />,
+  medium: <MediumSvg className="icon icon--medium" />,
+  linkedin: <LinkedinSvg className="icon icon--linkedin" />,
+  mail: <MailSvg className="icon icon--mail" />,
+};
 
 export default function Socials() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 60);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <aside className="socials" aria-label="Social Profiles">
+    <aside className={`socials ${isScrolled ? 'visible' : ''}`} aria-label="Social Profiles">
       <ul className="social__icon-list">
-        {socialLinks.map(({ label, href, icon }) => (
+        {socialLinks.map(({ label, href, iconName }) => (
           <li key={label}>
             <a
               href={href}
@@ -42,7 +34,7 @@ export default function Socials() {
               rel="noopener noreferrer"
               className="social-link"
             >
-              {icon}
+              {iconMap[iconName] || null}
               <span className="social-tooltip">{label}</span>
             </a>
           </li>

@@ -1,16 +1,8 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme, THEMES } from '../context/ThemeContext.jsx';
+import { navLinks as links } from '../data/portfolio.js';
 import { MailSvg, LinkedinSvg, GithubSvg, MediumSvg, LeetCodeSvg } from '../icon_jsx';
-
-const links = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'playground', label: 'Playground' },
-  { id: 'contact', label: 'Contact' },
-];
 
 export default function Navbar() {
   const { theme, cycleTheme } = useTheme();
@@ -21,6 +13,17 @@ export default function Navbar() {
   const pillRef = useRef(null);
   const navLinkRefs = useRef({});
   const [indicatorPos, setIndicatorPos] = useState({ left: 10, width: 60 });
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Track scroll position so navbar appears only when user starts scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // 1. IntersectionObserver for active section tracking
   useEffect(() => {
@@ -117,14 +120,19 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Desktop Floating Pill Navbar (> 768px) */}
+      {/* Desktop Floating Pill Navbar (> 768px): Arrives on Scroll */}
       <motion.header
         className="site-nav"
-        initial={{ y: -60, x: '-50%', opacity: 0 }}
-        animate={{ y: 0, x: '-50%', opacity: 1 }}
+        initial={false}
+        animate={{
+          y: isScrolled ? 0 : -60,
+          x: '-50%',
+          opacity: isScrolled ? 1 : 0,
+          pointerEvents: isScrolled ? 'auto' : 'none',
+        }}
         transition={{
-          duration: 0.7,
-          ease: [0.34, 1.56, 0.64, 1],
+          duration: 0.4,
+          ease: [0.25, 0.1, 0.25, 1.0],
         }}
       >
         <div className="nav-pill" ref={pillRef}>

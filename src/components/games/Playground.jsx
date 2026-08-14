@@ -127,7 +127,7 @@ export default function Playground({ onToast }) {
     <section id="playground" className="section">
       <div className="container">
         <span className="eyebrow">
-          <span className="dot" /> Cosmic Holodeck
+          <span className="dot" /> Fun & Games
         </span>
         <h2 className="section-title">
           Space <span className="accent">Arcade</span>
