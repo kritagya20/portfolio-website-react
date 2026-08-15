@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { perfectCircleData } from '../../data/portfolio.js';
+import { perfectCircleData } from '../../data/games.js';
 
 const SIZE = 360;
 

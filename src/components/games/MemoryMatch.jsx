@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { memoryMatchData } from '../../data/portfolio.js';
+import { memoryMatchData } from '../../data/games.js';
 
 const PAIRS = memoryMatchData.pairs;
 

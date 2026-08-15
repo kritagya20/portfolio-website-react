@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { memorySequenceData } from '../../data/portfolio.js';
+import { memorySequenceData } from '../../data/games.js';
 
 const PADS = memorySequenceData.pads;
 

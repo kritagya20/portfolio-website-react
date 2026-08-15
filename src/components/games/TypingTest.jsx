@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { typingTestData } from '../../data/portfolio.js';
+import { typingTestData } from '../../data/games.js';
 
 const SNIPPETS = typingTestData.snippets;
 
