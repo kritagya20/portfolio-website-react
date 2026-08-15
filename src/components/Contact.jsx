@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { profile, contactData } from '../data/portfolio.js';
 import { MailSvg } from '../icon_jsx';
+import ScrambleText from './ScrambleText.jsx';
 
 export default function Contact({ onToast }) {
   const [name, setName] = useState('');
@@ -33,7 +34,7 @@ export default function Contact({ onToast }) {
             <span className="dot" /> {contactData.eyebrow}
           </span>
           <h2 className="section-title">
-            Establish <span className="accent">{contactData.titleAccent}</span>
+            Establish <ScrambleText text={contactData.titleAccent} className="accent" />
           </h2>
           <p className="section-sub">
             {contactData.sub}

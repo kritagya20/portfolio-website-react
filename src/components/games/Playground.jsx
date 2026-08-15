@@ -1,6 +1,7 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playgroundHeader, gamesData } from '../../data/games.js';
+import ScrambleText from '../ScrambleText.jsx';
 
 const PerfectCircle = lazy(() => import('./PerfectCircle.jsx'));
 const TypingTest = lazy(() => import('./TypingTest.jsx'));
@@ -80,7 +81,7 @@ export default function Playground({ onToast }) {
           <span className="dot" /> {playgroundHeader.eyebrow}
         </span>
         <h2 className="section-title">
-          {playgroundHeader.title.split(' ')[0]} <span className="accent">{playgroundHeader.titleAccent}</span>
+          {playgroundHeader.title.split(' ')[0]} <ScrambleText text={playgroundHeader.titleAccent} className="accent" />
         </h2>
         <p className="section-sub">
           {playgroundHeader.sub}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { projects, githubProfileUrl, projectsHeader } from '../data/portfolio.js';
 import { GithubSvg } from '../icon_jsx';
+import ScrambleText from './ScrambleText.jsx';
 
 export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -54,7 +55,7 @@ export default function Projects() {
               <span className="dot" /> {projectsHeader.eyebrow}
             </span>
             <h2 className="section-title">
-              Featured <span className="accent">{projectsHeader.titleAccent}</span>
+              Featured <ScrambleText text={projectsHeader.titleAccent} className="accent" />
             </h2>
             <p className="section-sub">
               {projectsHeader.sub}

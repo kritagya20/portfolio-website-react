@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform, useMotionValue, AnimatePresence } from 'framer-motion';
 import { experience, experienceHeader } from '../data/portfolio.js';
+import ScrambleText from './ScrambleText.jsx';
 
 function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
   const isLeft = index % 2 === 0;
@@ -173,7 +174,7 @@ export default function Experience() {
             <span className="dot" /> {experienceHeader.eyebrow}
           </span>
           <h2 className="section-title">
-            Career <span className="accent">{experienceHeader.titleAccent}</span>
+            Career <ScrambleText text={experienceHeader.titleAccent} className="accent" />
           </h2>
           <p className="section-sub">
             {experienceHeader.sub}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { aboutData } from '../data/portfolio.js';
+import ScrambleText from './ScrambleText.jsx';
 
 export default function About() {
   const [hudTab, setHudTab] = useState('telemetry');
@@ -18,7 +19,7 @@ export default function About() {
             <span className="dot" /> {aboutData.eyebrow}
           </span>
           <h2 className="section-title">
-            Engineering <span className="accent">{aboutData.titleAccent}</span> &amp; Principles
+            Engineering <ScrambleText text={aboutData.titleAccent} className="accent" /> &amp; Principles
           </h2>
           <p className="section-sub">{aboutData.sub}</p>
         </motion.div>
