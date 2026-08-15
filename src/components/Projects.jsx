@@ -33,6 +33,32 @@ export default function Projects() {
     }
   }, [visibleCount, maxIndex, currentIndex]);
 
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const minSwipeDistance = 40;
+
+    if (distance > minSwipeDistance) {
+      // Swiped left -> Next slide
+      next();
+    } else if (distance < -minSwipeDistance) {
+      // Swiped right -> Previous slide
+      prev();
+    }
+  };
+
   const prev = () => {
     setCurrentIndex((c) => Math.max(0, c - 1));
   };
@@ -93,7 +119,12 @@ export default function Projects() {
         </div>
 
         {/* Carousel Viewport Container */}
-        <div className="projects-carousel-container">
+        <div
+          className="projects-carousel-container"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <div
             className="projects-carousel-track"
             style={{

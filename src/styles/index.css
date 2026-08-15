@@ -2630,6 +2630,7 @@ select::placeholder,
   overflow: hidden;
   border-radius: 20px;
   padding: 4px 2px 14px;
+  touch-action: pan-y;
 }
 
 .projects-carousel-track {
@@ -3315,27 +3316,49 @@ select::placeholder,
 
 @media (max-width: 980px) {
   .space-footer {
-    padding-right: 0 !important;
+    padding: 36px 20px 48px !important;
   }
 
   .footer-inner {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 14px;
     width: 100%;
+    padding: 0 12px;
+    box-sizing: border-box;
   }
 }
 
 @media (max-width: 768px) {
+  .space-footer {
+    padding: 32px 16px 44px !important;
+    margin-top: 30px;
+  }
+
   .space-footer-card {
     flex: 0 0 auto !important;
-    width: auto !important;
-    max-width: 92% !important;
-    padding: 6px 14px !important;
-    border-radius: 999px !important;
+    width: 100% !important;
+    max-width: 520px !important;
+    padding: 14px 20px !important;
+    border-radius: 16px !important;
     margin: 0 auto !important;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+    box-sizing: border-box;
+  }
+
+  .greeting-card {
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .single-line-greeting {
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.45 !important;
+    font-size: 0.84rem !important;
   }
 
   .visitor-card {
@@ -3346,33 +3369,35 @@ select::placeholder,
   }
 
   .visitor-info {
-    flex-direction: row !important;
+    flex-direction: column !important;
     align-items: center !important;
-    gap: 6px !important;
+    gap: 4px !important;
   }
 
   .visitor-meta {
-    display: none !important;
+    display: block !important;
+    margin-bottom: 2px !important;
   }
 
   .visitor-text {
-    font-size: 0.72rem !important;
-    white-space: nowrap !important;
-    line-height: 1 !important;
+    font-size: 0.8rem !important;
+    white-space: normal !important;
+    text-align: center !important;
+    line-height: 1.45 !important;
   }
 
   .visitor-num {
-    font-size: 0.82rem !important;
+    font-size: 0.88rem !important;
   }
 
   .radar-pulse-box {
-    width: 10px !important;
-    height: 10px !important;
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .radar-dot {
-    width: 6px !important;
-    height: 6px !important;
+    width: 7px !important;
+    height: 7px !important;
   }
 }
 
