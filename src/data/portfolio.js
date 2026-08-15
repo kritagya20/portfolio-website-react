@@ -250,13 +250,41 @@ export const projects = [
     featured: true,
   },
   {
-    title: 'ISRO Landing Page',
-    type: 'Frontend',
-    desc: 'A multi-page website showcasing the Indian Space Research Organisation, highlighting its major missions, achievements, launch vehicles, satellites, and technological advancements through a clean and responsive interface.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
+    title: 'Privacy-First Personal Finance Engine',
+    type: 'Backend & Systems Architecture',
+    desc: 'A privacy-focused, local-first personal finance engine and backend built with Go, encrypted SQLite (SQLCipher), and Redis. Features deterministic offline calculations, end-to-end encrypted multi-device sync, zero-trust cloud architecture, and comprehensive financial asset tracking.',
+    tech: [
+      'Go',
+      'PostgreSQL',
+      'SQLite',
+      'SQLCipher',
+      'Redis',
+      'REST API',
+      'Docker',
+      'Cryptography'
+    ],
     links: {
       live: null,
-      code: 'https://github.com/kritagya20/isro',
+      code: 'https://github.com/kritagya20/finance-tracker-app',
+    },
+    featured: true,
+  },
+  {
+    title: 'Visitor Counter Service',
+    type: 'Backend & Microservices',
+    desc: 'A lightweight, standalone backend service written in Go that tracks unique website visitors via salted HMAC-SHA256 IP hashing, PostgreSQL ON CONFLICT upserts, Redis caching, and dynamic SVG count badges.',
+    tech: [
+      'Go',
+      'PostgreSQL',
+      'Redis',
+      'Docker',
+      'REST API',
+      'Chi Router',
+      'Cryptography'
+    ],
+    links: {
+      live: null,
+      code: 'https://github.com/kritagya20/Visitor-Counter-Service',
     },
     featured: true,
   },
@@ -268,17 +296,6 @@ export const projects = [
     links: {
       live: null,
       code: 'https://github.com/kritagya20/cosmic',
-    },
-    featured: true,
-  },
-  {
-    title: 'YouTube Clone',
-    type: 'Frontend',
-    desc: 'A fully responsive YouTube-inspired application featuring video search, category-based browsing, recommendations, and video playback using real-time API integration with a modern React architecture.',
-    tech: ['React', 'Material UI', 'YouTube API'],
-    links: {
-      live: null,
-      code: 'https://github.com/kritagya20/react-youtube-clone',
     },
     featured: true,
   },
