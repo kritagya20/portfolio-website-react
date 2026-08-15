@@ -1304,14 +1304,14 @@ select::placeholder,
 
 .about-story-text {
   color: var(--text-muted);
-  font-size: clamp(0.92rem, 0.88rem + 0.3vw, 1.02rem);
-  line-height: 1.72;
+  font-size: clamp(0.83rem, 1.8vw, 0.88rem);
+  line-height: 1.62;
   margin: 0;
 }
 
 .about-story-text.lead-text {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.08rem, 1rem + 0.4vw, 1.25rem);
+  font-size: clamp(0.98rem, 2.2vw, 1.12rem);
   font-weight: 700;
   color: var(--text);
   line-height: 1.5;
@@ -1324,7 +1324,6 @@ select::placeholder,
   font-weight: 600;
 }
 
-
 .tech-tag-glow {
   display: inline-block;
   padding: 1px 7px;
@@ -1332,7 +1331,7 @@ select::placeholder,
   background: color-mix(in srgb, var(--primary) 12%, transparent);
   color: var(--primary);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   font-weight: 600;
   border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
 }
@@ -1340,9 +1339,9 @@ select::placeholder,
 .about-glow-quote {
   display: flex;
   align-items: stretch;
-  gap: 16px;
-  margin-top: 14px;
-  padding: 16px 20px;
+  gap: 14px;
+  margin-top: 12px;
+  padding: 14px 18px;
   border-radius: 14px;
   background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 8%, transparent), color-mix(in srgb, var(--primary-2) 5%, transparent));
   border: 1px solid color-mix(in srgb, var(--primary) 25%, transparent);
@@ -1359,10 +1358,10 @@ select::placeholder,
 
 .about-glow-quote .quote-body {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.92rem;
+  font-size: clamp(0.82rem, 1.8vw, 0.88rem);
   font-style: italic;
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.55;
   margin: 0 0 6px;
 }
 
@@ -1455,8 +1454,8 @@ select::placeholder,
 }
 
 .mac-terminal-body {
-  padding: 22px;
-  min-height: 280px;
+  padding: clamp(14px, 2.5vw, 20px);
+  min-height: 230px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1465,28 +1464,46 @@ select::placeholder,
 
 .hud-terminal {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.82rem;
-  line-height: 1.65;
+  font-size: clamp(0.74rem, 1.8vw, 0.8rem);
+  line-height: 1.52;
 }
 
 .hud-terminal .prompt { color: var(--primary-2); font-weight: 700; }
 .hud-terminal .muted-text { color: var(--text-muted); margin-top: 2px; }
 .hud-terminal .json-block {
-  margin: 8px 0 0;
+  margin: 6px 0 0;
   font-family: inherit;
   font-size: inherit;
   white-space: pre-wrap;
+  word-break: break-word;
 }
 .hud-terminal .env-block {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  line-height: 1.6;
+  font-size: clamp(0.72rem, 1.8vw, 0.78rem);
+  line-height: 1.45;
+}
+.hud-terminal .env-block .str {
+  color: var(--accent);
+  word-break: break-word;
+  font-size: clamp(0.7rem, 1.7vw, 0.76rem);
 }
 .hud-terminal .key { color: var(--primary); font-weight: 600; }
 .hud-terminal .str { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .mac-terminal-bar { padding: 7px 10px; gap: 10px; }
+  .mac-controls { gap: 5px; }
+  .mac-btn { width: 9px; height: 9px; }
+  .mac-tab { padding: 4px 8px; font-size: 0.68rem; border-radius: 6px; }
+  .mac-terminal-body { padding: 12px 14px; min-height: auto; justify-content: flex-start; }
+  .hud-terminal { font-size: 0.72rem; line-height: 1.45; }
+  .hud-terminal .json-block { margin: 4px 0 0; }
+  .hud-terminal .env-block { font-size: 0.7rem; line-height: 1.4; }
+  .hud-terminal .env-block .str { font-size: 0.68rem; }
+}
 
 
 /* HUD Metrics */
@@ -2784,13 +2801,14 @@ select::placeholder,
 
 .project h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  line-height: 1.35;
 }
 
 .project p {
   color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: clamp(0.82rem, 1.8vw, 0.86rem);
+  line-height: 1.55;
   margin: 0;
   flex: 1;
 }
@@ -2802,8 +2820,8 @@ select::placeholder,
 }
 
 .tech {
-  font-size: 0.72rem;
-  padding: 4px 9px;
+  font-size: clamp(0.66rem, 1.5vw, 0.7rem);
+  padding: 3px 8px;
   border-radius: 999px;
   background: var(--surface-strong);
   border: 1px solid var(--border);
@@ -2832,8 +2850,8 @@ select::placeholder,
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 12px;
-  font-size: 0.82rem;
+  padding: 7px 11px;
+  font-size: clamp(0.78rem, 1.7vw, 0.82rem);
   border-radius: 10px;
   background: var(--surface-strong);
   border: 1px solid var(--border);
@@ -2847,6 +2865,13 @@ select::placeholder,
   border-color: var(--primary);
   color: var(--text);
   stroke: var(--text);
+}
+
+@media (max-width: 640px) {
+  .project h3 { font-size: 0.95rem; }
+  .project p { font-size: 0.83rem; line-height: 1.5; }
+  .tech { font-size: 0.65rem; padding: 3px 7px; }
+  .icon-btn { font-size: 0.78rem; padding: 6px 10px; }
 }
 
 /* ========== REVIEWS ========== */
@@ -3441,11 +3466,17 @@ select::placeholder,
   color: transparent;
 }
 
-/* ========== PLAYGROUND ========== */
 .game-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 640px) {
+  .game-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
 }
 
 .game-tile {
@@ -3496,7 +3527,14 @@ select::placeholder,
 
 .game-tile-icon.small { width: 42px; height: 42px; font-size: 1.3rem; border-radius: 10px; }
 
-.game-tile-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.game-tile-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
 .game-tile-row {
   display: flex; align-items: center; justify-content: space-between; gap: 8px;
   min-width: 0; width: 100%;
@@ -3523,7 +3561,9 @@ select::placeholder,
 .game-tile p { margin: 0; color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; }
 .game-tile-foot {
   display: flex; justify-content: space-between; align-items: center;
-  margin-top: 4px; font-size: 0.82rem;
+  margin-top: 16px; padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  font-size: 0.84rem;
 }
 .game-best { color: var(--text-muted); font-family: 'JetBrains Mono', monospace; }
 .game-play { color: var(--g-color, var(--primary)); font-weight: 700; }
@@ -3923,18 +3963,23 @@ select::placeholder,
 }
 .hm-letter.shown { border-color: var(--primary-2); color: var(--primary-2); }
 
-.hm-keys {
-  display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px;
-  margin-top: 24px;
-  padding-top: 18px;
+.hm-keyboard-qwerty {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  margin-top: 20px; padding-top: 16px;
   border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+  width: 100%;
+}
+.hm-keyboard-row {
+  display: flex; flex-direction: row; justify-content: center; align-items: center;
+  gap: 6px; width: 100%; max-width: 520px; margin: 0 auto;
 }
 .hm-key {
-  padding: 8px 0; border-radius: 8px;
-  background: var(--surface); border: 1px solid var(--border);
+  flex: 1 1 0px; min-width: 0; max-width: 44px; height: 40px; padding: 0;
+  border-radius: 8px; background: var(--surface); border: 1px solid var(--border);
   color: var(--text); font-weight: 700; cursor: pointer;
-  transition: transform 0.1s;
-  font-family: inherit;
+  transition: transform 0.1s, border-color 0.2s, background 0.2s;
+  font-family: inherit; font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
 }
 .hm-key:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--primary); }
 .hm-key:disabled { cursor: not-allowed; opacity: 0.7; }
@@ -3950,7 +3995,9 @@ select::placeholder,
 @media (max-width: 600px) {
   .hm-stage { grid-template-columns: 1fr; gap: 14px; margin-bottom: 20px; }
   .hm-svg { max-height: 180px; margin: 0 auto; }
-  .hm-keys { grid-template-columns: repeat(9, 1fr); margin-top: 20px; padding-top: 14px; }
+  .hm-keyboard-qwerty { margin-top: 16px; padding-top: 12px; gap: 6px; }
+  .hm-keyboard-row { gap: 4px; }
+  .hm-key { height: 34px; font-size: 0.8rem; border-radius: 6px; }
 }
 
 /* ========== PLAYGROUND RESPONSIVE OVERRIDES ========== */
@@ -4326,5 +4373,63 @@ main {
       0 0 20px
       color-mix(in srgb, var(--primary-2) 40%, transparent)
     );
+}
+
+/* ========== MASTER MOBILE FONT-SIZE SYNCHRONIZATION SYSTEM (< 640px) ========== */
+@media (max-width: 640px) {
+  /* Section Headers & Subtitles */
+  .section-title { font-size: clamp(1.35rem, 5.2vw, 1.65rem); }
+  .section-sub { font-size: clamp(0.83rem, 3.2vw, 0.88rem); line-height: 1.55; margin-bottom: 24px; }
+  .eyebrow { font-size: 0.72rem; padding: 5px 12px; gap: 8px; margin-bottom: 14px; }
+  .btn { font-size: 0.84rem; padding: 10px 18px; }
+
+  /* Hero Section */
+  .core-typer-sub { font-size: clamp(0.85rem, 3.2vw, 0.94rem); }
+  .hero-desc { font-size: clamp(0.83rem, 3.2vw, 0.88rem); }
+
+  /* About Section */
+  .about-story-text { font-size: 0.83rem; line-height: 1.58; }
+  .about-story-text.lead-text { font-size: 0.98rem; }
+  .about-glow-quote .quote-body { font-size: 0.83rem; line-height: 1.55; }
+  .hud-terminal { font-size: 0.72rem; line-height: 1.45; }
+
+  /* Experience Section */
+  .tl-card h3 { font-size: 0.95rem; }
+  .tl-company { font-size: 0.78rem; }
+  .tl-bullets { font-size: 0.83rem; line-height: 1.5; }
+  .tl-period { font-size: 0.72rem; }
+
+  /* Projects Section */
+  .project h3 { font-size: 0.95rem; }
+  .project p { font-size: 0.83rem; line-height: 1.5; }
+  .tech { font-size: 0.65rem; padding: 3px 7px; }
+  .icon-btn { font-size: 0.78rem; padding: 6px 10px; }
+
+  /* Skills Section */
+  .skill-tab { font-size: 0.78rem; padding: 6px 12px; }
+  .skill-pill { font-size: 0.82rem; padding: 10px 14px; }
+
+  /* Reviews & Testimonials Section */
+  .review-form h3 { font-size: 0.98rem; }
+  .review-form .hint { font-size: 0.82rem; }
+  .review-card p { font-size: 0.84rem; line-height: 1.52; }
+  .review-meta .nm { font-size: 0.88rem; }
+  .review-meta .when { font-size: 0.74rem; }
+  .field label { font-size: 0.72rem; }
+  .field input, .field textarea { font-size: 0.85rem; padding: 9px 11px; }
+
+  /* Contact Section */
+  .channel-title { font-size: 0.9rem; }
+  .channel-val { font-size: 0.82rem; }
+  .contact-terminal-card input, .contact-terminal-card textarea { font-size: 0.85rem; padding: 10px 12px; }
+
+  /* Space Arcade / Playground Section */
+  .game-tile-row h3 { font-size: 0.92rem; }
+  .game-tile p { font-size: 0.81rem; line-height: 1.5; }
+  .game-best { font-size: 0.76rem; }
+  .game-play { font-size: 0.78rem; }
+
+  /* Footer & Visitor Telemetry */
+  .visitor-text { font-size: 0.74rem; }
 }
 

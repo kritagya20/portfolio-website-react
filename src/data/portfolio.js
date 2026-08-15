@@ -288,7 +288,7 @@ export const projects = [
     desc: 'A real-time chat application with Firebase backend support, enabling instant messaging, profile management, custom themes, image sharing, and user blocking/unblocking in a modern Next.js interface.',
     tech: ['Next.js', 'Firebase', 'Tailwind CSS'],
     links: {
-      live: 'https://chat-7ch6v68g3-kritagya20.vercel.app/',
+      live: 'null',
       code: 'https://github.com/kritagya20/chatApp',
     },
     featured: true,

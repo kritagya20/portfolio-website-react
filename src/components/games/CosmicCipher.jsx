@@ -103,7 +103,13 @@ function CosmicRadarModule({ wrong }) {
   );
 }
 
-export default function Hangman({ best, onBest, onToast }) {
+const KEYBOARD_ROWS = [
+  ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+  ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+  ['Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+];
+
+export default function CosmicCipher({ best, onBest, onToast }) {
   const [entry, setEntry] = useState(() => pick());
   const word = entry.word;
   const [picked, setPicked] = useState(new Set());
@@ -199,21 +205,25 @@ export default function Hangman({ best, onBest, onToast }) {
         </div>
       </div>
 
-      <div className="hm-keys">
-        {ALPHABET.split('').map((l) => {
-          const used = picked.has(l);
-          const inWord = word.includes(l);
-          return (
-            <button
-              key={l}
-              className={`hm-key ${used ? (inWord ? 'good' : 'bad') : ''}`}
-              onClick={() => guess(l)}
-              disabled={used || gameStatus !== 'playing'}
-            >
-              {l}
-            </button>
-          );
-        })}
+      <div className="hm-keyboard-qwerty">
+        {KEYBOARD_ROWS.map((row, rIdx) => (
+          <div key={rIdx} className="hm-keyboard-row">
+            {row.map((l) => {
+              const used = picked.has(l);
+              const inWord = word.includes(l);
+              return (
+                <button
+                  key={l}
+                  className={`hm-key ${used ? (inWord ? 'good' : 'bad') : ''}`}
+                  onClick={() => guess(l)}
+                  disabled={used || gameStatus !== 'playing'}
+                >
+                  {l}
+                </button>
+              );
+            })}
+          </div>
+        ))}
       </div>
 
       <AnimatePresence>

@@ -5,7 +5,7 @@ import { playgroundHeader, gamesData } from '../../data/games.js';
 const PerfectCircle = lazy(() => import('./PerfectCircle.jsx'));
 const TypingTest = lazy(() => import('./TypingTest.jsx'));
 const MemoryMatch = lazy(() => import('./MemoryMatch.jsx'));
-const Hangman = lazy(() => import('./Hangman.jsx'));
+const CosmicCipher = lazy(() => import('./CosmicCipher.jsx'));
 
 const BEST_KEY = 'kritagya-portfolio-game-best-v1';
 
@@ -13,7 +13,7 @@ const COMPONENT_MAP = {
   circle: PerfectCircle,
   typing: TypingTest,
   memory: MemoryMatch,
-  hangman: Hangman,
+  hangman: CosmicCipher,
 };
 
 const BEST_LABEL_MAP = {
