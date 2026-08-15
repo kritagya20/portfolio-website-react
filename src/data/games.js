@@ -4,7 +4,7 @@ export const playgroundHeader = {
   title: 'Space Arcade',
   titleAccent: 'Arcade',
   sub: 'Six space-flavored dev mini-games — test your orbits, signals, telemetry, and speed. High scores persist on this device.',
-  fallbackLoadingText: '// INITIALIZING HOLODECK MODULE…',
+  fallbackLoadingText: 'Loading module…',
 };
 
 export const gamesData = [
@@ -61,11 +61,11 @@ export const gamesData = [
   },
   {
     id: 'hangman',
-    name: 'Cosmic Hangman',
+    name: 'Cosmic Cipher',
     tag: 'Deep Space',
-    icon: '🎯',
+    icon: '🛰️',
     color: '#fb7185',
-    desc: 'Decrypt the tech keyword before the cosmic doodle completes.',
+    desc: 'Decrypt the tech keyword before cosmic radar signal drops.',
     bestIsHigher: true,
     bestType: 'streak',
   },
@@ -184,16 +184,34 @@ export const hangmanData = {
 };
 
 export const memoryMatchData = {
-  gameIntro: 'Flip two cards. Match all 8 pairs in the fewest moves.',
-  pairs: [
-    { id: 'golang',   label: 'Golang',      emoji: '🐹',  color: '#00add8' },
-    { id: 'postgres', label: 'PostgreSQL',  emoji: '🐘',  color: '#336791' },
-    { id: 'selenium', label: 'Selenium',    emoji: '🤖',  color: '#43b02a' },
-    { id: 'rest',     label: 'REST Assured',emoji: '⚡',  color: '#f59e0b' },
-    { id: 'react',    label: 'React',       emoji: '⚛️',  color: '#22d3ee' },
-    { id: 'java',     label: 'Java',        emoji: '☕',  color: '#e76f51' },
-    { id: 'mysql',    label: 'MySQL',       emoji: '🐬',  color: '#0891b2' },
-    { id: 'docker',   label: 'Docker',      emoji: '🐳',  color: '#2496ed' },
+  gameIntro: 'Flip two cards. Match all 12 pairs in the fewest moves.',
+  techPairs: [
+    { id: 'golang',     label: 'Golang',      emoji: '🐹',  color: '#00add8' },
+    { id: 'postgres',   label: 'PostgreSQL',  emoji: '🐘',  color: '#336791' },
+    { id: 'selenium',   label: 'Selenium',    emoji: '🤖',  color: '#43b02a' },
+    { id: 'rest',       label: 'REST Assured',emoji: '⚡',  color: '#f59e0b' },
+    { id: 'react',      label: 'React',       emoji: '⚛️',  color: '#22d3ee' },
+    { id: 'java',       label: 'Java',        emoji: '☕',  color: '#e76f51' },
+    { id: 'js',         label: 'JavaScript',  emoji: '🟨',  color: '#f7df1e' },
+    { id: 'sql',        label: 'SQL Query',   emoji: '📊',  color: '#38bdf8' },
+    { id: 'docker',     label: 'Docker',      emoji: '🐳',  color: '#2496ed' },
+    { id: 'git',        label: 'Git',         emoji: '🌿',  color: '#f05032' },
+    { id: 'postman',    label: 'Postman API', emoji: '🚀',  color: '#ff6c37' },
+    { id: 'micro',      label: 'Microservices',emoji: '🧩', color: '#a855f7' },
+    { id: 'k8s',        label: 'Kubernetes',  emoji: '☸️',  color: '#326ce5' },
+  ],
+  spacePairs: [
+    { id: 'telescope',  label: 'Webb Scope',  emoji: '🔭',  color: '#eab308' },
+    { id: 'rover',      label: 'Mars Rover',  emoji: '🚜',  color: '#ef4444' },
+    { id: 'nebula',     label: 'Cosmic Nebula',emoji: '🌌', color: '#c084fc' },
+    { id: 'saturn',     label: 'Ringed Saturn',emoji: '🪐', color: '#f59e0b' },
+    { id: 'blackhole',  label: 'Black Hole',  emoji: '🕳️',  color: '#94a3b8' },
+    { id: 'comet',      label: 'Space Comet', emoji: '☄️',  color: '#38bdf8' },
+    { id: 'astronaut',  label: 'Spacewalker', emoji: '👨‍🚀', color: '#38bdf8' },
+    { id: 'rocket',     label: 'Falcon Booster',emoji: '🚀', color: '#ef4444' },
+    { id: 'station',    label: 'Space Station',emoji: '🛸', color: '#22d3ee' },
+    { id: 'sun',        label: 'Solar Array', emoji: '☀️',  color: '#eab308' },
+    { id: 'supernova',  label: 'Supernova',   emoji: '💥',  color: '#f97316' },
   ],
 };
 

@@ -2,10 +2,33 @@ import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { memoryMatchData } from '../../data/games.js';
 
-const PAIRS = memoryMatchData.pairs;
+function selectMixedPairs(numPairs = 12) {
+  const tech = memoryMatchData.techPairs || memoryMatchData.pairs || [];
+  const space = memoryMatchData.spacePairs || [];
 
-function buildDeck() {
-  const deck = [...PAIRS, ...PAIRS].map((p, i) => ({
+  const shuffleArray = (arr) => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  const shuffledTech = shuffleArray(tech);
+  const shuffledSpace = shuffleArray(space);
+
+  // Mix 7 tech stack pairs and 5 cosmic exploration space pairs
+  const chosenTech = shuffledTech.slice(0, 7);
+  const chosenSpace = shuffledSpace.slice(0, Math.max(0, numPairs - chosenTech.length));
+  
+  const combined = shuffleArray([...chosenTech, ...chosenSpace]);
+  return combined.slice(0, numPairs);
+}
+
+function buildGameData() {
+  const activePairs = selectMixedPairs(12);
+  const deck = [...activePairs, ...activePairs].map((p, i) => ({
     key: i + '-' + p.id,
     pair: p,
   }));
@@ -13,17 +36,18 @@ function buildDeck() {
     const j = Math.floor(Math.random() * (i + 1));
     [deck[i], deck[j]] = [deck[j], deck[i]];
   }
-  return deck;
+  return { deck, activePairs };
 }
 
 export default function MemoryMatch({ best, onBest, onToast }) {
-  const [deck, setDeck] = useState(() => buildDeck());
+  const [{ deck, activePairs }, setGameState] = useState(() => buildGameData());
   const [open, setOpen] = useState([]);
   const [matched, setMatched] = useState(new Set());
   const [moves, setMoves] = useState(0);
   const [lock, setLock] = useState(false);
 
-  const won = matched.size === PAIRS.length * 2;
+  const totalPairs = activePairs.length;
+  const won = matched.size > 0 && matched.size === totalPairs * 2;
 
   useEffect(() => {
     if (open.length !== 2) return;
@@ -63,7 +87,7 @@ export default function MemoryMatch({ best, onBest, onToast }) {
   };
 
   const reset = () => {
-    setDeck(buildDeck());
+    setGameState(buildGameData());
     setOpen([]);
     setMatched(new Set());
     setMoves(0);
@@ -78,7 +102,7 @@ export default function MemoryMatch({ best, onBest, onToast }) {
         </p>
         <div className="mm-stats">
           <span><b>{moves}</b> moves</span>
-          <span><b>{matched.size / 2}</b>/{PAIRS.length} pairs</span>
+          <span><b>{matched.size / 2}</b>/{totalPairs} pairs</span>
         </div>
       </div>
 

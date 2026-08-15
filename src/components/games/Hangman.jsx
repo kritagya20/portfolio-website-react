@@ -14,46 +14,92 @@ function pick(prevWord) {
   return e;
 }
 
-function HangmanFigure({ wrong }) {
-  const stroke = 'var(--text)';
+function CosmicRadarModule({ wrong }) {
+  const isCritical = wrong >= 4;
+  const isDead = wrong >= MAX_WRONG;
+
+  // Radar node positions (6 nodes for 6 lives)
+  const nodeDegrees = [0, 60, 120, 180, 240, 300];
+
   return (
-    <svg viewBox="0 0 200 220" className="hm-svg">
-      {/* Gallows */}
-      <line x1="20" y1="210" x2="180" y2="210" stroke={stroke} strokeWidth="4" />
-      <line x1="50" y1="210" x2="50" y2="20" stroke={stroke} strokeWidth="4" />
-      <line x1="50" y1="20" x2="130" y2="20" stroke={stroke} strokeWidth="4" />
-      <line x1="130" y1="20" x2="130" y2="40" stroke={stroke} strokeWidth="4" />
-      {/* Head */}
-      <AnimatePresence>
-        {wrong >= 1 && (
-          <motion.circle
-            key="head" cx="130" cy="60" r="20" fill="none"
-            stroke="var(--primary-2)" strokeWidth="4"
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.5 }}
-          />
+    <div className="hm-radar-wrapper">
+      <svg viewBox="0 0 220 220" className="hm-svg cosmic-radar-svg">
+        <defs>
+          <radialGradient id="radarCoreGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={isDead ? '#ef4444' : isCritical ? '#f59e0b' : '#38bdf8'} stopOpacity="0.45" />
+            <stop offset="100%" stopColor="transparent" />
+          </radialGradient>
+        </defs>
+
+        {/* Outer Orbital Grid Rings */}
+        <circle cx="110" cy="110" r="95" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" strokeDasharray="4 4" />
+        <circle cx="110" cy="110" r="70" fill="none" stroke="rgba(56, 189, 248, 0.15)" strokeWidth="1.5" />
+        <circle cx="110" cy="110" r="42" fill="none" stroke="rgba(192, 132, 252, 0.2)" strokeWidth="1.5" />
+
+        {/* Sweeping Telemetry Radar Beam */}
+        {!isDead && (
+          <motion.g
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 3.5, ease: 'linear' }}
+            style={{ transformOrigin: '110px 110px' }}
+          >
+            <line x1="110" y1="110" x2="110" y2="15" stroke="var(--primary-2)" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
+            <polygon points="110,110 110,15 145,25" fill="rgba(56, 189, 248, 0.12)" />
+          </motion.g>
         )}
-        {wrong >= 2 && (
-          <motion.line key="body" x1="130" y1="80" x2="130" y2="140" stroke="var(--primary-2)" strokeWidth="4"
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.4 }} />
-        )}
-        {wrong >= 3 && (
-          <motion.line key="arm1" x1="130" y1="100" x2="105" y2="120" stroke="var(--primary-2)" strokeWidth="4"
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.3 }} />
-        )}
-        {wrong >= 4 && (
-          <motion.line key="arm2" x1="130" y1="100" x2="155" y2="120" stroke="var(--primary-2)" strokeWidth="4"
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.3 }} />
-        )}
-        {wrong >= 5 && (
-          <motion.line key="leg1" x1="130" y1="140" x2="110" y2="175" stroke="var(--primary-2)" strokeWidth="4"
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.3 }} />
-        )}
-        {wrong >= 6 && (
-          <motion.line key="leg2" x1="130" y1="140" x2="150" y2="175" stroke="#ef4444" strokeWidth="4"
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.3 }} />
-        )}
-      </AnimatePresence>
-    </svg>
+
+        {/* Central Space Probe Core */}
+        <circle cx="110" cy="110" r="48" fill="url(#radarCoreGlow)" />
+        <circle
+          cx="110" cy="110" r="22"
+          fill={isDead ? 'rgba(239, 68, 68, 0.25)' : 'rgba(15, 23, 42, 0.9)'}
+          stroke={isDead ? '#ef4444' : isCritical ? '#f59e0b' : 'var(--primary)'}
+          strokeWidth="2.5"
+        />
+
+        {/* Central Status Icon */}
+        <text
+          x="110" y="115"
+          textAnchor="middle"
+          fill={isDead ? '#ef4444' : isCritical ? '#f59e0b' : '#ffffff'}
+          fontSize="14"
+          fontWeight="bold"
+          fontFamily="Space Grotesk, sans-serif"
+        >
+          {isDead ? '✕' : isCritical ? '⚠️' : '🛰️'}
+        </text>
+
+        {/* 6 Peripheral Energy Beacons (Disables one by one as wrong guesses occur) */}
+        {nodeDegrees.map((deg, idx) => {
+          const rad = (deg * Math.PI) / 180;
+          const nx = 110 + 70 * Math.cos(rad);
+          const ny = 110 + 70 * Math.sin(rad);
+          const isNodeDisabled = idx < wrong;
+
+          return (
+            <g key={deg}>
+              <line
+                x1="110" y1="110" x2={nx} y2={ny}
+                stroke={isNodeDisabled ? '#ef4444' : 'var(--primary-2)'}
+                strokeWidth="1.5"
+                opacity={isNodeDisabled ? 0.25 : 0.7}
+                strokeDasharray={isNodeDisabled ? '2 2' : 'none'}
+              />
+              <circle
+                cx={nx} cy={ny} r="8"
+                fill={isNodeDisabled ? 'rgba(239, 68, 68, 0.2)' : 'color-mix(in srgb, var(--surface-strong) 90%, #000)'}
+                stroke={isNodeDisabled ? '#ef4444' : 'var(--primary-2)'}
+                strokeWidth="2"
+              />
+              <circle
+                cx={nx} cy={ny} r="3"
+                fill={isNodeDisabled ? '#ef4444' : 'var(--primary-2)'}
+              />
+            </g>
+          );
+        })}
+      </svg>
+    </div>
   );
 }
 
@@ -62,7 +108,7 @@ export default function Hangman({ best, onBest, onToast }) {
   const word = entry.word;
   const [picked, setPicked] = useState(new Set());
   const [streak, setStreak] = useState(0);
-  const [ended, setEnded] = useState(false);
+  const [gameStatus, setGameStatus] = useState('playing'); // 'playing' | 'won' | 'lost'
 
   const wrong = useMemo(
     () => [...picked].filter((l) => !word.includes(l)).length,
@@ -72,29 +118,34 @@ export default function Hangman({ best, onBest, onToast }) {
     () => word.split('').map((c) => (picked.has(c) ? c : '_')),
     [word, picked]
   );
-  const won = !ended && masked.every((c) => c !== '_');
-  const lost = !ended && wrong >= MAX_WRONG;
+
+  const isWon = useMemo(
+    () => masked.length > 0 && masked.every((c) => c !== '_'),
+    [masked]
+  );
+  const isLost = wrong >= MAX_WRONG;
 
   useEffect(() => {
-    if (won && !ended) {
-      setEnded(true);
-      setStreak((s) => {
-        const next = s + 1;
-        onBest?.(next);
-        return next;
-      });
-      onToast?.(`🎉 Signal decrypted!`);
-    } else if (lost && !ended) {
-      setEnded(true);
-      setStreak(0);
-      onToast?.(`📡 Signal lost! The word was ${word}`);
+    if (gameStatus === 'playing') {
+      if (isWon) {
+        setGameStatus('won');
+        setStreak((s) => {
+          const next = s + 1;
+          onBest?.(next);
+          return next;
+        });
+        onToast?.(hangmanData.messages.winToast);
+      } else if (isLost) {
+        setGameStatus('lost');
+        setStreak(0);
+        onToast?.(hangmanData.messages.loseToast(word));
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [won, lost]);
+  }, [isWon, isLost, gameStatus, word, onBest, onToast]);
 
   useEffect(() => {
     const onKey = (e) => {
-      if (ended) return;
+      if (gameStatus !== 'playing') return;
       const k = e.key.toUpperCase();
       if (/^[A-Z]$/.test(k) && !picked.has(k)) {
         setPicked((p) => new Set([...p, k]));
@@ -102,27 +153,27 @@ export default function Hangman({ best, onBest, onToast }) {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [ended, picked]);
+  }, [gameStatus, picked]);
 
   const guess = (l) => {
-    if (ended || picked.has(l)) return;
+    if (gameStatus !== 'playing' || picked.has(l)) return;
     setPicked((p) => new Set([...p, l]));
   };
 
   const next = () => {
     setEntry(pick(word));
     setPicked(new Set());
-    setEnded(false);
+    setGameStatus('playing');
   };
 
   return (
     <div className="game hm">
       <div className="hm-stage">
-        <HangmanFigure wrong={wrong} />
+        <CosmicRadarModule wrong={wrong} />
         <div className="hm-side">
           <div className="hm-meta">
             <span>
-              ❤️ <b>{MAX_WRONG - wrong}</b> lives left
+              ❤️ <b>{Math.max(0, MAX_WRONG - wrong)}</b> lives left
             </span>
             <span>
               🔥 Streak: <b>{streak}</b>
@@ -157,7 +208,7 @@ export default function Hangman({ best, onBest, onToast }) {
               key={l}
               className={`hm-key ${used ? (inWord ? 'good' : 'bad') : ''}`}
               onClick={() => guess(l)}
-              disabled={used || ended}
+              disabled={used || gameStatus !== 'playing'}
             >
               {l}
             </button>
@@ -166,21 +217,23 @@ export default function Hangman({ best, onBest, onToast }) {
       </div>
 
       <AnimatePresence>
-        {ended && (
+        {gameStatus !== 'playing' && (
           <motion.div
-            className={`hm-result ${won ? 'good' : 'bad'}`}
+            className={`hm-result ${gameStatus === 'won' ? 'good' : 'bad'}`}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
           >
-            {won ? `🎉 You got it! Streak: ${streak}` : `💀 The word was "${word}"`}
+            {gameStatus === 'won'
+              ? hangmanData.messages.winResult(streak)
+              : hangmanData.messages.loseResult(word)}
           </motion.div>
         )}
       </AnimatePresence>
 
       <div className="game-actions">
         <button className="btn btn-primary" onClick={next}>
-          {ended ? '▶️ Next word' : '🎲 New word'}
+          {gameStatus !== 'playing' ? '▶️ Next word' : '🎲 New word'}
         </button>
         {best != null && <span className="best-pill">🏆 Best streak: {best}</span>}
       </div>

@@ -316,6 +316,6 @@ export const contactData = {
 export const footerData = {
   greeting: 'Happy to see you here',
   greetingSub: '— have a great day ahead! 👋',
-  visitorTelemetryLabel: '// ORBIT VISITOR TELEMETRY',
+  visitorTelemetryLabel: 'VISITOR COUNTER',
 };
 

@@ -3835,7 +3835,7 @@ select::placeholder,
 
 .mm-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 10px;
 }
 .mm-card {
@@ -3853,42 +3853,59 @@ select::placeholder,
 .mm-face {
   position: absolute; inset: 0;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  border-radius: 14px; -webkit-backface-visibility: hidden; backface-visibility: hidden;
+  border-radius: 12px; -webkit-backface-visibility: hidden; backface-visibility: hidden;
   border: 2px solid var(--border);
 }
 .mm-back {
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--primary) 30%, transparent), color-mix(in srgb, var(--primary-2) 30%, transparent)),
     var(--surface);
-  color: var(--text); font-size: 1.6rem; font-weight: 800;
+  color: var(--text); font-size: 1.5rem; font-weight: 800;
 }
 .mm-front {
   background: var(--bg-soft);
   transform: rotateY(180deg);
-  gap: 4px;
+  gap: 3px;
+  padding: 4px;
 }
 .mm-card.matched .mm-front {
   box-shadow: 0 0 0 2px color-mix(in srgb, currentColor 40%, transparent),
-              0 0 24px color-mix(in srgb, currentColor 30%, transparent);
+              0 0 20px color-mix(in srgb, currentColor 30%, transparent);
 }
-.mm-emoji { font-size: 1.8rem; line-height: 1; }
-.mm-label { font-size: 0.78rem; font-weight: 700; }
+.mm-emoji { font-size: 1.6rem; line-height: 1; }
+.mm-label { font-size: 0.72rem; font-weight: 700; text-align: center; line-height: 1.1; }
 
 .mm-final {
   margin-top: 14px; padding: 12px 14px; border-radius: 12px; text-align: center;
   background: color-mix(in srgb, var(--primary) 14%, transparent);
   border: 1px solid var(--primary);
 }
-@media (max-width: 480px) {
+@media (max-width: 640px) {
   .mm-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
-  .mm-emoji { font-size: 1.4rem; }
-  .mm-label { font-size: 0.65rem; }
+  .mm-emoji { font-size: 1.3rem; }
+  .mm-label { font-size: 0.62rem; }
+}
+@media (max-width: 400px) {
+  .mm-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
 }
 
-/* --- Hangman --- */
+.hm-radar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cosmic-radar-svg {
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+}
+
 .hm-stage {
-  display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: center;
-  margin-bottom: 14px;
+  display: grid; grid-template-columns: 200px 1fr; gap: 20px; align-items: center;
+  margin-bottom: 24px;
 }
 .hm-svg { width: 100%; height: auto; max-height: 220px; }
 .hm-side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
@@ -3896,10 +3913,10 @@ select::placeholder,
 .hm-meta b { color: var(--text); }
 
 .hm-word {
-  display: flex; gap: 6px; flex-wrap: wrap;
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;
 }
 .hm-letter {
-  min-width: 24px; padding: 4px 6px;
+  min-width: 26px; padding: 4px 6px;
   border-bottom: 3px solid var(--text-muted);
   font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 1.3rem;
   text-align: center;
@@ -3907,7 +3924,10 @@ select::placeholder,
 .hm-letter.shown { border-color: var(--primary-2); color: var(--primary-2); }
 
 .hm-keys {
-  display: grid; grid-template-columns: repeat(13, 1fr); gap: 5px;
+  display: grid; grid-template-columns: repeat(13, 1fr); gap: 6px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 .hm-key {
   padding: 8px 0; border-radius: 8px;
@@ -3922,15 +3942,15 @@ select::placeholder,
 .hm-key.bad  { background: #ef4444; border-color: #ef4444; color: #fff; }
 
 .hm-result {
-  margin-top: 12px; padding: 12px 14px; border-radius: 12px; text-align: center; font-weight: 600;
+  margin-top: 16px; padding: 12px 14px; border-radius: 12px; text-align: center; font-weight: 600;
 }
 .hm-result.good { background: color-mix(in srgb, #16a34a 16%, transparent); border: 1px solid #16a34a; }
 .hm-result.bad  { background: color-mix(in srgb, #ef4444 14%, transparent); border: 1px solid #ef4444; }
 
 @media (max-width: 600px) {
-  .hm-stage { grid-template-columns: 1fr; }
+  .hm-stage { grid-template-columns: 1fr; gap: 14px; margin-bottom: 20px; }
   .hm-svg { max-height: 180px; margin: 0 auto; }
-  .hm-keys { grid-template-columns: repeat(9, 1fr); }
+  .hm-keys { grid-template-columns: repeat(9, 1fr); margin-top: 20px; padding-top: 14px; }
 }
 
 /* ========== PLAYGROUND RESPONSIVE OVERRIDES ========== */
