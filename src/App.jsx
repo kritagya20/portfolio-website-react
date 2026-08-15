@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { motion, useScroll } from 'framer-motion';
-import StarfieldCanvas from './components/StarfieldCanvas.jsx';
 import CustomCursor from './components/CustomCursor.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -11,6 +10,8 @@ import Playground from './components/games/Playground.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Socials from './components/Socials.jsx';
+
+const StarfieldCanvas = lazy(() => import('./components/StarfieldCanvas.jsx'));
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -24,7 +25,9 @@ export default function App() {
 
   return (
     <div className="app">
-      <StarfieldCanvas />
+      <Suspense fallback={null}>
+        <StarfieldCanvas />
+      </Suspense>
       <CustomCursor />
       <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
       <Navbar />

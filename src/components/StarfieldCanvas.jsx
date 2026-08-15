@@ -7,6 +7,12 @@ export default function StarfieldCanvas() {
   useEffect(() => {
     if (!canvasRef.current) return;
 
+    // Detect low-power hardware, mobile, slow connections (save-data / 2g / 3g), or reduced motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 640;
+    const isSlowConnection = navigator.connection && (navigator.connection.saveData || /2g|3g/.test(navigator.connection.effectiveType));
+    const isLowPowerDevice = isMobile || isSlowConnection || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) || prefersReducedMotion;
+
     const canvas = canvasRef.current;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -19,13 +25,14 @@ export default function StarfieldCanvas() {
     const renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       alpha: true,
-      antialias: true,
+      antialias: !isLowPowerDevice,
     });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(isLowPowerDevice ? 1 : Math.min(window.devicePixelRatio, 2));
 
-    const starsCount = 3400;
+    // Adaptive Star Particle Count: 900 on low power/mobile vs 3400 on high performance
+    const starsCount = isLowPowerDevice ? 900 : 3400;
     const starsGeometry = new THREE.BufferGeometry();
     const posArray = new Float32Array(starsCount * 3);
 
@@ -40,12 +47,13 @@ export default function StarfieldCanvas() {
 
     function createStarTexture() {
       const texCanvas = document.createElement('canvas');
-      texCanvas.width = 64;
-      texCanvas.height = 64;
+      const texSize = isLowPowerDevice ? 32 : 64;
+      texCanvas.width = texSize;
+      texCanvas.height = texSize;
 
       const ctx = texCanvas.getContext('2d');
-      const center = 32;
-      const radius = 30;
+      const center = texSize / 2;
+      const radius = texSize * 0.45;
 
       const gradient = ctx.createRadialGradient(center, center, 0, center, center, radius);
       gradient.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
@@ -64,7 +72,7 @@ export default function StarfieldCanvas() {
     const starTexture = createStarTexture();
 
     const starsMaterial = new THREE.PointsMaterial({
-      size: 0.34,
+      size: isLowPowerDevice ? 0.45 : 0.34,
       map: starTexture,
       color: 0xffffff,
       transparent: true,
@@ -83,8 +91,8 @@ export default function StarfieldCanvas() {
     const meteors = [];
 
     function spawnMeteorWave() {
-      // Random count: 1 to 3 meteors per wave
-      const count = Math.floor(Math.random() * 3) + 1;
+      if (prefersReducedMotion) return;
+      const count = isLowPowerDevice ? 1 : Math.floor(Math.random() * 3) + 1;
       const isSameDirection = Math.random() > 0.4;
 
       const baseDirX = Math.random() > 0.5 ? (Math.random() * 0.3 - 0.75) : (Math.random() * 0.3 + 0.45);
@@ -92,17 +100,15 @@ export default function StarfieldCanvas() {
 
       for (let c = 0; c < count; c++) {
         const geometry = new THREE.BufferGeometry();
-        const tailPoints = 22;
+        const tailPoints = isLowPowerDevice ? 12 : 22;
 
         const dirX = isSameDirection
           ? baseDirX
           : (Math.random() > 0.5 ? (Math.random() * 0.3 - 0.75) : (Math.random() * 0.3 + 0.45));
         const dirY = isSameDirection ? baseDirY : -(Math.random() * 0.3 + 0.35);
-        
-        // Random speed multiplier per meteor (1.1x to 2.3x)
+
         const speed = Math.random() * 1.2 + 1.1;
 
-        // Position spawn origin relative to direction
         const startX = dirX < 0 ? (Math.random() * 30 + 5) : (Math.random() * -30 - 5);
         const startY = Math.random() * 18 + 8;
         const startZ = (Math.random() - 0.5) * 12;
@@ -123,7 +129,7 @@ export default function StarfieldCanvas() {
           color: color,
           transparent: true,
           opacity: 1.0,
-          linewidth: 3,
+          linewidth: isLowPowerDevice ? 2 : 3,
           blending: THREE.AdditiveBlending,
         });
 
@@ -141,10 +147,11 @@ export default function StarfieldCanvas() {
       }
     }
 
-    // Initial spawn wave, then random interval between 5000ms and 10000ms
-    spawnMeteorWave();
+    if (!prefersReducedMotion) {
+      spawnMeteorWave();
+    }
     let lastMeteorSpawn = Date.now();
-    let nextMeteorInterval = Math.random() * 5000 + 5000;
+    let nextMeteorInterval = isLowPowerDevice ? 10000 : Math.random() * 5000 + 5000;
 
     let targetMouseX = 0;
     let targetMouseY = 0;
@@ -157,6 +164,7 @@ export default function StarfieldCanvas() {
     let windowHalfY = window.innerHeight / 2;
 
     const handleMouseMove = (event) => {
+      if (isLowPowerDevice) return;
       targetMouseX = (event.clientX - windowHalfX) * 0.00004;
       targetMouseY = (event.clientY - windowHalfY) * 0.00004;
       isMouseActive = true;
@@ -186,53 +194,59 @@ export default function StarfieldCanvas() {
     };
 
     window.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('mousemove', handleMouseMove);
+    if (!isLowPowerDevice) window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('resize', handleResize);
 
     let animationFrameId;
+    let lastFrameTime = 0;
+    const targetFps = isLowPowerDevice ? 30 : 60;
+    const frameInterval = 1000 / targetFps;
 
-    const animate = () => {
+    const animate = (timestamp) => {
       if (isTabVisible) {
-        const now = Date.now();
+        const elapsed = timestamp - lastFrameTime;
 
-        // Dynamic spawn timer (5 - 10 seconds)
-        if (now - lastMeteorSpawn > nextMeteorInterval) {
-          spawnMeteorWave();
-          lastMeteorSpawn = now;
-          nextMeteorInterval = Math.random() * 5000 + 5000;
-        }
+        if (!isLowPowerDevice || elapsed >= frameInterval) {
+          lastFrameTime = timestamp - (elapsed % frameInterval);
+          const now = Date.now();
 
-        // Update active meteors
-        for (let i = meteors.length - 1; i >= 0; i--) {
-          const m = meteors[i];
-          m.mesh.position.x += m.vx;
-          m.mesh.position.y += m.vy;
-          m.mesh.position.z += m.vz;
-          m.life -= m.fadeSpeed;
-          m.mesh.material.opacity = m.life;
-
-          if (m.life <= 0) {
-            scene.remove(m.mesh);
-            m.mesh.geometry.dispose();
-            m.mesh.material.dispose();
-            meteors.splice(i, 1);
+          if (!prefersReducedMotion && now - lastMeteorSpawn > nextMeteorInterval) {
+            spawnMeteorWave();
+            lastMeteorSpawn = now;
+            nextMeteorInterval = isLowPowerDevice ? 12000 : Math.random() * 5000 + 5000;
           }
+
+          for (let i = meteors.length - 1; i >= 0; i--) {
+            const m = meteors[i];
+            m.mesh.position.x += m.vx;
+            m.mesh.position.y += m.vy;
+            m.mesh.position.z += m.vz;
+            m.life -= m.fadeSpeed;
+            m.mesh.material.opacity = m.life;
+
+            if (m.life <= 0) {
+              scene.remove(m.mesh);
+              m.mesh.geometry.dispose();
+              m.mesh.material.dispose();
+              meteors.splice(i, 1);
+            }
+          }
+
+          const activeFactor = isMouseActive ? 1.0 : 0.0;
+
+          currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.018;
+          currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.018;
+
+          starMesh.rotation.y += 0.00012 + currentInfluenceX;
+          starMesh.rotation.x += 0.00006 + currentInfluenceY;
+
+          renderer.render(scene, camera);
         }
-
-        const activeFactor = isMouseActive ? 1.0 : 0.0;
-
-        currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.018;
-        currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.018;
-
-        starMesh.rotation.y += 0.00012 + currentInfluenceX;
-        starMesh.rotation.x += 0.00006 + currentInfluenceY;
-
-        renderer.render(scene, camera);
       }
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
       if (inactivityTimer) clearTimeout(inactivityTimer);
