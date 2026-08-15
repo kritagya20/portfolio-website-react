@@ -318,3 +318,4 @@ export const footerData = {
   greetingSub: '— have a great day ahead! 👋',
   visitorTelemetryLabel: '// ORBIT VISITOR TELEMETRY',
 };
+

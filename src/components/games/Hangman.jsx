@@ -1,31 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { hangmanData } from '../../data/games.js';
 
-const WORDS = [
-  { word: 'JAVASCRIPT',     hint: 'The language of the web' },
-  { word: 'REACT',          hint: "Meta's component-based UI library" },
-  { word: 'MICROSERVICES',  hint: 'Architecture made of many small services' },
-  { word: 'KUBERNETES',     hint: 'Container orchestration platform' },
-  { word: 'DEVELOPER',      hint: 'Person who writes code for a living' },
-  { word: 'ALGORITHM',      hint: 'Step-by-step problem-solving recipe' },
-  { word: 'DATABASE',       hint: 'Where structured data lives' },
-  { word: 'FUNCTION',       hint: 'A reusable block of code' },
-  { word: 'COMPONENT',      hint: 'A reusable UI building block' },
-  { word: 'DEPLOYMENT',     hint: 'Releasing code to production' },
-  { word: 'AZURE',          hint: "Microsoft's cloud platform" },
-  { word: 'FRONTEND',       hint: 'The part of an app the user sees' },
-  { word: 'BACKEND',        hint: 'Server-side logic and data' },
-  { word: 'DEBUGGING',      hint: 'Finding and fixing problems in code' },
-  { word: 'REPOSITORY',     hint: 'A versioned project folder (Git)' },
-  { word: 'FRAMEWORK',      hint: 'Skeleton library you build apps on' },
-  { word: 'CONTAINER',      hint: 'Lightweight isolated runtime (e.g. Docker)' },
-  { word: 'PIPELINE',       hint: 'Automated build / deploy flow' },
-  { word: 'INTEGRATION',    hint: 'Connecting two systems together' },
-  { word: 'AUTHENTICATION', hint: 'Verifying who you are' },
-];
-
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const MAX_WRONG = 6;
+const WORDS = hangmanData.words;
+const ALPHABET = hangmanData.alphabet;
+const MAX_WRONG = hangmanData.maxWrong;
 
 function pick(prevWord) {
   let e = WORDS[Math.floor(Math.random() * WORDS.length)];

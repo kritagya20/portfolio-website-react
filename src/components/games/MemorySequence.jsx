@@ -1,12 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { memorySequenceData } from '../../data/portfolio.js';
 
-const PADS = [
-  { id: 0, name: 'Red',    color: '#ef4444', glow: '#fca5a5', freq: 329.63 },
-  { id: 1, name: 'Green',  color: '#22c55e', glow: '#86efac', freq: 261.63 },
-  { id: 2, name: 'Blue',   color: '#3b82f6', glow: '#93c5fd', freq: 392.0  },
-  { id: 3, name: 'Yellow', color: '#f59e0b', glow: '#fcd34d', freq: 440.0  },
-];
+const PADS = memorySequenceData.pads;
 
 const SHOW_MS = 520;
 const GAP_MS = 180;
@@ -134,18 +130,17 @@ export default function MemorySequence({ best, onBest, onToast }) {
   const round = seq.length;
   const statusLabel =
     phase === 'idle'
-      ? 'Press start to begin'
+      ? memorySequenceData.statusLabels.idle
       : phase === 'showing'
-      ? 'Watch the sequence…'
+      ? memorySequenceData.statusLabels.showing
       : phase === 'input'
-      ? `Your turn — step ${userIdx + 1} / ${round}`
-      : 'Game over';
+      ? memorySequenceData.statusLabels.input(userIdx, round)
+      : memorySequenceData.statusLabels.gameover;
 
   return (
     <div className="game ms">
       <p className="game-intro">
-        Watch the sequence, then repeat it by tapping the pads in the same order. Each round
-        adds one more step.
+        {memorySequenceData.gameIntro}
       </p>
 
       <div className="ms-hud">

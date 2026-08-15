@@ -1,77 +1,8 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { bugHunterData } from '../../data/games.js';
 
-const PUZZLES = [
-  {
-    lang: 'JavaScript',
-    title: 'Array iteration',
-    code: [
-      'function sumArr(arr) {',
-      '  let sum = 0;',
-      '  for (let i = 0; i <= arr.length; i++) {',
-      '    sum += arr[i];',
-      '  }',
-      '  return sum;',
-      '}',
-    ],
-    bug: 2,
-    explain: 'Off-by-one: i should go up to < arr.length, not <= (causes NaN on the last index).',
-  },
-  {
-    lang: 'C#',
-    title: 'Async without await',
-    code: [
-      'public async Task<User> GetUserAsync(int id) {',
-      '    var user = _db.Users.FindAsync(id);',
-      '    if (user == null) return null;',
-      '    return user;',
-      '}',
-    ],
-    bug: 1,
-    explain: 'FindAsync returns a Task — must be awaited. Otherwise user is the Task object.',
-  },
-  {
-    lang: 'SQL',
-    title: 'Vulnerable query',
-    code: [
-      'string sql = "SELECT * FROM users " +',
-      '             "WHERE name = \'" + name + "\'";',
-      'var rows = db.Query(sql);',
-      'return rows;',
-    ],
-    bug: 0,
-    explain: 'String concatenation = SQL injection. Use parameterized queries instead.',
-  },
-  {
-    lang: 'JavaScript',
-    title: 'Equality check',
-    code: [
-      'function isAdmin(user) {',
-      '  if (user.role == "admin") {',
-      '    return true;',
-      '  }',
-      '  return false;',
-      '}',
-    ],
-    bug: 1,
-    explain: 'Use === for strict equality. == triggers type coercion that can cause subtle bugs.',
-  },
-  {
-    lang: 'React',
-    title: 'Missing dependency',
-    code: [
-      'function Profile({ id }) {',
-      '  const [user, setUser] = useState(null);',
-      '  useEffect(() => {',
-      '    fetchUser(id).then(setUser);',
-      '  }, []);',
-      '  return <div>{user?.name}</div>;',
-      '}',
-    ],
-    bug: 4,
-    explain: 'The dep array should include `id`. Otherwise the effect never re-fires when id changes.',
-  },
-];
+const PUZZLES = bugHunterData.puzzles;
 
 export default function BugHunter({ best, onBest }) {
   const [order] = useState(() => shuffle(PUZZLES.map((_, i) => i)));
@@ -121,7 +52,7 @@ export default function BugHunter({ best, onBest }) {
               <b style={{ color: 'var(--primary-2)' }}>{score}</b>
             </div>
           </div>
-          <p className="game-intro">Click the line that contains the space probe system bug.</p>
+          <p className="game-intro">{bugHunterData.gameIntro}</p>
 
           <pre className="bug-code">
             {puzzle.code.map((line, i) => (

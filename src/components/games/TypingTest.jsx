@@ -1,31 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { typingTestData } from '../../data/portfolio.js';
 
-const SNIPPETS = [
-  `public async Task<IActionResult> GetOrders(int userId) {
-  var orders = await _db.Orders
-    .Where(o => o.UserId == userId)
-    .ToListAsync();
-  return Ok(orders);
-}`,
-  `const fetchUser = async (id) => {
-  const res = await fetch(\`/api/users/\${id}\`);
-  if (!res.ok) throw new Error("User not found");
-  return res.json();
-};`,
-  `function debounce(fn, wait) {
-  let t;
-  return (...args) => {
-    clearTimeout(t);
-    t = setTimeout(() => fn(...args), wait);
-  };
-}`,
-  `SELECT u.id, u.name, COUNT(o.id) AS orders
-FROM users u
-LEFT JOIN orders o ON o.user_id = u.id
-GROUP BY u.id, u.name
-HAVING COUNT(o.id) > 5;`,
-];
+const SNIPPETS = typingTestData.snippets;
 
 function pickSnippet(prevIdx) {
   if (SNIPPETS.length === 1) return 0;
@@ -87,8 +64,7 @@ export default function TypingTest({ best, onBest }) {
   return (
     <div className="game tt">
       <p className="game-intro">
-        Type the snippet below as quickly &amp; accurately as you can. Timer starts on your
-        first keystroke.
+        {typingTestData.gameIntro}
       </p>
 
       <div className="tt-stage">
@@ -111,7 +87,7 @@ export default function TypingTest({ best, onBest }) {
           value={typed}
           onChange={onChange}
           spellCheck={false}
-          placeholder="Click here and start typing…"
+          placeholder={typingTestData.placeholder}
           disabled={!!endedAt}
         />
       </div>

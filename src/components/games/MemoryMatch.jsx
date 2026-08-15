@@ -1,16 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { memoryMatchData } from '../../data/portfolio.js';
 
-const PAIRS = [
-  { id: 'react',   label: 'React',  emoji: '⚛️',  color: '#22d3ee' },
-  { id: 'node',    label: 'Node',   emoji: '🟢',  color: '#22c55e' },
-  { id: 'csharp',  label: 'C#',     emoji: '🎯',  color: '#a855f7' },
-  { id: 'azure',   label: 'Azure',  emoji: '☁️',  color: '#3b82f6' },
-  { id: 'mysql',   label: 'MySQL',  emoji: '🐬',  color: '#0891b2' },
-  { id: 'dotnet',  label: '.NET',   emoji: '🟣',  color: '#7c5cff' },
-  { id: 'java',    label: 'Java',   emoji: '☕',  color: '#f59e0b' },
-  { id: 'git',     label: 'Git',    emoji: '🌿',  color: '#ec4899' },
-];
+const PAIRS = memoryMatchData.pairs;
 
 function buildDeck() {
   const deck = [...PAIRS, ...PAIRS].map((p, i) => ({
@@ -82,7 +74,7 @@ export default function MemoryMatch({ best, onBest, onToast }) {
     <div className="game mm">
       <div className="mm-head">
         <p className="game-intro" style={{ margin: 0 }}>
-          Flip two cards. Match all 8 pairs in the fewest moves.
+          {memoryMatchData.gameIntro}
         </p>
         <div className="mm-stats">
           <span><b>{moves}</b> moves</span>

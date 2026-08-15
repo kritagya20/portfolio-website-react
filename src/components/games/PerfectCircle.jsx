@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { perfectCircleData } from '../../data/portfolio.js';
 
 const SIZE = 360;
 
@@ -114,8 +115,7 @@ export default function PerfectCircle({ best, onBest }) {
   return (
     <div className="game pc">
       <p className="game-intro">
-        Hold and drag (or touch) inside the cosmic grid to draw a planetary orbit in <b>one stroke</b>.
-        Release to measure orbital precision.
+        {perfectCircleData.gameIntro}
       </p>
 
       <div className="pc-stage">
@@ -143,14 +143,14 @@ export default function PerfectCircle({ best, onBest }) {
               <div className="pc-num">{result}%</div>
               <div className="pc-cap">
                 {result > 95
-                  ? 'Perfect planetary orbit!'
+                  ? perfectCircleData.captions.perfect
                   : result > 85
-                  ? 'Stable trajectory!'
+                  ? perfectCircleData.captions.stable
                   : result > 70
-                  ? 'Decent orbital path.'
+                  ? perfectCircleData.captions.decent
                   : result > 40
-                  ? 'Unstable orbit — practice entry.'
-                  : 'Off-course trajectory!'}
+                  ? perfectCircleData.captions.unstable
+                  : perfectCircleData.captions.offCourse}
               </div>
             </motion.div>
           )}

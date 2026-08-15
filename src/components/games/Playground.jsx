@@ -1,5 +1,6 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { playgroundHeader, gamesData } from '../../data/games.js';
 
 const PerfectCircle = lazy(() => import('./PerfectCircle.jsx'));
 const TypingTest = lazy(() => import('./TypingTest.jsx'));
@@ -10,74 +11,29 @@ const Hangman = lazy(() => import('./Hangman.jsx'));
 
 const BEST_KEY = 'kritagya-portfolio-game-best-v1';
 
-export const GAMES = [
-  {
-    id: 'circle',
-    name: 'Perfect Orbit',
-    tag: 'Orbit',
-    icon: '◯',
-    color: '#7c5cff',
-    desc: 'Draw a smooth planetary orbit in one continuous sweep. Score is orbit roundness.',
-    Component: PerfectCircle,
-    bestLabel: (v) => `Best: ${v}%`,
-    bestIsHigher: true,
-  },
-  {
-    id: 'typing',
-    name: 'Typing',
-    tag: 'Flight Code',
-    icon: '⌨',
-    color: '#22d3ee',
-    desc: 'Type real space-flight and dev code snippets. Measures WPM and accuracy.',
-    Component: TypingTest,
-    bestLabel: (v) => `Best: ${v} WPM`,
-    bestIsHigher: true,
-  },
-  {
-    id: 'sequence',
-    name: 'Starlight Sequence',
-    tag: 'Signals',
-    icon: '🎵',
-    color: '#22c55e',
-    desc: 'Watch the constellation beacons, repeat the signal pattern. Each round adds one step.',
-    Component: MemorySequence,
-    bestLabel: (v) => `Round ${v}`,
-    bestIsHigher: true,
-  },
-  {
-    id: 'bug',
-    name: 'Asteroid Bug Hunter',
-    tag: 'Telemetry',
-    icon: '🐛',
-    color: '#f59e0b',
-    desc: 'Spot the buggy line in real space-probe code. 5 telemetry puzzles, no hints.',
-    Component: BugHunter,
-    bestLabel: (v) => `Best: ${v}/5`,
-    bestIsHigher: true,
-  },
-  {
-    id: 'memory',
-    name: 'Stack Match',
-    tag: 'Memory',
-    icon: '🧠',
-    color: '#ec4899',
-    desc: 'Flip cosmic cards to match tech-stack pairs. Fewer moves = better rank.',
-    Component: MemoryMatch,
-    bestLabel: (v) => `Best: ${v} moves`,
-    bestIsHigher: false,
-  },
-  {
-    id: 'hangman',
-    name: 'Cosmic Hangman',
-    tag: 'Deep Space',
-    icon: '🎯',
-    color: '#fb7185',
-    desc: 'Decrypt the tech keyword before the cosmic doodle completes.',
-    Component: Hangman,
-    bestLabel: (v) => `Win streak: ${v}`,
-    bestIsHigher: true,
-  },
-];
+const COMPONENT_MAP = {
+  circle: PerfectCircle,
+  typing: TypingTest,
+  sequence: MemorySequence,
+  bug: BugHunter,
+  memory: MemoryMatch,
+  hangman: Hangman,
+};
+
+const BEST_LABEL_MAP = {
+  circle: (v) => `Best: ${v}%`,
+  typing: (v) => `Best: ${v} WPM`,
+  sequence: (v) => `Round ${v}`,
+  bug: (v) => `Best: ${v}/5`,
+  memory: (v) => `Best: ${v} moves`,
+  hangman: (v) => `Win streak: ${v}`,
+};
+
+export const GAMES = gamesData.map((g) => ({
+  ...g,
+  Component: COMPONENT_MAP[g.id],
+  bestLabel: BEST_LABEL_MAP[g.id],
+}));
 
 function loadBests() {
   try {
@@ -127,14 +83,13 @@ export default function Playground({ onToast }) {
     <section id="playground" className="section">
       <div className="container">
         <span className="eyebrow">
-          <span className="dot" /> Fun & Games
+          <span className="dot" /> {playgroundHeader.eyebrow}
         </span>
         <h2 className="section-title">
-          Space <span className="accent">Arcade</span>
+          {playgroundHeader.title.split(' ')[0]} <span className="accent">{playgroundHeader.titleAccent}</span>
         </h2>
         <p className="section-sub">
-          Six space-flavored dev mini-games — test your orbits, signals, telemetry, and speed.
-          High scores persist on this device.
+          {playgroundHeader.sub}
         </p>
 
         <div className="game-grid">
@@ -215,7 +170,7 @@ export default function Playground({ onToast }) {
                 <Suspense
                   fallback={
                     <div style={{ padding: '40px 0', textAlign: 'center', color: 'var(--primary-2)', fontFamily: 'JetBrains Mono, monospace', fontSize: '0.85rem' }}>
-                      // INITIALIZING HOLODECK MODULE…
+                      {playgroundHeader.fallbackLoadingText}
                     </div>
                   }
                 >
@@ -233,3 +188,4 @@ export default function Playground({ onToast }) {
     </section>
   );
 }
+
