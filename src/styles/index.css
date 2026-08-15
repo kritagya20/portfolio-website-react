@@ -1,6 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* ========== THEME TOKENS ========== */
+/* ========== THEME & TYPOGRAPHY TOKENS ========== */
+:root {
+  /* Central Typography System */
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Central Font Sizes - Desktop / Fluid Default */
+  --fs-hero-title: clamp(2.2rem, 5vw, 3.8rem);
+  --fs-section-title: clamp(1.48rem, 1.1rem + 1.8vw, 2.4rem);
+  --fs-section-sub: clamp(0.88rem, 0.8rem + 0.4vw, 1.05rem);
+  --fs-card-title: clamp(0.95rem, 2.2vw, 1.08rem);
+  --fs-body: clamp(0.83rem, 1.8vw, 0.88rem);
+  --fs-lead: clamp(0.98rem, 2.2vw, 1.12rem);
+  --fs-btn: clamp(0.82rem, 1.8vw, 0.9rem);
+  --fs-badge: clamp(0.66rem, 1.5vw, 0.72rem);
+  --fs-eyebrow: 0.75rem;
+  --fs-code: clamp(0.72rem, 1.8vw, 0.78rem);
+
+  /* Line Heights */
+  --lh-heading: 1.35;
+  --lh-body: 1.55;
+}
+
+/* Mobile Typography Token Overrides (< 640px) */
+@media (max-width: 640px) {
+  :root {
+    --fs-hero-title: clamp(1.65rem, 6.5vw, 2.2rem);
+    --fs-section-title: clamp(1.35rem, 5.2vw, 1.65rem);
+    --fs-section-sub: clamp(0.83rem, 3.2vw, 0.88rem);
+    --fs-card-title: 0.95rem;
+    --fs-body: 0.83rem;
+    --fs-lead: 0.98rem;
+    --fs-btn: 0.84rem;
+    --fs-badge: 0.65rem;
+    --fs-eyebrow: 0.72rem;
+    --fs-code: 0.72rem;
+  }
+}
+
 :root,
 [data-theme='solar'] {
   --bg: #070707;
@@ -195,8 +234,8 @@ img {
 .section-sub { margin-bottom: clamp(28px, 4vw, 48px); }
 
 .section-title {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: clamp(1.48rem, 1.1rem + 1.8vw, 2.4rem);
+  font-family: var(--font-heading);
+  font-size: var(--fs-section-title);
   font-weight: 700;
   letter-spacing: -0.02em;
   margin: 0 0 8px;
@@ -213,13 +252,13 @@ img {
 .section-sub {
   color: var(--text-muted);
   margin: 0 0 clamp(24px, 4vw, 44px);
-  font-size: clamp(0.88rem, 0.8rem + 0.4vw, 1.05rem);
-  line-height: 1.6;
+  font-size: var(--fs-section-sub);
+  line-height: var(--lh-body);
   max-width: 640px;
 }
 
 .eyebrow {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: var(--font-heading);
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -228,7 +267,7 @@ img {
   background: var(--surface);
   border: 1px solid var(--border);
   color: var(--text-muted);
-  font-size: 0.75rem;
+  font-size: var(--fs-eyebrow);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -246,7 +285,7 @@ img {
 }
 
 .btn {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: var(--font-heading);
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -256,7 +295,7 @@ img {
   background: var(--surface);
   color: var(--text);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: var(--fs-btn);
   transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease,
     box-shadow 0.2s ease;
   backdrop-filter: blur(12px);
