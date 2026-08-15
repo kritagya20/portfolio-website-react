@@ -7,7 +7,7 @@ export const profile = {
   emailAlt: 'kritagya2022@gmail.com',
   phone: '+91 7987322906',
   phoneAlt: '+91 7987322906',
-  resumeUrl: '/Resume - Kritagya Singh Chouhan.pdf',
+  resumeUrl: './Resume_Kritagya_Singh_Chouhan.pdf',
   socials: {
     github: 'https://github.com/kritagya20',
     linkedin: 'https://linkedin.com/in/kritagyasinghchouhan/',

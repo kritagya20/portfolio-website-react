@@ -91,6 +91,7 @@ export default function Contact({ onToast }) {
               href={profile.resumeUrl}
               target="_blank"
               rel="noreferrer"
+              download="Resume_Kritagya_Singh_Chouhan.pdf"
             >
               <div className="channel-ico">
                 <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
