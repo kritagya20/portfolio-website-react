@@ -127,12 +127,12 @@ export default function Projects() {
                     </div>
 
                     <div className="tag-row">
-                      <span className="badge">{p.type}</span>
-                      <div style={{ display: 'flex', gap: 6 }}>
-                        {p.featured && <span className="badge">Featured</span>}
+                      <span className="badge badge-type" title={p.type}>{p.type}</span>
+                      <div className="tag-group">
+                        {p.featured && <span className="badge badge-featured">Featured</span>}
                         {isInternal && (
                           <span
-                            className="badge"
+                            className="badge badge-internal"
                             style={{
                               background: 'color-mix(in srgb, #94a3b8 18%, transparent)',
                               color: '#94a3b8',
