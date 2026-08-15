@@ -13,8 +13,53 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <title>Kritagya Singh Chouhan — Full Stack Developer</title>
+    <style>
+      html, body {
+        background-color: #030712;
+        color: #f3e8ff;
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        overflow-x: hidden;
+      }
+      #static-preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background-color: #030712;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        color: #f3e8ff;
+        font-family: 'JetBrains Mono', monospace, sans-serif;
+        user-select: none;
+      }
+      .static-radar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        border: 2px dashed rgba(192, 132, 252, 0.45);
+        display: grid;
+        place-items: center;
+        animation: staticRadarSpin 3s linear infinite;
+        box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
+      }
+      @keyframes staticRadarSpin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
+    <div id="static-preloader">
+      <div class="static-radar">
+        <span style="font-size: 1.6rem;">🛰️</span>
+      </div>
+      <div style="font-size: 0.76rem; color: #94a3b8; letter-spacing: 0.08em;">
+        CONNECTING ORBITAL TELEMETRY…
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
