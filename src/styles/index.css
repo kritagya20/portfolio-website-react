@@ -994,7 +994,7 @@ select::placeholder,
 }
 
 .solar-core .hero-title .grad {
-  background: linear-gradient(135deg, #38bdf8, #c084fc);
+  background: linear-gradient(135deg, var(--primary-2), var(--primary));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -1051,14 +1051,22 @@ select::placeholder,
   justify-content: center;
   gap: 6px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(0.72rem, 1.8vw, 0.86rem);
+  font-size: clamp(0.68rem, 1.8vw, 0.84rem);
   color: var(--primary-2);
   margin-bottom: 2px;
   font-weight: 600;
-  white-space: nowrap; /* STRICT SINGLE LINE GUARANTEE */
+  white-space: nowrap;
   max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   flex-shrink: 0;
-  min-height: 22px;
+  min-height: 24px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface-strong) 85%, #000);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }
 
 .core-typer-sub .typer-prompt {
@@ -1231,20 +1239,22 @@ select::placeholder,
 
   /* Compact Central Core Card for Mobile */
   .solar-core {
-    width: clamp(200px, 68vw, 250px);
+    width: clamp(270px, 86vw, 360px);
     height: auto;
     min-height: 110px;
-    padding: 10px 14px;
-    border-radius: 18px;
+    padding: 14px 18px;
+    border-radius: 20px;
   }
 
   .solar-core .hero-title {
-    font-size: clamp(1.05rem, 4.2vw, 1.35rem);
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
     margin: 2px 0;
   }
 
   .core-typer-sub {
-    font-size: clamp(0.56rem, 2.2vw, 0.68rem);
+    font-size: clamp(0.58rem, 2.7vw, 0.72rem);
+    padding: 3px 8px;
+    max-width: 100%;
     margin-bottom: 4px;
   }
 
@@ -4427,7 +4437,7 @@ main {
   .btn { font-size: 0.84rem; padding: 10px 18px; }
 
   /* Hero Section */
-  .core-typer-sub { font-size: clamp(0.85rem, 3.2vw, 0.94rem); }
+  .core-typer-sub { font-size: clamp(0.60rem, 2.6vw, 0.72rem); padding: 3px 8px; }
   .hero-desc { font-size: clamp(0.83rem, 3.2vw, 0.88rem); }
 
   /* About Section */
