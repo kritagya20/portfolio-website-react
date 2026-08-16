@@ -33,6 +33,36 @@ export default function Projects() {
     }
   }, [visibleCount, maxIndex, currentIndex]);
 
+  // Listen for direct satellite tag navigation events
+  useEffect(() => {
+    const handleSelectSlide = (e) => {
+      const targetIdx = e.detail?.index;
+      if (typeof targetIdx === 'number') {
+        const maxIdx = Math.max(0, projects.length - visibleCount);
+        setCurrentIndex(Math.min(targetIdx, maxIdx));
+      }
+
+      // Calculate scroll position to place project carousel in vertical center of viewport
+      requestAnimationFrame(() => {
+        const container = document.querySelector('.projects-carousel-container');
+        if (container) {
+          const rect = container.getBoundingClientRect();
+          const elementCenterY = window.scrollY + rect.top + (rect.height / 2);
+          const viewportCenterY = window.innerHeight / 2;
+          const targetScrollTop = Math.max(0, elementCenterY - viewportCenterY);
+
+          window.scrollTo({
+            top: targetScrollTop,
+            behavior: 'auto',
+          });
+        }
+      });
+    };
+
+    window.addEventListener('selectProjectSlide', handleSelectSlide);
+    return () => window.removeEventListener('selectProjectSlide', handleSelectSlide);
+  }, [visibleCount]);
+
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 

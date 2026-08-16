@@ -23,14 +23,14 @@ export const profile = {
 };
 
 export const satellites = [
-  { label: 'Golang APIs', color: '#38bdf8' },
-  { label: 'Java Automation', color: '#a855f7' },
-  { label: 'React & Node', color: '#f59e0b' },
-  { label: 'PostgreSQL & MySQL', color: '#22c55e' },
-  { label: 'Docker & Containers', color: '#ec4899' },
-  { label: 'System Architecture', color: '#6366f1' },
-  { label: 'REST Assured', color: '#06b6d4' },
-  { label: 'GenAI Workflows', color: '#10b981' },
+  { label: 'Golang APIs', color: '#38bdf8', projectIndex: 1 },
+  { label: 'Java Automation', color: '#a855f7', projectIndex: 0 },
+  { label: 'React & Node', color: '#f59e0b', projectIndex: 4 },
+  { label: 'PostgreSQL & MySQL', color: '#22c55e', projectIndex: 2 },
+  { label: 'Docker & Containers', color: '#ec4899', projectIndex: null },
+  { label: 'System Architecture', color: '#6366f1', projectIndex: 0 },
+  { label: 'REST Assured', color: '#06b6d4', projectIndex: 0 },
+  { label: 'GenAI Workflows', color: '#10b981', projectIndex: null },
 ];
 
 export const navLinks = [

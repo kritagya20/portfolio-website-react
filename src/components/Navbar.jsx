@@ -29,7 +29,7 @@ export default function Navbar() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -60% 0px',
+      rootMargin: '-15% 0px -45% 0px',
       threshold: 0,
     };
 
@@ -76,24 +76,54 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', updateIndicator);
   }, [active]);
 
-  // 3. Lock scroll when mobile drawer is open
+  // 3. Halt background scrolling completely when mobile drawer is open
   useEffect(() => {
     if (!open) return;
-    const scrollY = window.scrollY;
 
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalBodyTouchAction = document.body.style.touchAction;
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    document.body.style.touchAction = 'none';
+
+    const preventTouch = (e) => {
+      const scrollable = e.target.closest('.nav-mobile-links');
+      if (!scrollable) {
+        if (e.cancelable) e.preventDefault();
+      }
+    };
+
+    document.addEventListener('touchstart', preventTouch, { passive: false });
+    document.addEventListener('touchmove', preventTouch, { passive: false });
 
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      window.scrollTo(0, scrollY);
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+      document.body.style.touchAction = originalBodyTouchAction;
+      document.removeEventListener('touchstart', preventTouch);
+      document.removeEventListener('touchmove', preventTouch);
     };
   }, [open]);
+
+  const handleNavClick = (e, linkId) => {
+    e.preventDefault();
+    setActive(linkId);
+    setOpen(false);
+
+    setTimeout(() => {
+      if (linkId === 'projects') {
+        window.dispatchEvent(new CustomEvent('selectProjectSlide', { detail: { index: 0 } }));
+      } else {
+        const el = document.getElementById(linkId);
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top, behavior: 'auto' });
+        }
+      }
+    }, 40);
+  };
 
   const themeMeta = THEMES.find((t) => t.id === theme) || THEMES[0];
 
@@ -153,7 +183,13 @@ export default function Navbar() {
                   href={`#${link.id}`}
                   ref={(el) => (navLinkRefs.current[link.id] = el)}
                   className={`nav-link ${isActive ? 'active' : ''}`}
-                  onClick={() => setActive(link.id)}
+                  onClick={(e) => {
+                    setActive(link.id);
+                    if (link.id === 'projects') {
+                      e.preventDefault();
+                      window.dispatchEvent(new CustomEvent('selectProjectSlide', { detail: { index: 0 } }));
+                    }
+                  }}
                 >
                   <span className="nav-label">{link.label}</span>
                 </a>
@@ -220,10 +256,7 @@ export default function Navbar() {
                       key={link.id}
                       href={`#${link.id}`}
                       className={`nav-mobile-link ${isActive ? 'active' : ''}`}
-                      onClick={() => {
-                        setActive(link.id);
-                        setOpen(false);
-                      }}
+                      onClick={(e) => handleNavClick(e, link.id)}
                     >
                       <span className="nav-mobile-label">{link.label}</span>
                       {isActive && <span className="active-dot" />}

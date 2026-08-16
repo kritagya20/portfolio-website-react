@@ -66,6 +66,10 @@ export default function Hero() {
 
   const activeColor = activeSat !== null ? satellites[activeSat]?.color : null;
 
+  const handleSatClick = (projectIndex) => {
+    window.dispatchEvent(new CustomEvent('selectProjectSlide', { detail: { index: projectIndex } }));
+  };
+
   return (
     <section id="home" className="section hero hero-centered-theme">
       <div className="container">
@@ -136,7 +140,9 @@ export default function Hero() {
                   className={`sat-node ${posClass} ${isSelected ? 'sat-active' : ''}`}
                   onMouseEnter={() => setActiveSat(idx)}
                   onMouseLeave={() => setActiveSat(null)}
+                  onClick={() => handleSatClick(sat.projectIndex)}
                   style={{
+                    cursor: 'pointer',
                     borderColor: isSelected ? sat.color : undefined,
                     color: isSelected ? '#ffffff' : undefined,
                     boxShadow: isSelected
