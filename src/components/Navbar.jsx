@@ -88,22 +88,21 @@ export default function Navbar() {
     document.body.style.overflow = 'hidden';
     document.body.style.touchAction = 'none';
 
-    const preventTouch = (e) => {
-      const scrollable = e.target.closest('.nav-mobile-links');
-      if (!scrollable) {
-        if (e.cancelable) e.preventDefault();
-      }
+    const preventTouchMove = (e) => {
+      // Allow scrolling inside .nav-mobile-links
+      if (e.target.closest('.nav-mobile-links')) return;
+      
+      // Prevent touch scroll gestures outside link container
+      if (e.cancelable) e.preventDefault();
     };
 
-    document.addEventListener('touchstart', preventTouch, { passive: false });
-    document.addEventListener('touchmove', preventTouch, { passive: false });
+    document.addEventListener('touchmove', preventTouchMove, { passive: false });
 
     return () => {
       document.documentElement.style.overflow = originalHtmlOverflow;
       document.body.style.overflow = originalBodyOverflow;
       document.body.style.touchAction = originalBodyTouchAction;
-      document.removeEventListener('touchstart', preventTouch);
-      document.removeEventListener('touchmove', preventTouch);
+      document.removeEventListener('touchmove', preventTouchMove);
     };
   }, [open]);
 
