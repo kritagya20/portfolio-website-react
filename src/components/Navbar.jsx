@@ -25,6 +25,9 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const isNavClickRef = useRef(false);
+  const clickTimerRef = useRef(null);
+
   // 1. IntersectionObserver for active section tracking
   useEffect(() => {
     const observerOptions = {
@@ -34,6 +37,9 @@ export default function Navbar() {
     };
 
     const handleIntersect = (entries) => {
+      // Ignore intermediate IntersectionObserver triggers during active click navigation
+      if (isNavClickRef.current) return;
+
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setActive(entry.target.id);
@@ -107,9 +113,18 @@ export default function Navbar() {
   }, [open]);
 
   const handleNavClick = (e, linkId) => {
-    e.preventDefault();
+    e?.preventDefault();
     setActive(linkId);
-    setOpen(false);
+
+    // Lock IntersectionObserver updates for 800ms during scroll travel
+    isNavClickRef.current = true;
+    if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+    clickTimerRef.current = setTimeout(() => {
+      isNavClickRef.current = false;
+    }, 800);
+
+    const wasOpen = open;
+    if (open) setOpen(false);
 
     setTimeout(() => {
       if (linkId === 'projects') {
@@ -121,7 +136,7 @@ export default function Navbar() {
           window.scrollTo({ top, behavior: 'auto' });
         }
       }
-    }, 40);
+    }, wasOpen ? 40 : 0);
   };
 
   const themeMeta = THEMES.find((t) => t.id === theme) || THEMES[0];
@@ -182,13 +197,7 @@ export default function Navbar() {
                   href={`#${link.id}`}
                   ref={(el) => (navLinkRefs.current[link.id] = el)}
                   className={`nav-link ${isActive ? 'active' : ''}`}
-                  onClick={(e) => {
-                    setActive(link.id);
-                    if (link.id === 'projects') {
-                      e.preventDefault();
-                      window.dispatchEvent(new CustomEvent('selectProjectSlide', { detail: { index: 0 } }));
-                    }
-                  }}
+                  onClick={(e) => handleNavClick(e, link.id)}
                 >
                   <span className="nav-label">{link.label}</span>
                 </a>
