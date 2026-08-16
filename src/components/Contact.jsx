@@ -90,8 +90,7 @@ export default function Contact({ onToast }) {
               className="contact-channel"
               href={profile.resumeUrl}
               target="_blank"
-              rel="noreferrer"
-              download="Resume_Kritagya_Singh_Chouhan.pdf"
+              rel="noopener noreferrer"
             >
               <div className="channel-ico">
                 <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
@@ -107,7 +106,7 @@ export default function Contact({ onToast }) {
                   <strong className="channel-title">Resume</strong>
                   <span className="channel-badge">PDF</span>
                 </div>
-                <span className="channel-val">Download PDF</span>
+                <span className="channel-val">View PDF</span>
               </div>
             </a>
           </motion.div>

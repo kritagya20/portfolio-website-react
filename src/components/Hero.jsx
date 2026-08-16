@@ -109,7 +109,7 @@ export default function Hero() {
                 <a className="core-tab-btn active" href="#about">
                   Explore →
                 </a>
-                <a className="core-tab-btn" href={profile.resumeUrl} target="_blank" rel="noreferrer" download="Resume_Kritagya_Singh_Chouhan.pdf">
+                <a className="core-tab-btn" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
                   📄 Resume
                 </a>
               </div>
