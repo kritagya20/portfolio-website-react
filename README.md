@@ -100,6 +100,80 @@ This project adopts a strict, standardized **Thumb Rules System** for element te
 | **Contact Submit Button** | `contact.form__submit__btn` |
 | **Floating Social Links** | `socials__link__a-github`, `socials__link__a-linkedin` |
 
+### 📋 Executable Playwright E2E Test Suite (52 Tests)
+
+Run with `npm run test:e2e`:
+
+#### 1. Link & Button Health Check (`e2e/tests/link-button-health.spec.js`)
+- `TC_LNK_001`: Validate all page anchors and navigation links have valid hrefs
+- `TC_LNK_002`: Verify external profile & social links have `target="_blank"` and `rel="noopener"`
+- `TC_LNK_003`: Verify Contact channel links (`mailto:`, `tel:`, PDF resume)
+- `TC_LNK_004`: Verify GitHub Code links and CTA button targets in Projects section
+- `TC_LNK_005`: Verify Desktop floating glass social icons links (GitHub, LeetCode, Medium, LinkedIn, Mail)
+- `TC_LNK_006`: Verify Mobile drawer embedded social icons links (GitHub, LeetCode, Medium, LinkedIn, Mail)
+- `TC_BTN_001`: Desktop & Mobile Theme Toggle buttons function correctly
+- `TC_BTN_002`: Mobile Hamburger menu button and close button function correctly
+- `TC_BTN_003`: macOS Terminal tab buttons toggle correctly
+- `TC_BTN_004`: Experience dossier modal trigger and close button function correctly
+- `TC_BTN_005`: Projects carousel Prev, Next, and Pagination dot buttons function correctly
+- `TC_BTN_006`: Playground game tiles and game close button function correctly
+- `TC_BTN_007`: Contact Form Submit button functions correctly
+
+#### 2. Navigation & Theme Engine (`e2e/tests/navigation.spec.js`)
+- `TC_NAV_001`: [Large 1920px] Desktop floating pill navbar arrives on scroll and navigates smoothly
+- `TC_NAV_002`: [Large 1920px] Desktop theme toggle cycles theme attribute
+- `TC_NAV_003`: [Medium 768px] Tablet top bar renders theme & menu buttons
+- `TC_NAV_004`: [Small 375px] Mobile drawer menu opens, locks body scroll, and navigates
+- `TC_NAV_EC01`: [Edge Case] Mobile drawer open and close sequence protection
+- `TC_NAV_EC02`: [Edge Case] Closing drawer restores background body overflow state
+
+#### 3. Hero Solar Orbit System (`e2e/tests/hero.spec.js`)
+- `TC_HERO_001`: [Large 1920px] Hero card renders typewriter text, Explore CTA, and Resume link
+- `TC_HERO_002`: [Large 1920px] Hovering satellite tech node applies glowing active state
+- `TC_HERO_003`: [Large 1920px] Clicking satellite node dispatches slide navigation to project carousel
+- `TC_HERO_004`: [Small 375px] Hero section scales down cleanly for mobile viewports
+- `TC_HERO_EC01`: [Edge Case] Rapid hovering between satellite nodes updates active state cleanly
+
+#### 4. About & macOS Terminal (`e2e/tests/about.spec.js`)
+- `TC_ABT_001`: [Large 1920px] Renders terminal window and defaults to profile.json tab
+- `TC_ABT_002`: [Large 1920px] Switching tabs to architecture.sh displays system architecture specs
+- `TC_ABT_003`: [Small 375px] Terminal wraps text cleanly on mobile viewports
+- `TC_ABT_EC01`: [Edge Case] Rapid tab toggling between profile.json and architecture.sh does not desync active tab state
+
+#### 5. Experience Timeline & Dossier Modal (`e2e/tests/experience.spec.js`)
+- `TC_EXP_001`: [Large 1920px] Timeline renders cards with full bullet details on desktop
+- `TC_EXP_002`: [Small 375px] Mobile timeline shows top 2 bullets preview and renders "View details" trigger hyperlink
+- `TC_EXP_003`: [Small 375px] Opening dossier modal locks body scroll & restoring on close
+- `TC_EXP_EC01`: [Edge Case] Pressing Escape key closes open dossier modal
+- `TC_EXP_EC02`: [Edge Case] Pressing Escape key when modal is closed causes zero errors
+
+#### 6. Projects Responsive Carousel (`e2e/tests/projects.spec.js`)
+- `TC_PRJ_001`: [Large 1920px] Carousel renders 3 visible project cards and GitHub profile CTA
+- `TC_PRJ_002`: [Medium 768px] Carousel adapts responsive layout for tablet (2 visible cards)
+- `TC_PRJ_003`: [Small 375px] Carousel adapts responsive layout for mobile (1 visible card)
+- `TC_PRJ_004`: [Large 1920px] Carousel Prev & Next buttons navigate slides cleanly
+- `TC_PRJ_005`: [Large 1920px] Pagination dot buttons navigate directly to project slides
+- `TC_PRJ_006`: [Small 375px] Touch swipe left advances slide on mobile
+- `TC_PRJ_EC01`: [Edge Case] Swiping below 40px threshold does not change slide index
+
+#### 7. Playground Mini-Games (`e2e/tests/playground.spec.js`)
+- `TC_PLG_001`: [Large 1920px] Renders game tiles for Perfect Circle, Typing Test, Memory Match, and Cosmic Cipher
+- `TC_PLG_002`: [In-Depth Perfect Circle] Canvas drawing score calculation and reset
+- `TC_PLG_003`: [In-Depth Typing Test] Target text typing, WPM stats, and snippet cycling
+- `TC_PLG_004`: [In-Depth Memory Match] Card grid rendering, flipping cards, and restart
+- `TC_PLG_005`: [In-Depth Cosmic Cipher] Radar SVG, hint display, letter key guesses, and new puzzle
+- `TC_PLG_006`: [Small 375px] Launching game tile opens interactive game modal & locks scroll
+- `TC_PLG_EC01`: [Edge Case] Pressing Escape key closes active game modal
+
+#### 8. Contact Form & Channels (`e2e/tests/contact.spec.js`)
+- `TC_CNT_001`: [Large 1920px] Contact channel cards have valid mailto, tel, and PDF targets
+- `TC_CNT_002`: [Small 375px] Typing into Contact form inputs updates fields cleanly on mobile
+- `TC_CNT_EC01`: [Edge Case] Submitting empty contact form does not crash page
+
+#### 9. Socials Dock & Footer (`e2e/tests/socials-footer.spec.js`)
+- `TC_SOC_001`: [Large 1920px] Floating glass socials dock becomes visible on scroll
+- `TC_FTR_001`: [All Viewports] Footer renders developer name and dynamic current year
+
 ---
 
 ## 🚀 Project Setup & Installation

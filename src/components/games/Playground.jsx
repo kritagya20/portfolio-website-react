@@ -54,8 +54,15 @@ export default function Playground({ onToast }) {
     } else {
       document.body.style.overflow = '';
     }
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActiveId(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
       document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [activeId]);
 
