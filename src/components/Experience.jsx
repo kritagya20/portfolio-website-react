@@ -65,7 +65,11 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
         </ul>
 
         {/* Mobile view: top 2 bullets preview with trigger */}
-        <div className="tl-bullets-mobile-wrapper">
+        <div
+          className="tl-bullets-mobile-wrapper"
+          onClick={() => onOpenModal(item)}
+          style={{ cursor: 'pointer' }}
+        >
           <ul className="tl-bullets tl-bullets-mobile">
             {item.bullets.slice(0, 2).map((b, idx) => (
               <li key={idx}>
@@ -86,7 +90,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
           onClick={() => onOpenModal(item)}
           data-testid={`experience.timeline__details__btn-${index}`}
         >
-          <span>View details ({item.bullets.length} points)</span>
+          <span>View details</span>
           <span className="link-icon">↗</span>
         </button>
 

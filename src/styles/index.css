@@ -2292,30 +2292,32 @@ select::placeholder,
   .tl-card-trigger-link {
     display: inline-flex;
   }
-  .tl-card .tech-row {
+  .tl-card .tech-row,
+  .exp-modal-footer .tech-row {
     flex-wrap: nowrap;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
     max-width: 100%;
     position: relative;
-    padding-right: 22px;
+    padding-right: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .tl-card .tech-row .tech {
+  .tl-card .tech-row::-webkit-scrollbar,
+  .exp-modal-footer .tech-row::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  .tl-card .tech-row .tech,
+  .exp-modal-footer .tech-row .tech {
     flex-shrink: 0;
   }
   .tl-card .tech-row::after {
-    content: '...';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--primary-2);
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 800;
-    font-size: 0.85rem;
-    pointer-events: none;
-    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--surface-strong) 96%, #000) 45%);
-    padding-left: 10px;
+    content: none;
+    display: none;
   }
 }
 
