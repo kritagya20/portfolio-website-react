@@ -173,20 +173,12 @@ export default function Projects() {
                 >
                   <article className="card project">
                     <div className="card-nebula-glow" aria-hidden="true" />
-                    <div className="hud-scanline" aria-hidden="true" />
 
                     {/* Corner HUD Telemetry Brackets */}
                     <span className="hud-bracket tl" aria-hidden="true" />
                     <span className="hud-bracket tr" aria-hidden="true" />
                     <span className="hud-bracket bl" aria-hidden="true" />
                     <span className="hud-bracket br" aria-hidden="true" />
-
-                    {/* Stardust Sparkles */}
-                    <div className="card-sparkles" aria-hidden="true">
-                      <span className="card-sparkle s1" />
-                      <span className="card-sparkle s2" />
-                      <span className="card-sparkle s3" />
-                    </div>
 
                     <div className="tag-row">
                       <span className="badge badge-type" title={p.type}>{p.type}</span>

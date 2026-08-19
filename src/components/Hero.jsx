@@ -38,6 +38,7 @@ export default function Hero() {
   const [activeSat, setActiveSat] = useState(null);
 
   const handleMouseMove = (e) => {
+    if (window.matchMedia && !window.matchMedia('(pointer: fine)').matches) return;
     const stage = stageRef.current;
     if (!stage) return;
 
@@ -48,10 +49,10 @@ export default function Hero() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
+    const rotateX = ((y - centerY) / centerY) * -3;
+    const rotateY = ((x - centerX) / centerX) * 3;
 
-    stage.style.transition = 'transform 0.1s ease-out';
+    stage.style.transition = 'transform 0.15s ease-out';
     stage.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   };
 

@@ -15,7 +15,7 @@ export default function Preloader({ onComplete }) {
   useEffect(() => {
     // Fast progress ticker (~1.2 seconds total duration)
     const startTime = Date.now();
-    const duration = 1250; // ms
+    const duration = 650; // ms
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;

@@ -92,7 +92,7 @@ export default function StarfieldCanvas() {
 
     function spawnMeteorWave() {
       if (prefersReducedMotion) return;
-      const count = isLowPowerDevice ? 1 : Math.floor(Math.random() * 3) + 1;
+      const count = isLowPowerDevice ? 1 : (Math.random() > 0.7 ? 2 : 1);
       const isSameDirection = Math.random() > 0.4;
 
       const baseDirX = Math.random() > 0.5 ? (Math.random() * 0.3 - 0.75) : (Math.random() * 0.3 + 0.45);
@@ -128,8 +128,8 @@ export default function StarfieldCanvas() {
         const material = new THREE.LineBasicMaterial({
           color: color,
           transparent: true,
-          opacity: 1.0,
-          linewidth: isLowPowerDevice ? 2 : 3,
+          opacity: 0.65,
+          linewidth: isLowPowerDevice ? 1.5 : 2,
           blending: THREE.AdditiveBlending,
         });
 
@@ -151,7 +151,7 @@ export default function StarfieldCanvas() {
       spawnMeteorWave();
     }
     let lastMeteorSpawn = Date.now();
-    let nextMeteorInterval = isLowPowerDevice ? 10000 : Math.random() * 5000 + 5000;
+    let nextMeteorInterval = isLowPowerDevice ? 25000 : Math.random() * 8000 + 18000;
 
     let targetMouseX = 0;
     let targetMouseY = 0;
@@ -213,7 +213,7 @@ export default function StarfieldCanvas() {
           if (!prefersReducedMotion && now - lastMeteorSpawn > nextMeteorInterval) {
             spawnMeteorWave();
             lastMeteorSpawn = now;
-            nextMeteorInterval = isLowPowerDevice ? 12000 : Math.random() * 5000 + 5000;
+            nextMeteorInterval = isLowPowerDevice ? 25000 : Math.random() * 8000 + 18000;
           }
 
           for (let i = meteors.length - 1; i >= 0; i--) {

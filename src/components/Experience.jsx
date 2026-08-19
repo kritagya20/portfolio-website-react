@@ -195,12 +195,6 @@ export default function Experience() {
               <div className="comet-core" />
               <div className="comet-aura" />
             </div>
-            <div className="comet-sparkles" aria-hidden="true">
-              <span className="sparkle s1" />
-              <span className="sparkle s2" />
-              <span className="sparkle s3" />
-              <span className="sparkle s4" />
-            </div>
           </motion.div>
 
           {experience.map((e, i) => (

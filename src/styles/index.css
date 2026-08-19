@@ -902,28 +902,28 @@ main {
   height: 62%;
   border: 1px dashed color-mix(in srgb, var(--primary) 45%, transparent);
   box-shadow: inset 0 0 25px color-mix(in srgb, var(--primary) 15%, transparent);
-  animation: orbitRotate 24s linear infinite;
+  animation: orbitRotate 180s linear infinite;
 }
 
 .solar-ring.ring-2 {
   width: 76%;
   height: 76%;
   border: 1px solid color-mix(in srgb, var(--primary-2) 35%, transparent);
-  animation: orbitRotateReverse 36s linear infinite;
+  animation: orbitRotateReverse 240s linear infinite;
 }
 
 .solar-ring.ring-3 {
   width: 90%;
   height: 90%;
   border: 1px dotted color-mix(in srgb, var(--accent) 30%, transparent);
-  animation: orbitRotate 50s linear infinite;
+  animation: orbitRotate 300s linear infinite;
 }
 
 .solar-ring.ring-4 {
   width: 100%;
   height: 100%;
   border: 1px dashed color-mix(in srgb, var(--primary) 22%, transparent);
-  animation: orbitRotateReverse 68s linear infinite;
+  animation: orbitRotateReverse 360s linear infinite;
 }
 
 
@@ -1170,20 +1170,20 @@ select::placeholder,
 
 /* Math-Tilted Elliptical Satellite Positions Across Grand Orbits (Guaranteed Core Clearance) */
 /* Ring 1 (Inner Top/Bottom Clearance) */
-.sat-r1-1 { top: 14%; left: 8%; animation: floatSat1 4s ease-in-out infinite alternate; }
-.sat-r1-2 { bottom: 14%; right: 8%; animation: floatSat2 4.5s ease-in-out infinite alternate 0.4s; }
+.sat-r1-1 { top: 14%; left: 8%; }
+.sat-r1-2 { bottom: 14%; right: 8%; }
 
 /* Ring 2 (Mid-Inner Outer Clearance) */
-.sat-r2-1 { top: 4%; right: 12%; animation: floatSat2 5s ease-in-out infinite alternate 0.8s; }
-.sat-r2-2 { bottom: 4%; left: 12%; animation: floatSat1 4.8s ease-in-out infinite alternate 1.2s; }
+.sat-r2-1 { top: 4%; right: 12%; }
+.sat-r2-2 { bottom: 4%; left: 12%; }
 
 /* Ring 3 (Mid-Outer Side Flanks - Outside Card Edge) */
-.sat-r3-1 { top: 46%; left: 1%; animation: floatSat1 5.5s ease-in-out infinite alternate 0.2s; }
-.sat-r3-2 { top: 46%; right: 1%; animation: floatSat2 5.2s ease-in-out infinite alternate 0.6s; }
+.sat-r3-1 { top: 46%; left: 1%; }
+.sat-r3-2 { top: 46%; right: 1%; }
 
 /* Ring 4 (Outer Apex Top/Bottom) */
-.sat-r4-1 { top: -6%; left: 36%; animation: floatSat2 6s ease-in-out infinite alternate 1s; }
-.sat-r4-2 { bottom: -6%; right: 36%; animation: floatSat1 5.8s ease-in-out infinite alternate 1.4s; }
+.sat-r4-1 { top: -6%; left: 36%; }
+.sat-r4-2 { bottom: -6%; right: 36%; }
 
 
 
