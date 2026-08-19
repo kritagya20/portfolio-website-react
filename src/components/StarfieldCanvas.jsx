@@ -193,6 +193,36 @@ export default function StarfieldCanvas() {
       }
     };
 
+    // =========================================================================
+    // 🎨 OPACITY CONTROL: Hero level vs Constant Subtle Content level
+    // =========================================================================
+    const HERO_OPACITY = 0.90;     // Full space background opacity in Hero section
+    const CONTENT_OPACITY = 0.32;  // Constant, subtle opacity from About to Footer
+    // =========================================================================
+
+    const handleScroll = () => {
+      if (!canvas) return;
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight || 800;
+
+      // In Hero section
+      if (scrollY < heroHeight * 0.7) {
+        canvas.style.opacity = HERO_OPACITY;
+      } 
+      // Smooth transition zone as user scrolls out of Hero into About
+      else if (scrollY < heroHeight * 1.1) {
+        const progress = (scrollY - heroHeight * 0.7) / (heroHeight * 0.4);
+        const opacity = HERO_OPACITY - progress * (HERO_OPACITY - CONTENT_OPACITY);
+        canvas.style.opacity = opacity.toFixed(3);
+      } 
+      // Constant subtle background opacity for all content sections (About -> Footer)
+      else {
+        canvas.style.opacity = CONTENT_OPACITY;
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('visibilitychange', handleVisibilityChange);
     if (!isLowPowerDevice) window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('resize', handleResize);
@@ -211,9 +241,11 @@ export default function StarfieldCanvas() {
           const now = Date.now();
 
           if (!prefersReducedMotion && now - lastMeteorSpawn > nextMeteorInterval) {
-            spawnMeteorWave();
-            lastMeteorSpawn = now;
-            nextMeteorInterval = isLowPowerDevice ? 25000 : Math.random() * 8000 + 18000;
+            if (window.scrollY < (window.innerHeight || 800) * 1.2) {
+              spawnMeteorWave();
+              lastMeteorSpawn = now;
+              nextMeteorInterval = isLowPowerDevice ? 25000 : Math.random() * 8000 + 18000;
+            }
           }
 
           for (let i = meteors.length - 1; i >= 0; i--) {
@@ -251,6 +283,7 @@ export default function StarfieldCanvas() {
     return () => {
       if (inactivityTimer) clearTimeout(inactivityTimer);
       cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
