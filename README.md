@@ -1,24 +1,24 @@
-# 🌌 Kritagya Singh Chouhan — Developer Portfolio
+# Kritagya Singh Chouhan — Developer Portfolio
 
 A modern, high-performance personal portfolio website built with **React 18**, **Three.js**, and **Vanilla CSS**. Features a dynamic 3D meteor wave engine, custom dual-cursor tracking system, glassmorphic UI components, and a multi-theme cosmic design system.
 
 ---
 
-## ✨ Features
+## Features
 
-- **☀️ Dynamic Cosmic Theme Engine**: Handcrafted space theme presets:
-  - **Solar (`☀️`) [Default]**: Pitch Black Void + Solar Amber Gold (`#f59e0b` / `#fcd34d`).
-  - **Cosmic (`✨`)**: Void Black + Starlight Violet (`#c084fc`) & Cyan Aurora (`#38bdf8`).
-  - **Starlight (`💫`)**: Deep Sapphire Void + Electric Cyan (`#00f2fe`) & Ice Blue Beam (`#4facfe`).
-- **🎯 DevHQ Custom Dual Cursor**: 8px glowing pointer dot with a 38px smooth glass ring follower (`cubic-bezier(0.25, 1, 0.5, 1)` 400ms lag) and subtle hover scaling (44px).
-- **🌠 3D Dynamic Meteor Wave Engine**: Three.js canvas featuring random 5–10s wave intervals, 1–3 meteor cluster spawns, variable speeds (1.1x–2.3x), bi-directional trajectories, and additive color blending.
-- **🛸 Glassmorphic Floating Socials Dock**: Desktop floating glass dock with glowing vertical Starlight Energy Line and sliding tooltip badges (`GitHub`, `LeetCode`, `LinkedIn`, `Mail`), bounded within a `1440px` max-width container layout.
-- **📱 Unified Responsive Mobile Drawer**: Tablet/Mobile breakpoint (`≤ 1024px`) rendering a glass top bar (theme toggle & menu hamburger) and a slide-out navigation drawer with embedded social links.
-- **🙈 Global Cross-Browser Scrollbar Hiding**: Completely hidden scrollbars across Chrome, Safari, Firefox, Edge, iOS Safari, and Android Chrome while preserving smooth scrolling.
+- **Dynamic Cosmic Theme Engine**: Handcrafted space theme presets:
+  - **Solar [Default]**: Pitch Black Void + Solar Amber Gold (`#f59e0b` / `#fcd34d`).
+  - **Cosmic**: Void Black + Starlight Violet (`#c084fc`) & Cyan Aurora (`#38bdf8`).
+  - **Starlight**: Deep Sapphire Void + Electric Cyan (`#00f2fe`) & Ice Blue Beam (`#4facfe`).
+- **DevHQ Custom Dual Cursor**: 8px glowing pointer dot with a 38px smooth glass ring follower (`cubic-bezier(0.25, 1, 0.5, 1)` 400ms lag) and subtle hover scaling (44px).
+- **3D Dynamic Meteor Wave Engine**: Three.js canvas featuring random 5–10s wave intervals, 1–3 meteor cluster spawns, variable speeds (1.1x–2.3x), bi-directional trajectories, and additive color blending.
+- **Glassmorphic Floating Socials Dock**: Desktop floating glass dock with glowing vertical Starlight Energy Line and sliding tooltip badges (`GitHub`, `LeetCode`, `LinkedIn`, `Mail`), bounded within a `1440px` max-width container layout.
+- **Unified Responsive Mobile Drawer**: Tablet/Mobile breakpoint (`<= 1024px`) rendering a glass top bar (theme toggle & menu hamburger) and a slide-out navigation drawer with embedded social links.
+- **Global Cross-Browser Scrollbar Hiding**: Completely hidden scrollbars across Chrome, Safari, Firefox, Edge, iOS Safari, and Android Chrome while preserving smooth scrolling.
 
 ---
 
-## 📁 Directory & File Structure
+## Directory & File Structure
 
 ```text
 Portfolio-main/
@@ -52,7 +52,7 @@ Portfolio-main/
 
 ---
 
-## 🛠️ Tech Stack & Dependencies
+## Tech Stack & Dependencies
 
 - **Core Framework**: [React 18](https://react.dev/)
 - **3D Graphics & Animations**: [Three.js](https://threejs.org/) & [Framer Motion](https://www.framer.com/motion/)
@@ -62,11 +62,11 @@ Portfolio-main/
 
 ---
 
-## 🧪 Testing & Test Identifiers Convention (Thumb Rules)
+## Testing & Test Identifiers Convention (Thumb Rules)
 
 This project adopts a strict, standardized **Thumb Rules System** for element test attributes (`data-testid`). This allows automated End-to-End (E2E) frameworks (such as **Playwright**) and unit testing utilities (**Vitest + React Testing Library**) to reliably locate and interact with UI elements across any viewport size or theme state.
 
-### 📐 Standard `data-testid` Thumb Rule Pattern
+### Standard `data-testid` Thumb Rule Pattern
 
 ```text
 [sectionName].[componentName]__[elementName]__[elementType]-[index]
@@ -79,7 +79,7 @@ This project adopts a strict, standardized **Thumb Rules System** for element te
 - **`__[elementType]`**: HTML/UI element role (`__section`, `__nav`, `__btn`, `__card`, `__input`, `__link`, `__dialog`, `__drawer`).
 - **`-[index]`** *(Optional)*: Index suffix or slug for mapped items (`-0`, `-1`, `-react`, `-github`).
 
-### 📌 Example Test Identifiers Across Components
+### Example Test Identifiers Across Components
 
 | Component / Element | `data-testid` Attribute |
 | :--- | :--- |
@@ -100,7 +100,7 @@ This project adopts a strict, standardized **Thumb Rules System** for element te
 | **Contact Submit Button** | `contact.form__submit__btn` |
 | **Floating Social Links** | `socials__link__a-github`, `socials__link__a-linkedin` |
 
-### 📋 Executable Playwright E2E Test Suite (52 Tests)
+### Executable Playwright E2E Test Suite (52 Tests)
 
 Run with `npm run test:e2e`:
 
@@ -176,7 +176,42 @@ Run with `npm run test:e2e`:
 
 ---
 
-## 🚀 Project Setup & Installation
+## Emergency Test Bypass (GitHub Actions CI/CD)
+
+If you need to make an emergency hotfix deployment and **bypass the Playwright E2E test execution step in GitHub Actions**, add `[skip tests]` (or `[skip-tests]`) anywhere in your Git commit message:
+
+```bash
+git commit -m "hotfix: update critical contact link [skip tests]"
+```
+
+> **How it works:** GitHub Actions will detect `[skip tests]`, evaluate the test condition to `false`, skip test execution, and immediately build and deploy your project to GitHub Pages.
+
+---
+
+## Essential Project & Testing Commands
+
+### Development & Build Commands
+
+| Action | Command |
+| :--- | :--- |
+| **Start Dev Server** | `npm run dev` *(Launches app at `http://localhost:5173`)* |
+| **Build Production Bundle** | `npm run build` *(Generates optimized output in `dist/`)* |
+| **Preview Production Build** | `npm run preview` *(Serves production bundle locally)* |
+
+### Playwright E2E Testing Commands
+
+| Action | Command |
+| :--- | :--- |
+| **Run All E2E Tests (Headless)** | `npm run test:e2e` or `npx playwright test` |
+| **Run Interactive UI Runner** | `npm run test:e2e:ui` or `npx playwright test --ui` |
+| **Run Specific Test Spec File** | `npx playwright test e2e/tests/playground.spec.js` |
+| **Run Tests in Headed Browser** | `npx playwright test --headed` |
+| **Run Playwright Inspector Debugger** | `npx playwright test --debug` |
+| **View Interactive HTML Report** | `npx playwright show-report` |
+
+---
+
+## Project Setup & Installation
 
 ### Prerequisites
 
@@ -195,40 +230,18 @@ cd portfolio-website-react
 npm install
 ```
 
-### 3. Start Development Server
+### 3. Install Playwright Browsers (for E2E Testing)
 
 ```bash
-npm run dev
-```
-
-The application will launch at `http://localhost:5173`.
-
-### 4. Build for Production
-
-```bash
-npm run build
-```
-
-The optimized production bundle will be generated in the `dist/` directory.
-
-### 5. Preview Production Build
-
-```bash
-npm run preview
+npx playwright install chromium
 ```
 
 ---
 
-## 👤 Author
+## Author
 
 **Kritagya Singh Chouhan**
 - **Role**: Full Stack Software Developer (Golang, Java, React, Docker)
 - **Location**: Ahmedabad, Gujarat, India
 - **GitHub**: [@kritagya20](https://github.com/kritagya20)
 - **LinkedIn**: [Kritagya Singh Chouhan](https://linkedin.com/in/kritagyasinghchouhan/)
-
----
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
