@@ -23,7 +23,7 @@ export default function Socials() {
   }, []);
 
   return (
-    <aside className={`socials ${isScrolled ? 'visible' : ''}`} aria-label="Social Profiles">
+    <aside className={`socials ${isScrolled ? 'visible' : ''}`} aria-label="Social Profiles" data-testid="socials__container__aside">
       <ul className="social__icon-list">
         {socialLinks.map(({ label, href, iconName }) => (
           <li key={label}>
@@ -33,6 +33,7 @@ export default function Socials() {
               target="_blank"
               rel="noopener noreferrer"
               className="social-link"
+              data-testid={`socials__link__a-${iconName}`}
             >
               {iconMap[iconName] || null}
               <span className="social-tooltip">{label}</span>

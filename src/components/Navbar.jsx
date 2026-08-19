@@ -144,12 +144,13 @@ export default function Navbar() {
   return (
     <>
       {/* Mobile Top Bar (< 768px): Top Left Theme Button & Top Right Menu Button */}
-      <div className="mobile-top-bar">
+      <div className="mobile-top-bar" data-testid="navbar.mobile__bar__container">
         <button
           className="mobile-theme-btn"
           onClick={cycleTheme}
           aria-label={`Switch theme (current: ${themeMeta.label})`}
           title={`Theme: ${themeMeta.label}`}
+          data-testid="navbar.mobile__theme-toggle__btn"
         >
           <span className="theme-icon">{themeMeta.icon}</span>
           <span className="theme-label">{themeMeta.label}</span>
@@ -159,6 +160,7 @@ export default function Navbar() {
           className="mobile-menu-btn"
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Toggle menu"
+          data-testid="navbar.mobile__hamburger__btn"
         >
           {open ? '✕' : '☰'}
         </button>
@@ -167,6 +169,7 @@ export default function Navbar() {
       {/* Desktop Floating Pill Navbar (> 768px): Arrives on Scroll */}
       <motion.header
         className="site-nav"
+        data-testid="navbar__header__nav"
         initial={false}
         animate={{
           y: isScrolled ? 0 : -60,
@@ -179,7 +182,7 @@ export default function Navbar() {
           ease: [0.25, 0.1, 0.25, 1.0],
         }}
       >
-        <div className="nav-pill" ref={pillRef}>
+        <div className="nav-pill" ref={pillRef} data-testid="navbar__pill__div">
           <span
             className="nav-indicator"
             style={{
@@ -198,6 +201,7 @@ export default function Navbar() {
                   ref={(el) => (navLinkRefs.current[link.id] = el)}
                   className={`nav-link ${isActive ? 'active' : ''}`}
                   onClick={(e) => handleNavClick(e, link.id)}
+                  data-testid={`navbar__link__a-${link.id}`}
                 >
                   <span className="nav-label">{link.label}</span>
                 </a>
@@ -212,6 +216,7 @@ export default function Navbar() {
             onClick={cycleTheme}
             aria-label={`Switch theme (current: ${themeMeta.label})`}
             title={`Theme: ${themeMeta.label}`}
+            data-testid="navbar__theme-toggle__btn"
           >
             <span className="theme-icon">{themeMeta.icon}</span>
             <span className="theme-label">{themeMeta.label}</span>
@@ -225,6 +230,7 @@ export default function Navbar() {
           <>
             <motion.div
               className="nav-overlay"
+              data-testid="navbar.mobile__overlay__div"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -234,6 +240,7 @@ export default function Navbar() {
 
             <motion.div
               className="nav-mobile"
+              data-testid="navbar.mobile__drawer__dialog"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -251,6 +258,7 @@ export default function Navbar() {
                   className="nav-mobile-close"
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
+                  data-testid="navbar.mobile__close__btn"
                 >
                   ✕
                 </button>
@@ -265,6 +273,7 @@ export default function Navbar() {
                       href={`#${link.id}`}
                       className={`nav-mobile-link ${isActive ? 'active' : ''}`}
                       onClick={(e) => handleNavClick(e, link.id)}
+                      data-testid={`navbar.mobile__link__a-${link.id}`}
                     >
                       <span className="nav-mobile-label">{link.label}</span>
                       {isActive && <span className="active-dot" />}
@@ -280,6 +289,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
+                    data-testid="navbar.mobile__social-github__a"
                   >
                     <GithubSvg className="icon icon--github" />
                   </a>
@@ -288,6 +298,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LeetCode"
+                    data-testid="navbar.mobile__social-leetcode__a"
                   >
                     <LeetCodeSvg className="icon icon--leetcode" />
                   </a>
@@ -296,6 +307,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Medium"
+                    data-testid="navbar.mobile__social-medium__a"
                   >
                     <MediumSvg className="icon icon--medium" />
                   </a>
@@ -304,6 +316,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
+                    data-testid="navbar.mobile__social-linkedin__a"
                   >
                     <LinkedinSvg className="icon icon--linkedin" />
                   </a>
@@ -312,6 +325,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Mail"
+                    data-testid="navbar.mobile__social-mail__a"
                   >
                     <MailSvg className="icon icon--mail" />
                   </a>
@@ -321,6 +335,7 @@ export default function Navbar() {
                   className="nav-mobile-theme-btn"
                   onClick={cycleTheme}
                   aria-label="Switch Theme"
+                  data-testid="navbar.mobile__drawer-theme-toggle__btn"
                 >
                   <span>{themeMeta.icon}</span>
                   <span>

@@ -39,6 +39,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
     <motion.div
       ref={itemRef}
       className={`tl-item ${reached ? 'reached' : ''}`}
+      data-testid={`experience.timeline__card-item__${index}`}
       initial={{ x: isLeft ? -60 : 60, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
       viewport={{ once: true, amount: 0.15 }}
@@ -83,6 +84,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
           type="button"
           className="tl-card-trigger-link"
           onClick={() => onOpenModal(item)}
+          data-testid={`experience.timeline__details__btn-${index}`}
         >
           <span>View details ({item.bullets.length} points)</span>
           <span className="link-icon">↗</span>
@@ -162,7 +164,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="section">
+    <section id="experience" className="section" data-testid="experience__container__section">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
@@ -215,6 +217,7 @@ export default function Experience() {
         {selectedExperience && (
           <motion.div
             className="exp-modal-backdrop"
+            data-testid="experience.modal__backdrop__div"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -222,6 +225,7 @@ export default function Experience() {
           >
             <motion.div
               className="exp-modal-content"
+              data-testid="experience.modal__dossier__dialog"
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -239,6 +243,7 @@ export default function Experience() {
                 className="exp-modal-close"
                 onClick={() => setSelectedExperience(null)}
                 aria-label="Close dossier"
+                data-testid="experience.modal__close__btn"
               >
                 ✕
               </button>

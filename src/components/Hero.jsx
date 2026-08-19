@@ -72,7 +72,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="section hero hero-centered-theme">
+    <section id="home" className="section hero hero-centered-theme" data-testid="hero__container__section">
       <div className="container">
         <motion.div
           ref={stageRef}
@@ -111,10 +111,10 @@ export default function Hero() {
 
               {/* Embedded Action Buttons inside Central Core Card */}
               <div className="core-tab-actions">
-                <a className="core-tab-btn active" href="#about">
+                <a className="core-tab-btn active" href="#about" data-testid="hero__explore__link">
                   Explore →
                 </a>
-                <a className="core-tab-btn" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
+                <a className="core-tab-btn" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" data-testid="hero__resume__link">
                   📄 Resume
                 </a>
               </div>
@@ -142,6 +142,7 @@ export default function Hero() {
                   onMouseEnter={() => setActiveSat(idx)}
                   onMouseLeave={() => setActiveSat(null)}
                   onClick={() => handleSatClick(sat.projectIndex)}
+                  data-testid={`hero__satellite__node-${idx}`}
                   style={{
                     cursor: 'pointer',
                     borderColor: isSelected ? sat.color : undefined,

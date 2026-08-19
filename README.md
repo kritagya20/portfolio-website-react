@@ -62,6 +62,46 @@ Portfolio-main/
 
 ---
 
+## 🧪 Testing & Test Identifiers Convention (Thumb Rules)
+
+This project adopts a strict, standardized **Thumb Rules System** for element test attributes (`data-testid`). This allows automated End-to-End (E2E) frameworks (such as **Playwright**) and unit testing utilities (**Vitest + React Testing Library**) to reliably locate and interact with UI elements across any viewport size or theme state.
+
+### 📐 Standard `data-testid` Thumb Rule Pattern
+
+```text
+[sectionName].[componentName]__[elementName]__[elementType]-[index]
+```
+
+#### Rule Schema Breakdown:
+- **`[sectionName]`**: Primary section ID or domain (`navbar`, `hero`, `about`, `experience`, `projects`, `playground`, `contact`, `socials`, `footer`).
+- **`.[componentName]`** *(Optional)*: Sub-component name if distinct from section (`.mobile`, `.terminal`, `.timeline`, `.carousel`, `.modal`).
+- **`__[elementName]`**: Specific function or content designation (`__theme-toggle`, `__hamburger`, `__profile-tab`, `__submit`).
+- **`__[elementType]`**: HTML/UI element role (`__section`, `__nav`, `__btn`, `__card`, `__input`, `__link`, `__dialog`, `__drawer`).
+- **`-[index]`** *(Optional)*: Index suffix or slug for mapped items (`-0`, `-1`, `-react`, `-github`).
+
+### 📌 Example Test Identifiers Across Components
+
+| Component / Element | `data-testid` Attribute |
+| :--- | :--- |
+| **Navbar Header (Desktop)** | `navbar__header__nav` |
+| **Desktop Nav Link** | `navbar__link__a-home`, `navbar__link__a-projects` |
+| **Desktop Theme Toggle** | `navbar__theme-toggle__btn` |
+| **Mobile Drawer Hamburger** | `navbar.mobile__hamburger__btn` |
+| **Mobile Drawer Container** | `navbar.mobile__drawer__dialog` |
+| **Hero Section Container** | `hero__container__section` |
+| **Hero "Explore" Link** | `hero__explore__link` |
+| **About Terminal Tab** | `about.terminal__tab-profile__btn` |
+| **Experience Timeline Item** | `experience.timeline__card-item__0` |
+| **Experience Modal Dossier** | `experience.modal__dossier__dialog` |
+| **Projects Carousel Next** | `projects.carousel__next__btn` |
+| **Project Code / Live Links** | `projects.card__code__link-0`, `projects.card__live__link-0` |
+| **Playground Game Tile** | `playground__tile__btn-circle`, `playground__tile__btn-typing` |
+| **Contact Form & Inputs** | `contact.form__container__form`, `contact.form__email__input` |
+| **Contact Submit Button** | `contact.form__submit__btn` |
+| **Floating Social Links** | `socials__link__a-github`, `socials__link__a-linkedin` |
+
+---
+
 ## 🚀 Project Setup & Installation
 
 ### Prerequisites

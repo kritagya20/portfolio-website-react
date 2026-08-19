@@ -98,7 +98,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="section">
+    <section id="projects" className="section" data-testid="projects__container__section">
       <div className="container">
         <div className="projects-header-row">
           <motion.div
@@ -129,6 +129,7 @@ export default function Projects() {
                 onClick={prev}
                 disabled={currentIndex === 0}
                 aria-label="Previous project"
+                data-testid="projects.carousel__prev__btn"
               >
                 <svg viewBox="0 0 24 24" className="carousel-nav-svg">
                   <polyline points="15 18 9 12 15 6" />
@@ -139,6 +140,7 @@ export default function Projects() {
                 onClick={next}
                 disabled={currentIndex >= maxIndex}
                 aria-label="Next project"
+                data-testid="projects.carousel__next__btn"
               >
                 <svg viewBox="0 0 24 24" className="carousel-nav-svg">
                   <polyline points="9 18 15 12 9 6" />
@@ -161,12 +163,13 @@ export default function Projects() {
               transform: `translateX(calc(-${currentIndex} * ((100% + 20px) / ${visibleCount})))`,
             }}
           >
-            {projects.map((p) => {
+            {projects.map((p, idx) => {
               const isInternal = p.type === 'Internal' || (!p.links?.code && !p.links?.live);
               return (
                 <div
                   key={p.title}
                   className="projects-carousel-slide"
+                  data-testid={`projects.carousel__card-item__${idx}`}
                   style={{
                     flex: `0 0 calc((100% - ${(visibleCount - 1) * 20}px) / ${visibleCount})`,
                   }}
@@ -213,6 +216,7 @@ export default function Projects() {
                           href={p.links.code}
                           target="_blank"
                           rel="noreferrer"
+                          data-testid={`projects.card__code__link-${idx}`}
                         >
                           <GithubSvg className="icon" />
                           Code
@@ -224,6 +228,7 @@ export default function Projects() {
                           href={p.links.live}
                           target="_blank"
                           rel="noreferrer"
+                          data-testid={`projects.card__live__link-${idx}`}
                         >
                           ↗ Live
                         </a>
@@ -233,6 +238,7 @@ export default function Projects() {
                           className="icon-btn"
                           style={{ opacity: 0.7, cursor: 'default' }}
                           title="Built inside an organization — source not publicly available"
+                          data-testid={`projects.card__internal__badge-${idx}`}
                         >
                           🔒 Internal Project
                         </span>
@@ -254,6 +260,7 @@ export default function Projects() {
                 className={`carousel-dot ${idx === currentIndex ? 'active' : ''}`}
                 onClick={() => setCurrentIndex(Math.min(idx, maxIndex))}
                 aria-label={`Go to project ${idx + 1}`}
+                data-testid={`projects.carousel__dot__btn-${idx}`}
               />
             ))}
           </div>
@@ -271,6 +278,7 @@ export default function Projects() {
             href={githubProfileUrl}
             target="_blank"
             rel="noreferrer"
+            data-testid="projects.cta__github__link"
           >
             <GithubSvg className="icon" />
             View all repos on GitHub →

@@ -5,7 +5,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer space-footer">
+    <footer className="footer space-footer" data-testid="footer__container__footer">
       <div className="container footer-inner">
         <motion.div
           className="space-footer-card greeting-card"

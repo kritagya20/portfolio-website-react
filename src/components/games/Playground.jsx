@@ -75,7 +75,7 @@ export default function Playground({ onToast }) {
   const active = GAMES.find((g) => g.id === activeId) || null;
 
   return (
-    <section id="playground" className="section">
+    <section id="playground" className="section" data-testid="playground__container__section">
       <div className="container">
         <span className="eyebrow">
           <span className="dot" /> {playgroundHeader.eyebrow}
@@ -93,6 +93,7 @@ export default function Playground({ onToast }) {
               key={g.id}
               type="button"
               className="game-tile"
+              data-testid={`playground__tile__btn-${g.id}`}
               style={{ '--g-color': g.color }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -127,6 +128,7 @@ export default function Playground({ onToast }) {
         {active && (
           <motion.div
             className="game-overlay"
+            data-testid="playground.modal__backdrop__div"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -136,6 +138,7 @@ export default function Playground({ onToast }) {
           >
             <motion.div
               className="game-modal"
+              data-testid="playground.modal__game__dialog"
               initial={{ y: 30, scale: 0.95, opacity: 0 }}
               animate={{ y: 0, scale: 1, opacity: 1 }}
               exit={{ y: 30, scale: 0.95, opacity: 0 }}
@@ -156,6 +159,7 @@ export default function Playground({ onToast }) {
                   className="game-close"
                   onClick={() => setActiveId(null)}
                   aria-label="Close game"
+                  data-testid="playground.modal__close__btn"
                 >
                   ✕
                 </button>

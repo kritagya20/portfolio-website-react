@@ -7,7 +7,7 @@ export default function About() {
   const [hudTab, setHudTab] = useState('telemetry');
 
   return (
-    <section id="about" className="section">
+    <section id="about" className="section" data-testid="about__container__section">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -29,6 +29,7 @@ export default function About() {
           {/* Left Column: Authentic macOS Terminal Window */}
           <motion.div
             className="mac-terminal-window"
+            data-testid="about.terminal__window__container"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -46,6 +47,7 @@ export default function About() {
                   type="button"
                   className={`mac-tab ${hudTab === 'telemetry' ? 'active' : ''}`}
                   onClick={() => setHudTab('telemetry')}
+                  data-testid="about.terminal__tab-profile__btn"
                 >
                   profile.json
                 </button>
@@ -53,6 +55,7 @@ export default function About() {
                   type="button"
                   className={`mac-tab ${hudTab === 'metrics' ? 'active' : ''}`}
                   onClick={() => setHudTab('metrics')}
+                  data-testid="about.terminal__tab-architecture__btn"
                 >
                   architecture.sh
                 </button>
@@ -60,7 +63,7 @@ export default function About() {
             </div>
 
             {/* Terminal Body */}
-            <div className="mac-terminal-body">
+            <div className="mac-terminal-body" data-testid="about.terminal__body__div">
               {hudTab === 'telemetry' ? (
                 <div className="hud-terminal">
                   <div className="terminal-line">
