@@ -180,6 +180,8 @@ body {
   z-index: 0;
   pointer-events: none;
   opacity: 0.95;
+  will-change: opacity;
+  transition: opacity 0.15s ease-out;
 }
 
 a {
@@ -2426,6 +2428,10 @@ select::placeholder,
 }
 
 @media (max-width: 768px) {
+  .exp-modal-content .hud-bracket {
+    display: none !important;
+  }
+
   .exp-modal-content {
     padding: 18px 18px 14px;
     max-height: 88vh;
