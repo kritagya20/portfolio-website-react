@@ -38,8 +38,10 @@ Thumbs.db
 vite.config.ts.timestamp-*
 vite.config.js.timestamp-*
 
-# Coverage
+# Coverage & Playwright Reports
 coverage/
+playwright-report/
+test-results/
 
 # TypeScript
 *.tsbuildinfo
