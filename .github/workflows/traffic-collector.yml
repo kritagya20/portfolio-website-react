@@ -37,7 +37,7 @@ jobs:
           
           if [ -n "$(git status --porcelain public/visitor-stats.json)" ]; then
             git add public/visitor-stats.json
-            git commit -m "[skip tests] stats: update visitor traffic metrics"
+            git commit -m "stats: update visitor traffic metrics"
             git push
             echo "Updated visitor stats pushed to main."
           else

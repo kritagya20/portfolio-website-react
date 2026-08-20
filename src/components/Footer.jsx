@@ -3,11 +3,7 @@ import { motion } from 'framer-motion';
 import { footerData } from '../data/portfolio.js';
 
 function getOrdinalString(n) {
-<<<<<<< HEAD
-  if (n === null || n === undefined || isNaN(n)) return '1st';
-=======
   if (n === null || n === undefined || isNaN(n)) return '106th';
->>>>>>> dev
   const num = Number(n);
   const formattedNum = num.toLocaleString();
   const lastDigit = num % 10;
@@ -27,11 +23,7 @@ function getOrdinalString(n) {
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-<<<<<<< HEAD
-  const [visitorCount, setVisitorCount] = useState(null);
-=======
   const [visitorCount, setVisitorCount] = useState(106);
->>>>>>> dev
 
   useEffect(() => {
     let isMounted = true;

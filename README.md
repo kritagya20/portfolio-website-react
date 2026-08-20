@@ -184,8 +184,8 @@ This project implements an automated persistent visitor counter system to overco
 
 1. **Data Persistence (`public/visitor-stats.json`)**: Tracks totalViews and totalUniques along with daily historical breakdowns.
 2. **Collector Script (`.github/scripts/update-visitor-stats.js`)**: Fetches GitHub REST API (`GET /repos/{owner}/{repo}/traffic/views`). If the API call fails or token expires, a fallback algorithm calculates rolling daily averages from past weeks and backfills missing days.
-3. **Daily Cron Collector (`.github/workflows/traffic-collector.yml`)**: Runs automatically at midnight UTC (`cron: '0 0 * * *'`), updating `public/visitor-stats.json` and committing changes with `[skip tests]`.
-4. **Smart E2E Test Skipping (`.github/workflows/deploy.yml`)**: Deployment workflows evaluate `[skip tests]` to bypass Playwright test execution on automated data commits.
+3. **Daily Cron Collector (`.github/workflows/traffic-collector.yml`)**: Runs automatically at midnight UTC (`cron: '0 0 * * *'`), updating `public/visitor-stats.json` and committing changes to `main`.
+4. **Fast Deployment Builds (`.github/workflows/deploy.yml`)**: Playwright test steps are skipped by default during deployments unless `[run tests]` is explicitly added to the commit message.
 
 ### How to Run the Collector Manually
 
@@ -215,15 +215,17 @@ TRAFFIC_TOKEN=github_pat_your_token node .github/scripts/update-visitor-stats.js
 
 ---
 
-## Emergency Test Bypass (GitHub Actions CI/CD)
+## Playwright E2E Test Execution (GitHub Actions CI/CD)
 
-If you need to make an emergency hotfix deployment and **bypass the Playwright E2E test execution step in GitHub Actions**, add `[skip tests]` (or `[skip-tests]`) anywhere in your Git commit message:
+By default, GitHub Actions deployments skip running Playwright E2E browser tests to ensure fast deployment builds.
+
+If you want GitHub Actions to execute the Playwright E2E test suite during a deployment, include `[run tests]` (or `[run-tests]`) anywhere in your Git commit message:
 
 ```bash
-git commit -m "hotfix: update critical contact link [skip tests]"
+git commit -m "feat(navigation): update navbar drawer flow [run tests]"
 ```
 
-> **How it works:** GitHub Actions will detect `[skip tests]`, evaluate the test condition to `false`, skip test execution, and immediately build and deploy your project to GitHub Pages.
+> **How it works:** GitHub Actions evaluates the presence of `[run tests]` in the commit message. If present, it installs Playwright Chromium and executes the E2E test suite before deploying. Otherwise, test execution is skipped by default.
 
 ---
 
