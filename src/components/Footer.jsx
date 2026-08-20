@@ -3,7 +3,11 @@ import { motion } from 'framer-motion';
 import { footerData } from '../data/portfolio.js';
 
 function getOrdinalString(n) {
+<<<<<<< HEAD
   if (n === null || n === undefined || isNaN(n)) return '1st';
+=======
+  if (n === null || n === undefined || isNaN(n)) return '106th';
+>>>>>>> dev
   const num = Number(n);
   const formattedNum = num.toLocaleString();
   const lastDigit = num % 10;
@@ -23,13 +27,24 @@ function getOrdinalString(n) {
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+<<<<<<< HEAD
   const [visitorCount, setVisitorCount] = useState(null);
+=======
+  const [visitorCount, setVisitorCount] = useState(106);
+>>>>>>> dev
 
   useEffect(() => {
     let isMounted = true;
-    fetch('/visitor-stats.json')
+
+    // Resolve exact base URL path for Vite / GitHub Pages compatibility
+    const baseUrl = (import.meta.env.BASE_URL || '/').endsWith('/') 
+      ? (import.meta.env.BASE_URL || '/') 
+      : `${import.meta.env.BASE_URL}/`;
+    const statsUrl = `${baseUrl}visitor-stats.json`;
+
+    fetch(statsUrl)
       .then(res => {
-        if (!res.ok) throw new Error('Network response failed');
+        if (!res.ok) throw new Error(`Network response failed: ${res.status}`);
         return res.json();
       })
       .then(data => {
