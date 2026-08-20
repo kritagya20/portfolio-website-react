@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Explicit AI Search Engine Crawlers (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://kritagya20.github.io/portfolio-website-react/sitemap.xml
