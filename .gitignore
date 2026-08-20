@@ -26,7 +26,12 @@ pnpm-debug.log*
 
 # OS files
 .DS_Store
+*.DS_Store
+**/.DS_Store
 Thumbs.db
+
+# Deploy config
+netlify.toml
 
 # Cache
 .cache/

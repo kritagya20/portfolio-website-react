@@ -14,15 +14,18 @@ async function updateVisitorStats() {
   
   let statsData = {
     lastUpdated: new Date().toISOString(),
-    totalViews: 100,
-    totalUniques: 45,
+    baseViews: 0,
+    baseUniques: 0,
+    totalViews: 0,
+    totalUniques: 0,
     daily: {}
   };
 
   if (fs.existsSync(statsFilePath)) {
     try {
       const fileContent = fs.readFileSync(statsFilePath, 'utf8');
-      statsData = { ...statsData, ...JSON.parse(fileContent) };
+      const parsed = JSON.parse(fileContent);
+      statsData = { ...statsData, ...parsed };
       if (!statsData.daily) statsData.daily = {};
     } catch (err) {
       console.warn('[Visitor Stats] Failed to parse existing stats file. Using default baseline.', err.message);
@@ -45,10 +48,9 @@ async function updateVisitorStats() {
       if (response.ok) {
         const trafficData = await response.json();
         const viewsList = trafficData.views || [];
-        console.log(`[Visitor Stats] Successfully fetched ${viewsList.length} days of traffic data.`);
+        console.log(`[Visitor Stats] GitHub API returned ${viewsList.length} daily entries. Total 14-day count: ${trafficData.count}, Uniques: ${trafficData.uniques}`);
 
         viewsList.forEach(entry => {
-          // Format timestamp ISO string (e.g. 2026-08-20T00:00:00Z) to YYYY-MM-DD
           const dateStr = entry.timestamp.split('T')[0];
           statsData.daily[dateStr] = {
             views: entry.count,
@@ -91,22 +93,24 @@ async function updateVisitorStats() {
     }
   }
 
-  // Recalculate totals across all stored daily entries
-  let calculatedViews = 0;
-  let calculatedUniques = 0;
+  // Recalculate total cumulative views & uniques by summing all daily entries stored in daily map
+  let dailyViewsSum = 0;
+  let dailyUniquesSum = 0;
   
   Object.values(statsData.daily).forEach(day => {
-    calculatedViews += day.views || 0;
-    calculatedUniques += day.uniques || 0;
+    dailyViewsSum += (day.views || 0);
+    dailyUniquesSum += (day.uniques || 0);
   });
 
-  // Preserve initial baseline offset if total historical views exceeds calculated daily sums
-  statsData.totalViews = Math.max(statsData.totalViews || 0, calculatedViews);
-  statsData.totalUniques = Math.max(statsData.totalUniques || 0, calculatedUniques);
+  const baseViews = Number(statsData.baseViews) || 0;
+  const baseUniques = Number(statsData.baseUniques) || 0;
+
+  statsData.totalViews = baseViews + dailyViewsSum;
+  statsData.totalUniques = baseUniques + dailyUniquesSum;
   statsData.lastUpdated = new Date().toISOString();
 
   fs.writeFileSync(statsFilePath, JSON.stringify(statsData, null, 2), 'utf8');
-  console.log(`[Visitor Stats] Updated stats file successfully: Total Views = ${statsData.totalViews}, Total Uniques = ${statsData.totalUniques}`);
+  console.log(`[Visitor Stats] Successfully updated visitor-stats.json! Total Views = ${statsData.totalViews} (Base: ${baseViews} + Stored Daily Sum: ${dailyViewsSum}), Total Uniques = ${statsData.totalUniques}`);
 }
 
 updateVisitorStats().catch(err => {
