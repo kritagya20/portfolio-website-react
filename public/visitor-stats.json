@@ -1,13 +1,10 @@
 {
-  "lastUpdated": "2026-08-20T16:18:37.172Z",
+  "lastUpdated": "2026-08-20T16:28:02.818Z",
+  "baseViews": 0,
+  "baseUniques": 0,
   "totalViews": 106,
-  "totalUniques": 45,
+  "totalUniques": 9,
   "daily": {
-    "2026-08-20": {
-      "views": 5,
-      "uniques": 3,
-      "estimated": true
-    },
     "2026-08-06": {
       "views": 0,
       "uniques": 0
@@ -63,6 +60,10 @@
     "2026-08-19": {
       "views": 32,
       "uniques": 1
+    },
+    "2026-08-20": {
+      "views": 5,
+      "uniques": 3
     }
   }
 }
