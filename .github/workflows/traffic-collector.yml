@@ -1,0 +1,45 @@
+name: Update Visitor Traffic Stats
+
+on:
+  schedule:
+    # Runs daily at midnight UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  collect-traffic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run Traffic Collector Script
+        env:
+          TRAFFIC_TOKEN: ${{ secrets.TRAFFIC_TOKEN || secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node .github/scripts/update-visitor-stats.js
+
+      - name: Commit and Push Updated Stats
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          if [ -n "$(git status --porcelain public/visitor-stats.json)" ]; then
+            git add public/visitor-stats.json
+            git commit -m "[skip tests] stats: update visitor traffic metrics"
+            git push
+            echo "Updated visitor stats pushed to main."
+          else
+            echo "No changes detected in visitor stats."
+          fi

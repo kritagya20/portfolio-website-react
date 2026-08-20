@@ -41,6 +41,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Chromium Browser
+        if: "!contains(github.event.head_commit.message, '[skip tests]') && !contains(github.event.head_commit.message, '[skip-tests]')"
         run: npx playwright install chromium
 
       - name: Run Playwright E2E Tests

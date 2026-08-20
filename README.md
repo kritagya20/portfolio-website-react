@@ -172,7 +172,46 @@ Run with `npm run test:e2e`:
 
 #### 9. Socials Dock & Footer (`e2e/tests/socials-footer.spec.js`)
 - `TC_SOC_001`: [Large 1920px] Floating glass socials dock becomes visible on scroll
-- `TC_FTR_001`: [All Viewports] Footer renders developer name and dynamic current year
+- `TC_FTR_001`: [All Viewports] Footer renders visitor count text and dynamic current year
+
+---
+
+## Persistent Visitor Counter & Traffic Collector
+
+This project implements an automated persistent visitor counter system to overcome GitHub Pages 14-day traffic view retention limit.
+
+### Architecture Overview
+
+1. **Data Persistence (`public/visitor-stats.json`)**: Tracks totalViews and totalUniques along with daily historical breakdowns.
+2. **Collector Script (`.github/scripts/update-visitor-stats.js`)**: Fetches GitHub REST API (`GET /repos/{owner}/{repo}/traffic/views`). If the API call fails or token expires, a fallback algorithm calculates rolling daily averages from past weeks and backfills missing days.
+3. **Daily Cron Collector (`.github/workflows/traffic-collector.yml`)**: Runs automatically at midnight UTC (`cron: '0 0 * * *'`), updating `public/visitor-stats.json` and committing changes with `[skip tests]`.
+4. **Smart E2E Test Skipping (`.github/workflows/deploy.yml`)**: Deployment workflows evaluate `[skip tests]` to bypass Playwright test execution on automated data commits.
+
+### How to Run the Collector Manually
+
+You can manually trigger the visitor traffic update at any time for initial setup or manual synchronization.
+
+#### Option A: Manual Trigger via GitHub Actions (Recommended)
+
+1. Go to your GitHub repository: `https://github.com/kritagya20/portfolio-website-react`
+2. Navigate to the **Actions** tab.
+3. Select **Update Visitor Traffic Stats** from the left workflows list.
+4. Click the **Run workflow** dropdown button.
+5. Select branch **main** and click **Run workflow**.
+
+#### Option B: Local Command Execution
+
+Run the collector script locally from your terminal:
+
+```bash
+node .github/scripts/update-visitor-stats.js
+```
+
+To run with your GitHub Personal Access Token locally:
+
+```bash
+TRAFFIC_TOKEN=github_pat_your_token node .github/scripts/update-visitor-stats.js
+```
 
 ---
 

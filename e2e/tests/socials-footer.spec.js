@@ -23,15 +23,15 @@ test.describe('Socials Dock & Footer E2E Suite [@module:SocialsFooter]', () => {
     await expect(sf.getSocialLink('mail')).toHaveAttribute('href', expect.stringContaining('mailto:'));
   });
 
-  test('TC_FTR_001: [All Viewports] Footer renders developer name and dynamic current year', async ({ page }) => {
-    Logger.step('TC_FTR_001: Footer developer name & current year check');
+  test('TC_FTR_001: [All Viewports] Footer renders visitor count text and dynamic current year', async ({ page }) => {
+    Logger.step('TC_FTR_001: Footer visitor count text & current year check');
     await page.goto('/');
 
     const sf = new SocialsFooterPage(page);
     await sf.footerSection.scrollIntoViewIfNeeded();
 
     const currentYear = String(new Date().getFullYear());
-    await expect(sf.footerSection).toContainText('Kritagya Singh Chouhan');
+    await expect(sf.footerSection).toContainText('visitor to my site in');
     await expect(sf.footerSection).toContainText(currentYear);
   });
 });
