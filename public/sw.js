@@ -33,6 +33,13 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
+  // Always fetch visitor-stats.json from the network — never serve from cache
+  // This ensures the visitor count is always fresh after each daily update
+  if (event.request.url.includes('visitor-stats.json')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       const fetchPromise = fetch(event.request)

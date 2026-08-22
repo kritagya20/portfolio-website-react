@@ -34,7 +34,7 @@ export default function Footer() {
       : `${import.meta.env.BASE_URL}/`;
     const statsUrl = `${baseUrl}visitor-stats.json`;
 
-    fetch(statsUrl)
+    fetch(statsUrl, { cache: 'no-store' })
       .then(res => {
         if (!res.ok) throw new Error(`Network response failed: ${res.status}`);
         return res.json();
