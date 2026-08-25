@@ -1,9 +1,9 @@
 {
-  "lastUpdated": "2026-08-24T00:30:33.897Z",
+  "lastUpdated": "2026-08-25T00:29:59.581Z",
   "baseViews": 0,
   "baseUniques": 0,
-  "totalViews": 131,
-  "totalUniques": 8,
+  "totalViews": 147,
+  "totalUniques": 9,
   "daily": {
     "2026-08-06": {
       "views": 0,
@@ -71,6 +71,10 @@
     },
     "2026-08-22": {
       "views": 4,
+      "uniques": 1
+    },
+    "2026-08-23": {
+      "views": 16,
       "uniques": 1
     }
   }
