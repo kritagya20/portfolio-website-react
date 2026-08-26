@@ -1,8 +1,7 @@
-const CACHE_NAME = 'kritagya-portfolio-v1';
+const CACHE_NAME = 'kritagya-portfolio-v2';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/favicon.svg',
+  '/portfolio-website-react/',
+  '/portfolio-website-react/index.html',
 ];
 
 // Install Event - Pre-cache core shell

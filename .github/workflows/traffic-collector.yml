@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   collect-traffic:
@@ -31,6 +32,7 @@ jobs:
         run: node .github/scripts/update-visitor-stats.js
 
       - name: Commit and Push Updated Stats
+        id: push-stats
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -41,6 +43,19 @@ jobs:
             git commit -m "stats: update visitor traffic metrics [${TIMESTAMP}]"
             git push
             echo "Updated visitor stats pushed to main at ${TIMESTAMP}."
+            echo "stats_changed=true" >> "$GITHUB_OUTPUT"
           else
             echo "No changes detected in visitor stats."
+            echo "stats_changed=false" >> "$GITHUB_OUTPUT"
           fi
+
+      # GITHUB_TOKEN push events do NOT trigger other workflows (GitHub security policy).
+      # We must explicitly trigger the deploy workflow via workflow_dispatch.
+      - name: Trigger Deploy Workflow
+        if: steps.push-stats.outputs.stats_changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Triggering deploy workflow to publish updated visitor stats..."
+          gh workflow run "Deploy to GitHub Pages" --ref main
+          echo "Deploy workflow triggered successfully."
