@@ -871,11 +871,12 @@ main {
 
 .hero-typer-badge .caret {
   display: inline-block;
-  width: 6px;
-  height: 12px;
+  width: 2px;
+  height: 13px;
   background: var(--primary-2);
-  margin-left: 2px;
-  animation: blink 1s steps(1) infinite;
+  margin-left: 3px;
+  vertical-align: -1px;
+  animation: blink 0.9s steps(1) infinite;
 }
 
 /* Math-Based Grand Elliptical Solar System Stage (Dominant Core Centering) */
@@ -950,8 +951,8 @@ select::placeholder,
   width: clamp(300px, 42vw, 520px);
   min-height: auto;
   border-radius: 28px;
-  background: linear-gradient(145deg, rgba(15, 23, 42, 0.97), rgba(3, 7, 18, 0.99));
-  border: 1.5px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  background: #080808;
+  border: 1.5px solid color-mix(in srgb, var(--primary) 45%, transparent);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   display: flex;
@@ -962,36 +963,43 @@ select::placeholder,
   padding: 22px 30px;
   text-align: center;
   box-shadow: 
-    0 28px 70px rgba(0, 0, 0, 0.85),
-    0 0 45px color-mix(in srgb, var(--primary) 35%, transparent),
-    inset 0 0 30px color-mix(in srgb, var(--primary) 18%, transparent);
+    0 28px 70px rgba(0, 0, 0, 0.90),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
   z-index: 10;
   transform: translateZ(40px);
   transition: all 0.3s ease;
   box-sizing: border-box;
 }
 
+/* Background Ambient Gradient: Emits strictly from the top and bottom of the main card (Subtle & Restrained) */
 .core-glow-aura {
   position: absolute;
-  inset: -16px;
-  border-radius: 32px;
-  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 35%, transparent), transparent 75%);
-  animation: auraPulse 4s ease-in-out infinite alternate;
+  inset: -14px -4px;
+  border-radius: 34px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary) 15%, transparent) 0%,
+    transparent 25%,
+    transparent 75%,
+    color-mix(in srgb, var(--primary) 12%, transparent) 100%
+  );
+  animation: auraPulse 6s ease-in-out infinite alternate;
   pointer-events: none;
+  z-index: -1;
 }
 
 .core-pulse-ring {
   position: absolute;
-  inset: -28px;
-  border-radius: 38px;
-  border: 1px dashed color-mix(in srgb, var(--primary) 38%, transparent);
+  inset: -22px;
+  border-radius: 36px;
+  border: 1px dashed color-mix(in srgb, var(--primary) 20%, transparent);
   animation: pulseRing 6s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
 @keyframes pulseRing {
-  0% { transform: scale(0.96); opacity: 0.3; }
-  100% { transform: scale(1.06); opacity: 0.8; }
+  0% { transform: scale(0.98); opacity: 0.2; }
+  100% { transform: scale(1.02); opacity: 0.5; }
 }
 
 .solar-core .hero-title {
@@ -1013,49 +1021,128 @@ select::placeholder,
   color: transparent;
 }
 
-/* Embedded Action Buttons inside Central Core Card */
-.core-tab-actions {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px;
-  border-radius: 999px;
-  background: rgba(3, 7, 18, 0.92);
-  border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
-  margin-top: 4px;
-  width: fit-content;
+/* Solar Theme Specific: Clean Solid Obsidian Core (No internal gradient) */
+[data-theme='solar'] .solar-core,
+:root:not([data-theme='cosmic']):not([data-theme='starlight']) .solar-core {
+  background: #070707;
+  border: 1px solid rgba(245, 158, 11, 0.40);
+  box-shadow: 
+    0 28px 70px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
-.core-tab-btn {
+[data-theme='solar'] .core-typer-sub,
+:root:not([data-theme='cosmic']):not([data-theme='starlight']) .core-typer-sub {
+  background: rgba(14, 10, 5, 0.85);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+/* ========== HERO INDEPENDENT DUAL GLASS CTA BUTTONS ========== */
+.hero-cta-group {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 8px 24px;
+  padding: 9px 24px;
   border-radius: 999px;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(0.78rem, 0.72rem + 0.3vw, 0.92rem);
+  font-size: clamp(0.82rem, 0.76rem + 0.3vw, 0.94rem);
   font-weight: 700;
   text-decoration: none;
-  transition: all 0.25s ease;
   white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-sizing: border-box;
 }
 
+/* Primary CTA: Radiant Cosmic Amber Glass */
+.hero-btn--primary {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.92) 0%, rgba(217, 119, 6, 0.96) 100%);
+  color: #070503;
+  border: 1px solid rgba(253, 230, 138, 0.65);
+  box-shadow: 
+    0 8px 24px color-mix(in srgb, var(--primary) 40%, transparent),
+    0 0 16px color-mix(in srgb, var(--primary) 30%, transparent),
+    inset 0 1px 1px rgba(255, 255, 255, 0.50);
+}
 
-.core-tab-btn.active {
-  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+.hero-btn--primary .btn-arrow {
+  display: inline-block;
+  font-size: 1.1em;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+.hero-btn--primary:hover {
+  background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 100%);
+  color: #000000;
+  transform: translateY(-2px) scale(1.03);
+  border-color: #ffffff;
+  box-shadow: 
+    0 12px 32px color-mix(in srgb, var(--primary) 55%, transparent),
+    0 0 28px color-mix(in srgb, var(--primary) 45%, transparent),
+    inset 0 1px 2px rgba(255, 255, 255, 0.70);
+}
+
+.hero-btn--primary:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Secondary CTA: Translucent Smoked Glass */
+.hero-btn--secondary {
+  background: color-mix(in srgb, var(--surface) 65%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.hero-btn--secondary .btn-icon {
+  width: 15px;
+  height: 15px;
+  stroke: var(--primary-2);
+  transition: all 0.25s ease;
+}
+
+.hero-btn--secondary:hover {
+  background: var(--surface-strong);
+  border-color: var(--primary);
   color: #ffffff;
-  box-shadow: 0 4px 16px color-mix(in srgb, var(--primary) 50%, transparent);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 14px color-mix(in srgb, var(--primary) 25%, transparent);
 }
 
-.core-tab-btn:not(.active) {
-  color: var(--text-muted);
-  background: transparent;
+.hero-btn--secondary:hover .btn-icon {
+  stroke: #ffffff;
+  transform: scale(1.1);
 }
 
-.core-tab-btn:not(.active):hover {
-  color: #ffffff;
-  background: color-mix(in srgb, var(--primary) 18%, transparent);
+/* Theme Adaptation for Cosmic and Starlight */
+[data-theme='cosmic'] .hero-btn--primary {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);
+  border-color: rgba(233, 213, 255, 0.65);
+}
+[data-theme='cosmic'] .hero-btn--primary:hover {
+  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 100%);
+}
+
+[data-theme='starlight'] .hero-btn--primary {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  border-color: rgba(224, 242, 254, 0.65);
+}
+[data-theme='starlight'] .hero-btn--primary:hover {
+  background: linear-gradient(135deg, #7dd3fc 0%, #00f2fe 100%);
 }
 
 .core-typer-sub {
@@ -1089,16 +1176,26 @@ select::placeholder,
 
 .core-typer-sub .caret {
   display: inline-block;
-  width: 5px;
-  height: 11px;
+  width: 2px;
+  height: 13px;
   background: var(--primary-2);
-  margin-left: 1px;
-  animation: blink 1s steps(1) infinite;
+  margin-left: 3px;
+  vertical-align: -1px;
+  animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 @keyframes auraPulse {
-  0% { opacity: 0.4; transform: scale(0.96); }
-  100% { opacity: 0.9; transform: scale(1.06); }
+  0% { opacity: 0.35; transform: scale(0.99); }
+  100% { opacity: 0.65; transform: scale(1.015); }
 }
 
 
@@ -1259,6 +1356,12 @@ select::placeholder,
     border-radius: 20px;
   }
 
+  /* Remove glowing aura & pulse rings on small screens to prevent visual crowding */
+  .core-glow-aura,
+  .core-pulse-ring {
+    display: none !important;
+  }
+
   .solar-core .hero-title {
     font-size: clamp(1.15rem, 4.8vw, 1.45rem);
     margin: 2px 0;
@@ -1271,15 +1374,15 @@ select::placeholder,
     margin-bottom: 4px;
   }
 
-  .core-tab-actions {
-    padding: 2px;
-    margin-top: 4px;
+  .hero-cta-group {
+    gap: 8px;
+    margin-top: 6px;
   }
 
-  .core-tab-btn {
-    padding: 4px 11px;
-    font-size: 0.7rem;
-    gap: 4px;
+  .hero-btn {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    gap: 5px;
   }
 
   /* Mobile Satellite Nodes Spacing across Vertical Canvas */
@@ -4249,7 +4352,7 @@ body,
 
   .socials {
     position: fixed;
-    bottom: 0;
+    bottom: 2.2rem;
     right: 2.2rem;
     z-index: 100;
     background: transparent;
@@ -4262,20 +4365,33 @@ body,
     }
   }
 
-  .social__icon-list {
+  .social__dock-pill {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    gap: 0;
     margin: 0;
     padding: 14px 10px;
-    list-style: none;
     background: color-mix(in srgb, var(--bg-soft) 80%, transparent);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border);
     border-radius: 999px;
     box-shadow: var(--shadow), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .social__icon-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
 
   .social__icon-list li {
@@ -4331,16 +4447,75 @@ body,
     transform: translateY(-50%) translateX(0);
   }
 
-  /* Starlight Energy Line Tail */
-  .social__icon-list::after {
-    content: "";
+  /* Starlight Energy Beam Separator (80px with gradient fading effect) */
+  .social__beam-separator {
     display: block;
     width: 2px;
     height: 80px;
-    margin: 10px auto 0;
-    background: linear-gradient(180deg, var(--primary), var(--primary-2), transparent);
+    margin: 10px auto;
+    background: linear-gradient(
+      180deg,
+      var(--primary) 0%,
+      var(--primary-2) 45%,
+      color-mix(in srgb, var(--primary) 35%, transparent) 80%,
+      transparent 100%
+    );
     border-radius: 2px;
-    box-shadow: 0 0 12px var(--primary);
+    box-shadow: 0 0 14px var(--primary);
+    opacity: 0.95;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Theme Toggle in Dock */
+  .social__theme-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .social-theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--surface) 60%, transparent);
+    color: var(--text);
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .social-theme-toggle:hover {
+    background: var(--surface-strong);
+    border-color: var(--primary);
+    transform: scale(1.14);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--primary) 45%, transparent);
+  }
+
+  .social-theme-toggle:hover .social-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .theme-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    line-height: 1;
+    transition: transform 0.3s ease;
+  }
+
+  .social-theme-toggle:hover .theme-toggle-icon {
+    transform: rotate(15deg);
   }
 
   /* Per-Brand Cosmic Hover Accents */
@@ -4362,6 +4537,12 @@ body,
     padding-right: 0 !important; /* Remove right padding so content never overlaps or gets squeezed! */
   }
 
+  /* Hide background card glow effects on tablets and mobile screens */
+  .core-glow-aura,
+  .core-pulse-ring {
+    display: none !important;
+  }
+
   .socials {
     position: relative;
     inset: auto;
@@ -4370,6 +4551,16 @@ body,
     right: auto;
     display: flex;
     justify-content: center;
+  }
+
+  .social__dock-pill {
+    display: contents;
+  }
+
+  .social__beam-separator,
+  .social__theme-wrapper,
+  .social-theme-toggle {
+    display: none !important;
   }
 
   .social__icon-list {

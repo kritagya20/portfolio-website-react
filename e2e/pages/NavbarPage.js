@@ -8,7 +8,7 @@ export class NavbarPage {
   // Locators
   get desktopHeader() { return this.page.getByTestId('navbar__header__nav'); }
   get desktopPill() { return this.page.getByTestId('navbar__pill__div'); }
-  get themeToggleBtn() { return this.page.getByTestId('navbar__theme-toggle__btn'); }
+  get themeToggleBtn() { return this.page.locator('[data-testid="sidebar__theme-toggle__btn"], [data-testid="navbar__theme-toggle__btn"]').first(); }
   get mobileBar() { return this.page.getByTestId('navbar.mobile__bar__container'); }
   get mobileThemeBtn() { return this.page.getByTestId('navbar.mobile__theme-toggle__btn'); }
   get hamburgerBtn() { return this.page.getByTestId('navbar.mobile__hamburger__btn'); }

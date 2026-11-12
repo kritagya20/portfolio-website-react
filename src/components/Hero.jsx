@@ -2,38 +2,46 @@ import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { profile, satellites } from '../data/portfolio.js';
 
-function useTypewriter(words, typing = 80, holding = 1400) {
+function useTypewriterOnce(textToType = 'Software Development Engineer', speed = 55, delay = 250) {
   const [text, setText] = useState('');
-  const [wordIdx, setWordIdx] = useState(0);
-  const [deleting, setDeleting] = useState(false);
+  const hasCompletedRef = useRef(false);
 
   useEffect(() => {
-    const word = words[wordIdx % words.length];
-    let timeout;
-    if (!deleting && text === word) {
-      timeout = setTimeout(() => setDeleting(true), holding);
-    } else if (deleting && text === '') {
-      setDeleting(false);
-      setWordIdx((i) => (i + 1) % words.length);
-    } else {
-      timeout = setTimeout(
-        () => {
-          const next = deleting
-            ? word.slice(0, text.length - 1)
-            : word.slice(0, text.length + 1);
-          setText(next);
-        },
-        deleting ? typing / 2 : typing
-      );
+    if (hasCompletedRef.current) {
+      setText(textToType);
+      return;
     }
-    return () => clearTimeout(timeout);
-  }, [text, deleting, wordIdx, words, typing, holding]);
+
+    let index = 0;
+    let timerId;
+
+    const startTimer = setTimeout(() => {
+      const step = () => {
+        if (index < textToType.length) {
+          index++;
+          setText(textToType.slice(0, index));
+          timerId = setTimeout(step, speed);
+        } else {
+          hasCompletedRef.current = true;
+        }
+      };
+      step();
+    }, delay);
+
+    return () => {
+      clearTimeout(startTimer);
+      clearTimeout(timerId);
+    };
+  }, [textToType, speed, delay]);
 
   return text;
 }
 
 export default function Hero() {
-  const typed = useTypewriter(profile.typewriter);
+  const singleRole = typeof profile.typewriter === 'string'
+    ? profile.typewriter
+    : (Array.isArray(profile.typewriter) ? profile.typewriter[0] : 'Software Development Engineer');
+  const typed = useTypewriterOnce(singleRole);
   const stageRef = useRef(null);
   const [activeSat, setActiveSat] = useState(null);
 
@@ -103,19 +111,42 @@ export default function Hero() {
               
               <div className="core-typer-sub">
                 <span className="typer-prompt">&gt;</span> {typed}
-                <span className="caret">&nbsp;</span>
+                <span className="caret" aria-hidden="true" />
               </div>
               <h1 className="hero-title">
                 Hi, I’m <span className="grad">{profile.name.split(' ')[0]}</span>.
               </h1>
 
-              {/* Embedded Action Buttons inside Central Core Card */}
-              <div className="core-tab-actions">
-                <a className="core-tab-btn active" href="#about" data-testid="hero__explore__link">
-                  Explore →
+              {/* Primary & Secondary Dual Glass CTA Buttons */}
+              <div className="hero-cta-group">
+                <a className="hero-btn hero-btn--primary" href="#about" data-testid="hero__explore__link">
+                  <span>Explore</span>
+                  <span className="btn-arrow" aria-hidden="true">→</span>
                 </a>
-                <a className="core-tab-btn" href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" data-testid="hero__resume__link">
-                  📄 Resume
+                <a
+                  className="hero-btn hero-btn--secondary"
+                  href={profile.resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid="hero__resume__link"
+                >
+                  <svg
+                    className="btn-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                  <span>Resume</span>
                 </a>
               </div>
             </div>

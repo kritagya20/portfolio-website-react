@@ -14,12 +14,7 @@ export const profile = {
     leetcode: 'https://leetcode.com/u/kritagya20/',
     medium: 'https://medium.com/@kritagya2022',
   },
-  typewriter: [
-    'Full Stack Software Developer',
-    'Golang Backend Engineer',
-    'React + Node Developer',
-    'Java & Automation Engineer',
-  ],
+  typewriter: 'Software Development Engineer',
 };
 
 export const satellites = [

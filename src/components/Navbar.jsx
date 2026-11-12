@@ -209,18 +209,6 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="nav-divider" />
-
-          <button
-            className="theme-nav-btn"
-            onClick={cycleTheme}
-            aria-label={`Switch theme (current: ${themeMeta.label})`}
-            title={`Theme: ${themeMeta.label}`}
-            data-testid="navbar__theme-toggle__btn"
-          >
-            <span className="theme-icon">{themeMeta.icon}</span>
-            <span className="theme-label">{themeMeta.label}</span>
-          </button>
         </div>
       </motion.header>
 
