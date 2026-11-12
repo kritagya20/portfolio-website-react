@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, useTransform, useMotionValue, AnimatePresence } from 'framer-motion';
 import { experience, experienceHeader } from '../data/portfolio.js';
 import ScrambleText from './ScrambleText.jsx';
+import { ResponsiveTimelineDate, isCurrentRole } from '../utils/dateFormatter.jsx';
 
 function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
   const isLeft = index % 2 === 0;
@@ -33,7 +34,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
     });
   }, [scaleY, threshold]);
 
-  const hasMoreBullets = item.bullets.length > 2;
+  const isCurrent = isCurrentRole(item.when);
 
   return (
     <motion.div
@@ -46,12 +47,36 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
       transition={{ duration: 0.65, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1.0] }}
     >
       <div className="tl-card">
-        <div className="tl-head">
-          <h3>
-            <span className="tl-role">{item.role}</span> · <span className="tl-company">{item.company}</span>
-          </h3>
-          <span className="when">{item.when}</span>
+        {/* Desktop Header */}
+        <div className="tl-head tl-head-desktop">
+          <div className="tl-head-title">
+            <h3 className="tl-title-heading">
+              <span className="tl-role">{item.role}</span>
+              <span className="tl-desktop-sep"> · </span>
+              <span className="tl-company">{item.company}</span>
+            </h3>
+          </div>
+          <span className={`when ${isCurrent ? 'is-present' : ''}`}>
+            {isCurrent && <span className="status-dot-pulse" aria-hidden="true" />}
+            <ResponsiveTimelineDate date={item.when} />
+          </span>
         </div>
+
+        {/* Mobile Header: Company & Status on top, Role Title below */}
+        <div className="tl-head-mobile">
+          <div className="tl-meta-header">
+            <div className="tl-company-badge">
+              <span className="tl-company-icon">◈</span>
+              <span className="tl-company">{item.companyAbbr || item.company}</span>
+            </div>
+            <span className={`when ${isCurrent ? 'is-present' : ''}`}>
+              {isCurrent && <span className="status-dot-pulse" aria-hidden="true" />}
+              <ResponsiveTimelineDate date={item.when} />
+            </span>
+          </div>
+          <h3 className="tl-role-mobile">{item.role}</h3>
+        </div>
+
         <div className="where">{item.where}</div>
 
         {/* Desktop view: full bullet list */}
@@ -64,42 +89,48 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
           ))}
         </ul>
 
-        {/* Mobile view: top 2 bullets preview with trigger */}
+        {/* Mobile view only: Frosted glass summary callout with accent beam */}
         <div
-          className="tl-bullets-mobile-wrapper"
+          className="tl-mobile-summary-wrapper"
           onClick={() => onOpenModal(item)}
-          style={{ cursor: 'pointer' }}
+          title="Click to view full details"
+          role="button"
+          tabIndex={0}
         >
-          <ul className="tl-bullets tl-bullets-mobile">
-            {item.bullets.slice(0, 2).map((b, idx) => (
-              <li key={idx}>
-                <span className="tl-bullet-icon">›</span>
-                <span>{b}</span>
-              </li>
-            ))}
-          </ul>
-          {hasMoreBullets && (
-            <div className="tl-bullet-fade-overlay" />
-          )}
+          <p
+            className="tl-mobile-summary"
+            data-testid={`experience.timeline__summary__p-${index}`}
+          >
+            {item.summary || item.bullets[0]}
+          </p>
         </div>
 
-        {/* Mobile Trigger Hyperlink */}
-        <button
-          type="button"
-          className="tl-card-trigger-link"
-          onClick={() => onOpenModal(item)}
-          data-testid={`experience.timeline__details__btn-${index}`}
-        >
-          <span>View details</span>
-          <span className="link-icon">↗</span>
-        </button>
-
-        <div className="tech-row" style={{ marginTop: 14 }}>
+        {/* Skill stack (desktop / modal) */}
+        <div className="tech-row">
           {item.stack.map((s) => (
             <span key={s} className="tech">
               {s}
             </span>
           ))}
+        </div>
+
+        {/* Mobile Action Footer Bar */}
+        <div className="tl-mobile-footer">
+          <div className="tl-mobile-count">
+            <span className="count-icon">✦</span>
+            <span>{item.bullets.length} Highlights</span>
+          </div>
+
+          <button
+            type="button"
+            className="tl-card-trigger-link"
+            onClick={() => onOpenModal(item)}
+            data-testid={`experience.timeline__details__btn-${index}`}
+            aria-label={`View details for ${item.role} at ${item.company}`}
+          >
+            <span>View details</span>
+            <span className="link-icon">↗</span>
+          </button>
         </div>
       </div>
     </motion.div>

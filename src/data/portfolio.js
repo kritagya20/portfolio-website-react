@@ -124,8 +124,10 @@ export const experience = [
   {
     role: 'Senior Software Development Engineer in Test',
     company: 'Medkart',
+    companyAbbr: 'Medkart',
     where: 'Ahmedabad, India',
     when: 'Feb 2026 – Present',
+    summary: 'Architected scalable multi-platform test automation frameworks across Web, Mobile, API, and DB batch workflows with custom reporting engines and CI/CD observability.',
     bullets: [
       'Architected and maintained a scalable automation framework supporting Web, Mobile, API, Database, and Batch Job validation.',
       'Built reusable framework modules for session management, reporting, data handling, and test utilities, reducing test development effort.',
@@ -149,8 +151,10 @@ export const experience = [
   {
     role: 'Software Development Engineer in Test',
     company: 'Bhanix Finance and Investment Limited',
+    companyAbbr: 'Bhanix',
     where: 'Hyderabad, India',
     when: 'Dec 2024 – Feb 2026',
+    summary: 'Spearheaded core fintech automation frameworks across web, mobile, and APIs, automating 2000+ critical workflows and cutting regression execution cycles by 55%.',
     bullets: [
       'Designed and owned a scalable Selenium-TestNG automation framework using Java and the Page Object Model.',
       'Automated 2000+ end-to-end test cases covering critical fintech workflows across web, mobile, and APIs.',
@@ -175,8 +179,10 @@ export const experience = [
   {
     role: 'Assistant Manager',
     company: 'Jio Platforms Limited',
+    companyAbbr: 'Jio Platforms',
     where: 'Navi Mumbai, India',
     when: 'Oct 2023 – Dec 2024',
+    summary: 'Automated web regression suites for Jio.com using Robot Framework and Selenium while building internal analytics dashboards and optimizing CI test execution pipelines.',
     bullets: [
       'Automated regression testing for Jio.com using Robot Framework and Selenium.',
       'Developed Bash scripts that reduced environment setup time by approximately 30%.',
@@ -197,8 +203,10 @@ export const experience = [
   {
     role: 'Software Development Intern',
     company: 'CASHe',
+    companyAbbr: 'CASHe',
     where: 'India',
     when: 'Jun 2022 – Nov 2022',
+    summary: 'Contributed to frontend development of internal enterprise learning platforms using AngularJS and JavaScript within high-velocity Agile release sprints.',
     bullets: [
       'Contributed to the development of an internal learning portal using AngularJS and JavaScript.',
       'Implemented frontend features and resolved functional and UI issues.',

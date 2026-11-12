@@ -16,17 +16,35 @@ test.describe('Experience Section & Dossier Modal E2E Suite [@module:Experience]
     await expect(exp.getTimelineCard(0)).toBeVisible();
   });
 
-  test('TC_EXP_002: [Small 375px] Mobile timeline shows top 2 bullets preview and renders "View details" trigger hyperlink', async ({ page }) => {
-    Logger.step('TC_EXP_002: Mobile timeline top 2 bullets & trigger link (Small 375px)');
+  test('TC_EXP_002: [Small 375px] Mobile timeline shows 2-3 line summary teaser with "View details" button and hides card skills', async ({ page }) => {
+    Logger.step('TC_EXP_002: Streamlined mobile timeline card with summary teaser (Small 375px)');
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');
 
     const exp = new ExperiencePage(page);
     await exp.section.scrollIntoViewIfNeeded();
 
+    // Verify "View details" button is visible and properly labeled
     const triggerBtn = exp.getMobileDetailsBtn(0);
     await expect(triggerBtn).toBeVisible();
     await expect(triggerBtn).toContainText('View details');
+
+    // Verify desktop bullets are hidden on small screens
+    const firstCard = exp.getTimelineCard(0);
+    const bulletsDesktop = firstCard.locator('.tl-bullets-desktop');
+    await expect(bulletsDesktop).toBeHidden();
+
+    // Verify location is hidden on small screens to prevent clutter
+    const location = firstCard.locator('.where');
+    await expect(location).toBeHidden();
+
+    // Verify mobile summary teaser is visible
+    const mobileSummary = firstCard.locator('.tl-mobile-summary');
+    await expect(mobileSummary).toBeVisible();
+
+    // Verify skills on card are hidden on mobile (replaced by summary)
+    const techRow = firstCard.locator('.tech-row');
+    await expect(techRow).toBeHidden();
   });
 
   test('TC_EXP_003: [Small 375px] Opening dossier modal locks body scroll & restoring on close', async ({ page }) => {
