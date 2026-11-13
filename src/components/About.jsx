@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { aboutData } from '../data/portfolio.js';
+import { aboutData, profile } from '../data/portfolio.js';
 import ScrambleText from './ScrambleText.jsx';
 
 export default function About() {
@@ -69,13 +69,14 @@ export default function About() {
                   <div className="terminal-line">
                     <span className="prompt">{aboutData.terminal.promptUser}</span> whoami
                   </div>
-                  <div className="muted-text">→ Full Stack Software Engineer @ Medkart</div>
+                  <div className="muted-text">→ Software Engineer (Backend Systems) @ Medkart</div>
                   <div className="terminal-line" style={{ marginTop: 14 }}>
                     <span className="prompt">{aboutData.terminal.promptUser}</span> cat profile.json
                   </div>
                   <pre className="json-block">
 {`{
   `}<span className="key">"name"</span>{`: `}<span className="str">"{aboutData.terminal.profileJson.name}"</span>{`,
+  `}<span className="key">"role"</span>{`: `}<span className="str">"{aboutData.terminal.profileJson.role}"</span>{`,
   `}<span className="key">"experience"</span>{`: `}<span className="str">"{aboutData.terminal.profileJson.experience}"</span>{`,
   `}<span className="key">"primaryStack"</span>{`: [`}{aboutData.terminal.profileJson.primaryStack.map((s, i) => (
                     <span key={s}><span className="str">"{s}"</span>{i < aboutData.terminal.profileJson.primaryStack.length - 1 ? ', ' : ''}</span>
@@ -83,14 +84,14 @@ export default function About() {
   `}<span className="key">"databases"</span>{`: [`}{aboutData.terminal.profileJson.databases.map((d, i) => (
                     <span key={d}><span className="str">"{d}"</span>{i < aboutData.terminal.profileJson.databases.length - 1 ? ', ' : ''}</span>
                   ))}{`],
-  `}<span className="key">"testing"</span>{`: [`}{aboutData.terminal.profileJson.testing.map((t, i) => (
-                    <span key={t}><span className="str">"{t}"</span>{i < aboutData.terminal.profileJson.testing.length - 1 ? ', ' : ''}</span>
+  `}<span className="key">"systems"</span>{`: [`}{aboutData.terminal.profileJson.systems.map((t, i) => (
+                    <span key={t}><span className="str">"{t}"</span>{i < aboutData.terminal.profileJson.systems.length - 1 ? ', ' : ''}</span>
                   ))}{`],
   `}<span className="key">"masters"</span>{`: `}<span className="str">"{aboutData.terminal.profileJson.masters}"</span>
 {`}`}
                   </pre>
                   <div className="terminal-line" style={{ marginTop: 14 }}>
-                    <span className="prompt">{aboutData.terminal.promptUser}</span> echo "Let’s build scalable systems." <span className="caret">&nbsp;</span>
+                    <span className="prompt">{aboutData.terminal.promptUser}</span> echo "Let’s build reliable softwares." <span className="caret">&nbsp;</span>
                   </div>
                 </div>
               ) : (

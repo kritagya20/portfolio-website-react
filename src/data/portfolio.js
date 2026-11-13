@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Kritagya Singh Chouhan',
-  role: 'Full Stack Software Developer',
-  tagline: 'Backend-learning engineer building reliable APIs, scalable Golang systems, and AI-powered workflows.',
+  role: 'Software Engineer',
+  tagline: 'Backend-focused software engineer building reliable APIs, scalable Go & Java architectures, and database-driven systems.',
   location: 'Ahmedabad, Gujarat, India',
   email: 'kritagya2022@gmail.com',
   emailAlt: 'kritagya2022@gmail.com',
@@ -14,18 +14,18 @@ export const profile = {
     leetcode: 'https://leetcode.com/u/kritagya20/',
     medium: 'https://medium.com/@kritagya2022',
   },
-  typewriter: 'Software Development Engineer',
+  typewriter: 'Software Engineer — Backend Systems',
 };
 
 export const satellites = [
-  { label: 'Golang APIs', color: '#38bdf8', projectIndex: 1 },
-  { label: 'Java Automation', color: '#a855f7', projectIndex: 0 },
-  { label: 'React & Node', color: '#f59e0b', projectIndex: 4 },
-  { label: 'PostgreSQL & MySQL', color: '#22c55e', projectIndex: 2 },
-  { label: 'Docker & Containers', color: '#ec4899', projectIndex: null },
-  { label: 'System Architecture', color: '#6366f1', projectIndex: 0 },
-  { label: 'REST Assured', color: '#06b6d4', projectIndex: 0 },
-  { label: 'GenAI Workflows', color: '#10b981', projectIndex: null },
+  { label: 'Go & REST APIs', color: '#38bdf8', projectIndex: 0 },
+  { label: 'Java & Spring Boot', color: '#e76f51', projectIndex: null },
+  { label: 'PostgreSQL & SQL', color: '#22c55e', projectIndex: 0 },
+  { label: 'Redis & Caching', color: '#f59e0b', projectIndex: 1 },
+  { label: 'Docker & Linux', color: '#ec4899', projectIndex: null },
+  { label: 'WMS & POS Workflows', color: '#a855f7', projectIndex: 2 },
+  { label: 'API Reliability & k6', color: '#06b6d4', projectIndex: 3 },
+  { label: 'System Reliability', color: '#6366f1', projectIndex: null },
 ];
 
 export const navLinks = [
@@ -69,42 +69,44 @@ export const aboutData = {
   eyebrow: 'About Me',
   title: 'Engineering Background & Principles',
   titleAccent: 'Background',
-  sub: 'Architecting scalable backend runtimes, automated quality pipelines, and high-throughput systems.',
+  sub: 'Architecting reliable backend services, database-backed platforms, and high-concurrency automated verification pipelines.',
   terminal: {
     promptUser: 'kritagya@core ~ %',
     profileJson: {
       name: 'Kritagya Singh Chouhan',
+      role: 'Software Engineer',
       experience: '3+ years',
-      primaryStack: ['Golang', 'Java', 'React'],
-      databases: ['PostgreSQL', 'MySQL', 'MongoDB'],
-      testing: ['Selenium', 'REST Assured'],
-      masters: 'IIT PATNA',
+      primaryStack: ['Go', 'Java', 'React', 'SQL'],
+      databases: ['PostgreSQL', 'MySQL', 'Redis'],
+      systems: ['REST APIs', 'k6', 'REST Assured', 'Docker'],
+      testing: ['k6 Stress Testing', 'REST Assured', 'Selenium'],
+      masters: 'IIT Patna',
     },
     architectureSpecs: [
       {
-        section: '[01. BACKEND & SERVICES]',
-        details: '→ Go (Golang) Microservices, REST APIs, Node.js',
+        section: '[01. BACKEND & APIS]',
+        details: '→ Golang REST APIs, Java / Spring Boot',
       },
       {
-        section: '[02. DATABASE ARCHITECTURE]',
-        details: '→ PostgreSQL, MySQL, Query Optimization, Transactions',
+        section: '[02. Frontend & INTERNAL PLATFORMS]',
+        details: '→ JavaScript, React, AngularJS',
       },
       {
-        section: '[03. AUTOMATION & QUALITY]',
-        details: '→ Java, Selenium, REST Assured, Appium, TestNG',
+        section: '[03. DATABASE ARCHITECTURE]',
+        details: '→ PostgreSQL, MySQL, MongoDB, Redis',
       },
       {
-        section: '[04. DEVOPS & RUNTIMES]',
-        details: '→ Docker , Jenkins CI/CD, Git, Linux',
+        section: '[04. RELIABILITY & DEVOPS]',
+        details: '→ k6, REST Assured,  Selenium, Docker, Jenkins, GitHub Actions, Linux',
       },
     ],
   },
   story: {
-    lead: 'Building resilient systems engineered for high scale & minimal latency.',
+    lead: 'Building resilient backend systems engineered for reliability, data integrity, and high performance.',
     paragraphs: [
-      'I’m a Software Engineer dedicated to solving complex system architecture challenges. My work centers on designing high-throughput backend services, tuning database execution plans, and establishing end-to-end automated validation pipelines.',
-      'Currently at Medkart, I craft backend services primarily in Go (Golang). Drawing from a strong foundation in Java, Selenium, and REST Assured, I engineer stress-tested automation frameworks that ensure 100% backend reliability before deployment.',
-      'From low-level API design to containerized runtimes with Docker, I take complete end-to-end ownership. Beyond code, I’m a passionate football and cricket follower driven by continuous technical growth.',
+      'I am a Software Engineer with 3 years of experience designing and building backend services, internal developer platforms, and data-driven systems. Working extensively with distributed architectures gives me an inherent edge: I design systems with failure modes in mind—guaranteeing transactional consistency, resilient API contracts, and predictable performance under high load.',
+      'At Medkart, I build backend platform tooling and services across core retail products including Warehouse Management Systems (WMS), Point of Sale (POS), and Central Admin portals. Among key initiatives, our team engineered an in-house testcase management platform with automated CI/CD reporting pipelines, complemented by high-concurrency k6 stress testing and multi-service API automation frameworks.',
+      'I am actively channeling my engineering depth into core backend development with Go, Java/Spring Boot, and PostgreSQL. Furthermore, I am pursuing my Master of Computer Applications (MCA) through the IIT Patna program to deepen my theoretical and technical skills.',
     ],
     quote: {
       body: '“Great software isn’t just shipped fast—it is engineered to perform reliably under high scale.”',
@@ -113,39 +115,81 @@ export const aboutData = {
   },
 };
 
+export const technicalSkills = {
+  languages: [
+    { name: 'Java', level: 'Proficient / Production Experience' },
+    { name: 'Go (Golang)', level: 'Active Backend Focus & Projects' },
+    { name: 'SQL', level: 'Proficient / Production Experience' },
+    { name: 'JavaScript', level: 'Working Knowledge' },
+    { name: 'Bash / Shell', level: 'Working Knowledge' },
+  ],
+  backendEngineering: [
+    { name: 'REST API Design & Development', status: 'Core' },
+    { name: 'HTTP Semantics & Status Codes', status: 'Core' },
+    { name: 'Layered / Clean Architecture', status: 'Core' },
+    { name: 'Spring Boot Fundamentals', status: 'Active Focus / Learning' },
+    { name: 'Concurrency & Goroutines Basics', status: 'Active Focus / Learning' },
+    { name: 'Authentication & JWT', status: 'Applied in Projects' },
+  ],
+  databases: [
+    { name: 'PostgreSQL', status: 'Production & Project Usage' },
+    { name: 'MySQL', status: 'Production Experience' },
+    { name: 'Database Transactions & ACID', status: 'Core Focus' },
+    { name: 'Schema Design & Foreign Keys', status: 'Core Focus' },
+    { name: 'Redis (Caching & Key-Value)', status: 'Applied in Projects' },
+  ],
+  reliabilityAndAutomation: [
+    { name: 'k6 Stress Testing & Benchmarking', status: 'Production Experience' },
+    { name: 'REST Assured (API Testing)', status: 'Production Experience' },
+    { name: 'Root Cause Debugging & Failure Analysis', status: 'Production Experience' },
+    { name: 'TestNG & Automation Architecture', status: 'Production Experience' },
+    { name: 'Selenium & Appium', status: 'Production Experience' },
+  ],
+  devopsAndTooling: [
+    { name: 'Docker & Containerization', status: 'Working Knowledge' },
+    { name: 'Git & GitHub Workflows', status: 'Production Experience' },
+    { name: 'Linux CLI & Environments', status: 'Production Experience' },
+    { name: 'Jenkins CI/CD Pipelines', status: 'Production Experience' },
+    { name: 'Postman & cURL', status: 'Production Experience' },
+  ],
+};
+
 export const experienceHeader = {
   eyebrow: 'Past Experience',
   title: 'Career Trajectory',
   titleAccent: 'Trajectory',
-  sub: 'From automating quality engineering to architecting high-throughput Go backend services.',
+  sub: 'Leading backend platform tooling, quality engineering, and multi-service automation across enterprise products.',
 };
 
 export const experience = [
   {
-    role: 'Senior Software Development Engineer in Test',
+    role: 'Software Engineer — Backend & Quality Automation Lead',
     company: 'Medkart',
     companyAbbr: 'Medkart',
     where: 'Ahmedabad, India',
     when: 'Feb 2026 – Present',
-    summary: 'Architected scalable multi-platform test automation frameworks across Web, Mobile, API, and DB batch workflows with custom reporting engines and CI/CD observability.',
+    summary: 'Backend-focused engineering lead architecting internal automation platforms, CI/CD reporting layers, and multi-service testing engines across Medkart’s core WMS, POS, and Central Admin enterprise products.',
     bullets: [
-      'Architected and maintained a scalable automation framework supporting Web, Mobile, API, Database, and Batch Job validation.',
-      'Built reusable framework modules for session management, reporting, data handling, and test utilities, reducing test development effort.',
-      'Developed robust REST Assured automation suites with reusable request builders, validators, authentication handlers, and assertion libraries.',
-      'Implemented end-to-end validation of loyalty points, rewards, invoicing, and transaction workflows using API, database, and asynchronous job verification.',
-      'Created custom Excel reporting solutions using Apache POI and SXSSF for large-scale execution reporting and analysis.',
-      'Integrated PostgreSQL and MySQL validations to automate backend verification of financial transactions, memberships, and rewards data.',
-      'Designed polling and job-monitoring mechanisms for validating long-running background processes and scheduled workflows.',
-      'Integrated Jenkins CI/CD pipelines and enhanced framework observability through detailed logging, reporting, and debugging utilities.'
+      'Engineered and delivered an in-house testcase management system backend, managing automated test execution pipelines, test metadata, and unified CI/CD reporting layers.',
+      'Architected multi-tier backend automation frameworks covering Web, REST API integration, and high-concurrency stress testing using k6, simulating peak retail traffic loads.',
+      'Led backend validation and system reliability for core enterprise retail products including Warehouse Management Systems (WMS), Point of Sale (POS), and Central Admin portals.',
+      'Developed high-coverage REST Assured suites with reusable auth handlers and JSON request/response interceptors to validate complex ordering, inventory synchronization, and billing APIs.',
+      'Integrated deep PostgreSQL and MySQL validations to verify ACID transaction guarantees, schema constraints, and database state transitions across financial and inventory workflows.',
+      'Engineered custom polling and event-driven monitoring mechanisms to trace long-running asynchronous batch jobs, cron queues, and inter-service state updates.',
+      'Collaborated directly with product teams and backend developers in a Laravel/PHP service architecture to reproduce integration race conditions, trace error logs, and ensure release stability.',
+      'Led and mentored the testing engineering team, establishing automated quality gates in Jenkins CI/CD pipelines and driving sprint delivery commitments.'
     ],
     stack: [
       'Java',
-      'Selenium',
-      'Appium',
+      'k6',
       'REST Assured',
       'PostgreSQL',
-      'Maven',
+      'MySQL',
+      'Docker',
+      'Jenkins',
+      'Linux',
       'Git',
+      'Maven',
     ]
   },
   {
@@ -154,24 +198,24 @@ export const experience = [
     companyAbbr: 'Bhanix',
     where: 'Hyderabad, India',
     when: 'Dec 2024 – Feb 2026',
-    summary: 'Spearheaded core fintech automation frameworks across web, mobile, and APIs, automating 2000+ critical workflows and cutting regression execution cycles by 55%.',
+    summary: 'Engineered core fintech automation frameworks and API/DB validation pipelines for digital lending products, optimizing parallel regression execution and data verification.',
     bullets: [
-      'Designed and owned a scalable Selenium-TestNG automation framework using Java and the Page Object Model.',
-      'Automated 2000+ end-to-end test cases covering critical fintech workflows across web, mobile, and APIs.',
-      'Reduced regression execution time by 55% through parallel execution and framework optimization.',
-      'Integrated REST Assured and MySQL validations to enable complete UI, API, and database verification.',
-      'Implemented Jenkins-based CI automation with detailed reporting using Allure and ExtentReports.',
-      'Improved automation reliability through reusable utilities, explicit waits, and robust synchronization.'
+      'Designed and scaled a Java-based Selenium and TestNG automation framework with thread-safe execution engines for parallel test runs.',
+      'Automated end-to-end fintech lending workflows across loan origination, KYC verification, credit evaluation APIs, and repayment database ledgers.',
+      'Integrated REST Assured and MySQL validations to perform multi-tier verification across UI, backend REST APIs, and transactional databases.',
+      'Automated database validations to verify transaction records, EMI calculations, and ledger state consistency under dynamic user inputs.',
+      'Configured Jenkins CI/CD pipeline triggers with detailed Allure and ExtentReports dashboards to ensure immediate feedback on regression runs.',
+      'Conducted API payload and server-log root cause analysis to diagnose regression failures, isolating backend integration anomalies from client-side issues.'
     ],
     stack: [
       'Java',
-      'Selenium',
-      'Appium',
-      'TestNG',
       'REST Assured',
-      'Maven',
-      'Jenkins',
+      'Selenium',
+      'TestNG',
       'MySQL',
+      'Jenkins',
+      'Maven',
+      'Git',
       'Allure',
       'ExtentReports',
     ],
@@ -182,12 +226,12 @@ export const experience = [
     companyAbbr: 'Jio Platforms',
     where: 'Navi Mumbai, India',
     when: 'Oct 2023 – Dec 2024',
-    summary: 'Automated web regression suites for Jio.com using Robot Framework and Selenium while building internal analytics dashboards and optimizing CI test execution pipelines.',
+    summary: 'Automated web regression suites for Jio.com, developed Bash automation scripts for environment setup, and built internal analytics dashboards for test execution telemetry.',
     bullets: [
-      'Automated regression testing for Jio.com using Robot Framework and Selenium.',
-      'Developed Bash scripts that reduced environment setup time by approximately 30%.',
-      'Built internal dashboards for automation execution reporting and quality analytics.',
-      'Collaborated with engineering teams to improve automation reliability and release confidence.'
+      'Automated regression validation suites for high-traffic Jio.com user journeys using Robot Framework and Selenium.',
+      'Authored Bash automation scripts to streamline local test environment setup and dependency configuration across Linux systems.',
+      'Built internal reporting dashboards with React and Chart.js to track test execution telemetry, regression trends, and system stability.',
+      'Collaborated with cross-functional engineering squads to review API and functional requirements, anticipating edge-case failure modes early in the release cycle.'
     ],
     stack: [
       'Robot Framework',
@@ -195,9 +239,8 @@ export const experience = [
       'Bash',
       'Linux',
       'Git',
-      'JavaScript',
       'React',
-      'ChartJS',
+      'JavaScript',
     ],
   },
   {
@@ -208,9 +251,9 @@ export const experience = [
     when: 'Jun 2022 – Nov 2022',
     summary: 'Contributed to frontend development of internal enterprise learning platforms using AngularJS and JavaScript within high-velocity Agile release sprints.',
     bullets: [
-      'Contributed to the development of an internal learning portal using AngularJS and JavaScript.',
-      'Implemented frontend features and resolved functional and UI issues.',
-      'Worked in an Agile environment alongside developers and QA engineers.'
+      'Contributed to the development of internal enterprise portals using AngularJS, JavaScript, and HTML/CSS.',
+      'Implemented frontend features, resolved UI bugs, and validated API payload integration in an Agile sprint cadence.',
+      'Collaborated with developers and QA engineers to ensure cross-browser compatibility and responsive UI workflows.'
     ],
     stack: [
       'JavaScript',
@@ -228,43 +271,23 @@ export const projectsHeader = {
   eyebrow: 'Recent Projects',
   title: 'Featured Missions',
   titleAccent: 'Missions',
-  sub: 'A showcase of applications I\'ve built, tested, automated, and continuously improved.',
+  sub: 'A showcase of backend services, distributed platforms, and high-reliability systems I’ve architected and built.',
 };
 
 export const projects = [
   {
-    title: 'Enterprise Web Automation & Analytics Engine',
-    type: 'SDET / Test Engineering',
-    desc: 'An enterprise-grade Selenium & TestNG automation framework featuring cross-browser W3C native network interception, a single unified JSON execution engine, pinpoint step-correlated multi-tab Excel traces, and a sleek SaaS-grade executive dark dashboard for platform health intelligence.',
-    tech: [
-      'Java',
-      'Selenium',
-      'TestNG',
-      'JavaScript',
-      'ExtentReports',
-      'Chart.js',
-      'Apache POI',
-      'Maven'
-    ],
-    links: {
-      live: null, 
-      code: 'https://github.com/kritagya20/selenium-web-automation',
-    },
-    featured: true,
-  },
-  {
     title: 'Privacy-First Personal Finance Engine',
     type: 'Backend & Systems Architecture',
-    desc: 'A privacy-focused, local-first personal finance engine and backend built with Go, encrypted SQLite (SQLCipher), and Redis. Features deterministic offline calculations, end-to-end encrypted multi-device sync, zero-trust cloud architecture, and comprehensive financial asset tracking.',
+    desc: 'A privacy-centric personal finance backend built with Go and PostgreSQL, designed around local-first data ownership, transactional integrity, and cryptographic isolation. Features layered Clean Architecture, ACID-compliant ledger transactions, JWT authentication with bcrypt, encrypted local storage, and structured logging with error tracing.',
     tech: [
       'Go',
       'PostgreSQL',
-      'SQLite',
-      'SQLCipher',
-      'Redis',
-      'REST API',
       'Docker',
-      'Cryptography'
+      'REST API',
+      'Redis',
+      'SQL',
+      'Cryptography',
+      'Clean Architecture'
     ],
     links: {
       live: null,
@@ -273,17 +296,17 @@ export const projects = [
     featured: true,
   },
   {
-    title: 'Visitor Counter Service',
+    title: 'Visitor Counter Microservice',
     type: 'Backend & Microservices',
-    desc: 'A lightweight, standalone backend service written in Go that tracks unique website visitors via salted HMAC-SHA256 IP hashing, PostgreSQL ON CONFLICT upserts, Redis caching, and dynamic SVG count badges.',
+    desc: 'A lightweight, standalone backend telemetry service written in Go that tracks unique visitors with zero third-party cookies. Implements salted HMAC-SHA256 IP hashing for privacy-safe deduplication, atomic PostgreSQL ON CONFLICT upserts, in-memory Redis caching to reduce database I/O, and dynamic SVG badge generation via Chi router.',
     tech: [
       'Go',
       'PostgreSQL',
       'Redis',
       'Docker',
-      'REST API',
       'Chi Router',
-      'Cryptography'
+      'HMAC-SHA256',
+      'REST API'
     ],
     links: {
       live: null,
@@ -292,26 +315,54 @@ export const projects = [
     featured: true,
   },
   {
-    title: 'Cosmic Space Discovery App',
-    type: 'Frontend',
-    desc: 'A space exploration application that integrates NASA APIs to display Astronomy Picture of the Day with detailed information, providing users with a visually engaging experience of daily space discoveries.',
-    tech: ['JavaScript', 'NASA API', 'HTML', 'CSS'],
+    title: 'Product Activity & Testcase Management Platform',
+    type: 'Backend Platform & Tooling',
+    desc: 'An in-house testcase management and traceability platform backend built to orchestrate CI/CD automation pipelines and report execution telemetry. Designed to track product workflow activity across WMS, POS, and Admin services, correlating test runs with API mutations and background jobs to accelerate failure root cause analysis.',
+    tech: [
+      'Java',
+      'REST APIs',
+      'PostgreSQL',
+      'Docker',
+      'Jenkins CI/CD',
+      'System Design',
+      'Event Logging'
+    ],
     links: {
       live: null,
-      code: 'https://github.com/kritagya20/cosmic',
+      code: null,
+    },
+    featured: true,
+  },
+  {
+    title: 'Enterprise API, Web & k6 Stress Testing Engine',
+    type: 'Reliability & Quality Engineering',
+    desc: 'A unified Java & k6 test engineering framework built for enterprise-grade API verification and stress testing. Features modular REST Assured request interceptors, k6 load scripts for simulated peak concurrency, automated PostgreSQL/MySQL state verification, and synchronized execution reporting.',
+    tech: [
+      'Java',
+      'k6',
+      'REST Assured',
+      'Selenium',
+      'PostgreSQL',
+      'TestNG',
+      'Maven',
+      'Docker'
+    ],
+    links: {
+      live: null,
+      code: 'https://github.com/kritagya20/selenium-web-automation',
     },
     featured: true,
   },
   {
     title: 'Desktop Chat App',
-    type: 'Full Stack',
-    desc: 'A real-time chat application with Firebase backend support, enabling instant messaging, profile management, custom themes, image sharing, and user blocking/unblocking in a modern Next.js interface.',
-    tech: ['Next.js', 'Firebase', 'Tailwind CSS'],
+    type: 'Full Stack & WebSockets',
+    desc: 'A real-time messaging application with Firebase backend integration, enabling instant messaging, user session management, custom themes, media attachments, and user blocking in a responsive interface.',
+    tech: ['Next.js', 'Firebase', 'Tailwind CSS', 'WebSockets'],
     links: {
-      live: 'null',
+      live: null,
       code: 'https://github.com/kritagya20/chatApp',
     },
-    featured: true,
+    featured: false,
   },
 ];
 
@@ -338,4 +389,3 @@ export const footerData = {
   greetingSub: '— have a great day ahead! 👋',
   visitorTelemetryLabel: 'VISITOR COUNTER',
 };
-
