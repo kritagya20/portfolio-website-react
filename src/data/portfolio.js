@@ -19,13 +19,12 @@ export const profile = {
 
 export const satellites = [
   { label: 'Go & REST APIs', color: '#38bdf8', projectIndex: 0 },
-  { label: 'Java & Spring Boot', color: '#e76f51', projectIndex: null },
+  { label: 'Java & Spring Boot', color: '#e76f51', projectIndex: 3 },
   { label: 'PostgreSQL & SQL', color: '#22c55e', projectIndex: 0 },
   { label: 'Redis & Caching', color: '#f59e0b', projectIndex: 1 },
-  { label: 'Docker & Linux', color: '#ec4899', projectIndex: null },
-  { label: 'WMS & POS Workflows', color: '#a855f7', projectIndex: 2 },
+  { label: 'Docker & Linux', color: '#ec4899', projectIndex: 3 },
   { label: 'API Reliability & k6', color: '#06b6d4', projectIndex: 3 },
-  { label: 'System Reliability', color: '#6366f1', projectIndex: null },
+  { label: 'System Reliability', color: '#6366f1', projectIndex: 3 },
 ];
 
 export const navLinks = [
