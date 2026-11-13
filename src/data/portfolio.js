@@ -162,7 +162,7 @@ export const experienceHeader = {
 
 export const experience = [
   {
-    role: 'Software Engineer — Backend & Quality Automation Lead',
+    role: 'Software Engineer — Backend & Automation Lead',
     company: 'Medkart',
     companyAbbr: 'Medkart',
     where: 'Ahmedabad, India',
