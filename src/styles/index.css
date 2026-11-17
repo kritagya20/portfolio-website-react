@@ -3027,10 +3027,253 @@ select::placeholder,
 .projects-carousel-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  border-radius: 20px;
   padding: 4px 2px 14px;
   touch-action: pan-y;
+}
+
+/* ========== 3D ORBITAL PERSPECTIVE CAROUSEL DECK ========== */
+.orbital-deck-container {
+  overflow: visible;
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+  perspective-origin: 50% 50%;
+  padding: 16px 0 28px;
+  user-select: none;
+}
+
+.orbital-deck-stage {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.orbital-card-frame {
+  position: absolute;
+  width: min(370px, 86vw);
+  max-width: 370px;
+  height: 410px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  will-change: transform, opacity;
+  border-radius: 18px;
+  box-sizing: border-box;
+}
+
+/* Inactive Flanking Cards: Native Rounded Glassmorphism */
+.orbital-card-frame.inactive-frame {
+  opacity: 0.72;
+  transition: opacity 0.3s ease;
+}
+
+.orbital-card-frame.inactive-frame:hover {
+  opacity: 0.95;
+}
+
+.orbital-card-frame.inactive-frame .project {
+  border-color: var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.orbital-card-frame.inactive-frame:hover .project {
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.55), 0 0 16px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.orbital-card-frame .project {
+  height: 100%;
+  justify-content: space-between;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface-strong) 95%, #050608), color-mix(in srgb, var(--surface) 95%, #050608)) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: none !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.orbital-card-frame .project:hover {
+  transform: none !important;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface-strong) 95%, #050608), color-mix(in srgb, var(--surface) 95%, #050608)) !important;
+}
+
+/* Active Center Card: Luminous Accent Border & Radiance */
+.orbital-card-frame.active-frame {
+  z-index: 30;
+}
+
+.orbital-card-frame.active-frame .project {
+  border-color: var(--primary);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.75),
+    0 0 28px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+
+.orbital-card-frame.active-frame:hover .project {
+  border-color: color-mix(in srgb, var(--primary) 85%, #ffffff);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.85),
+    0 0 34px color-mix(in srgb, var(--primary) 32%, transparent);
+}
+
+.orbital-card-frame .project h3 {
+  font-size: clamp(1.02rem, 2.2vw, 1.18rem);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.orbital-card-frame .project p {
+  font-size: clamp(0.8rem, 1.5vw, 0.86rem);
+  line-height: 1.55;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Tech Stack Skills Subtle Compact Chips (No Hover) */
+.orbital-card-frame .tech {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.67rem;
+  font-weight: 500;
+  padding: 2.5px 8px;
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--primary) 6%, rgba(20, 22, 32, 0.6));
+  border: 1px solid color-mix(in srgb, var(--primary) 26%, rgba(255, 255, 255, 0.06));
+  color: color-mix(in srgb, var(--text) 82%, var(--primary));
+  letter-spacing: 0.01em;
+  cursor: default;
+  user-select: none;
+}
+
+.orbital-card-frame .actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: auto;
+}
+
+/* ========== ORBITAL TELEMETRY DOCK (Replaces dots) ========== */
+.orbital-telemetry-dock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 16px;
+  position: relative;
+  z-index: 40;
+}
+
+.orbital-counter-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 22px;
+  border-radius: 9999px;
+  border: 1.2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  background: color-mix(in srgb, var(--surface-strong) 85%, #050608);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.6),
+    0 0 16px color-mix(in srgb, var(--primary) 18%, transparent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--primary);
+  user-select: none;
+  min-width: 110px;
+}
+
+.orbital-counter-divider {
+  color: color-mix(in srgb, var(--primary) 50%, rgba(255, 255, 255, 0.4));
+  font-weight: 400;
+}
+
+.orbital-counter-total {
+  color: var(--primary);
+}
+
+.orbital-nav-circle-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.2px solid rgba(255, 255, 255, 0.16);
+  background: color-mix(in srgb, var(--surface-strong) 85%, #050608);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+  padding: 0;
+}
+
+.orbital-nav-circle-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 14%, #0a0b10);
+  color: var(--primary);
+  transform: scale(1.08);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary) 32%, transparent);
+}
+
+.orbital-nav-circle-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.orbital-nav-circle-btn:disabled {
+  opacity: 0.28;
+  cursor: not-allowed;
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.nav-chevron-svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 640px) {
+  .orbital-deck-container {
+    padding: 12px 0 20px;
+  }
+  .orbital-deck-stage {
+    height: 440px;
+  }
+  .orbital-card-frame {
+    width: min(340px, 86vw);
+    height: 420px;
+  }
+  .orbital-telemetry-dock {
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .orbital-counter-pill {
+    padding: 7px 18px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+  .orbital-nav-circle-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .nav-chevron-svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .projects-carousel-track {

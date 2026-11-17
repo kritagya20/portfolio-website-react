@@ -6,39 +6,46 @@ import ScrambleText from './ScrambleText.jsx';
 
 export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  );
 
-  // Responsive visible count tracking (3 on desktop, 2 on tablet, 1 on mobile)
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setVisibleCount(1);
-      } else if (window.innerWidth < 1024) {
-        setVisibleCount(2);
-      } else {
-        setVisibleCount(3);
-      }
-    };
-    handleResize();
+    const handleResize = () => setViewportWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const maxIndex = Math.max(0, projects.length - visibleCount);
+  const maxIndex = Math.max(0, projects.length - 1);
 
-  // Ensure index stays valid when screen size changes
+  const prev = () => {
+    setCurrentIndex((c) => Math.max(0, c - 1));
+  };
+
+  const next = () => {
+    setCurrentIndex((c) => Math.min(maxIndex, c + 1));
+  };
+
+  // Keyboard arrow navigation
   useEffect(() => {
-    if (currentIndex > maxIndex) {
-      setCurrentIndex(maxIndex);
-    }
-  }, [visibleCount, maxIndex, currentIndex]);
+    const handleKeyDown = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (e.key === 'ArrowLeft') {
+        prev();
+      } else if (e.key === 'ArrowRight') {
+        next();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [maxIndex]);
 
   // Listen for direct satellite tag navigation events
   useEffect(() => {
     const handleSelectSlide = (e) => {
       const targetIdx = e.detail?.index;
       if (typeof targetIdx === 'number') {
-        const maxIdx = Math.max(0, projects.length - visibleCount);
+        const maxIdx = Math.max(0, projects.length - 1);
         setCurrentIndex(Math.min(targetIdx, maxIdx));
       }
 
@@ -61,7 +68,7 @@ export default function Projects() {
 
     window.addEventListener('selectProjectSlide', handleSelectSlide);
     return () => window.removeEventListener('selectProjectSlide', handleSelectSlide);
-  }, [visibleCount]);
+  }, []);
 
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
@@ -81,20 +88,119 @@ export default function Projects() {
     const minSwipeDistance = 40;
 
     if (distance > minSwipeDistance) {
-      // Swiped left -> Next slide
       next();
     } else if (distance < -minSwipeDistance) {
-      // Swiped right -> Previous slide
       prev();
     }
   };
 
-  const prev = () => {
-    setCurrentIndex((c) => Math.max(0, c - 1));
-  };
+  // 3D Orbital Perspective transform calculation
+  const getCardTransform = (idx) => {
+    const offset = idx - currentIndex;
+    const absOffset = Math.abs(offset);
+    const isMobile = viewportWidth < 640;
+    const isTablet = viewportWidth >= 640 && viewportWidth < 1024;
 
-  const next = () => {
-    setCurrentIndex((c) => Math.min(maxIndex, c + 1));
+    if (offset === 0) {
+      return {
+        x: '0px',
+        y: '0px',
+        z: 40,
+        rotateY: 0,
+        scale: 1,
+        opacity: 1,
+        zIndex: 30,
+        pointerEvents: 'auto',
+      };
+    }
+
+    if (isMobile) {
+      if (absOffset === 1) {
+        return {
+          x: offset > 0 ? '70%' : '-70%',
+          y: '6px',
+          z: -50,
+          rotateY: offset > 0 ? -14 : 14,
+          scale: 0.85,
+          opacity: 0.45,
+          zIndex: 20,
+          pointerEvents: 'auto',
+        };
+      }
+      return {
+        x: offset > 0 ? '110%' : '-110%',
+        y: '12px',
+        z: -120,
+        rotateY: offset > 0 ? -22 : 22,
+        scale: 0.72,
+        opacity: 0,
+        zIndex: 10 - absOffset,
+        pointerEvents: 'none',
+      };
+    }
+
+    if (isTablet) {
+      if (absOffset === 1) {
+        return {
+          x: offset > 0 ? '220px' : '-220px',
+          y: '6px',
+          z: -70,
+          rotateY: offset > 0 ? -16 : 16,
+          scale: 0.86,
+          opacity: 0.65,
+          zIndex: 20,
+          pointerEvents: 'auto',
+        };
+      }
+      return {
+        x: offset > 0 ? '420px' : '-420px',
+        y: '14px',
+        z: -180,
+        rotateY: offset > 0 ? -26 : 26,
+        scale: 0.74,
+        opacity: 0,
+        zIndex: 10 - absOffset,
+        pointerEvents: 'none',
+      };
+    }
+
+    // Desktop (>= 1024px)
+    if (absOffset === 1) {
+      return {
+        x: offset > 0 ? '290px' : '-290px',
+        y: '6px',
+        z: -70,
+        rotateY: offset > 0 ? -18 : 18,
+        scale: 0.88,
+        opacity: 0.72,
+        zIndex: 20,
+        pointerEvents: 'auto',
+      };
+    }
+
+    if (absOffset === 2) {
+      return {
+        x: offset > 0 ? '520px' : '-520px',
+        y: '14px',
+        z: -180,
+        rotateY: offset > 0 ? -26 : 26,
+        scale: 0.75,
+        opacity: 0.35,
+        zIndex: 10,
+        pointerEvents: 'auto',
+      };
+    }
+
+    return {
+      x: offset > 0 ? '700px' : '-700px',
+      y: '22px',
+      z: -280,
+      rotateY: offset > 0 ? -36 : 36,
+      scale: 0.65,
+      opacity: 0,
+      zIndex: 5,
+      pointerEvents: 'none',
+    };
   };
 
   return (
@@ -117,71 +223,58 @@ export default function Projects() {
               {projectsHeader.sub}
             </p>
           </motion.div>
-
-          {/* Carousel Navigation Buttons & Counter */}
-          {projects.length > visibleCount && (
-            <div className="carousel-nav">
-              <span className="carousel-counter">
-                {String(currentIndex + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-              </span>
-              <button
-                className="carousel-btn"
-                onClick={prev}
-                disabled={currentIndex === 0}
-                aria-label="Previous project"
-                data-testid="projects.carousel__prev__btn"
-              >
-                <svg viewBox="0 0 24 24" className="carousel-nav-svg">
-                  <polyline points="15 18 9 12 15 6" />
-                </svg>
-              </button>
-              <button
-                className="carousel-btn"
-                onClick={next}
-                disabled={currentIndex >= maxIndex}
-                aria-label="Next project"
-                data-testid="projects.carousel__next__btn"
-              >
-                <svg viewBox="0 0 24 24" className="carousel-nav-svg">
-                  <polyline points="9 18 15 12 9 6" />
-                </svg>
-              </button>
-            </div>
-          )}
         </div>
 
-        {/* Carousel Viewport Container */}
+        {/* 3D Orbital Perspective Stage */}
         <div
-          className="projects-carousel-container"
+          className="projects-carousel-container orbital-deck-container"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <div
-            className="projects-carousel-track"
-            style={{
-              transform: `translateX(calc(-${currentIndex} * ((100% + 20px) / ${visibleCount})))`,
-            }}
-          >
+          <div className="orbital-deck-stage">
             {projects.map((p, idx) => {
+              const isSelected = idx === currentIndex;
+              const cardAnim = getCardTransform(idx);
               const isInternal = p.type === 'Internal' || (!p.links?.code && !p.links?.live);
+
               return (
-                <div
+                <motion.div
                   key={p.title}
-                  className="projects-carousel-slide"
+                  className={`orbital-card-frame ${isSelected ? 'active-frame' : 'inactive-frame'}`}
                   data-testid={`projects.carousel__card-item__${idx}`}
+                  animate={{
+                    x: cardAnim.x,
+                    y: cardAnim.y,
+                    z: cardAnim.z,
+                    rotateY: cardAnim.rotateY,
+                    scale: cardAnim.scale,
+                    opacity: cardAnim.opacity,
+                    zIndex: cardAnim.zIndex,
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 280,
+                    damping: 28,
+                    mass: 0.85,
+                  }}
+                  onClick={() => {
+                    if (!isSelected) setCurrentIndex(idx);
+                  }}
+                  onTouchEnd={(e) => {
+                    const dist = Math.abs(touchStart - touchEnd);
+                    if (dist < 15 && !isSelected) {
+                      e.stopPropagation();
+                      setCurrentIndex(idx);
+                    }
+                  }}
                   style={{
-                    flex: `0 0 calc((100% - ${(visibleCount - 1) * 20}px) / ${visibleCount})`,
+                    pointerEvents: cardAnim.pointerEvents,
+                    cursor: isSelected ? 'default' : 'pointer',
                   }}
                 >
                   <article className="card project">
                     <div className="card-nebula-glow" aria-hidden="true" />
-
-                    {/* Corner HUD Telemetry Brackets */}
-                    <span className="hud-bracket tl" aria-hidden="true" />
-                    <span className="hud-bracket tr" aria-hidden="true" />
-                    <span className="hud-bracket bl" aria-hidden="true" />
-                    <span className="hud-bracket br" aria-hidden="true" />
 
                     <div className="tag-row">
                       <span className="badge badge-type" title={p.type}>{p.type}</span>
@@ -200,8 +293,10 @@ export default function Projects() {
                         )}
                       </div>
                     </div>
+
                     <h3>{p.title}</h3>
                     <p>{p.desc}</p>
+
                     <div className="tech-row">
                       {p.tech.map((t) => (
                         <span key={t} className="tech">
@@ -209,6 +304,7 @@ export default function Projects() {
                         </span>
                       ))}
                     </div>
+
                     <div className="actions">
                       {p.links?.code && (
                         <a
@@ -217,6 +313,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noreferrer"
                           data-testid={`projects.card__code__link-${idx}`}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           <GithubSvg className="icon" />
                           Code
@@ -229,6 +326,7 @@ export default function Projects() {
                           target="_blank"
                           rel="noreferrer"
                           data-testid={`projects.card__live__link-${idx}`}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           ↗ Live
                         </a>
@@ -239,32 +337,51 @@ export default function Projects() {
                           style={{ opacity: 0.7, cursor: 'default' }}
                           title="Built inside an organization — source not publicly available"
                           data-testid={`projects.card__internal__badge-${idx}`}
+                          onClick={(e) => e.stopPropagation()}
                         >
                           🔒 Internal Project
                         </span>
                       )}
                     </div>
                   </article>
-                </div>
+                </motion.div>
               );
             })}
           </div>
         </div>
 
-        {/* Bottom Pagination Dots */}
-        {projects.length > visibleCount && (
-          <div className="carousel-dots">
-            {projects.map((_, idx) => (
-              <button
-                key={idx}
-                className={`carousel-dot ${idx === currentIndex ? 'active' : ''}`}
-                onClick={() => setCurrentIndex(Math.min(idx, maxIndex))}
-                aria-label={`Go to project ${idx + 1}`}
-                data-testid={`projects.carousel__dot__btn-${idx}`}
-              />
-            ))}
+        {/* Sleek Orbital Telemetry Dock (Numbers in center between side button icons) */}
+        <div className="orbital-telemetry-dock">
+          <button
+            className="orbital-nav-circle-btn"
+            onClick={prev}
+            disabled={currentIndex === 0}
+            aria-label="Previous project"
+            data-testid="projects.carousel__prev__btn"
+          >
+            <svg viewBox="0 0 24 24" className="nav-chevron-svg">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <div className="orbital-counter-pill" aria-label={`Project ${currentIndex + 1} of ${projects.length}`}>
+            <span className="orbital-counter-current">{String(currentIndex + 1).padStart(2, '0')}</span>
+            <span className="orbital-counter-divider">/</span>
+            <span className="orbital-counter-total">{String(projects.length).padStart(2, '0')}</span>
           </div>
-        )}
+
+          <button
+            className="orbital-nav-circle-btn"
+            onClick={next}
+            disabled={currentIndex >= maxIndex}
+            aria-label="Next project"
+            data-testid="projects.carousel__next__btn"
+          >
+            <svg viewBox="0 0 24 24" className="nav-chevron-svg">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
 
         <motion.div
           className="projects-cta"
