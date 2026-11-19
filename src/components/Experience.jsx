@@ -5,7 +5,6 @@ import ScrambleText from './ScrambleText.jsx';
 import { ResponsiveTimelineDate, isCurrentRole } from '../utils/dateFormatter.jsx';
 
 function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
-  const isLeft = index % 2 === 0;
   const itemRef = useRef(null);
   const [reached, setReached] = useState(false);
   const [threshold, setThreshold] = useState(
@@ -41,7 +40,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
       ref={itemRef}
       className={`tl-item ${reached ? 'reached' : ''}`}
       data-testid={`experience.timeline__card-item__${index}`}
-      initial={{ x: isLeft ? -60 : 60, opacity: 0 }}
+      initial={{ x: -60, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.65, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1.0] }}
