@@ -1,6 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
-import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import Preloader from './components/Preloader.jsx';
+import { motion, useScroll } from 'framer-motion';
 import CustomCursor from './components/CustomCursor.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -17,17 +16,17 @@ const StarfieldCanvas = lazy(() => import('./components/StarfieldCanvas.jsx'));
 export default function App() {
   const { scrollYProgress } = useScroll();
   const [toast, setToast] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isReady, setIsReady] = useState(false);
 
-  // Remove static HTML fallback preloader once React mounts
   useEffect(() => {
-    const el = document.getElementById('static-preloader');
-    if (el) el.remove();
+    if (typeof window !== 'undefined' && window.__dismissSubtleLoader) {
+      window.__dismissSubtleLoader(() => {
+        setIsReady(true);
+      });
+    } else {
+      setIsReady(true);
+    }
   }, []);
-
-  const handlePreloadComplete = () => {
-    setIsLoading(false);
-  };
 
   useEffect(() => {
     if (!toast) return;
@@ -37,36 +36,23 @@ export default function App() {
 
   return (
     <div className="app">
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <Preloader key="preloader" onComplete={handlePreloadComplete} />
-        )}
-      </AnimatePresence>
+      <Suspense fallback={null}>
+        <StarfieldCanvas />
+      </Suspense>
+      <CustomCursor />
+      <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
+      <Navbar />
+      <main>
+        <Hero isReady={isReady} />
+        <About />
+        <Experience />
+        <Projects />
+        <Playground onToast={setToast} />
+        <Contact onToast={setToast} />
+      </main>
 
-      <motion.div
-        key="site-content"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <Suspense fallback={null}>
-          <StarfieldCanvas />
-        </Suspense>
-        <CustomCursor />
-        <motion.div className="scroll-progress" style={{ scaleX: scrollYProgress }} />
-        <Navbar />
-        <main>
-          <Hero />
-          <About />
-          <Experience />
-          <Projects />
-          <Playground onToast={setToast} />
-          <Contact onToast={setToast} />
-        </main>
-
-        <Socials />
-        <Footer />
-      </motion.div>
+      <Socials />
+      <Footer />
 
       {toast && (
         <motion.div

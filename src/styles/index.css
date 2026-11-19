@@ -921,6 +921,56 @@ main {
   margin: auto 0;
 }
 
+/* Staged Reveal: Concentric Celestial Orbit Stage & Scanner Wave */
+.solar-rings-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+/* Big-Bang Cosmic Genesis: Individual Orbit Slots */
+.solar-ring-slot {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Big-Bang Singularity Detonation Pulse */
+.solar-singularity-pulse {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, color-mix(in srgb, var(--primary) 75%, #ffffff) 0%, color-mix(in srgb, var(--primary-2) 40%, transparent) 45%, transparent 75%);
+  filter: blur(10px);
+  transform: rotateX(65deg) rotateZ(-12deg);
+  will-change: transform, opacity;
+}
+
+.solar-scanner-pulse {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 1.5px solid color-mix(in srgb, var(--primary) 70%, transparent);
+  box-shadow: 
+    0 0 32px color-mix(in srgb, var(--primary) 35%, transparent),
+    inset 0 0 24px color-mix(in srgb, var(--primary-2) 25%, transparent);
+  transform: rotateX(65deg) rotateZ(-12deg);
+  will-change: transform, opacity;
+}
+
 /* Elliptical 3D Tilted Orbit Rings */
 .solar-ring {
   position: absolute;
@@ -1389,8 +1439,15 @@ select::placeholder,
   }
 
   /* Lessen 3D tilt on mobile so orbits expand vertically into Vh */
-  .solar-ring {
+  .solar-ring,
+  .solar-scanner-pulse,
+  .solar-singularity-pulse {
     transform: rotateX(42deg) rotateZ(-6deg);
+  }
+
+  .solar-singularity-pulse {
+    width: 160px;
+    height: 160px;
   }
 
   /* Compact Central Core Card for Mobile - Attention-Grabbing & Spacious */
@@ -5345,129 +5402,6 @@ main {
 
   /* Footer & Visitor Telemetry */
   .visitor-text { font-size: 0.74rem; }
-}
-
-/* ========== CENTRALIZED COSMIC PRELOADER ========== */
-.preloader-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  background: var(--bg, #030712);
-  display: grid;
-  place-items: center;
-  user-select: none;
-}
-
-.preloader-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
-  width: 90%;
-  max-width: 360px;
-}
-
-.preloader-radar {
-  position: relative;
-  width: 110px;
-  height: 110px;
-  display: grid;
-  place-items: center;
-}
-
-.preloader-svg {
-  width: 100%;
-  height: 100%;
-}
-
-.preloader-svg .ring {
-  fill: none;
-}
-
-.preloader-svg .ring-outer {
-  stroke: color-mix(in srgb, var(--primary) 25%, transparent);
-  stroke-width: 1.5;
-  stroke-dasharray: 4 4;
-}
-
-.preloader-svg .ring-mid {
-  stroke: color-mix(in srgb, var(--primary-2) 35%, transparent);
-  stroke-width: 1.5;
-}
-
-.preloader-svg .ring-inner {
-  stroke: color-mix(in srgb, var(--primary) 50%, transparent);
-  stroke-width: 1.5;
-}
-
-.preloader-svg .radar-beam {
-  stroke: var(--primary);
-  stroke-width: 2;
-  stroke-linecap: round;
-  opacity: 0.85;
-}
-
-.preloader-core-icon {
-  position: absolute;
-  font-size: 1.7rem;
-  filter: drop-shadow(0 0 10px var(--primary));
-}
-
-.preloader-counter-row {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 800;
-  font-size: clamp(2.2rem, 7vw, 3rem);
-  line-height: 1;
-  color: var(--text);
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.preloader-symbol {
-  font-size: 1.2rem;
-  color: var(--primary-2);
-}
-
-.preloader-track {
-  width: 100%;
-  height: 4px;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--surface-strong) 80%, #000);
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
-
-.preloader-fill {
-  height: 100%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-2));
-  box-shadow: 0 0 12px var(--primary);
-}
-
-.preloader-status {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.dot-pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
-  animation: pulseGlow 1.2s infinite ease-in-out;
-  flex-shrink: 0;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.75); }
 }
 
 /* ========== TOUCH & SMALL SCREEN HOVER SUPPRESSION SYSTEM ==========

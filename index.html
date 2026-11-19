@@ -144,33 +144,48 @@
       overflow-x: hidden;
     }
 
-    #static-preloader {
+    /* Subtle Network Fallback Loader: Only visible on slow connections / asset lag (>280ms) */
+    #subtle-net-loader {
       position: fixed;
       inset: 0;
-      z-index: 99999;
+      z-index: 999999;
       background-color: #030712;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 16px;
-      color: #f3e8ff;
-      font-family: 'JetBrains Mono', monospace, sans-serif;
-      user-select: none;
+      gap: 12px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .static-radar {
-      width: 72px;
-      height: 72px;
+    #subtle-net-loader.visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .subtle-micro-ring {
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      border: 2px dashed rgba(192, 132, 252, 0.45);
-      display: grid;
-      place-items: center;
-      animation: staticRadarSpin 3s linear infinite;
-      box-shadow: 0 0 20px rgba(192, 132, 252, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #c084fc;
+      animation: subtleSpin 0.8s linear infinite;
+      box-shadow: 0 0 16px rgba(192, 132, 252, 0.2);
     }
 
-    @keyframes staticRadarSpin {
+    .subtle-micro-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+    }
+
+    @keyframes subtleSpin {
       to {
         transform: rotate(360deg);
       }
@@ -179,14 +194,47 @@
 </head>
 
 <body>
-  <div id="static-preloader">
-    <div class="static-radar">
-      <span style="font-size: 1.6rem;">🛰️</span>
-    </div>
-    <div style="font-size: 0.76rem; color: #94a3b8; letter-spacing: 0.08em;">
-      CONNECTING ORBITAL TELEMETRY…
-    </div>
+  <div id="subtle-net-loader" aria-hidden="true">
+    <div class="subtle-micro-ring"></div>
+    <div class="subtle-micro-label">Loading</div>
   </div>
+  <script>
+    (function() {
+      // Detect if user is on an explicitly slow network or high-latency connection
+      var isSlowNet = false;
+      if (navigator.connection) {
+        isSlowNet = navigator.connection.saveData || /2g|3g/.test(navigator.connection.effectiveType) || (navigator.connection.downlink && navigator.connection.downlink < 1.5);
+      }
+
+      // If network is already known to be slow (2g/3g), activate after 80ms;
+      // otherwise, only activate if bundle download/execution exceeds 280ms threshold
+      var loaderTimer = setTimeout(function() {
+        var loader = document.getElementById('subtle-net-loader');
+        if (loader) loader.classList.add('visible');
+      }, isSlowNet ? 80 : 280);
+
+      window.__dismissSubtleLoader = function(onComplete) {
+        clearTimeout(loaderTimer);
+        var loader = document.getElementById('subtle-net-loader');
+        if (!loader) {
+          if (onComplete) onComplete();
+          return;
+        }
+
+        if (loader.classList.contains('visible')) {
+          loader.style.opacity = '0';
+          loader.style.pointerEvents = 'none';
+          setTimeout(function() {
+            if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+            if (onComplete) onComplete();
+          }, 300);
+        } else {
+          if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+          if (onComplete) onComplete();
+        }
+      };
+    })();
+  </script>
   <noscript>
       <div
         style="padding: 32px; max-width: 860px; margin: 0 auto; color: #f3e8ff; background: #030712; font-family: system-ui, sans-serif; line-height: 1.6;">

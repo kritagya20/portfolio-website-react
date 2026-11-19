@@ -85,7 +85,13 @@ export default function StarfieldCanvas() {
     const starMesh = new THREE.Points(starsGeometry, starsMaterial);
     scene.add(starMesh);
 
-    camera.position.z = 20;
+    // Initial Arrival Deceleration: camera glides smoothly forward as starfield eases into subtle ambient drift
+    const mountTime = performance.now();
+    const WARP_DURATION = prefersReducedMotion ? 0 : (isMobile ? 850 : 1300);
+    const startCameraZ = prefersReducedMotion ? 20 : (isMobile ? 22.8 : 24.5);
+    const targetCameraZ = 20;
+
+    camera.position.z = startCameraZ;
 
     // Advanced Dynamic Meteor Wave System
     const meteors = [];
@@ -269,8 +275,26 @@ export default function StarfieldCanvas() {
           currentInfluenceX += (targetMouseX * activeFactor - currentInfluenceX) * 0.018;
           currentInfluenceY += (targetMouseY * activeFactor - currentInfluenceY) * 0.018;
 
-          starMesh.rotation.y += 0.00012 + currentInfluenceX;
-          starMesh.rotation.x += 0.00006 + currentInfluenceY;
+          // Smooth camera arrival ease (startCameraZ -> 20.0)
+          const elapsedSinceMount = timestamp - mountTime;
+          let easeWarp = 0;
+
+          if (WARP_DURATION > 0 && elapsedSinceMount < WARP_DURATION) {
+            const warpProgress = elapsedSinceMount / WARP_DURATION;
+            // Smooth quintic ease-out deceleration curve
+            const decay = 1 - warpProgress;
+            easeWarp = Math.pow(decay, 2.8);
+            camera.position.z = targetCameraZ + (startCameraZ - targetCameraZ) * easeWarp;
+          } else if (camera.position.z !== targetCameraZ) {
+            camera.position.z = targetCameraZ;
+          }
+
+          // Initial brisk cosmic glide softly decelerating into calm perpetual ambient drift
+          const warpBoostY = 0.0024 * easeWarp;
+          const warpBoostX = 0.0012 * easeWarp;
+
+          starMesh.rotation.y += 0.00012 + warpBoostY + currentInfluenceX;
+          starMesh.rotation.x += 0.00006 + warpBoostX + currentInfluenceY;
 
           renderer.render(scene, camera);
         }
