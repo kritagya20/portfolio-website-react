@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { profile, contactData } from '../data/portfolio.js';
 import { MailSvg } from '../icon_jsx';
@@ -9,16 +9,99 @@ export default function Contact({ onToast }) {
   const [email, setEmail] = useState('');
   const [msg, setMsg] = useState('');
 
+  // Field-specific validation errors anchored directly towards each field
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    msg: '',
+  });
+
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const msgRef = useRef(null);
+
+  const validate = () => {
+    const newErrors = { name: '', email: '', msg: '' };
+    let isValid = true;
+    let firstInvalidRef = null;
+
+    // Validate Name
+    if (!name.trim()) {
+      newErrors.name = 'Your name is required';
+      isValid = false;
+      if (!firstInvalidRef) firstInvalidRef = nameRef;
+    } else if (name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+      isValid = false;
+      if (!firstInvalidRef) firstInvalidRef = nameRef;
+    }
+
+    // Validate Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) {
+      newErrors.email = 'Your email address is required';
+      isValid = false;
+      if (!firstInvalidRef) firstInvalidRef = emailRef;
+    } else if (!emailRegex.test(email.trim())) {
+      newErrors.email = 'Please enter a valid email (e.g. name@domain.com)';
+      isValid = false;
+      if (!firstInvalidRef) firstInvalidRef = emailRef;
+    }
+
+    // Validate Message
+    if (!msg.trim()) {
+      newErrors.msg = 'Message is required';
+      isValid = false;
+      if (!firstInvalidRef) firstInvalidRef = msgRef;
+    } else if (msg.trim().length < 5) {
+      newErrors.msg = 'Message must be at least 5 characters';
+      isValid = false;
+      if (!firstInvalidRef) firstInvalidRef = msgRef;
+    }
+
+    setErrors(newErrors);
+
+    if (!isValid && firstInvalidRef?.current) {
+      firstInvalidRef.current.focus();
+    }
+
+    return isValid;
+  };
+
   const submit = (e) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim() || !msg.trim()) {
-      onToast?.(contactData.validationMessage);
+
+    // Field-level validation: errors are shown directly towards the field, NOT on the center toast
+    const isValid = validate();
+    if (!isValid) {
       return;
     }
-    const subject = encodeURIComponent(`Portfolio transmission from ${name}`);
-    const body = encodeURIComponent(`${msg}\n\n— ${name} (${email})`);
+
+    const subject = encodeURIComponent(`Portfolio transmission from ${name.trim()}`);
+    const body = encodeURIComponent(`${msg.trim()}\n\n— ${name.trim()} (${email.trim()})`);
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
     onToast?.(contactData.sendingMessage);
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    if (errors.name) {
+      setErrors((prev) => ({ ...prev, name: '' }));
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (errors.email) {
+      setErrors((prev) => ({ ...prev, email: '' }));
+    }
+  };
+
+  const handleMsgChange = (e) => {
+    setMsg(e.target.value);
+    if (errors.msg) {
+      setErrors((prev) => ({ ...prev, msg: '' }));
+    }
   };
 
   return (
@@ -120,37 +203,100 @@ export default function Contact({ onToast }) {
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            noValidate
           >
-            <div className="field">
-              <label>{contactData.formLabels.name}</label>
+            <div className={`field ${errors.name ? 'field-has-error' : ''}`}>
+              <div className="field-label-row">
+                <label htmlFor="contact-name">
+                  {contactData.formLabels.name} <span className="req-star" aria-hidden="true">*</span>
+                </label>
+              </div>
               <input
+                ref={nameRef}
+                id="contact-name"
+                name="name"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleNameChange}
                 type="text"
+                autoComplete="name"
                 placeholder={contactData.formLabels.namePlaceholder}
                 data-testid="contact.form__name__input"
+                aria-required="true"
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? 'contact-name-error' : undefined}
               />
+              {errors.name && (
+                <div id="contact-name-error" className="field-error-msg" role="alert">
+                  <svg className="error-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3a.75.75 0 01.75.75v4a.75.75 0 01-1.5 0v-4A.75.75 0 018 4zm0 8a1 1 0 110-2 1 1 0 010 2z" />
+                  </svg>
+                  <span>{errors.name}</span>
+                </div>
+              )}
             </div>
-            <div className="field">
-              <label>{contactData.formLabels.email}</label>
+
+            <div className={`field ${errors.email ? 'field-has-error' : ''}`}>
+              <div className="field-label-row">
+                <label htmlFor="contact-email">
+                  {contactData.formLabels.email} <span className="req-star" aria-hidden="true">*</span>
+                </label>
+              </div>
               <input
+                ref={emailRef}
+                id="contact-email"
+                name="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleEmailChange}
                 type="email"
+                autoComplete="email"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck="false"
                 placeholder={contactData.formLabels.emailPlaceholder}
                 data-testid="contact.form__email__input"
+                aria-required="true"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? 'contact-email-error' : undefined}
               />
+              {errors.email && (
+                <div id="contact-email-error" className="field-error-msg" role="alert">
+                  <svg className="error-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3a.75.75 0 01.75.75v4a.75.75 0 01-1.5 0v-4A.75.75 0 018 4zm0 8a1 1 0 110-2 1 1 0 010 2z" />
+                  </svg>
+                  <span>{errors.email}</span>
+                </div>
+              )}
             </div>
-            <div className="field">
-              <label>{contactData.formLabels.message}</label>
+
+            <div className={`field ${errors.msg ? 'field-has-error' : ''}`}>
+              <div className="field-label-row">
+                <label htmlFor="contact-message">
+                  {contactData.formLabels.message} <span className="req-star" aria-hidden="true">*</span>
+                </label>
+              </div>
               <textarea
+                ref={msgRef}
+                id="contact-message"
+                name="message"
                 rows={4}
                 value={msg}
-                onChange={(e) => setMsg(e.target.value)}
+                onChange={handleMsgChange}
                 placeholder={contactData.formLabels.messagePlaceholder}
                 data-testid="contact.form__message__textarea"
+                aria-required="true"
+                aria-invalid={!!errors.msg}
+                aria-describedby={errors.msg ? 'contact-msg-error' : undefined}
               />
+              {errors.msg && (
+                <div id="contact-msg-error" className="field-error-msg" role="alert">
+                  <svg className="error-icon" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 1a7 7 0 100 14A7 7 0 008 1zm0 3a.75.75 0 01.75.75v4a.75.75 0 01-1.5 0v-4A.75.75 0 018 4zm0 8a1 1 0 110-2 1 1 0 010 2z" />
+                  </svg>
+                  <span>{errors.msg}</span>
+                </div>
+              )}
             </div>
+
             <button type="submit" className="btn btn-primary" style={{ width: '100%' }} data-testid="contact.form__submit__btn">
               {contactData.formLabels.buttonText}
             </button>

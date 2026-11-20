@@ -4054,16 +4054,31 @@ select::placeholder,
 }
 
 .contact-terminal-card .field {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+.contact-terminal-card .field-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
 }
 
 .contact-terminal-card .field label {
-  display: block;
+  display: inline-flex;
+  align-items: center;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.74rem;
   color: var(--text-muted);
-  margin-bottom: 6px;
   letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.contact-terminal-card .req-star {
+  color: var(--primary);
+  margin-left: 3px;
+  font-weight: 700;
 }
 
 .contact-terminal-card input,
@@ -4071,21 +4086,84 @@ select::placeholder,
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--bg-soft) 80%, transparent);
+  background: color-mix(in srgb, var(--bg-soft) 85%, #05070c);
   border: 1px solid var(--border);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  font-size: 0.92rem;
-  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
   box-sizing: border-box;
+  color-scheme: dark;
 }
 
 .contact-terminal-card input:focus,
 .contact-terminal-card textarea:focus {
   outline: none;
   border-color: var(--primary);
-  background: var(--surface);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--primary) 25%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, #0a0e18);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--primary) 28%, transparent);
+}
+
+/* Dark Theme Native Autofill Shield (Prevents WebKit/Blink white/blue autofill flash) */
+.contact-terminal-card input:-webkit-autofill,
+.contact-terminal-card input:-webkit-autofill:hover,
+.contact-terminal-card input:-webkit-autofill:focus,
+.contact-terminal-card input:-webkit-autofill:active,
+.contact-terminal-card textarea:-webkit-autofill,
+.contact-terminal-card textarea:-webkit-autofill:hover,
+.contact-terminal-card textarea:-webkit-autofill:focus,
+.contact-terminal-card textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #090d16 inset !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+  caret-color: #f1f5f9 !important;
+  transition: background-color 5000s ease-in-out 0s;
+  border-color: var(--border) !important;
+  font-family: inherit !important;
+}
+
+.contact-terminal-card input:-webkit-autofill:focus,
+.contact-terminal-card textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #0c1220 inset, 0 0 16px color-mix(in srgb, var(--primary) 28%, transparent) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Field-specific Error States (Anchored directly towards the field) */
+.contact-terminal-card .field.field-has-error input,
+.contact-terminal-card .field.field-has-error textarea {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.22) !important;
+  background: color-mix(in srgb, #ef4444 5%, var(--surface)) !important;
+}
+
+.contact-terminal-card .field.field-has-error input:focus,
+.contact-terminal-card .field.field-has-error textarea:focus {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.35) !important;
+}
+
+.contact-terminal-card .field-error-msg {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: #f87171;
+  font-weight: 500;
+  animation: fieldErrorShake 0.35s ease;
+}
+
+.contact-terminal-card .field-error-msg .error-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+@keyframes fieldErrorShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
 }
 
 @media (max-width: 980px) {
@@ -5392,7 +5470,7 @@ main {
   /* Contact Section */
   .channel-title { font-size: 0.9rem; }
   .channel-val { font-size: 0.82rem; }
-  .contact-terminal-card input, .contact-terminal-card textarea { font-size: 0.85rem; padding: 10px 12px; }
+  .contact-terminal-card input, .contact-terminal-card textarea { font-size: 16px; padding: 11px 13px; }
 
   /* Space Arcade / Playground Section */
   .game-tile-row h3 { font-size: 0.92rem; }

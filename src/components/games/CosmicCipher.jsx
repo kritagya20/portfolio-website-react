@@ -151,6 +151,7 @@ export default function CosmicCipher({ best, onBest, onToast }) {
 
   useEffect(() => {
     const onKey = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
       if (gameStatus !== 'playing') return;
       const k = e.key.toUpperCase();
       if (/^[A-Z]$/.test(k) && !picked.has(k)) {
