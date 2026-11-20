@@ -4096,6 +4096,17 @@ select::placeholder,
   color-scheme: dark;
 }
 
+.contact-terminal-card textarea {
+  resize: none;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: 120px;
+  min-height: 120px;
+  max-height: 120px;
+  line-height: 1.5;
+}
+
 .contact-terminal-card input:focus,
 .contact-terminal-card textarea:focus {
   outline: none;
