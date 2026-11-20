@@ -2,12 +2,16 @@ import { useEffect, useState, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { profile, satellites } from '../data/portfolio.js';
 
-function useTypewriterOnce(textToType = 'Software Development Engineer', speed = 50, delay = 1550, isReady = true) {
+function useTypewriterOnce(textToType = 'Software Development Engineer', speed = 45, startTyping = false) {
   const [text, setText] = useState('');
   const hasCompletedRef = useRef(false);
 
   useEffect(() => {
-    if (!isReady) return;
+    // Guaranteed empty state while card is popping up or waiting
+    if (!startTyping) {
+      setText('');
+      return;
+    }
     if (hasCompletedRef.current) {
       setText(textToType);
       return;
@@ -16,7 +20,8 @@ function useTypewriterOnce(textToType = 'Software Development Engineer', speed =
     let index = 0;
     let timerId;
 
-    const startTimer = setTimeout(() => {
+    // Mindful cognitive pause after card pop-up animation completes (150ms)
+    const initialPause = setTimeout(() => {
       const step = () => {
         if (index < textToType.length) {
           index++;
@@ -27,26 +32,27 @@ function useTypewriterOnce(textToType = 'Software Development Engineer', speed =
         }
       };
       step();
-    }, delay);
+    }, 150);
 
     return () => {
-      clearTimeout(startTimer);
+      clearTimeout(initialPause);
       clearTimeout(timerId);
     };
-  }, [textToType, speed, delay, isReady]);
+  }, [textToType, speed, startTyping]);
 
   return text;
 }
 
 // Chaotic "Big-Bang" cosmic genesis configuration for celestial orbits
+// Tuned for rapid, crisp manifestation so the stage completely clears before the card pops up
 const ORBIT_RINGS = [
   {
     id: 'ring-2',
     ringClass: 'ring-2',
     activeSatIndices: [2, 3],
     // Ring 2 bursts first with energetic expansion from core
-    delayDesktop: 0.28,
-    delayMobile: 0.18,
+    delayDesktop: 0.20,
+    delayMobile: 0.12,
     initialScaleDesktop: 0.15,
     initialScaleMobile: 0.22,
     initialRotate: -24,
@@ -58,9 +64,9 @@ const ORBIT_RINGS = [
     ringClass: 'ring-4',
     activeSatIndices: [6, 7],
     // Ring 4 (outer boundary) snaps in second from outer horizon
-    delayDesktop: 0.44,
-    delayMobile: 0.28,
-    initialScaleDesktop: 1.42,
+    delayDesktop: 0.32,
+    delayMobile: 0.20,
+    initialScaleDesktop: 1.40,
     initialScaleMobile: 1.20,
     initialRotate: 16,
     stiffness: 280,
@@ -71,8 +77,8 @@ const ORBIT_RINGS = [
     ringClass: 'ring-1',
     activeSatIndices: [0, 1],
     // Ring 1 (inner nucleus) quantum-sparks third from singularity
-    delayDesktop: 0.60,
-    delayMobile: 0.38,
+    delayDesktop: 0.44,
+    delayMobile: 0.28,
     initialScaleDesktop: 0.22,
     initialScaleMobile: 0.28,
     initialRotate: 26,
@@ -84,8 +90,8 @@ const ORBIT_RINGS = [
     ringClass: 'ring-3',
     activeSatIndices: [4, 5],
     // Ring 3 (mid-outer harmonic) locks into resonance fourth
-    delayDesktop: 0.74,
-    delayMobile: 0.48,
+    delayDesktop: 0.56,
+    delayMobile: 0.36,
     initialScaleDesktop: 0.36,
     initialScaleMobile: 0.42,
     initialRotate: -15,
@@ -96,23 +102,23 @@ const ORBIT_RINGS = [
 
 // Asynchronous starlight ignition delays mapped to parent orbits
 const SATELLITE_BIG_BANG_DELAYS_DESKTOP = [
-  0.68, // idx 0: Go & REST APIs (on Ring 1, pops right after Ring 1 at 0.60s)
-  0.76, // idx 1: Java & Spring Boot (on Ring 1)
-  0.36, // idx 2: PostgreSQL & SQL (on Ring 2, pops right after Ring 2 at 0.28s)
-  0.44, // idx 3: Redis & Caching (on Ring 2)
-  0.84, // idx 4: Docker & Linux (on Ring 3, pops right after Ring 3 at 0.74s)
-  0.92, // idx 5: API Reliability & k6 (on Ring 3)
-  0.54, // idx 6: System Reliability (on Ring 4, pops right after Ring 4 at 0.44s)
+  0.50, // idx 0: Go & REST APIs (on Ring 1, pops right after Ring 1 at 0.44s)
+  0.56, // idx 1: Java & Spring Boot (on Ring 1)
+  0.26, // idx 2: PostgreSQL & SQL (on Ring 2, pops right after Ring 2 at 0.20s)
+  0.32, // idx 3: Redis & Caching (on Ring 2)
+  0.62, // idx 4: Docker & Linux (on Ring 3, pops right after Ring 3 at 0.56s)
+  0.68, // idx 5: API Reliability & k6 (on Ring 3)
+  0.38, // idx 6: System Reliability (on Ring 4, pops right after Ring 4 at 0.32s)
 ];
 
 const SATELLITE_BIG_BANG_DELAYS_MOBILE = [
-  0.44, // idx 0 (Ring 1)
-  0.50, // idx 1 (Ring 1)
-  0.24, // idx 2 (Ring 2)
-  0.30, // idx 3 (Ring 2)
-  0.55, // idx 4 (Ring 3)
-  0.62, // idx 5 (Ring 3)
-  0.36, // idx 6 (Ring 4)
+  0.32, // idx 0 (Ring 1)
+  0.36, // idx 1 (Ring 1)
+  0.16, // idx 2 (Ring 2)
+  0.20, // idx 3 (Ring 2)
+  0.40, // idx 4 (Ring 3)
+  0.44, // idx 5 (Ring 3)
+  0.24, // idx 6 (Ring 4)
 ];
 
 export default function Hero({ isReady = true }) {
@@ -120,16 +126,15 @@ export default function Hero({ isReady = true }) {
     ? profile.typewriter
     : (Array.isArray(profile.typewriter) ? profile.typewriter[0] : 'Software Development Engineer');
 
-  // Adaptive timing: chaotic Big-Bang orbits genesis -> satellites -> nucleus card
+  // Adaptive timing: ensures sequential staging (Orbits -> Stage Clears -> Card Pops Up -> Typing Starts)
   const timingConfig = useMemo(() => {
     if (typeof window === 'undefined') {
       return {
         isInstant: false,
         isMobile: false,
-        singularityDelay: 0.15,
-        scannerDelay: 0.95,
-        coreDelay: 1.15,
-        typewriterDelay: 1450,
+        singularityDelay: 0.10,
+        scannerDelay: 0.36,
+        coreDelay: 0.82,
       };
     }
 
@@ -143,35 +148,49 @@ export default function Hero({ isReady = true }) {
         isMobile,
         singularityDelay: 0,
         scannerDelay: 0,
-        coreDelay: 0.08,
-        typewriterDelay: 50,
+        coreDelay: 0.05,
       };
     }
 
-    // Snappy mobile choreography (~1.0s before core card)
+    // Snappy mobile choreography (~0.52s before card pop-up)
     if (isMobile) {
       return {
         isInstant: false,
         isMobile: true,
-        singularityDelay: 0.08,
-        scannerDelay: 0.62,
-        coreDelay: 0.75,
-        typewriterDelay: 950,
+        singularityDelay: 0.06,
+        scannerDelay: 0.24,
+        coreDelay: 0.52,
       };
     }
 
-    // Cinematic space-first desktop choreography (~1.2s before core card)
+    // Cinematic staged desktop choreography (~0.82s before card pop-up)
     return {
       isInstant: false,
       isMobile: false,
-      singularityDelay: 0.15,
-      scannerDelay: 0.95,
-      coreDelay: 1.15,
-      typewriterDelay: 1450,
+      singularityDelay: 0.10,
+      scannerDelay: 0.36,
+      coreDelay: 0.82,
     };
   }, []);
 
-  const typed = useTypewriterOnce(singleRole, 50, timingConfig.typewriterDelay, isReady);
+  // Card Pop-Up State Machine: Card arrives EMPTY; typing only triggers after pop-up completes
+  const [cardAnimationDone, setCardAnimationDone] = useState(false);
+
+  // Safety fallback: guarantees typing activates even if onAnimationComplete is interrupted
+  useEffect(() => {
+    if (!isReady) return;
+    if (timingConfig.isInstant) {
+      setCardAnimationDone(true);
+      return;
+    }
+    const timeoutMs = (timingConfig.coreDelay + 0.95) * 1000;
+    const fallbackTimer = setTimeout(() => {
+      setCardAnimationDone(true);
+    }, timeoutMs);
+    return () => clearTimeout(fallbackTimer);
+  }, [isReady, timingConfig.isInstant, timingConfig.coreDelay]);
+
+  const typed = useTypewriterOnce(singleRole, 45, cardAnimationDone);
   const stageRef = useRef(null);
   const [activeSat, setActiveSat] = useState(null);
 
@@ -225,7 +244,7 @@ export default function Hero({ isReady = true }) {
               '--warp-color': activeColor || 'var(--primary)',
             }}
           >
-            {/* Phase 1: Chaotic Big-Bang Orbits Genesis & Singularity Wave */}
+            {/* Phase 1: Chaotic Big-Bang Orbits Genesis & Singularity Wave (Finishes before card pop-up) */}
             <div className="solar-rings-stage">
               {/* Central Singularity Detonation Wave */}
               {!timingConfig.isInstant && (
@@ -241,14 +260,14 @@ export default function Hero({ isReady = true }) {
                       : { opacity: 0 }
                   }
                   transition={{
-                    duration: timingConfig.isMobile ? 0.65 : 0.85,
+                    duration: timingConfig.isMobile ? 0.45 : 0.55,
                     delay: timingConfig.singularityDelay,
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 />
               )}
 
-              {/* Sweeping Scanner Radar Pulse */}
+              {/* Sweeping Scanner Radar Pulse (Clears the stage before card arrives) */}
               {!timingConfig.isInstant && (
                 <motion.div
                   className="solar-scanner-pulse"
@@ -262,7 +281,7 @@ export default function Hero({ isReady = true }) {
                       : { opacity: 0 }
                   }
                   transition={{
-                    duration: timingConfig.isMobile ? 0.7 : 0.9,
+                    duration: timingConfig.isMobile ? 0.38 : 0.45,
                     delay: timingConfig.scannerDelay,
                     ease: 'easeOut',
                   }}
@@ -298,7 +317,7 @@ export default function Hero({ isReady = true }) {
                       timingConfig.isInstant
                         ? { duration: 0.1 }
                         : {
-                            opacity: { duration: 0.26, delay: ringDelay },
+                            opacity: { duration: 0.22, delay: ringDelay },
                             scale: {
                               type: 'spring',
                               stiffness: orbit.stiffness,
@@ -338,8 +357,8 @@ export default function Hero({ isReady = true }) {
               const satDelay = timingConfig.isInstant
                 ? 0
                 : (timingConfig.isMobile
-                    ? (SATELLITE_BIG_BANG_DELAYS_MOBILE[idx] ?? 0.3)
-                    : (SATELLITE_BIG_BANG_DELAYS_DESKTOP[idx] ?? 0.5));
+                    ? (SATELLITE_BIG_BANG_DELAYS_MOBILE[idx] ?? 0.25)
+                    : (SATELLITE_BIG_BANG_DELAYS_DESKTOP[idx] ?? 0.45));
 
               return (
                 <motion.div
@@ -376,13 +395,13 @@ export default function Hero({ isReady = true }) {
               );
             })}
 
-            {/* Phase 3: Central Nucleus Dossier Card (Floats and Locks into Gravitational Orbit) */}
+            {/* Phase 3: Central Hero Card Pop-Up (Arrives EMPTY, triggers typing on animation complete) */}
             <motion.div
               className="solar-core"
               initial={{
                 opacity: 0,
-                y: timingConfig.isInstant ? 0 : 38,
-                scale: timingConfig.isInstant ? 1 : 0.93,
+                y: timingConfig.isInstant ? 0 : 28,
+                scale: timingConfig.isInstant ? 1 : 0.82,
                 z: timingConfig.isInstant ? 40 : 0,
               }}
               animate={
@@ -395,20 +414,32 @@ export default function Hero({ isReady = true }) {
                     }
                   : {
                       opacity: 0,
-                      y: 38,
-                      scale: 0.93,
+                      y: 28,
+                      scale: 0.82,
                       z: 0,
                     }
               }
-              transition={{
-                duration: timingConfig.isInstant ? 0.2 : 0.75,
-                delay: timingConfig.coreDelay,
-                ease: [0.16, 1, 0.3, 1],
+              transition={
+                timingConfig.isInstant
+                  ? { duration: 0.1 }
+                  : {
+                      type: 'spring',
+                      stiffness: 300,
+                      damping: 22,
+                      mass: 0.75,
+                      delay: timingConfig.coreDelay,
+                    }
+              }
+              onAnimationComplete={() => {
+                if (isReady) {
+                  setCardAnimationDone(true);
+                }
               }}
             >
               <div className="core-glow-aura" />
               <div className="core-pulse-ring" />
               
+              {/* Terminal Typewriter Badge: Arrives empty (> _); typing starts only after card pop-up settles */}
               <div className="core-typer-sub">
                 <span className="typer-prompt">&gt;</span> {typed}
                 <span className="caret" aria-hidden="true" />

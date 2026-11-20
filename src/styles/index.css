@@ -1047,7 +1047,7 @@ select::placeholder,
     0 0 0 1px rgba(255, 255, 255, 0.04);
   z-index: 10;
   transform: translateZ(40px);
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
   box-sizing: border-box;
 }
 
