@@ -84,15 +84,20 @@ export default function Playground({ onToast }) {
   return (
     <section id="playground" className="section" data-testid="playground__container__section">
       <div className="container">
-        <span className="eyebrow">
-          <span className="dot" /> {playgroundHeader.eyebrow}
-        </span>
-        <h2 className="section-title">
-          {playgroundHeader.title.split(' ')[0]} <ScrambleText text={playgroundHeader.titleAccent} className="accent" />
-        </h2>
-        <p className="section-sub">
-          {playgroundHeader.sub}
-        </p>
+        <motion.div
+          className="playground-header"
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+        >
+          <span className="eyebrow">
+            <span className="dot" /> {playgroundHeader.eyebrow}
+          </span>
+          <h2 className="section-title">
+            {playgroundHeader.title.split(' ')[0]} <ScrambleText text={playgroundHeader.titleAccent} className="accent" />
+          </h2>
+        </motion.div>
 
         <div className="game-grid">
           {GAMES.map((g, i) => (

@@ -5,6 +5,7 @@ import ScrambleText from './ScrambleText.jsx';
 
 export default function About() {
   const [hudTab, setHudTab] = useState('telemetry');
+  const [isTerminalExpanded, setIsTerminalExpanded] = useState(false);
 
   return (
     <section id="about" className="section" data-testid="about__container__section">
@@ -21,7 +22,6 @@ export default function About() {
           <h2 className="section-title">
             Engineering <ScrambleText text={aboutData.titleAccent} className="accent" /> &amp; Principles
           </h2>
-          <p className="section-sub">{aboutData.sub}</p>
         </motion.div>
 
         {/* Main Content Layout: Terminal Window (Left) + Open-Air Story Flow (Right) */}
@@ -38,9 +38,19 @@ export default function About() {
             {/* macOS Window Title Bar */}
             <div className="mac-terminal-bar">
               <div className="mac-controls">
-                <span className="mac-btn close" />
-                <span className="mac-btn minimize" />
-                <span className="mac-btn zoom" />
+                <span className="mac-btn close" aria-hidden="true" />
+                <button
+                  type="button"
+                  className="mac-btn minimize"
+                  onClick={() => setIsTerminalExpanded((prev) => !prev)}
+                  aria-label={isTerminalExpanded ? 'Minimize terminal' : 'Expand terminal'}
+                />
+                <button
+                  type="button"
+                  className="mac-btn zoom"
+                  onClick={() => setIsTerminalExpanded((prev) => !prev)}
+                  aria-label={isTerminalExpanded ? 'Minimize terminal' : 'Expand terminal'}
+                />
               </div>
               <div className="mac-tabs">
                 <button
@@ -62,8 +72,11 @@ export default function About() {
               </div>
             </div>
 
-            {/* Terminal Body */}
-            <div className="mac-terminal-body" data-testid="about.terminal__body__div">
+            {/* Terminal Body with Expandable Mobile Peek Mode */}
+            <div
+              className={`mac-terminal-body ${isTerminalExpanded ? 'expanded' : 'collapsed'}`}
+              data-testid="about.terminal__body__div"
+            >
               {hudTab === 'telemetry' ? (
                 <div className="hud-terminal">
                   <div className="terminal-line">
@@ -115,6 +128,25 @@ export default function About() {
                   </div>
                 </div>
               )}
+            </div>
+
+            {/* Authentic macOS Terminal Status Bar & Mobile Expand Toggle */}
+            <div className="mac-terminal-status-bar">
+              <div className="terminal-status-left">
+                <span className="terminal-status-pulse" aria-hidden="true" />
+                <span className="terminal-status-text">zsh 5.9</span>
+                <span className="terminal-status-sep">·</span>
+                <span className="terminal-status-text">UTF-8</span>
+              </div>
+              <button
+                type="button"
+                className="mac-terminal-expand-btn"
+                onClick={() => setIsTerminalExpanded((prev) => !prev)}
+                aria-expanded={isTerminalExpanded}
+                data-testid="about.terminal__expand__btn"
+              >
+                <span>{isTerminalExpanded ? '▲ Collapse Terminal' : '▼ Expand Full Terminal'}</span>
+              </button>
             </div>
           </motion.div>
 

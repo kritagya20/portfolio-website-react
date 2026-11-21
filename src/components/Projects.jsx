@@ -219,9 +219,6 @@ export default function Projects() {
             <h2 className="section-title">
               Featured <ScrambleText text={projectsHeader.titleAccent} className="accent" />
             </h2>
-            <p className="section-sub">
-              {projectsHeader.sub}
-            </p>
           </motion.div>
         </div>
 

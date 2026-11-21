@@ -212,9 +212,6 @@ export default function Experience() {
           <h2 className="section-title">
             Career <ScrambleText text={experienceHeader.titleAccent} className="accent" />
           </h2>
-          <p className="section-sub">
-            {experienceHeader.sub}
-          </p>
         </motion.div>
 
         <div className="timeline" ref={containerRef}>

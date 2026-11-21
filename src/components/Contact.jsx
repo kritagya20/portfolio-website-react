@@ -119,9 +119,6 @@ export default function Contact({ onToast }) {
           <h2 className="section-title">
             Establish <ScrambleText text={contactData.titleAccent} className="accent" />
           </h2>
-          <p className="section-sub">
-            {contactData.sub}
-          </p>
         </motion.div>
 
         <motion.div
