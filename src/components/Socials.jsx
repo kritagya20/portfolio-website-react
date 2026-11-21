@@ -35,7 +35,7 @@ export default function Socials() {
       <div className="social__dock-pill">
         <ul className="social__icon-list">
           {socialLinks.map(({ label, href, iconName }) => (
-            <li key={label}>
+            <li key={label} className="social-item">
               <a
                 href={href}
                 aria-label={label}
@@ -45,8 +45,8 @@ export default function Socials() {
                 data-testid={`socials__link__a-${iconName}`}
               >
                 {iconMap[iconName] || null}
-                <span className="social-tooltip">{label}</span>
               </a>
+              <span className="social-tooltip" aria-hidden="true">{label}</span>
             </li>
           ))}
         </ul>
@@ -60,12 +60,11 @@ export default function Socials() {
             className="social-theme-toggle"
             onClick={cycleTheme}
             aria-label={`Switch theme (current: ${themeMeta.label})`}
-            title={`Theme: ${themeMeta.label}`}
             data-testid="sidebar__theme-toggle__btn"
           >
             <span className="theme-toggle-icon">{themeMeta.icon}</span>
-            <span className="social-tooltip">Theme: {themeMeta.label}</span>
           </button>
+          <span className="social-tooltip" aria-hidden="true">Theme: {themeMeta.label}</span>
         </div>
       </div>
     </aside>

@@ -276,26 +276,13 @@ export default function Projects() {
                   <article className="card project">
                     <div className="card-nebula-glow" aria-hidden="true" />
 
-                    <div className="tag-row">
-                      <span className="badge badge-type" title={p.type}>{p.type}</span>
-                      <div className="tag-group">
-                        {p.featured && <span className="badge badge-featured">Featured</span>}
-                        {isInternal && (
-                          <span
-                            className="badge badge-internal"
-                            style={{
-                              background: 'color-mix(in srgb, #94a3b8 18%, transparent)',
-                              color: '#94a3b8',
-                            }}
-                          >
-                            Private
-                          </span>
-                        )}
+                    <div className="project-content-lead">
+                      <div className="tag-row">
+                        <span className="badge badge-type" title={p.type}>{p.type}</span>
                       </div>
+                      <h3>{p.title}</h3>
+                      <p>{p.desc}</p>
                     </div>
-
-                    <h3>{p.title}</h3>
-                    <p>{p.desc}</p>
 
                     <div className="tech-row">
                       {p.tech.map((t) => (
