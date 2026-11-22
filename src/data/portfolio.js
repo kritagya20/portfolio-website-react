@@ -285,8 +285,7 @@ export const projects = [
       'REST API',
       'Redis',
       'SQL',
-      'Cryptography',
-      'Clean Architecture'
+      'Cryptography'
     ],
     links: {
       live: null,
@@ -321,10 +320,8 @@ export const projects = [
       'Java',
       'REST APIs',
       'PostgreSQL',
-      'Docker',
       'Jenkins CI/CD',
       'System Design',
-      'Event Logging'
     ],
     links: {
       live: null,
