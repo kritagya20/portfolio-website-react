@@ -20,10 +20,10 @@ test.describe('Navigation & Theme E2E Suite [@module:Navigation]', () => {
 
     // Click links
     await nav.navigateTo('about');
-    await expect(page.getByTestId('about__container__section')).toBeInViewport();
+    await expect(page.getByTestId('about__container_section')).toBeInViewport();
 
     await nav.navigateTo('projects');
-    await expect(page.getByTestId('projects__container__section')).toBeInViewport();
+    await expect(page.getByTestId('projects__container_section')).toBeInViewport();
   });
 
   test('TC_NAV_002: [Large 1920px] Desktop theme toggle cycles theme attribute', async ({ page }) => {
@@ -74,7 +74,7 @@ test.describe('Navigation & Theme E2E Suite [@module:Navigation]', () => {
     // Click contact link in mobile drawer
     await nav.getMobileNavLink('contact').click();
     await expect(nav.mobileDrawer).toBeHidden();
-    await expect(page.getByTestId('contact__container__section')).toBeInViewport();
+    await expect(page.getByTestId('contact__container_section')).toBeInViewport();
   });
 
   test('TC_NAV_005: Theme selection persists across browser page reloads via localStorage', async ({ page }) => {

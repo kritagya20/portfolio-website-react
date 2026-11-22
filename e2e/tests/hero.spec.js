@@ -43,7 +43,7 @@ test.describe('Hero Section E2E Suite [@module:Hero]', () => {
     await hero.clickSatelliteNode(0);
 
     // Should scroll down to project carousel
-    await expect(page.getByTestId('projects__container__section')).toBeInViewport();
+    await expect(page.getByTestId('projects__container_section')).toBeInViewport();
   });
 
   test('TC_HERO_004: [Small 375px] Hero section scales down cleanly for mobile viewports', async ({ page }) => {

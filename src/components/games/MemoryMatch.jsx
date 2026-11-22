@@ -106,7 +106,7 @@ export default function MemoryMatch({ best, onBest, onToast }) {
         </div>
       </div>
 
-      <div className="mm-grid">
+      <div className="mm-grid" test-id="playground__memory_grid">
         {deck.map((c) => {
           const isOpen = open.includes(c.key) || matched.has(c.key);
           const isMatched = matched.has(c.key);
@@ -115,6 +115,7 @@ export default function MemoryMatch({ best, onBest, onToast }) {
               key={c.key}
               type="button"
               className={`mm-card ${isOpen ? 'open' : ''} ${isMatched ? 'matched' : ''}`}
+              test-id="playground__memory_card"
               onClick={() => flip(c.key)}
               aria-label={isOpen ? c.pair.label : 'Hidden card'}
             >
@@ -147,7 +148,7 @@ export default function MemoryMatch({ best, onBest, onToast }) {
       </AnimatePresence>
 
       <div className="game-actions">
-        <button className="btn" onClick={reset}>
+        <button className="btn" onClick={reset} test-id="playground__memoryReset_btn">
           🔄 Shuffle &amp; restart
         </button>
         {best != null && <span className="best-pill">🏆 Best: {best} moves</span>}

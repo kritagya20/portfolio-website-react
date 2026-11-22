@@ -40,7 +40,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
     <motion.div
       ref={itemRef}
       className={`tl-item ${reached ? 'reached' : ''}`}
-      data-testid={`experience.timeline__card-item__${index}`}
+      test-id="experience__timeline_card"
       initial={{ x: -60, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
       viewport={{ once: true, amount: 0.15 }}
@@ -92,6 +92,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
         {/* Mobile view only: Frosted glass summary callout with accent beam */}
         <div
           className="tl-mobile-summary-wrapper"
+          test-id="experience__summary_wrapper"
           onClick={() => onOpenModal(item)}
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
@@ -105,7 +106,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
         >
           <p
             className="tl-mobile-summary"
-            data-testid={`experience.timeline__summary__p-${index}`}
+            test-id="experience__summary_text"
           >
             {item.summary || item.bullets[0]}
           </p>
@@ -131,7 +132,7 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
             type="button"
             className="tl-card-trigger-link"
             onClick={() => onOpenModal(item)}
-            data-testid={`experience.timeline__details__btn-${index}`}
+            test-id="experience__details_btn"
             aria-label={`View details for ${item.role} at ${item.company}`}
           >
             <span>View details</span>
@@ -185,7 +186,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="section" data-testid="experience__container__section">
+    <section id="experience" className="section" test-id="experience__container_section">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
@@ -193,15 +194,15 @@ export default function Experience() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <span className="eyebrow">
+          <span className="eyebrow" test-id="experience__eyebrow_badge">
             <span className="dot" /> {experienceHeader.eyebrow}
           </span>
-          <h2 className="section-title">
+          <h2 className="section-title" test-id="experience__title_heading">
             Career <ScrambleText text={experienceHeader.titleAccent} className="accent" />
           </h2>
         </motion.div>
 
-        <div className="timeline" ref={containerRef}>
+        <div className="timeline" ref={containerRef} test-id="experience__timeline_container">
           {/* Background Track Line */}
           <div className="timeline-track" />
 
@@ -235,7 +236,7 @@ export default function Experience() {
         {selectedExperience && (
           <motion.div
             className="exp-modal-backdrop"
-            data-testid="experience.modal__backdrop__div"
+            test-id="experience__modal_overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -243,7 +244,7 @@ export default function Experience() {
           >
             <motion.div
               className="exp-modal-content"
-              data-testid="experience.modal__dossier__dialog"
+              test-id="experience__dossier_modal"
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 30 }}
@@ -261,13 +262,13 @@ export default function Experience() {
                 className="exp-modal-close"
                 onClick={() => setSelectedExperience(null)}
                 aria-label="Close dossier"
-                data-testid="experience.modal__close__btn"
+                test-id="experience__modalClose_btn"
               >
                 ✕
               </button>
 
               <div className="exp-modal-header">
-                <h3 className="exp-modal-title">
+                <h3 className="exp-modal-title" test-id="experience__modal_heading">
                   <span className="tl-role">{selectedExperience.role}</span>
                   <span className="exp-modal-sep"> · </span>
                   <span className="tl-company">{selectedExperience.company}</span>

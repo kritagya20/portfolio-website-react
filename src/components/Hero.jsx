@@ -229,23 +229,25 @@ export default function Hero({ isReady = true }) {
   };
 
   return (
-    <section id="home" className="section hero hero-centered-theme" data-testid="hero__container__section">
+    <section id="home" className="section hero hero-centered-theme" test-id="hero__container_section">
       <div className="container">
         <div
           ref={stageRef}
           className="hero-centered-stage"
+          test-id="hero__stage_container"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
           {/* Centered Hero Solar Orbit System */}
           <div
             className={`hero-solar-system ${activeSat !== null ? 'gravitational-warp-active' : ''}`}
+            test-id="hero__solar_stage"
             style={{
               '--warp-color': activeColor || 'var(--primary)',
             }}
           >
             {/* Phase 1: Chaotic Big-Bang Orbits Genesis & Singularity Wave (Finishes before card pop-up) */}
-            <div className="solar-rings-stage">
+            <div className="solar-rings-stage" test-id="hero__rings_stage">
               {/* Central Singularity Detonation Wave */}
               {!timingConfig.isInstant && (
                 <motion.div
@@ -379,7 +381,7 @@ export default function Hero({ isReady = true }) {
                   onMouseEnter={() => setActiveSat(idx)}
                   onMouseLeave={() => setActiveSat(null)}
                   onClick={() => handleSatClick(sat.projectIndex)}
-                  data-testid={`hero__satellite__node-${idx}`}
+                  test-id="hero__satellite_node"
                   style={{
                     cursor: 'pointer',
                     borderColor: isSelected ? sat.color : undefined,
@@ -398,6 +400,7 @@ export default function Hero({ isReady = true }) {
             {/* Phase 3: Central Hero Card Pop-Up (Arrives EMPTY, triggers typing on animation complete) */}
             <motion.div
               className="solar-core"
+              test-id="hero__core_card"
               initial={{
                 opacity: 0,
                 y: timingConfig.isInstant ? 0 : 28,
@@ -440,17 +443,17 @@ export default function Hero({ isReady = true }) {
               <div className="core-pulse-ring" />
               
               {/* Terminal Typewriter Badge: Arrives empty (> _); typing starts only after card pop-up settles */}
-              <div className="core-typer-sub">
+              <div className="core-typer-sub" test-id="hero__typewriter_badge">
                 <span className="typer-prompt">&gt;</span> {typed}
                 <span className="caret" aria-hidden="true" />
               </div>
-              <h1 className="hero-title">
+              <h1 className="hero-title" test-id="hero__title_heading">
                 Hi, I’m <span className="grad">{profile.name.split(' ')[0]}</span>.
               </h1>
 
               {/* Primary & Secondary Dual Glass CTA Buttons */}
-              <div className="hero-cta-group">
-                <a className="hero-btn hero-btn--primary" href="#about" data-testid="hero__explore__link">
+              <div className="hero-cta-group" test-id="hero__cta_group">
+                <a className="hero-btn hero-btn--primary" href="#about" test-id="hero__explore_btn">
                   <span>Explore</span>
                   <span className="btn-arrow" aria-hidden="true">→</span>
                 </a>
@@ -459,7 +462,7 @@ export default function Hero({ isReady = true }) {
                   href={profile.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-testid="hero__resume__link"
+                  test-id="hero__resume_link"
                 >
                   <svg
                     className="btn-icon"

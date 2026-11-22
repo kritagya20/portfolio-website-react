@@ -6,23 +6,23 @@ export class ExperiencePage {
   }
 
   // Locators
-  get section() { return this.page.getByTestId('experience__container__section'); }
-  get modalDialog() { return this.page.getByTestId('experience.modal__dossier__dialog'); }
-  get modalCloseBtn() { return this.page.getByTestId('experience.modal__close__btn'); }
-  get modalTitle() { return this.page.locator('.exp-modal-title'); }
-  get modalCompany() { return this.page.locator('.exp-modal-title'); }
+  get section() { return this.page.getByTestId('experience__container_section'); }
+  get modalDialog() { return this.page.getByTestId('experience__dossier_modal'); }
+  get modalCloseBtn() { return this.page.getByTestId('experience__modalClose_btn'); }
+  get modalTitle() { return this.page.locator('[test-id="experience__modal_heading"], .exp-modal-title'); }
+  get modalCompany() { return this.page.locator('[test-id="experience__modal_heading"], .exp-modal-title'); }
   get modalBullets() { return this.page.locator('.exp-modal-body li'); }
 
   getTimelineCard(index) {
-    return this.page.getByTestId(`experience.timeline__card-item__${index}`);
+    return this.page.getByTestId('experience__timeline_card').nth(index);
   }
 
   getMobileDetailsBtn(index) {
-    return this.page.getByTestId(`experience.timeline__details__btn-${index}`);
+    return this.page.getByTestId('experience__details_btn').nth(index);
   }
 
   getMobileSummaryWrapper(index) {
-    return this.getTimelineCard(index).locator('.tl-mobile-summary-wrapper');
+    return this.getTimelineCard(index).locator('[test-id="experience__summary_wrapper"], .tl-mobile-summary-wrapper');
   }
 
   // Actions

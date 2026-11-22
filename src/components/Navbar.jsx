@@ -118,12 +118,12 @@ export default function Navbar() {
   return (
     <>
       {/* Mobile Top Bar (< 768px): Top Left Theme Button & Top Right Menu Button */}
-      <div className="mobile-top-bar" data-testid="navbar.mobile__bar__container">
+      <div className="mobile-top-bar" test-id="navbar__mobile_bar">
         <button
           className="mobile-theme-btn"
           onClick={cycleTheme}
           aria-label={`Switch theme (current: ${themeMeta.label})`}
-          data-testid="navbar.mobile__theme-toggle__btn"
+          test-id="navbar__mobileTheme_btn"
         >
           <span className="theme-icon">{themeMeta.icon}</span>
           <span className="theme-label">{themeMeta.label}</span>
@@ -133,7 +133,7 @@ export default function Navbar() {
           className="mobile-menu-btn"
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Toggle menu"
-          data-testid="navbar.mobile__hamburger__btn"
+          test-id="navbar__hamburger_btn"
         >
           {open ? '✕' : '☰'}
         </button>
@@ -142,7 +142,7 @@ export default function Navbar() {
       {/* Desktop Floating Pill Navbar (> 768px): Arrives on Scroll */}
       <motion.header
         className="site-nav"
-        data-testid="navbar__header__nav"
+        test-id="navbar__main_header"
         initial={false}
         animate={{
           y: isScrolled ? 0 : -60,
@@ -155,9 +155,10 @@ export default function Navbar() {
           ease: [0.25, 0.1, 0.25, 1.0],
         }}
       >
-        <div className="nav-pill" ref={pillRef} data-testid="navbar__pill__div">
+        <div className="nav-pill" ref={pillRef} test-id="navbar__nav_pill">
           <span
             className="nav-indicator"
+            test-id="navbar__indicator_pill"
             style={{
               left: `${indicatorPos.left}px`,
               width: `${indicatorPos.width}px`,
@@ -174,7 +175,7 @@ export default function Navbar() {
                   ref={(el) => (navLinkRefs.current[link.id] = el)}
                   className={`nav-link ${isActive ? 'active' : ''}`}
                   onClick={(e) => handleNavClick(e, link.id)}
-                  data-testid={`navbar__link__a-${link.id}`}
+                  test-id="navbar__nav_link"
                 >
                   <span className="nav-label">{link.label}</span>
                 </a>
@@ -191,7 +192,7 @@ export default function Navbar() {
           <>
             <motion.div
               className="nav-overlay"
-              data-testid="navbar.mobile__overlay__div"
+              test-id="navbar__drawer_overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -201,7 +202,7 @@ export default function Navbar() {
 
             <motion.div
               className="nav-mobile"
-              data-testid="navbar.mobile__drawer__dialog"
+              test-id="navbar__menu_drawer"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -219,7 +220,7 @@ export default function Navbar() {
                   className="nav-mobile-close"
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
-                  data-testid="navbar.mobile__close__btn"
+                  test-id="navbar__drawerClose_btn"
                 >
                   ✕
                 </button>
@@ -234,7 +235,7 @@ export default function Navbar() {
                       href={`#${link.id}`}
                       className={`nav-mobile-link ${isActive ? 'active' : ''}`}
                       onClick={(e) => handleNavClick(e, link.id)}
-                      data-testid={`navbar.mobile__link__a-${link.id}`}
+                      test-id="navbar__drawer_link"
                     >
                       <span className="nav-mobile-label">{link.label}</span>
                       {isActive && <span className="active-dot" />}
@@ -250,7 +251,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="GitHub"
-                    data-testid="navbar.mobile__social-github__a"
+                    test-id="navbar__drawerSocial_link"
                   >
                     <GithubSvg className="icon icon--github" />
                   </a>
@@ -259,7 +260,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LeetCode"
-                    data-testid="navbar.mobile__social-leetcode__a"
+                    test-id="navbar__drawerSocial_link"
                   >
                     <LeetCodeSvg className="icon icon--leetcode" />
                   </a>
@@ -268,7 +269,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Medium"
-                    data-testid="navbar.mobile__social-medium__a"
+                    test-id="navbar__drawerSocial_link"
                   >
                     <MediumSvg className="icon icon--medium" />
                   </a>
@@ -277,7 +278,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn"
-                    data-testid="navbar.mobile__social-linkedin__a"
+                    test-id="navbar__drawerSocial_link"
                   >
                     <LinkedinSvg className="icon icon--linkedin" />
                   </a>
@@ -286,7 +287,7 @@ export default function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Mail"
-                    data-testid="navbar.mobile__social-mail__a"
+                    test-id="navbar__drawerSocial_link"
                   >
                     <MailSvg className="icon icon--mail" />
                   </a>
@@ -296,7 +297,7 @@ export default function Navbar() {
                   className="nav-mobile-theme-btn"
                   onClick={cycleTheme}
                   aria-label="Switch Theme"
-                  data-testid="navbar.mobile__drawer-theme-toggle__btn"
+                  test-id="navbar__drawerTheme_btn"
                 >
                   <span>{themeMeta.icon}</span>
                   <span>

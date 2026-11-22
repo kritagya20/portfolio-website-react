@@ -83,6 +83,7 @@ test.describe('About Section & macOS Terminal E2E Suite [@module:About]', () => 
 
     const about = new AboutPage(page);
     await about.section.scrollIntoViewIfNeeded();
+    await about.terminalWindow.waitFor({ state: 'visible' });
 
     await expect(about.terminalBody).toHaveClass(/collapsed/);
 

@@ -38,10 +38,11 @@ export default function Footer() {
   const ordinalViews = getOrdinalString(visitorCount);
 
   return (
-    <footer className="footer space-footer" data-testid="footer__container__footer">
+    <footer className="footer space-footer" test-id="footer__container_footer">
       <div className="container footer-inner">
         <motion.div
           className="space-footer-card visitor-card"
+          test-id="footer__visitor_card"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -49,13 +50,14 @@ export default function Footer() {
         >
           <div className="visitor-info">
             <span className="visitor-text">
-              You are <strong className="visitor-highlight">{ordinalViews}</strong> visitor to my site in {currentYear}
+              You are <strong className="visitor-highlight" test-id="footer__visitor_count">{ordinalViews}</strong> visitor to my site in {currentYear}
             </span>
           </div>
         </motion.div>
 
         <motion.div
           className="space-footer-card greeting-card"
+          test-id="footer__greeting_card"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

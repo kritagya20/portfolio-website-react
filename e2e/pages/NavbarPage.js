@@ -6,22 +6,30 @@ export class NavbarPage {
   }
 
   // Locators
-  get desktopHeader() { return this.page.getByTestId('navbar__header__nav'); }
-  get desktopPill() { return this.page.getByTestId('navbar__pill__div'); }
-  get themeToggleBtn() { return this.page.locator('[data-testid="sidebar__theme-toggle__btn"], [data-testid="navbar__theme-toggle__btn"]').first(); }
-  get mobileBar() { return this.page.getByTestId('navbar.mobile__bar__container'); }
-  get mobileThemeBtn() { return this.page.getByTestId('navbar.mobile__theme-toggle__btn'); }
-  get hamburgerBtn() { return this.page.getByTestId('navbar.mobile__hamburger__btn'); }
-  get mobileDrawer() { return this.page.getByTestId('navbar.mobile__drawer__dialog'); }
-  get mobileCloseBtn() { return this.page.getByTestId('navbar.mobile__close__btn'); }
-  get drawerThemeBtn() { return this.page.getByTestId('navbar.mobile__drawer-theme-toggle__btn'); }
+  get desktopHeader() { return this.page.getByTestId('navbar__main_header'); }
+  get desktopPill() { return this.page.getByTestId('navbar__nav_pill'); }
+  get themeToggleBtn() { return this.page.getByTestId('socials__themeToggle_btn'); }
+  get mobileBar() { return this.page.getByTestId('navbar__mobile_bar'); }
+  get mobileThemeBtn() { return this.page.getByTestId('navbar__mobileTheme_btn'); }
+  get hamburgerBtn() { return this.page.getByTestId('navbar__hamburger_btn'); }
+  get mobileDrawer() { return this.page.getByTestId('navbar__menu_drawer'); }
+  get mobileCloseBtn() { return this.page.getByTestId('navbar__drawerClose_btn'); }
+  get drawerThemeBtn() { return this.page.getByTestId('navbar__drawerTheme_btn'); }
 
   getNavLink(linkId) {
-    return this.page.getByTestId(`navbar__link__a-${linkId}`);
+    const linkMap = { home: 0, about: 1, experience: 2, projects: 3, playground: 4, contact: 5 };
+    const index = typeof linkId === 'number' ? linkId : linkMap[linkId];
+    return index !== undefined
+      ? this.page.getByTestId('navbar__nav_link').nth(index)
+      : this.page.locator(`[test-id="navbar__nav_link"][href="#${linkId}"]`);
   }
 
   getMobileNavLink(linkId) {
-    return this.page.getByTestId(`navbar.mobile__link__a-${linkId}`);
+    const linkMap = { home: 0, about: 1, experience: 2, projects: 3, playground: 4, contact: 5 };
+    const index = typeof linkId === 'number' ? linkId : linkMap[linkId];
+    return index !== undefined
+      ? this.page.getByTestId('navbar__drawer_link').nth(index)
+      : this.page.locator(`[test-id="navbar__drawer_link"][href="#${linkId}"]`);
   }
 
   // Actions

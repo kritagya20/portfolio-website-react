@@ -6,19 +6,21 @@ export class PlaygroundPage {
   }
 
   // Section Locators
-  get section() { return this.page.getByTestId('playground__container__section'); }
-  get gameModal() { return this.page.getByTestId('playground.modal__game__dialog'); }
-  get modalCloseBtn() { return this.page.getByTestId('playground.modal__close__btn'); }
+  get section() { return this.page.getByTestId('playground__container_section'); }
+  get gameModal() { return this.page.getByTestId('playground__game_modal'); }
+  get modalCloseBtn() { return this.page.getByTestId('playground__modalClose_btn'); }
 
   getGameTile(gameId) {
-    return this.page.getByTestId(`playground__tile__btn-${gameId}`);
+    const gameMap = { circle: 0, typing: 1, memory: 2, hangman: 3 };
+    const index = typeof gameId === 'number' ? gameId : gameMap[gameId];
+    return this.page.getByTestId('playground__game_tile').nth(index);
   }
 
   // Game 1: Perfect Circle Locators & Actions
-  get pcCanvas() { return this.page.locator('.pc-stage canvas'); }
-  get pcScoreBadge() { return this.page.locator('.pc-badge'); }
-  get pcScoreNum() { return this.page.locator('.pc-num'); }
-  get pcTryAgainBtn() { return this.page.locator('.game.pc .game-actions button'); }
+  get pcCanvas() { return this.page.locator('[test-id="playground__circle_canvas"], .pc-stage canvas'); }
+  get pcScoreBadge() { return this.page.locator('[test-id="playground__circleScore_badge"], .pc-badge'); }
+  get pcScoreNum() { return this.page.locator('[test-id="playground__circleScore_text"], .pc-num'); }
+  get pcTryAgainBtn() { return this.page.locator('[test-id="playground__circleReset_btn"], .game.pc .game-actions button'); }
 
   async drawCircleOnCanvas() {
     Logger.info('Drawing circle on Perfect Circle canvas via mouse drag');
@@ -45,10 +47,10 @@ export class PlaygroundPage {
   }
 
   // Game 2: Typing Test Locators & Actions
-  get ttTargetPre() { return this.page.locator('pre.tt-target'); }
-  get ttInput() { return this.page.locator('textarea.tt-input'); }
-  get ttResultDiv() { return this.page.locator('.tt-result'); }
-  get ttNewSnippetBtn() { return this.page.locator('.game.tt .game-actions button'); }
+  get ttTargetPre() { return this.page.locator('[test-id="playground__typingTarget_code"], pre.tt-target'); }
+  get ttInput() { return this.page.locator('[test-id="playground__typing_textarea"], textarea.tt-input'); }
+  get ttResultDiv() { return this.page.locator('[test-id="playground__typingResult_text"], .tt-result'); }
+  get ttNewSnippetBtn() { return this.page.locator('[test-id="playground__typingReset_btn"], .game.tt .game-actions button'); }
 
   async typeTargetSnippet(text) {
     Logger.info(`Typing text into Typing Test input: "${text.substring(0, 20)}..."`);
@@ -56,9 +58,9 @@ export class PlaygroundPage {
   }
 
   // Game 3: Memory Match Locators & Actions
-  get mmCards() { return this.page.locator('.mm-card'); }
+  get mmCards() { return this.page.locator('[test-id="playground__memory_card"], .mm-card'); }
   get mmMovesCount() { return this.page.locator('.mm-stats span').first(); }
-  get mmRestartBtn() { return this.page.locator('.game.mm .game-actions button'); }
+  get mmRestartBtn() { return this.page.locator('[test-id="playground__memoryReset_btn"], .game.mm .game-actions button'); }
 
   async clickCard(index) {
     Logger.info(`Flipping Memory Match card #${index}`);
@@ -66,11 +68,11 @@ export class PlaygroundPage {
   }
 
   // Game 4: Cosmic Cipher Locators & Actions
-  get ccRadarSvg() { return this.page.locator('.cosmic-radar-svg'); }
+  get ccRadarSvg() { return this.page.locator('[test-id="playground__cipher_radar"], .cosmic-radar-svg'); }
   get ccWordDisplay() { return this.page.locator('.hm-word'); }
   get ccHintText() { return this.page.locator('.hm-hint-text'); }
-  get ccKeys() { return this.page.locator('.hm-key'); }
-  get ccNextWordBtn() { return this.page.locator('.game.hm .game-actions button'); }
+  get ccKeys() { return this.page.locator('[test-id="playground__cipherLetter_btn"], .hm-key'); }
+  get ccNextWordBtn() { return this.page.locator('[test-id="playground__cipherReset_btn"], .game.hm .game-actions button, .game-actions button'); }
 
   async pressKeyLetter(letter) {
     Logger.info(`Pressing Cosmic Cipher key letter: ${letter}`);
@@ -83,7 +85,9 @@ export class PlaygroundPage {
   // General Modal Actions
   async launchGame(gameId) {
     Logger.info(`Launching interactive game #${gameId}`);
-    await this.getGameTile(gameId).click();
+    const tile = this.getGameTile(gameId);
+    await tile.scrollIntoViewIfNeeded();
+    await tile.click();
     await this.gameModal.waitFor({ state: 'visible' });
   }
 

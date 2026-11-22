@@ -6,34 +6,34 @@ export class ProjectsPage {
   }
 
   // Locators
-  get section() { return this.page.getByTestId('projects__container__section'); }
-  get carouselContainer() { return this.page.locator('.projects-carousel-container'); }
-  get prevBtn() { return this.page.getByTestId('projects.carousel__prev__btn'); }
-  get nextBtn() { return this.page.getByTestId('projects.carousel__next__btn'); }
-  get githubCtaLink() { return this.page.getByTestId('projects.cta__github__link'); }
-  get counterPill() { return this.page.locator('.orbital-counter-pill'); }
-  get counterCurrent() { return this.page.locator('.orbital-counter-current'); }
-  get counterTotal() { return this.page.locator('.orbital-counter-total'); }
+  get section() { return this.page.getByTestId('projects__container_section'); }
+  get carouselContainer() { return this.page.locator('[test-id="projects__carousel_container"], .projects-carousel-container'); }
+  get prevBtn() { return this.page.getByTestId('projects__prev_btn'); }
+  get nextBtn() { return this.page.getByTestId('projects__next_btn'); }
+  get githubCtaLink() { return this.page.getByTestId('projects__githubCta_link'); }
+  get counterPill() { return this.page.locator('[test-id="projects__counter_pill"], .orbital-counter-pill'); }
+  get counterCurrent() { return this.page.locator('[test-id="projects__counter_current"], .orbital-counter-current'); }
+  get counterTotal() { return this.page.locator('[test-id="projects__counter_total"], .orbital-counter-total'); }
   get activeCard() { return this.page.locator('.orbital-card-frame.active-frame'); }
 
   getProjectCard(index) {
-    return this.page.getByTestId(`projects.carousel__card-item__${index}`);
+    return this.page.getByTestId('projects__project_card').nth(index);
   }
 
   getCodeLink(index) {
-    return this.page.getByTestId(`projects.card__code__link-${index}`);
+    return this.getProjectCard(index).locator('[test-id="projects__code_link"]');
   }
 
   getLiveLink(index) {
-    return this.page.getByTestId(`projects.card__live__link-${index}`);
+    return this.getProjectCard(index).locator('[test-id="projects__live_link"]');
   }
 
   getInternalBadge(index) {
-    return this.page.getByTestId(`projects.card__internal__badge-${index}`);
+    return this.getProjectCard(index).locator('[test-id="projects__internal_badge"]');
   }
 
   getDotBtn(index) {
-    return this.page.getByTestId(`projects.carousel__dot__btn-${index}`);
+    return this.page.locator('.orbital-dot').nth(index);
   }
 
   // Actions

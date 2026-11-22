@@ -10,6 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 2 : undefined,
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
+    testIdAttribute: 'test-id',
     baseURL: 'http://localhost:5173',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

@@ -39,6 +39,7 @@ export function ToastProvider({ children }) {
         {toast && (
           <motion.div
             className="toast"
+            test-id="toast__feedback_toast"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 30, opacity: 0 }}

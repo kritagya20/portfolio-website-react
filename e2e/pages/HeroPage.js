@@ -6,12 +6,12 @@ export class HeroPage {
   }
 
   // Locators
-  get section() { return this.page.getByTestId('hero__container__section'); }
-  get exploreLink() { return this.page.getByTestId('hero__explore__link'); }
-  get resumeLink() { return this.page.getByTestId('hero__resume__link'); }
+  get section() { return this.page.getByTestId('hero__container_section'); }
+  get exploreLink() { return this.page.getByTestId('hero__explore_btn'); }
+  get resumeLink() { return this.page.getByTestId('hero__resume_link'); }
 
   getSatelliteNode(index) {
-    return this.page.getByTestId(`hero__satellite__node-${index}`);
+    return this.page.getByTestId('hero__satellite_node').nth(index);
   }
 
   // Actions

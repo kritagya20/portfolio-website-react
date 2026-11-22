@@ -98,7 +98,7 @@ export default function Contact({ onToast }) {
   };
 
   return (
-    <section id="contact" className="section" data-testid="contact__container__section">
+    <section id="contact" className="section" test-id="contact__container_section">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 35 }}
@@ -106,16 +106,17 @@ export default function Contact({ onToast }) {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <span className="eyebrow">
+          <span className="eyebrow" test-id="contact__eyebrow_badge">
             <span className="dot" /> {contactData.eyebrow}
           </span>
-          <h2 className="section-title">
+          <h2 className="section-title" test-id="contact__title_heading">
             Establish <ScrambleText text={contactData.titleAccent} className="accent" />
           </h2>
         </motion.div>
 
         <motion.div
           className="contact-grid"
+          test-id="contact__grid_container"
           initial={{ opacity: 0, scale: 0.96, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           viewport={{ once: true, amount: 0.2 }}
@@ -123,12 +124,13 @@ export default function Contact({ onToast }) {
         >
           <motion.div
             className="contact-info"
+            test-id="contact__info_container"
             initial={{ x: -25, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <a className="contact-channel" href={`mailto:${profile.email}`} data-testid="contact.channel__email__link">
+            <a className="contact-channel" href={`mailto:${profile.email}`} test-id="contact__email_link">
               <div className="channel-ico">
                 <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -144,7 +146,7 @@ export default function Contact({ onToast }) {
               </div>
             </a>
 
-            <a className="contact-channel" href={`tel:${profile.phone.replace(/\s+/g, '')}`} data-testid="contact.channel__phone__link">
+            <a className="contact-channel" href={`tel:${profile.phone.replace(/\s+/g, '')}`} test-id="contact__phone_link">
               <div className="channel-ico">
                 <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
@@ -164,7 +166,7 @@ export default function Contact({ onToast }) {
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              data-testid="contact.channel__resume__link"
+              test-id="contact__resume_link"
             >
               <div className="channel-ico">
                 <svg viewBox="0 0 24 24" className="icon" fill="none" stroke="currentColor" strokeWidth="2">
@@ -188,7 +190,7 @@ export default function Contact({ onToast }) {
           <motion.form
             onSubmit={submit}
             className="contact-terminal-card"
-            data-testid="contact.form__container__form"
+            test-id="contact__message_form"
             initial={{ x: 25, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             viewport={{ once: true }}
@@ -210,7 +212,7 @@ export default function Contact({ onToast }) {
                 type="text"
                 autoComplete="name"
                 placeholder={contactData.formLabels.namePlaceholder}
-                data-testid="contact.form__name__input"
+                test-id="contact__name_input"
                 aria-required="true"
                 aria-invalid={!!errors.name}
                 aria-describedby={errors.name ? 'contact-name-error' : undefined}
@@ -243,7 +245,7 @@ export default function Contact({ onToast }) {
                 autoCorrect="off"
                 spellCheck="false"
                 placeholder={contactData.formLabels.emailPlaceholder}
-                data-testid="contact.form__email__input"
+                test-id="contact__email_input"
                 aria-required="true"
                 aria-invalid={!!errors.email}
                 aria-describedby={errors.email ? 'contact-email-error' : undefined}
@@ -272,7 +274,7 @@ export default function Contact({ onToast }) {
                 value={formData.msg}
                 onChange={handleChange}
                 placeholder={contactData.formLabels.messagePlaceholder}
-                data-testid="contact.form__message__textarea"
+                test-id="contact__message_textarea"
                 aria-required="true"
                 aria-invalid={!!errors.msg}
                 aria-describedby={errors.msg ? 'contact-msg-error' : undefined}
@@ -287,7 +289,7 @@ export default function Contact({ onToast }) {
               )}
             </div>
 
-            <button type="submit" className="btn btn-primary" style={{ width: '100%' }} data-testid="contact.form__submit__btn">
+            <button type="submit" className="btn btn-primary" style={{ width: '100%' }} test-id="contact__submit_btn">
               {contactData.formLabels.buttonText}
             </button>
           </motion.form>

@@ -68,7 +68,7 @@ export default function TypingTest({ best, onBest }) {
       </p>
 
       <div className="tt-stage">
-        <pre className="tt-target" aria-label="snippet to type">
+        <pre className="tt-target" test-id="playground__typingTarget_code" aria-label="snippet to type">
           {text.split('').map((ch, i) => {
             let cls = 'p';
             if (i < typed.length) cls = typed[i] === ch ? 'ok' : 'bad';
@@ -84,6 +84,7 @@ export default function TypingTest({ best, onBest }) {
         <textarea
           ref={inputRef}
           className="tt-input"
+          test-id="playground__typing_textarea"
           value={typed}
           onChange={onChange}
           spellCheck={false}
@@ -102,6 +103,7 @@ export default function TypingTest({ best, onBest }) {
       {endedAt && (
         <motion.div
           className="tt-result"
+          test-id="playground__typingResult_text"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -111,7 +113,7 @@ export default function TypingTest({ best, onBest }) {
       )}
 
       <div className="game-actions">
-        <button className="btn" onClick={reset}>
+        <button className="btn" onClick={reset} test-id="playground__typingReset_btn">
           🎲 New snippet
         </button>
         {best != null && <span className="best-pill">🏆 Best: {best} WPM</span>}

@@ -30,9 +30,9 @@ export default function Socials() {
     <aside
       className={`socials ${isScrolled ? 'visible' : ''}`}
       aria-label="Social Profiles and Theme Controls"
-      data-testid="socials__container__aside"
+      test-id="socials__container_aside"
     >
-      <div className="social__dock-pill">
+      <div className="social__dock-pill" test-id="socials__dock_pill">
         <ul className="social__icon-list">
           {socialLinks.map(({ label, href, iconName }) => (
             <li key={label} className="social-item">
@@ -42,7 +42,7 @@ export default function Socials() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
-                data-testid={`socials__link__a-${iconName}`}
+                test-id="socials__dock_link"
               >
                 {iconMap[iconName] || null}
               </a>
@@ -60,7 +60,7 @@ export default function Socials() {
             className="social-theme-toggle"
             onClick={cycleTheme}
             aria-label={`Switch theme (current: ${themeMeta.label})`}
-            data-testid="sidebar__theme-toggle__btn"
+            test-id="socials__themeToggle_btn"
           >
             <span className="theme-toggle-icon">{themeMeta.icon}</span>
           </button>

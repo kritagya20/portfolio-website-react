@@ -23,7 +23,7 @@ function CosmicRadarModule({ wrong }) {
 
   return (
     <div className="hm-radar-wrapper">
-      <svg viewBox="0 0 220 220" className="hm-svg cosmic-radar-svg">
+      <svg viewBox="0 0 220 220" className="hm-svg cosmic-radar-svg" test-id="playground__cipher_radar">
         <defs>
           <radialGradient id="radarCoreGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor={isDead ? '#ef4444' : isCritical ? '#f59e0b' : '#38bdf8'} stopOpacity="0.45" />
@@ -218,6 +218,7 @@ export default function CosmicCipher({ best, onBest, onToast }) {
                   className={`hm-key ${used ? (inWord ? 'good' : 'bad') : ''}`}
                   onClick={() => guess(l)}
                   disabled={used || gameStatus !== 'playing'}
+                  test-id="playground__cipherLetter_btn"
                 >
                   {l}
                 </button>
@@ -243,7 +244,7 @@ export default function CosmicCipher({ best, onBest, onToast }) {
       </AnimatePresence>
 
       <div className="game-actions">
-        <button className="btn btn-primary" onClick={next}>
+        <button className="btn btn-primary" onClick={next} test-id="playground__cipherReset_btn">
           {gameStatus !== 'playing' ? '▶️ Next word' : '🎲 New word'}
         </button>
         {best != null && <span className="best-pill">🏆 Best streak: {best}</span>}

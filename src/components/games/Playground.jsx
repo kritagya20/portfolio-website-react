@@ -81,7 +81,7 @@ export default function Playground({ onToast }) {
   const active = GAMES.find((g) => g.id === activeId) || null;
 
   return (
-    <section id="playground" className="section" data-testid="playground__container__section">
+    <section id="playground" className="section" test-id="playground__container_section">
       <div className="container">
         <motion.div
           className="playground-header"
@@ -90,21 +90,21 @@ export default function Playground({ onToast }) {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <span className="eyebrow">
+          <span className="eyebrow" test-id="playground__eyebrow_badge">
             <span className="dot" /> {playgroundHeader.eyebrow}
           </span>
-          <h2 className="section-title">
+          <h2 className="section-title" test-id="playground__title_heading">
             {playgroundHeader.title.split(' ')[0]} <ScrambleText text={playgroundHeader.titleAccent} className="accent" />
           </h2>
         </motion.div>
 
-        <div className="game-grid">
+        <div className="game-grid" test-id="playground__game_grid">
           {GAMES.map((g, i) => (
             <motion.button
               key={g.id}
               type="button"
               className="game-tile"
-              data-testid={`playground__tile__btn-${g.id}`}
+              test-id="playground__game_tile"
               style={{ '--g-color': g.color }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ export default function Playground({ onToast }) {
         {active && (
           <motion.div
             className="game-overlay"
-            data-testid="playground.modal__backdrop__div"
+            test-id="playground__modal_overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -149,7 +149,7 @@ export default function Playground({ onToast }) {
           >
             <motion.div
               className="game-modal"
-              data-testid="playground.modal__game__dialog"
+              test-id="playground__game_modal"
               initial={{ y: 30, scale: 0.95, opacity: 0 }}
               animate={{ y: 0, scale: 1, opacity: 1 }}
               exit={{ y: 30, scale: 0.95, opacity: 0 }}
@@ -170,7 +170,7 @@ export default function Playground({ onToast }) {
                   className="game-close"
                   onClick={() => setActiveId(null)}
                   aria-label="Close game"
-                  data-testid="playground.modal__close__btn"
+                  test-id="playground__modalClose_btn"
                 >
                   ✕
                 </button>

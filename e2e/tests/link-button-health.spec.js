@@ -112,15 +112,15 @@ test.describe('Link & Button Health Check Suite [@module:HealthCheck]', () => {
     await expect(nav.mobileDrawer).toBeVisible();
 
     const mobileSocials = [
-      { testId: 'navbar.mobile__social-github__a', expectedUrl: 'github.com/kritagya20' },
-      { testId: 'navbar.mobile__social-leetcode__a', expectedUrl: 'leetcode.com/u/kritagya20' },
-      { testId: 'navbar.mobile__social-medium__a', expectedUrl: 'medium.com/@kritagya2022' },
-      { testId: 'navbar.mobile__social-linkedin__a', expectedUrl: 'linkedin.com/in/kritagyachouhan' },
-      { testId: 'navbar.mobile__social-mail__a', expectedUrl: 'mailto:kritagya2022@gmail.com' },
+      { index: 0, expectedUrl: 'github.com/kritagya20' },
+      { index: 1, expectedUrl: 'leetcode.com/u/kritagya20' },
+      { index: 2, expectedUrl: 'medium.com/@kritagya2022' },
+      { index: 3, expectedUrl: 'linkedin.com/in/kritagyachouhan' },
+      { index: 4, expectedUrl: 'mailto:kritagya2022@gmail.com' },
     ];
 
-    for (const { testId, expectedUrl } of mobileSocials) {
-      const socialLink = page.getByTestId(testId);
+    for (const { index, expectedUrl } of mobileSocials) {
+      const socialLink = page.getByTestId('navbar__drawerSocial_link').nth(index);
       await expect(socialLink).toBeVisible();
       await expect(socialLink).toHaveAttribute('href', expect.stringContaining(expectedUrl));
     }

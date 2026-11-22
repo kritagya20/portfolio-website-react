@@ -204,7 +204,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="section" data-testid="projects__container__section">
+    <section id="projects" className="section" test-id="projects__container_section">
       <div className="container">
         <div className="projects-header-row">
           <motion.div
@@ -213,10 +213,10 @@ export default function Projects() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
-            <span className="eyebrow">
+            <span className="eyebrow" test-id="projects__eyebrow_badge">
               <span className="dot" /> {projectsHeader.eyebrow}
             </span>
-            <h2 className="section-title">
+            <h2 className="section-title" test-id="projects__title_heading">
               Featured <ScrambleText text={projectsHeader.titleAccent} className="accent" />
             </h2>
           </motion.div>
@@ -225,11 +225,12 @@ export default function Projects() {
         {/* 3D Orbital Perspective Stage */}
         <div
           className="projects-carousel-container orbital-deck-container"
+          test-id="projects__carousel_container"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <div className="orbital-deck-stage">
+          <div className="orbital-deck-stage" test-id="projects__deck_stage">
             {projects.map((p, idx) => {
               const isSelected = idx === currentIndex;
               const cardAnim = getCardTransform(idx);
@@ -239,7 +240,7 @@ export default function Projects() {
                 <motion.div
                   key={p.title}
                   className={`orbital-card-frame ${isSelected ? 'active-frame' : 'inactive-frame'}`}
-                  data-testid={`projects.carousel__card-item__${idx}`}
+                  test-id="projects__project_card"
                   animate={{
                     x: cardAnim.x,
                     y: cardAnim.y,
@@ -296,7 +297,7 @@ export default function Projects() {
                           href={p.links.code}
                           target="_blank"
                           rel="noreferrer"
-                          data-testid={`projects.card__code__link-${idx}`}
+                          test-id="projects__code_link"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <GithubSvg className="icon" />
@@ -309,7 +310,7 @@ export default function Projects() {
                           href={p.links.live}
                           target="_blank"
                           rel="noreferrer"
-                          data-testid={`projects.card__live__link-${idx}`}
+                          test-id="projects__live_link"
                           onClick={(e) => e.stopPropagation()}
                         >
                           ↗ Live
@@ -320,7 +321,7 @@ export default function Projects() {
                           className="icon-btn"
                           style={{ opacity: 0.7, cursor: 'default' }}
                           title="Built inside an organization — source not publicly available"
-                          data-testid={`projects.card__internal__badge-${idx}`}
+                          test-id="projects__internal_badge"
                           onClick={(e) => e.stopPropagation()}
                         >
                           🔒 Internal Project
@@ -335,23 +336,23 @@ export default function Projects() {
         </div>
 
         {/* Sleek Orbital Telemetry Dock (Numbers in center between side button icons) */}
-        <div className="orbital-telemetry-dock">
+        <div className="orbital-telemetry-dock" test-id="projects__telemetry_dock">
           <button
             className="orbital-nav-circle-btn"
             onClick={prev}
             disabled={currentIndex === 0}
             aria-label="Previous project"
-            data-testid="projects.carousel__prev__btn"
+            test-id="projects__prev_btn"
           >
             <svg viewBox="0 0 24 24" className="nav-chevron-svg">
               <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
 
-          <div className="orbital-counter-pill" aria-label={`Project ${currentIndex + 1} of ${projects.length}`}>
-            <span className="orbital-counter-current">{String(currentIndex + 1).padStart(2, '0')}</span>
+          <div className="orbital-counter-pill" test-id="projects__counter_pill" aria-label={`Project ${currentIndex + 1} of ${projects.length}`}>
+            <span className="orbital-counter-current" test-id="projects__counter_current">{String(currentIndex + 1).padStart(2, '0')}</span>
             <span className="orbital-counter-divider">/</span>
-            <span className="orbital-counter-total">{String(projects.length).padStart(2, '0')}</span>
+            <span className="orbital-counter-total" test-id="projects__counter_total">{String(projects.length).padStart(2, '0')}</span>
           </div>
 
           <button
@@ -359,7 +360,7 @@ export default function Projects() {
             onClick={next}
             disabled={currentIndex >= maxIndex}
             aria-label="Next project"
-            data-testid="projects.carousel__next__btn"
+            test-id="projects__next_btn"
           >
             <svg viewBox="0 0 24 24" className="nav-chevron-svg">
               <polyline points="9 18 15 12 9 6" />
@@ -379,7 +380,7 @@ export default function Projects() {
             href={githubProfileUrl}
             target="_blank"
             rel="noreferrer"
-            data-testid="projects.cta__github__link"
+            test-id="projects__githubCta_link"
           >
             <GithubSvg className="icon" />
             View all repos on GitHub →

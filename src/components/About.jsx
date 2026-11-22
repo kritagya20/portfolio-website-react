@@ -8,7 +8,7 @@ export default function About() {
   const [isTerminalExpanded, setIsTerminalExpanded] = useState(false);
 
   return (
-    <section id="about" className="section" data-testid="about__container__section">
+    <section id="about" className="section" test-id="about__container_section">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -16,10 +16,10 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <span className="eyebrow">
+          <span className="eyebrow" test-id="about__eyebrow_badge">
             <span className="dot" /> {aboutData.eyebrow}
           </span>
-          <h2 className="section-title">
+          <h2 className="section-title" test-id="about__title_heading">
             Engineering <ScrambleText text={aboutData.titleAccent} className="accent" /> &amp; Principles
           </h2>
         </motion.div>
@@ -29,27 +29,29 @@ export default function About() {
           {/* Left Column: Authentic macOS Terminal Window */}
           <motion.div
             className="mac-terminal-window"
-            data-testid="about.terminal__window__container"
+            test-id="about__terminal_window"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             {/* macOS Window Title Bar */}
-            <div className="mac-terminal-bar">
+            <div className="mac-terminal-bar" test-id="about__terminal_bar">
               <div className="mac-controls">
-                <span className="mac-btn close" aria-hidden="true" />
+                <span className="mac-btn close" test-id="about__terminalClose_dot" aria-hidden="true" />
                 <button
                   type="button"
                   className="mac-btn minimize"
                   onClick={() => setIsTerminalExpanded((prev) => !prev)}
                   aria-label={isTerminalExpanded ? 'Minimize terminal' : 'Expand terminal'}
+                  test-id="about__terminalMinimize_btn"
                 />
                 <button
                   type="button"
                   className="mac-btn zoom"
                   onClick={() => setIsTerminalExpanded((prev) => !prev)}
                   aria-label={isTerminalExpanded ? 'Minimize terminal' : 'Expand terminal'}
+                  test-id="about__terminalZoom_btn"
                 />
               </div>
               <div className="mac-tabs">
@@ -57,7 +59,7 @@ export default function About() {
                   type="button"
                   className={`mac-tab ${hudTab === 'telemetry' ? 'active' : ''}`}
                   onClick={() => setHudTab('telemetry')}
-                  data-testid="about.terminal__tab-profile__btn"
+                  test-id="about__profile_tab"
                 >
                   profile.json
                 </button>
@@ -65,7 +67,7 @@ export default function About() {
                   type="button"
                   className={`mac-tab ${hudTab === 'metrics' ? 'active' : ''}`}
                   onClick={() => setHudTab('metrics')}
-                  data-testid="about.terminal__tab-architecture__btn"
+                  test-id="about__architecture_tab"
                 >
                   architecture.sh
                 </button>
@@ -75,7 +77,7 @@ export default function About() {
             {/* Terminal Body with Expandable Mobile Peek Mode */}
             <div
               className={`mac-terminal-body ${isTerminalExpanded ? 'expanded' : 'collapsed'}`}
-              data-testid="about.terminal__body__div"
+              test-id="about__terminal_body"
             >
               {hudTab === 'telemetry' ? (
                 <div className="hud-terminal">
@@ -131,7 +133,7 @@ export default function About() {
             </div>
 
             {/* Authentic macOS Terminal Status Bar & Mobile Expand Toggle */}
-            <div className="mac-terminal-status-bar">
+            <div className="mac-terminal-status-bar" test-id="about__status_bar">
               <div className="terminal-status-left">
                 <span className="terminal-status-pulse" aria-hidden="true" />
                 <span className="terminal-status-text">zsh 5.9</span>
@@ -143,7 +145,7 @@ export default function About() {
                 className="mac-terminal-expand-btn"
                 onClick={() => setIsTerminalExpanded((prev) => !prev)}
                 aria-expanded={isTerminalExpanded}
-                data-testid="about.terminal__expand__btn"
+                test-id="about__terminalExpand_btn"
               >
                 <span>{isTerminalExpanded ? '▲ Collapse Terminal' : '▼ Expand Full Terminal'}</span>
               </button>
@@ -153,6 +155,7 @@ export default function About() {
           {/* Right Column: Open-Air Typography Story Flow */}
           <motion.div
             className="about-story-col"
+            test-id="about__story_column"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -168,7 +171,7 @@ export default function About() {
               </p>
             ))}
 
-            <div className="about-glow-quote">
+            <div className="about-glow-quote" test-id="about__quote_card">
               <span className="quote-bar" />
               <div>
                 <p className="quote-body">

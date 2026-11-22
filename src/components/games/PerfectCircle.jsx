@@ -122,6 +122,7 @@ export default function PerfectCircle({ best, onBest }) {
         <canvas
           ref={canvasRef}
           style={{ width: SIZE, height: SIZE, maxWidth: '100%' }}
+          test-id="playground__circle_canvas"
           onMouseDown={start}
           onMouseMove={move}
           onMouseUp={end}
@@ -136,11 +137,12 @@ export default function PerfectCircle({ best, onBest }) {
             <motion.div
               key="badge"
               className="pc-badge"
+              test-id="playground__circleScore_badge"
               initial={{ scale: 0.5, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.5, opacity: 0 }}
             >
-              <div className="pc-num">{result}%</div>
+              <div className="pc-num" test-id="playground__circleScore_text">{result}%</div>
               <div className="pc-cap">
                 {result > 95
                   ? perfectCircleData.captions.perfect
@@ -158,7 +160,7 @@ export default function PerfectCircle({ best, onBest }) {
       </div>
 
       <div className="game-actions">
-        <button className="btn" onClick={reset}>
+        <button className="btn" onClick={reset} test-id="playground__circleReset_btn">
           🔄 Try again
         </button>
         {best != null && (

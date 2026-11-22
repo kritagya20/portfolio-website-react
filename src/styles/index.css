@@ -1943,6 +1943,16 @@ select::placeholder,
   border: none;
   padding: 0;
   cursor: pointer;
+  position: relative;
+}
+
+.mac-controls button.mac-btn::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  left: -6px;
+  right: -6px;
 }
 
 @media (max-width: 768px) {
