@@ -5766,7 +5766,7 @@ main {
   .project p {
     font-size: 0.79rem;
     line-height: 1.48;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 6;
     margin: 0;
   }
   .orbital-card-frame .tech-row {
