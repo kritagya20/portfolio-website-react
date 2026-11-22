@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme, THEMES } from '../context/ThemeContext.jsx';
 import { navLinks as links } from '../data/portfolio.js';
 import { MailSvg, LinkedinSvg, GithubSvg, MediumSvg, LeetCodeSvg } from '../icon_jsx';
+import { useScrollLock } from '../hooks/useScrollLock.js';
 
 export default function Navbar() {
   const { theme, cycleTheme } = useTheme();
@@ -83,34 +84,7 @@ export default function Navbar() {
   }, [active]);
 
   // 3. Halt background scrolling completely when mobile drawer is open
-  useEffect(() => {
-    if (!open) return;
-
-    const originalHtmlOverflow = document.documentElement.style.overflow;
-    const originalBodyOverflow = document.body.style.overflow;
-    const originalBodyTouchAction = document.body.style.touchAction;
-
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-    document.body.style.touchAction = 'none';
-
-    const preventTouchMove = (e) => {
-      // Allow scrolling inside .nav-mobile-links
-      if (e.target.closest('.nav-mobile-links')) return;
-      
-      // Prevent touch scroll gestures outside link container
-      if (e.cancelable) e.preventDefault();
-    };
-
-    document.addEventListener('touchmove', preventTouchMove, { passive: false });
-
-    return () => {
-      document.documentElement.style.overflow = originalHtmlOverflow;
-      document.body.style.overflow = originalBodyOverflow;
-      document.body.style.touchAction = originalBodyTouchAction;
-      document.removeEventListener('touchmove', preventTouchMove);
-    };
-  }, [open]);
+  useScrollLock(open);
 
   const handleNavClick = (e, linkId) => {
     e?.preventDefault();
@@ -149,7 +123,6 @@ export default function Navbar() {
           className="mobile-theme-btn"
           onClick={cycleTheme}
           aria-label={`Switch theme (current: ${themeMeta.label})`}
-          title={`Theme: ${themeMeta.label}`}
           data-testid="navbar.mobile__theme-toggle__btn"
         >
           <span className="theme-icon">{themeMeta.icon}</span>

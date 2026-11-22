@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring, useTransform, useMotionValue, AnimatePres
 import { experience, experienceHeader } from '../data/portfolio.js';
 import ScrambleText from './ScrambleText.jsx';
 import { ResponsiveTimelineDate, isCurrentRole } from '../utils/dateFormatter.jsx';
+import { useScrollLock } from '../hooks/useScrollLock.js';
 
 function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
   const itemRef = useRef(null);
@@ -92,9 +93,15 @@ function TimelineItem({ item, index, total, scaleY, onOpenModal }) {
         <div
           className="tl-mobile-summary-wrapper"
           onClick={() => onOpenModal(item)}
-          title="Click to view full details"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onOpenModal(item);
+            }
+          }}
           role="button"
           tabIndex={0}
+          aria-label={`View full details for ${item.role} at ${item.company}`}
         >
           <p
             className="tl-mobile-summary"
@@ -166,28 +173,8 @@ export default function Experience() {
   // Map maxScaleY progress to top percentage for travelling dot to avoid scale distortion
   const dotTop = useTransform(maxScaleY, [0, 1], ['0%', '100%']);
 
-  const scrollPosRef = useRef(0);
-
-  // Robust mobile & desktop background scroll lock with exact scroll position memory
-  useEffect(() => {
-    if (selectedExperience) {
-      scrollPosRef.current = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPosRef.current}px`;
-      document.body.style.width = '100%';
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-    } else if (scrollPosRef.current > 0) {
-      const targetY = scrollPosRef.current;
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      window.scrollTo(0, targetY);
-      scrollPosRef.current = 0;
-    }
-  }, [selectedExperience]);
+  // Robust mobile & desktop background scroll lock
+  useScrollLock(Boolean(selectedExperience));
 
   useEffect(() => {
     const handleKeyDown = (e) => {

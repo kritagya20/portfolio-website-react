@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { aboutData, profile } from '../data/portfolio.js';
+import { aboutData } from '../data/portfolio.js';
 import ScrambleText from './ScrambleText.jsx';
 
 export default function About() {

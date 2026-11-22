@@ -40,26 +40,28 @@ export default function CustomCursor() {
       const posY = e.clientY;
 
       if (dot) {
-        dot.style.left = `${posX}px`;
-        dot.style.top = `${posY}px`;
+        dot.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
       }
 
       if (outline) {
         outline.animate(
           {
-            left: `${posX}px`,
-            top: `${posY}px`,
+            transform: `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`,
           },
           { duration: 250, fill: 'forwards', easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
         );
       }
 
-      // Check hover state over clickable elements
+      // Check hover state over clickable elements only when changed
       const target = e.target;
-      const isInteractable = target.closest(
-        'a, button, .card, .btn, .nav-link, input, select, textarea, .tl-card, .sat-node, .game-tile'
-      );
-      setHovered(Boolean(isInteractable));
+      if (target && target.closest) {
+        const isInteractable = Boolean(
+          target.closest(
+            'a, button, .card, .btn, .nav-link, input, select, textarea, .tl-card, .sat-node, .game-tile'
+          )
+        );
+        setHovered((prev) => (prev !== isInteractable ? isInteractable : prev));
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });

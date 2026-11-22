@@ -229,7 +229,7 @@ export default function StarfieldCanvas() {
 
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     if (!isLowPowerDevice) window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('resize', handleResize);
 
@@ -308,7 +308,7 @@ export default function StarfieldCanvas() {
       if (inactivityTimer) clearTimeout(inactivityTimer);
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
       meteors.forEach((m) => {

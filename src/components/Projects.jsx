@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { projects, githubProfileUrl, projectsHeader } from '../data/portfolio.js';
 import { GithubSvg } from '../icon_jsx';
@@ -70,21 +70,21 @@ export default function Projects() {
     return () => window.removeEventListener('selectProjectSlide', handleSelectSlide);
   }, []);
 
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const touchStartRef = useRef(0);
+  const touchEndRef = useRef(0);
 
   const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    setTouchEnd(e.targetTouches[0].clientX);
+    touchStartRef.current = e.targetTouches[0].clientX;
+    touchEndRef.current = e.targetTouches[0].clientX;
   };
 
   const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    touchEndRef.current = e.targetTouches[0].clientX;
   };
 
   const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
+    if (!touchStartRef.current || !touchEndRef.current) return;
+    const distance = touchStartRef.current - touchEndRef.current;
     const minSwipeDistance = 40;
 
     if (distance > minSwipeDistance) {
@@ -259,7 +259,7 @@ export default function Projects() {
                     if (!isSelected) setCurrentIndex(idx);
                   }}
                   onTouchEnd={(e) => {
-                    const dist = Math.abs(touchStart - touchEnd);
+                    const dist = Math.abs(touchStartRef.current - touchEndRef.current);
                     if (dist < 15 && !isSelected) {
                       e.stopPropagation();
                       setCurrentIndex(idx);

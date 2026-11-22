@@ -1,25 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { footerData } from '../data/portfolio.js';
-
-function getOrdinalString(n) {
-  if (n === null || n === undefined || isNaN(n)) return '106th';
-  const num = Number(n);
-  const formattedNum = num.toLocaleString();
-  const lastDigit = num % 10;
-  const lastTwoDigits = num % 100;
-
-  if (lastDigit === 1 && lastTwoDigits !== 11) {
-    return `${formattedNum}st`;
-  }
-  if (lastDigit === 2 && lastTwoDigits !== 12) {
-    return `${formattedNum}nd`;
-  }
-  if (lastDigit === 3 && lastTwoDigits !== 13) {
-    return `${formattedNum}rd`;
-  }
-  return `${formattedNum}th`;
-}
+import { getOrdinalString } from '../utils/formatters.js';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -66,8 +48,8 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
         >
           <div className="visitor-info">
-            <span className="visitor-text" style={{ textTransform: 'none', letterSpacing: '0.02em', fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.65)' }}>
-              You are <strong style={{ color: '#ffffff', fontWeight: 600 }}>{ordinalViews}</strong> visitor to my site in {currentYear}
+            <span className="visitor-text">
+              You are <strong className="visitor-highlight">{ordinalViews}</strong> visitor to my site in {currentYear}
             </span>
           </div>
         </motion.div>

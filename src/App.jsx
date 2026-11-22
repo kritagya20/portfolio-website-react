@@ -1,5 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, AnimatePresence } from 'framer-motion';
 import CustomCursor from './components/CustomCursor.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -15,7 +15,6 @@ const StarfieldCanvas = lazy(() => import('./components/StarfieldCanvas.jsx'));
 
 export default function App() {
   const { scrollYProgress } = useScroll();
-  const [toast, setToast] = useState(null);
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -27,12 +26,6 @@ export default function App() {
       setIsReady(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (!toast) return;
-    const t = setTimeout(() => setToast(null), 2400);
-    return () => clearTimeout(t);
-  }, [toast]);
 
   return (
     <div className="app">
@@ -47,23 +40,12 @@ export default function App() {
         <About />
         <Experience />
         <Projects />
-        <Playground onToast={setToast} />
-        <Contact onToast={setToast} />
+        <Playground />
+        <Contact />
       </main>
 
       <Socials />
       <Footer />
-
-      {toast && (
-        <motion.div
-          className="toast"
-          initial={{ y: 30, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 30, opacity: 0 }}
-        >
-          {toast}
-        </motion.div>
-      )}
     </div>
   );
 }

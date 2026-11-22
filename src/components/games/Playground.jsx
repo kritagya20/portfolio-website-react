@@ -2,6 +2,8 @@ import { useEffect, useState, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { playgroundHeader, gamesData } from '../../data/games.js';
 import ScrambleText from '../ScrambleText.jsx';
+import { useScrollLock } from '../../hooks/useScrollLock.js';
+import { useToast } from '../../context/ToastContext.jsx';
 
 const PerfectCircle = lazy(() => import('./PerfectCircle.jsx'));
 const TypingTest = lazy(() => import('./TypingTest.jsx'));
@@ -43,27 +45,24 @@ function saveBests(b) {
 }
 
 export default function Playground({ onToast }) {
+  const { showToast } = useToast();
+  const triggerToast = onToast || showToast;
   const [bests, setBests] = useState(() => loadBests());
   const [activeId, setActiveId] = useState(null);
 
   useEffect(() => saveBests(bests), [bests]);
 
+  useScrollLock(Boolean(activeId));
+
   useEffect(() => {
-    if (activeId) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
+    if (!activeId) return;
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         setActiveId(null);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeId]);
 
   const recordBest = (gameId, value) => {
@@ -74,7 +73,7 @@ export default function Playground({ onToast }) {
       if (cur == null) return { ...prev, [gameId]: value };
       const better = game.bestIsHigher ? value > cur : value < cur;
       if (!better) return prev;
-      onToast?.(`🏆 New best on ${game.name}!`);
+      triggerToast(`🏆 New best on ${game.name}!`);
       return { ...prev, [gameId]: value };
     });
   };

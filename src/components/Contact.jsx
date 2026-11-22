@@ -3,11 +3,17 @@ import { motion } from 'framer-motion';
 import { profile, contactData } from '../data/portfolio.js';
 import { MailSvg } from '../icon_jsx';
 import ScrambleText from './ScrambleText.jsx';
+import { useToast } from '../context/ToastContext.jsx';
 
 export default function Contact({ onToast }) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [msg, setMsg] = useState('');
+  const { showToast } = useToast();
+  const triggerToast = onToast || showToast;
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    msg: '',
+  });
 
   // Field-specific validation errors anchored directly towards each field
   const [errors, setErrors] = useState({
@@ -26,11 +32,11 @@ export default function Contact({ onToast }) {
     let firstInvalidRef = null;
 
     // Validate Name
-    if (!name.trim()) {
+    if (!formData.name.trim()) {
       newErrors.name = 'Your name is required';
       isValid = false;
       if (!firstInvalidRef) firstInvalidRef = nameRef;
-    } else if (name.trim().length < 2) {
+    } else if (formData.name.trim().length < 2) {
       newErrors.name = 'Name must be at least 2 characters';
       isValid = false;
       if (!firstInvalidRef) firstInvalidRef = nameRef;
@@ -38,22 +44,22 @@ export default function Contact({ onToast }) {
 
     // Validate Email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.trim()) {
+    if (!formData.email.trim()) {
       newErrors.email = 'Your email address is required';
       isValid = false;
       if (!firstInvalidRef) firstInvalidRef = emailRef;
-    } else if (!emailRegex.test(email.trim())) {
+    } else if (!emailRegex.test(formData.email.trim())) {
       newErrors.email = 'Please enter a valid email (e.g. name@domain.com)';
       isValid = false;
       if (!firstInvalidRef) firstInvalidRef = emailRef;
     }
 
     // Validate Message
-    if (!msg.trim()) {
+    if (!formData.msg.trim()) {
       newErrors.msg = 'Message is required';
       isValid = false;
       if (!firstInvalidRef) firstInvalidRef = msgRef;
-    } else if (msg.trim().length < 5) {
+    } else if (formData.msg.trim().length < 5) {
       newErrors.msg = 'Message must be at least 5 characters';
       isValid = false;
       if (!firstInvalidRef) firstInvalidRef = msgRef;
@@ -77,30 +83,17 @@ export default function Contact({ onToast }) {
       return;
     }
 
-    const subject = encodeURIComponent(`Portfolio transmission from ${name.trim()}`);
-    const body = encodeURIComponent(`${msg.trim()}\n\n— ${name.trim()} (${email.trim()})`);
+    const subject = encodeURIComponent(`Portfolio transmission from ${formData.name.trim()}`);
+    const body = encodeURIComponent(`${formData.msg.trim()}\n\n— ${formData.name.trim()} (${formData.email.trim()})`);
     window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    onToast?.(contactData.sendingMessage);
+    triggerToast(contactData.sendingMessage);
   };
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    if (errors.name) {
-      setErrors((prev) => ({ ...prev, name: '' }));
-    }
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-    if (errors.email) {
-      setErrors((prev) => ({ ...prev, email: '' }));
-    }
-  };
-
-  const handleMsgChange = (e) => {
-    setMsg(e.target.value);
-    if (errors.msg) {
-      setErrors((prev) => ({ ...prev, msg: '' }));
+  const handleChange = (e) => {
+    const { name: field, value } = e.target;
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: '' }));
     }
   };
 
@@ -212,8 +205,8 @@ export default function Contact({ onToast }) {
                 ref={nameRef}
                 id="contact-name"
                 name="name"
-                value={name}
-                onChange={handleNameChange}
+                value={formData.name}
+                onChange={handleChange}
                 type="text"
                 autoComplete="name"
                 placeholder={contactData.formLabels.namePlaceholder}
@@ -242,8 +235,8 @@ export default function Contact({ onToast }) {
                 ref={emailRef}
                 id="contact-email"
                 name="email"
-                value={email}
-                onChange={handleEmailChange}
+                value={formData.email}
+                onChange={handleChange}
                 type="email"
                 autoComplete="email"
                 autoCapitalize="none"
@@ -274,10 +267,10 @@ export default function Contact({ onToast }) {
               <textarea
                 ref={msgRef}
                 id="contact-message"
-                name="message"
+                name="msg"
                 rows={4}
-                value={msg}
-                onChange={handleMsgChange}
+                value={formData.msg}
+                onChange={handleChange}
                 placeholder={contactData.formLabels.messagePlaceholder}
                 data-testid="contact.form__message__textarea"
                 aria-required="true"
