@@ -31,7 +31,7 @@ test.describe('Contact Section & Form E2E Suite [@module:Contact]', () => {
     await expect(contact.messageTextarea).toHaveValue('Automated E2E contact transmission text.');
   });
 
-  test('TC_CNT_EC01: [Edge Case] Submitting empty contact form does not crash page', async ({ page }) => {
+  test('TC_CNT_EC01: [Edge Case] Submitting empty contact form triggers inline field errors and auto-focuses first invalid input', async ({ page }) => {
     Logger.step('TC_CNT_EC01: Empty contact form submit validation');
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.goto('/');
@@ -40,6 +40,60 @@ test.describe('Contact Section & Form E2E Suite [@module:Contact]', () => {
     await contact.section.scrollIntoViewIfNeeded();
 
     await contact.submitForm();
-    await expect(contact.nameInput).toBeVisible();
+    await expect(contact.nameError).toBeVisible();
+    await expect(contact.nameError).toContainText('Your name is required');
+    await expect(contact.emailError).toBeVisible();
+    await expect(contact.emailError).toContainText('Your email address is required');
+    await expect(contact.msgError).toBeVisible();
+    await expect(contact.msgError).toContainText('Message is required');
+
+    // First invalid field (name) should receive auto-focus
+    await expect(contact.nameInput).toBeFocused();
+  });
+
+  test('TC_CNT_003: Inline validation errors display per-field and clear dynamically on input', async ({ page }) => {
+    Logger.step('TC_CNT_003: Field-level validation rules & dynamic error clearing');
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto('/');
+
+    const contact = new ContactPage(page);
+    await contact.section.scrollIntoViewIfNeeded();
+
+    // Trigger validation
+    await contact.submitForm();
+    await expect(contact.nameError).toContainText('Your name is required');
+
+    // Type 1 char -> name must be at least 2 chars
+    await contact.nameInput.fill('K');
+    await contact.submitForm();
+    await expect(contact.nameError).toContainText('Name must be at least 2 characters');
+
+    // Type valid name -> error clears
+    await contact.nameInput.fill('Kritagya');
+    await expect(contact.nameError).toBeHidden();
+
+    // Invalid email format
+    await contact.emailInput.fill('not-an-email');
+    await contact.submitForm();
+    await expect(contact.emailError).toContainText('Please enter a valid email');
+
+    // Type valid email -> error clears
+    await contact.emailInput.fill('test@example.com');
+    await expect(contact.emailError).toBeHidden();
+  });
+
+  test('TC_CNT_004: Valid form submit triggers transmission toast notification', async ({ page }) => {
+    Logger.step('TC_CNT_004: Valid contact submit triggers toast feedback');
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto('/');
+
+    const contact = new ContactPage(page);
+    await contact.section.scrollIntoViewIfNeeded();
+
+    await contact.fillContactForm('Engineer Recruiter', 'recruiter@company.com', 'Exciting backend platform engineering opportunity.');
+    await contact.submitForm();
+
+    await expect(contact.toast).toBeVisible();
+    await expect(contact.toast).toContainText('Opening mail client to transmit signal');
   });
 });

@@ -58,7 +58,7 @@ test.describe('Playground Mini-Games In-Depth E2E Suite [@module:Playground]', (
 
     // Type characters into textarea
     await plg.ttInput.focus();
-    await plg.ttInput.type('SELECT u.id, u.email FROM users u;', { delay: 10 });
+    await plg.ttInput.fill('SELECT u.id, u.email FROM users u;');
 
     // Verify stats pills render WPM and Accuracy
     const wpmStat = page.locator('.tt-stat').first();
@@ -148,6 +148,32 @@ test.describe('Playground Mini-Games In-Depth E2E Suite [@module:Playground]', (
     // Verify background body scroll is restored
     const restoredOverflow = await page.evaluate(() => document.body.style.overflow);
     expect(restoredOverflow).toBe('');
+  });
+
+  test('TC_PLG_007: [Large 1920px] Personal best scores persist in localStorage across browser page reload', async ({ page }) => {
+    Logger.step('TC_PLG_007: Mini-games personal best localStorage persistence');
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto('/');
+
+    // Seed a best score into localStorage
+    await page.evaluate(() => {
+      localStorage.setItem('kritagya-portfolio-game-best-v1', JSON.stringify({
+        circle: 94,
+        typing: 85,
+      }));
+    });
+
+    await page.reload();
+
+    const plg = new PlaygroundPage(page);
+    await plg.section.scrollIntoViewIfNeeded();
+
+    // Verify tile displays updated best score badge
+    const circleTile = plg.getGameTile('circle');
+    await expect(circleTile).toContainText('94%');
+
+    const typingTile = plg.getGameTile('typing');
+    await expect(typingTile).toContainText('85 WPM');
   });
 
   test('TC_PLG_EC01: [Edge Case] Pressing Escape key closes active game modal', async ({ page }) => {

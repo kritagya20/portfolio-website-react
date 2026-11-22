@@ -11,6 +11,10 @@ export class ProjectsPage {
   get prevBtn() { return this.page.getByTestId('projects.carousel__prev__btn'); }
   get nextBtn() { return this.page.getByTestId('projects.carousel__next__btn'); }
   get githubCtaLink() { return this.page.getByTestId('projects.cta__github__link'); }
+  get counterPill() { return this.page.locator('.orbital-counter-pill'); }
+  get counterCurrent() { return this.page.locator('.orbital-counter-current'); }
+  get counterTotal() { return this.page.locator('.orbital-counter-total'); }
+  get activeCard() { return this.page.locator('.orbital-card-frame.active-frame'); }
 
   getProjectCard(index) {
     return this.page.getByTestId(`projects.carousel__card-item__${index}`);
@@ -44,8 +48,17 @@ export class ProjectsPage {
   }
 
   async goToSlide(index) {
-    Logger.info(`Navigating directly to carousel dot slide #${index}`);
-    await this.getDotBtn(index).click();
+    Logger.info(`Navigating directly to carousel slide #${index}`);
+    await this.clickCard(index);
+  }
+
+  async clickCard(index) {
+    Logger.info(`Clicking project card #${index} directly`);
+    await this.getProjectCard(index).dispatchEvent('click');
+  }
+
+  async getCurrentSlideNumber() {
+    return (await this.counterCurrent.innerText()).trim();
   }
 
   async swipeLeft(distance = 100) {

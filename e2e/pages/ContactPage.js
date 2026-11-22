@@ -15,6 +15,10 @@ export class ContactPage {
   get emailInput() { return this.page.getByTestId('contact.form__email__input'); }
   get messageTextarea() { return this.page.getByTestId('contact.form__message__textarea'); }
   get submitBtn() { return this.page.getByTestId('contact.form__submit__btn'); }
+  get nameError() { return this.page.locator('#contact-name-error'); }
+  get emailError() { return this.page.locator('#contact-email-error'); }
+  get msgError() { return this.page.locator('#contact-msg-error'); }
+  get toast() { return this.page.locator('.toast'); }
 
   // Actions
   async fillContactForm(name, email, message) {

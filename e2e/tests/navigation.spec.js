@@ -77,6 +77,31 @@ test.describe('Navigation & Theme E2E Suite [@module:Navigation]', () => {
     await expect(page.getByTestId('contact__container__section')).toBeInViewport();
   });
 
+  test('TC_NAV_005: Theme selection persists across browser page reloads via localStorage', async ({ page }) => {
+    Logger.step('TC_NAV_005: Theme localStorage persistence & reload integrity');
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto('/');
+
+    const nav = new NavbarPage(page);
+    await page.evaluate(() => window.scrollTo(0, 150));
+
+    // Cycle theme to second theme
+    await nav.toggleDesktopTheme();
+    const selectedTheme = await page.getAttribute('html', 'data-theme');
+    expect(selectedTheme).toBeTruthy();
+
+    // Verify localStorage has saved theme
+    const savedTheme = await page.evaluate(() => localStorage.getItem('kritagya-portfolio-theme'));
+    expect(savedTheme).toBe(selectedTheme);
+
+    // Reload page
+    await page.reload();
+
+    // Verify data-theme attribute on <html> remains exactly as saved
+    const reloadedTheme = await page.getAttribute('html', 'data-theme');
+    expect(reloadedTheme).toBe(selectedTheme);
+  });
+
   test('TC_NAV_EC01: [Edge Case] Mobile drawer open and close sequence protection', async ({ page }) => {
     Logger.step('TC_NAV_EC01: Mobile drawer open and close sequence');
     await page.setViewportSize({ width: 375, height: 812 });

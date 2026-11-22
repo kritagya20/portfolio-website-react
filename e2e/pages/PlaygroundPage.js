@@ -22,8 +22,8 @@ export class PlaygroundPage {
 
   async drawCircleOnCanvas() {
     Logger.info('Drawing circle on Perfect Circle canvas via mouse drag');
-    const canvas = this.pcCanvas;
-    const box = await canvas.boundingBox();
+    await this.pcCanvas.waitFor({ state: 'visible' });
+    const box = await this.pcCanvas.boundingBox();
     if (!box) return;
 
     const cx = box.x + box.width / 2;
@@ -33,13 +33,12 @@ export class PlaygroundPage {
     await this.page.mouse.move(cx + radius, cy);
     await this.page.mouse.down();
 
-    const pointsCount = 30;
+    const pointsCount = 12;
     for (let i = 1; i <= pointsCount; i++) {
       const angle = (i / pointsCount) * 2 * Math.PI;
       const x = cx + radius * Math.cos(angle);
       const y = cy + radius * Math.sin(angle);
       await this.page.mouse.move(x, y);
-      await this.page.waitForTimeout(20);
     }
 
     await this.page.mouse.up();
@@ -90,7 +89,7 @@ export class PlaygroundPage {
 
   async closeGameModal() {
     Logger.info('Closing active game modal');
-    await this.modalCloseBtn.click();
+    await this.modalCloseBtn.click({ force: true });
     await this.gameModal.waitFor({ state: 'hidden' });
   }
 }

@@ -59,17 +59,36 @@ test.describe('Experience Section & Dossier Modal E2E Suite [@module:Experience]
     await exp.openExperienceDetailsModal(0);
     await expect(exp.modalDialog).toBeVisible();
 
-    // Verify background body position is fixed (locked)
-    const bodyPos = await page.evaluate(() => document.body.style.position);
-    expect(bodyPos).toBe('fixed');
+    // Verify background body scroll is locked
+    const bodyOverflow = await page.evaluate(() => document.body.style.overflow);
+    expect(bodyOverflow).toBe('hidden');
 
     // Close modal via close button
     await exp.closeExperienceDetailsModal();
     await expect(exp.modalDialog).toBeHidden();
 
-    // Verify background body position is restored
-    const restoredPos = await page.evaluate(() => document.body.style.position);
-    expect(restoredPos).toBe('');
+    // Verify background body scroll is restored
+    const restoredOverflow = await page.evaluate(() => document.body.style.overflow);
+    expect(restoredOverflow).toBe('');
+  });
+
+  test('TC_EXP_004: [Small 375px] Clicking frosted glass summary card opens detailed dossier modal with full content', async ({ page }) => {
+    Logger.step('TC_EXP_004: Summary card click opens dossier modal (Small 375px)');
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/');
+
+    const exp = new ExperiencePage(page);
+    await exp.section.scrollIntoViewIfNeeded();
+
+    const summaryCard = exp.getMobileSummaryWrapper(0);
+    await summaryCard.click();
+
+    await expect(exp.modalDialog).toBeVisible();
+    await expect(exp.modalTitle).toBeVisible();
+    await expect(exp.modalCompany).toBeVisible();
+    await expect(exp.modalBullets.first()).toBeVisible();
+
+    await exp.closeExperienceDetailsModal();
   });
 
   test('TC_EXP_EC01: [Edge Case] Pressing Escape key closes open dossier modal', async ({ page }) => {

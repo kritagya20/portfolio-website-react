@@ -66,19 +66,22 @@ test.describe('Projects Carousel E2E Suite [@module:Projects]', () => {
     }
   });
 
-  test('TC_PRJ_005: [Large 1920px] Pagination dot buttons navigate directly to project slides', async ({ page }) => {
-    Logger.step('TC_PRJ_005: Pagination dot navigation');
+  test('TC_PRJ_005: [Large 1920px] Telemetry dock updates slide counter (01 / 05 -> 02 / 05) on navigation', async ({ page }) => {
+    Logger.step('TC_PRJ_005: Telemetry dock counter updates');
     await page.setViewportSize({ width: 1920, height: 1080 });
     await page.goto('/');
 
     const projects = new ProjectsPage(page);
     await projects.section.scrollIntoViewIfNeeded();
 
-    const dot1 = projects.getDotBtn(1);
-    if (await dot1.isVisible()) {
-      await projects.goToSlide(1);
-      await expect(dot1).toHaveClass(/active/);
-    }
+    await expect(projects.counterCurrent).toHaveText('01');
+    await expect(projects.counterTotal).toHaveText(/0[1-9]/);
+
+    await projects.nextSlide();
+    await expect(projects.counterCurrent).toHaveText('02');
+
+    await projects.prevSlide();
+    await expect(projects.counterCurrent).toHaveText('01');
   });
 
   test('TC_PRJ_006: [Small 375px] Touch swipe left advances slide on mobile', async ({ page }) => {
@@ -89,8 +92,55 @@ test.describe('Projects Carousel E2E Suite [@module:Projects]', () => {
     const projects = new ProjectsPage(page);
     await projects.section.scrollIntoViewIfNeeded();
 
+    await expect(projects.counterCurrent).toHaveText('01');
     await projects.swipeLeft(120);
-    await page.waitForTimeout(300);
+    await expect(projects.counterCurrent).toHaveText('02');
+  });
+
+  test('TC_PRJ_007: [Large 1920px] Keyboard ArrowRight and ArrowLeft keys navigate carousel slides', async ({ page }) => {
+    Logger.step('TC_PRJ_007: Keyboard ArrowLeft / ArrowRight navigation');
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto('/');
+
+    const projects = new ProjectsPage(page);
+    await projects.section.scrollIntoViewIfNeeded();
+
+    await expect(projects.counterCurrent).toHaveText('01');
+    await page.keyboard.press('ArrowRight');
+    await expect(projects.counterCurrent).toHaveText('02');
+
+    await page.keyboard.press('ArrowLeft');
+    await expect(projects.counterCurrent).toHaveText('01');
+  });
+
+  test('TC_PRJ_008: [Large 1920px] Clicking an inactive side card selects and centers it', async ({ page }) => {
+    Logger.step('TC_PRJ_008: Click inactive side card to select');
+    await page.setViewportSize({ width: 1920, height: 1080 });
+    await page.goto('/');
+
+    const projects = new ProjectsPage(page);
+    await projects.section.scrollIntoViewIfNeeded();
+
+    await expect(projects.counterCurrent).toHaveText('01');
+    await projects.clickCard(1);
+    await expect(projects.counterCurrent).toHaveText('02');
+  });
+
+  test('TC_PRJ_009: [Small 375px] Touch swipe right returns to previous carousel slide', async ({ page }) => {
+    Logger.step('TC_PRJ_009: Touch swipe right returns to previous slide (Small 375px)');
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/');
+
+    const projects = new ProjectsPage(page);
+    await projects.section.scrollIntoViewIfNeeded();
+
+    // Advance to slide 2 first
+    await projects.swipeLeft(120);
+    await expect(projects.counterCurrent).toHaveText('02');
+
+    // Swipe right to return to slide 1
+    await projects.swipeRight(120);
+    await expect(projects.counterCurrent).toHaveText('01');
   });
 
   test('TC_PRJ_EC01: [Edge Case] Swiping below 40px threshold does not change slide index', async ({ page }) => {
@@ -101,8 +151,9 @@ test.describe('Projects Carousel E2E Suite [@module:Projects]', () => {
     const projects = new ProjectsPage(page);
     await projects.section.scrollIntoViewIfNeeded();
 
+    await expect(projects.counterCurrent).toHaveText('01');
     // Swipe very small distance (10px)
     await projects.swipeLeft(10);
-    await page.waitForTimeout(100);
+    await expect(projects.counterCurrent).toHaveText('01');
   });
 });
